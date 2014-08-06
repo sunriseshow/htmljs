@@ -98,11 +98,13 @@ html
                             //.nick #{ans.user_nick}
                             //.time #{moment(ans.createdAt).fromNow()}
                           - var zanHistory = "";
-                          - if(ans.answerZanHistory){ans.answerZanHistory.forEach(function(his){if(his.user_nick) zanHistory+=(his.user_nick||"")+"，";})};
+                          - console.log(ans)
+                          - if(ans.answerZanHistories){ans.answerZanHistories.forEach(function(his){if(his.user_nick) zanHistory+=(his.user_nick||"")+"，";})};
                           - if(zanHistory.length>0){zanHistory=zanHistory.substr(0,zanHistory.length-1)}
                           a.zan(href="#",data-id="#{ans.id}",data-original-title="此回答被 #{zanHistory} 赞过") 
                             |<i class=""></i>
-                            em #{ans.answerZanHistory.length}
+                            if ans.answerZanHistories
+                              em #{ans.answerZanHistories.length}
                           if !question.good_answer_id 
                             if locals.user && (locals.user.id == question.user_id||user.is_admin)
                               a.btn.good(href="/qa/#{question.id}/good/#{ans.id}") 采纳

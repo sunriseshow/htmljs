@@ -3,6 +3,7 @@ module.exports =
     type:"int"
     autoIncrement: true
     primaryKey: true
+  user_id:"int"
   #真名
   name:""
   #性别

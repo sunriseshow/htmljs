@@ -90,6 +90,12 @@ module.exports.controllers =
                   action_name:"【评论】了您的问题"
                   target_path_name:question.title
                   content:req.body.html
+                if question.user_id!=res.locals.user.id
+                  func_user.getById question.user_id,(error,user)->
+                    func_email.sendMessage user.email,
+                      title:res.locals.user.nick+"评论了您的提问《"+question.title+"》"
+                      content:req.body.html
+                      url:"http://www.html-js.com/qa/"+question.id
           else if match = req.body.target_id.match(/^act_([0-9]*)$/)
             (__F 'act').addCount(match[1],"comment_count")
           console.log req.body

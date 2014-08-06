@@ -114,6 +114,7 @@ module.exports.controllers =
                 func_email.sendMessage u.email,
                   title:res.locals.user.nick+"回复了您发起的话题《"+topic.title+"》"
                   content:req.body.html
+                  url:"http://www.html-js.com/topic/"+topic.id
             if atnames = req.body.md.match(/\@([^\s]*)/g)
               atcount = atnames.length
               html = req.body.html
@@ -139,6 +140,7 @@ module.exports.controllers =
                     func_email.sendMessage user.email,
                       title:res.locals.user.nick+"在《"+topic.title+"》回帖中【提到】了你"
                       content:req.body.html
+                      url:"http://www.html-js.com/topic/"+topic.id
           if req.body.to_weibo
             sina.statuses.update 
               access_token:res.locals.user.weibo_token

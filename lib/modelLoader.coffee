@@ -28,13 +28,23 @@ global.uuid = require 'node-uuid'
 
 global.__FC = (func,model,methods)->
   if not methods
-    methods = ['getById','getAll','getAllAndCount','add','update','count','delete','addCount']
+    methods = ['getById','getByField','getAll','getAllAndCount','add','update','count','delete','addCount']
   methods.forEach (m)->
     if m == 'getById'
       func.getById = (id,callback)->
         model.find
           where:
             id:id
+        .success (m)->
+          callback null,m
+        .error (e)->
+          callback e
+    if m == 'getByField'
+      func.getByField = (key,value,callback)->
+        condition = {}
+        condition[key] = value
+        model.find
+          where:condition
         .success (m)->
           callback null,m
         .error (e)->

@@ -248,6 +248,36 @@ module.exports.controllers =
       else
         result.info = "错误的图片文件"
         res.send result  
+  "/upload_resume":
+    "post":(req,res,next)->
+      result = 
+        success:0
+        info:""
+      pack = req.files['file']
+      if pack 
+        sourcePath = pack.path
+        pack_name = (new Date()).getTime()+"-"+pack.name
+        targetPath = config.resume_path+pack_name
+        fs.rename sourcePath, targetPath, (err) ->
+          
+          upyun = new UPYun(config.upyun_bucketname, config.upyun_username, config.upyun_password)
+          fileContent = fs.readFileSync(targetPath)
+          md5Str = md5(fileContent)
+          upyun.setContentMD5(md5Str)
+          upyun.setFileSecret('bac')
+          upyun.writeFile '/uploads/'+pack_name, fileContent, false,(error, data)->
+            if error
+              result.info = error.message
+              res.send result
+              return
+            else
+              result.success = 1
+              result.data = 
+                filename:"http://htmljs.b0.upaiyun.com/uploads/"+pack_name
+            res.send result
+      else
+        result.info = "错误的图片文件"
+        res.send result  
   "/online_to_local":
     "post":(req,res,next)->
       result = 
@@ -370,8 +400,10 @@ module.exports.filters =
     get:['freshLogin',
     "index/actives",
     "index/recent_articles",
+    "index/recent_questions"
     "index/recent_topics",
     'index/recent_columns',
+    'index/all_tags',
     'index/all_topic_tags',
     'article/checkRss',
     'index/recent_users',

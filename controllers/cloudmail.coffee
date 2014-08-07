@@ -29,7 +29,7 @@ module.exports.controllers =
         +req.body.to+"-"
         +fileNameResult[1]
         fs.writeFileSync(filename, buffer)
-      req.body.filename = filename
+      req.body.filepath = filename
       func_mail.add req.body,(error)->
         console.log error
       console.log req.body

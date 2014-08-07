@@ -2,7 +2,6 @@ func_article = __F 'article/article'
 module.exports = (req,res,next)->
   func_article.getZansByArticleId req.params.id,(error,zan_logs)->
     res.locals.zan_logs = zan_logs
-    console.log zan_logs
     res.locals.zan_guo = false
     if zan_logs && res.locals.user
       zan_logs.forEach (log)->

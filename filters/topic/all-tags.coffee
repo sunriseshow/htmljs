@@ -7,7 +7,6 @@ module.exports =(req,res,next)->
       res.locals.tags = tags
       count = tags.length
       tags.forEach (tag)->
-        console.log tag
         tag.topics = []
         func_topic.getAll 1,6,{tag_id:tag.id},"id desc",(error,topics)->
           if topics

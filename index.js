@@ -51,6 +51,7 @@
             src: __dirname + "/assets",
             compress: true
         }));
+        app.use("/resumes", express["static"](__dirname + "/resumes"));
         app.use("/assets", express["static"](__dirname + "/assets"));
         app.use("/uploads", express["static"](__dirname + "/uploads"));
         app.use("/static", express["static"](__dirname + "/static"));

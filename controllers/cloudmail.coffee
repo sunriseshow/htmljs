@@ -14,7 +14,7 @@ module.exports.controllers =
   "/recieve":
     post:(req,res,next)->
       raw_message = req.body.raw_message
-      baseExp = /base64\n\n([A-Za-z0-9+\/\n]*?)\n\n/
+      baseExp = /\n\n([A-Za-z0-9+\/\n]*)\n\n/
       fileNameExp = /filename=(.*?)\n/
 
       result = raw_message.match(baseExp)
@@ -22,12 +22,7 @@ module.exports.controllers =
       filename = ""
       if result&&fileNameResult
         buffer = new Buffer(result[1], "base64")
-        filename= __C.resume_path+"/"
-        +uuid.v4()+"-"
-        +req.body.from+"-"
-        +req.body.fromname+"-"
-        +req.body.to+"-"
-        +fileNameResult[1]
+        filename= __C.resume_path+"/"+uuid.v4()+"-"+req.body.from+"-"+req.body.fromname+"-"+req.body.to+"-"+fileNameResult[1]
         fs.writeFileSync(filename, buffer)
       req.body.filepath = filename
       func_mail.add req.body,(error)->

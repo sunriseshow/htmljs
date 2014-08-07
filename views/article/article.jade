@@ -79,6 +79,9 @@ html
                 .entry-content 
                   | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>")}
                   | <script src="#{assets_head}/js/tuiku.js"></script>
+                  div(style="margin:30px 0 10px -15px;")
+                    a(href=" http://www.jobdeer.com/?fr=htmljs",target="_blank") 【广告】NB的人才不找工作，都在「 JobDeer.com 」拍卖自己！
+            
                 .vertical-actions.hidden
                   a.action
                     |赞

@@ -9,4 +9,5 @@ module.exports =
   toname:"varchar(100)"
   text:"text"
   html:"text"
+  filepath:"varchar(1000)"
   timestamp:"int"

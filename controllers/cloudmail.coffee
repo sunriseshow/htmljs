@@ -7,3 +7,11 @@ module.exports.controllers =
       func_mail.add req.body,(error)->
         console.log error
       res.send "ok"
+  "/recieve":
+    post:(req,res,next)->
+      
+      func_mail.add req.body,(error)->
+        console.log error
+      console.log req.body
+      console.log req.file
+      res.send "ok"

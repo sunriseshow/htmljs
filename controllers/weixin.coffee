@@ -3,7 +3,8 @@ func_article = (__F 'article/article')
 func_column = __F 'column'
 func_topic = __F 'topic'
 func_search = __F 'search'
-d = "你好，欢迎使用前端乱炖公众号系统\n回复1查看最新原创文章，\n回复2查看最近更新专栏，\n回复3查看最新讨论，\n回复：\"搜索：关键词\"可以使用本站的搜索系统搜索信息。\n也欢迎偶尔调戏下小炖(๑╹∀╹๑)萌。"
+func_rss_email = __F 'rss_email'
+d = "你好，欢迎使用前端乱炖公众号系统\n回复1查看最新原创文章，\n回复2查看最近更新专栏，\n回复3查看最新讨论，\n回复：\"搜索：关键词\"可以使用本站的搜索系统搜索信息。\n回复：\"订阅：email地址\"可以订阅本站推出的乱炖周刊。\n也欢迎偶尔调戏下小炖(๑╹∀╹๑)萌。"
 module.exports.controllers = 
     "/api":
         get:wechat("xinyu198736",(req,res,next)->
@@ -76,5 +77,10 @@ module.exports.controllers =
                         res.reply '对不起，没有搜索到任何相关信息，尝试换一下关键字吧少年！'
                     else
                         res.reply news
+            else if message.substr(0,2) == "订阅"
+                match = message.match(/(\w)+(\.\w+)*@(\w)+((\.\w+)+)/)
+                if match
+                    func_rss_email.add
+                      email:match[0]
 
             )

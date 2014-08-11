@@ -1,6 +1,7 @@
 func_job = __F 'job/job'
 func_resume = __F 'job/resume'
 func_comment = __F 'job/comment'
+func_cloudmail = __F 'cloudmail'
 pagedown = require("pagedown")
 safeConverter =new pagedown.Converter()
 pagedown.Extra.init(safeConverter);
@@ -22,6 +23,8 @@ module.exports.controllers =
           res.redirect '/job'
   "/:id":
     get:(req,res,next)->
+      func_job.addCount req.params.id,"visit_count",(error)->
+        
       res.render 'job/job'
   "/:id/zan":
     post:(req,res,next)->
@@ -35,7 +38,13 @@ module.exports.controllers =
         else
           result.success = 1
           res.send result
+  "/:id/create_mail":
+    get:(req,res,next)->
+      func_cloudmail.addLocalEmail req.query.source,req.query.target,req.query.user_id,(error)->
+        if not error
+          func_job.update req.query.job_id,{email:req.query.target},(error)->
 
+        res.redirect "back"
   "/:id/add":
     post:(req,res,next)->
       req.body.html = safeConverter.makeHtml req.body.md

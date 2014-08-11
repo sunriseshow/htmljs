@@ -17,7 +17,7 @@ module.exports.controllers =
     get:(req,res,next)->
       res.locals.now_page = req.query.page
       res.render 'topic/index.jade'
-
+  
   "/add":
     get:(req,res,next)->
       res.locals.tag_id = req.query.tag_id
@@ -54,6 +54,13 @@ module.exports.controllers =
       if res.locals.topic.tag_id
         func_topic_tag.addCount res.locals.topic.tag_id,'visit_count',(()->),2
       res.render 'topic/topic.jade'
+  "/:id/delete":
+    get:(req,res,next)->
+      if res.locals.user.is_admin
+        func_topic.delete req.params.id,(error)->
+          res.redirect 'back'
+      else
+        res.redirect 'back'
   "/:id/edit":
     get:(req,res,next)->
       func_topic.getById req.params.id,(error,topic)->
@@ -211,6 +218,8 @@ module.exports.filters =
     get:['freshLogin','topic/get-topic','topic/all-comments','topic/sametag_topics','topic/favs','book/some-books','topic/topic_zan_logs']
   "/:id/add":
     post:['checkLoginJson']
+  "/:id/delete":
+    get:['checkLogin']
   "/:id/zan":
     post:['checkLoginJson']
   "/:id/edit":

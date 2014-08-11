@@ -76,5 +76,5 @@ func_job =
       callback null,job
     .error (e)->
       callback e
-__FC func_job,Job,['getById','delete','update','count','add','getByField']
+__FC func_job,Job,['getById','delete','update','count','add','addCount','getByField']
 module.exports = func_job

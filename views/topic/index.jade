@@ -53,6 +53,7 @@ html
                             a.t(href="/topic/#{t.id}") #{t.title}
                             //- span (#{moment(t.createdAt).format("MM-DD")})
                         a.more(href="/topic?tag_id=#{tag.id}") 更多话题 >>
+
               .publish-tip.alert 如要发表话题，请点击分类进入之后，再发表到此分类。
             else 
               .simple-tags
@@ -127,6 +128,7 @@ html
                             a(href="/topic/#{topic.id}/update?sort=10000") 置顶
                           a(href="/topic/#{topic.id}/update?is_hot=1") hot
                           a(href="/topic/#{topic.id}/update?is_hot=0") nohot
+                          a(href="/topic/#{topic.id}/delete") 删除
                     div.user
                       a(data-original-title="#{topic.user_nick}",href="/user/#{topic.user_id}")
                         img(src="#{topic.user_headpic}")

@@ -843,10 +843,10 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #jobs .my-resume .item .value{color:#444;padding-left:10px;}
 #jobs .my-resume .add-job{border-top:1px solid #eee;padding-top:10px;margin-top:10px;}
 #jobs .job-list-hd{line-height:16px;margin:10px 0;font-size:16px;height:16px;font-weight:100;color:#666;border-left:3px solid #88d1b4;padding-left:8px;margin-top:20px;}
-#jobs .job-list{width:1100px;}#jobs .job-list .job{background:#fff;border-radius:5px;width:325px;display:inline-block;vertical-align:top;margin-right:10px;margin-bottom:10px;border:1px solid #ddd;box-shadow:1px 1px 5px #ddd;overflow:hidden;}#jobs .job-list .job .title{background:#fff;padding:5px 10px;font-size:16px;color:#444;line-height:30px;}#jobs .job-list .job .title a{color:#444;}
-#jobs .job-list .job .title img{width:30px;height:30px;border-radius:50px;float:right;}
-#jobs .job-list .job .title .headpic{margin-right:10px;}
-#jobs .job-list .job .con{padding:10px;line-height:25px;background:#f7f7f7;}#jobs .job-list .job .con .item{margin-right:10px;}#jobs .job-list .job .con .item .key{color:#666;}
+#jobs .job-list{width:1100px;}#jobs .job-list .job{background:#fff;border-radius:5px;width:325px;display:inline-block;vertical-align:top;margin-right:10px;margin-bottom:10px;border:1px solid #ddd;box-shadow:1px 1px 5px #ddd;overflow:hidden;}#jobs .job-list .job .title{background:#fff;padding:5px 10px;font-size:14px;line-height:30px;}
+#jobs .job-list .job .title img{width:30px;height:30px;border-radius:50px;}
+#jobs .job-list .job .title .headpic{float:right;}
+#jobs .job-list .job .con{padding:10px;line-height:30px;background:#f7f7f7;}#jobs .job-list .job .con .item{margin-right:10px;}#jobs .job-list .job .con .item .key{color:#666;}
 #jobs .job-list .job .con .item .value{color:#999;}
 #jobs .job-list .job .con .count em{color:#999;margin-right:10px;}
 #jobs .job-list .job .user .nick{float:left;font-size:14px;line-height:50px;margin:10px;}

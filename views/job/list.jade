@@ -3,7 +3,7 @@ html
   head
     include ../head
     title 招聘求职 - 前端乱炖
-    style
+    script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
   body#jobs
     - locals.pageId = 50
     include ../header
@@ -42,7 +42,7 @@ html
               .title 
                 
                 a.t(href="/job/#{job.id}") #{job.title}
-                a.headpic(href="/user/#{job.user.id}")
+                a.headpic.user(href="/user/#{job.user.id}",data-original-title="#{job.user.nick}")
                   img(src="#{job.user.head_pic}")
               .con
                 div
@@ -66,6 +66,10 @@ html
                 .item 
                   span.key 发布者：
                   a.value(href="/user/#{job.user.id}") #{job.user.nick}
-                .count 访问：<em>#{job.visit_count}</em> 关注：<em>#{job.zan_count}</em> 简历：<em>#{job.tou_count}</em>
+                .count 访问：<em>#{job.visit_count}</em> 关注：<em>#{job.zan_count}</em> 
               
         include ../page
+        script.
+          $('.user').tooltip({
+              placement:"bottom"
+          })

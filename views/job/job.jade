@@ -72,6 +72,13 @@ html
               h3.con-title 联系方式
               .job-email
                 a(href="mailto:#{job.email}") #{job.email}
+                if locals.user && locals.user.is_admin
+                  form(action="/job/#{job.id}/create_mail")
+                    input(type="hidden",name="job_id",value="#{job.id}")
+                    input(type="hidden",name="user_id",value="#{job.user_id}")
+                    input(type="hidden",name="source",value="#{job.email}")
+                    input(type="text",name="target",value="")
+                    button(type="submit") 提交
             .topic-user.clearfix
               .zans.clearfix
                 a.zan.action(href="javascript:void(0);") 

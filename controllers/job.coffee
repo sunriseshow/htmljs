@@ -24,7 +24,7 @@ module.exports.controllers =
   "/:id":
     get:(req,res,next)->
       func_job.addCount req.params.id,"visit_count",(error)->
-        
+
       res.render 'job/job'
   "/:id/zan":
     post:(req,res,next)->
@@ -60,6 +60,16 @@ module.exports.controllers =
         else
           res.send 
             success:1
+  "/:id/edit":
+    get:(req,res,next)->
+      func_job.getById req.params.id,(error,job)->
+        if error then next error
+        else
+          res.locals.job = job
+          res.render 'job/add'
+    post:(req,res,next)->
+      func_job.update req.params.id,req.body,(error)->
+        res.redirect 'back'
   "/resume/add":
     get:(req,res,next)->
       res.render 'job/add-resume'
@@ -87,6 +97,9 @@ module.exports.filters =
   "/:id/zan":
     post:['checkLoginJson']
   "/:id/add":
+    post:['checkLogin']
+  "/:id/edit":
+    get:['checkLogin']
     post:['checkLogin']
   "/resume/add":
     get:['checkLogin']

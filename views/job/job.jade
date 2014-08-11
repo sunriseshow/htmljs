@@ -96,10 +96,10 @@ html
                   else
                     .alert.alert-warning 只有发布者能看到谁表示了感兴趣！
                   
-            //-   .actions
+              .actions
                 
-            //-       if locals.user && (user.is_admin||user.id==topic.user_id)
-            //-         a.action(href="/topic/#{topic.id}/edit") <i class="icon-pencil icon-gray"></i>编辑
+                  if locals.user && (user.is_admin||user.id==job.user_id)
+                    a.action(href="/job/#{job.id}/edit") <i class="icon-pencil icon-gray"></i>编辑
             //-       a.action#add_fav(href="javascript:void(0);") 
             //-         i.icon-heart
             //-         span 收藏 #{locals.favs?locals.favs.length:0}

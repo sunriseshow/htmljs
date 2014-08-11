@@ -4,15 +4,15 @@ config = require './../config.coffee'
 
 buffer = ""
 
-mustache.compileAndRender('./../static/amui-edm.html', {})
+mustache.compileAndRender('./../static/htmljs-weekly-clear.html', {})
 .on 'data',(c)->
    buffer += c.toString()
 .on 'end',()->
   mail({
-    subject:"给大家推荐一款懂工程师的前端框架！",
-    #to:"676588498@qq.com",
-    to:"users@htmljs.sendcloud.org",
-    use_maillist:"true",
+    subject:"！",
+    to:"676588498@qq.com",
+    #to:"weekly@htmljs.sendcloud.org",
+    #use_maillist:"true",
     api_user:config.mail.api_user_list,
     api_key: config.mail.api_key_list,
     html:buffer

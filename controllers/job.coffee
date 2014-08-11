@@ -22,11 +22,20 @@ module.exports.controllers =
           res.redirect '/job'
   "/:id":
     get:(req,res,next)->
-      func_job.getById req.params.id,(error,job)->
-        if error then next error
+      res.render 'job/job'
+  "/:id/zan":
+    post:(req,res,next)->
+      result = 
+        success:0
+        info:""
+      func_job.addZan req.params.id,res.locals.user.id,(error)->
+        if error
+          result.info = error.message
+          res.send result
         else
-          res.locals.job = job
-          res.render 'job/job'
+          result.success = 1
+          res.send result
+
   "/:id/add":
     post:(req,res,next)->
       req.body.html = safeConverter.makeHtml req.body.md
@@ -65,7 +74,9 @@ module.exports.filters =
   "/add":
     get:['checkLogin']
   "/:id":
-    get:['freshLogin',"job/comments"]
+    get:['freshLogin',"job/comments","job/get-job","job/his-jobs","job/city-jobs","job/has_zan","job/zan-logs"]
+  "/:id/zan":
+    post:['checkLoginJson']
   "/:id/add":
     post:['checkLogin']
   "/resume/add":

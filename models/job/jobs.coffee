@@ -26,7 +26,7 @@ module.exports =
   company_country:"varchar(20)"
   company_city:"varchar(20)"
   company_desc:"text"
-
+  email:"varchar(100)"
   zhiwei:"varchar(100)"
   zhaopin_personcount:"int" #招聘人数
   zhaopin_jingyan:"varchar(20)" #工作经验

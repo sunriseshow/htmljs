@@ -3,6 +3,8 @@ func_job = __F 'job/job'
 module.exports = (req,res,next)->
   condition = 
     is_publish:1
+  if res.locals.user && res.locals.user.is_admin
+    condition = {}
   page = req.query.page || 1
   count = req.query.count || 20
   func_job.count condition,(error,_count)->

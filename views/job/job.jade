@@ -69,19 +69,26 @@ html
               .job-require !{job.zhaopin_desc}
               h3.con-title 公司简介
               .job-company-desc !{job.company_desc}
-            //- .topic-user.clearfix
-            //-   .zans.clearfix
-            //-     a.zan.action(href="javascript:void(0);") 
-            //-         i.icon-thumbs-up
-            //-         if locals.has_zan
-            //-           |<em>已赞</em> <span>#{topic.zan_count}</span>
-            //-         else
-            //-           |<em>赞</em> <span>#{topic.zan_count}</span>
-            //-       if locals.zan_logs
-            //-         span.zanlogs
-            //-           each zan in zan_logs
-            //-             a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
-            //-               img(src='#{zan.user.head_pic}')
+              h3.con-title 联系方式
+              .job-email
+                a(href="mailto:#{job.email}") #{job.email}
+            .topic-user.clearfix
+              .zans.clearfix
+                a.zan.action(href="javascript:void(0);") 
+                    i.icon-heart
+                    if locals.has_zan
+                      |<em>已感兴趣</em> <span>#{job.zan_count}</span>
+                    else
+                      |<em>感兴趣</em> <span>#{job.zan_count}</span>
+                  if locals.user && locals.user.id==job.user_id
+                    if locals.zan_logs
+                      span.zanlogs
+                        each zan in zan_logs
+                          a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
+                            img(src='#{zan.user.head_pic}')
+                  else
+                    .alert.alert-warning 只有发布者能看到谁表示了感兴趣！
+                  
             //-   .actions
                 
             //-       if locals.user && (user.is_admin||user.id==topic.user_id)
@@ -136,7 +143,7 @@ html
                             a.at(href="",data-nick="#{ans.user_nick}") <i class="icon-new-window icon-gray"></i>回复
                             a.reply(href="",data-md="#{ans.md}",data-nick="#{ans.user_nick}") <i class="icon-retweet icon-gray"></i>引用
                             a(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/job/"+job.id+"#comment-"+ans.id)}&title=分享自@前端乱炖 的精彩跟帖【#{job.title}】#{ans.user_nick}：#{ans.md.replace(/>/g,'').substr(0,100)}&appkey=659341943") 分享
-                            a.zan(href="",data-id="#{ans.id}") <i class="icon-thumbs-up"></i>赞 <em>#{ans.zan_count}</em>
+                            //- a.zan(href="",data-id="#{ans.id}") <i class="icon-thumbs-up"></i>赞 <em>#{ans.zan_count}</em>
                         if i==0 && locals.page==1
                           .ans-lou 沙发
                         else if i==1&& locals.page==1
@@ -183,13 +190,20 @@ html
                   <button class="btn btn-primary">插入</button>
                 </div>
       .right(class="#{locals.is_clear?'hidden':''}")
-        
-          //- .module.sametag_topics
-          //-   .hd 同类型的话题
-          //-   .bd
-          //-     each a in sametag_topics
-          //-       if a.id != topic.id
-          //-         div.item <a href="/topic/#{a.id}">#{a.title}</a>
+          if locals.user_jobs
+            .module.sametag_topics
+              .hd TA发布的其他职位
+              .bd
+                each jj in user_jobs
+                  if jj.id != job.id
+                    div.item <a href="/job/#{jj.id}">#{jj.title}</a>  
+          if locals.city_jobs
+            .module.sametag_topics
+              .hd 同城市的其他职位
+              .bd
+                each jjj in city_jobs
+                  if jjj.id != job.id
+                    div.item <a href="/job/#{jjj.id}">#{jjj.title}</a>
         
     script#comment-tpl(type="text/template")
       .comment-item.clearfix
@@ -223,6 +237,44 @@ html
     script(src='#{assets_head}/js/mustache.js')
     script(src='#{assets_head}/js/moment.js')
     script.
+      $(".zans .zan").click(function(){
+          var self = this;
+        HtmlJS.util.ajax("/job/#{job.id}/zan",{
+          score:$(self).attr("data-index")
+        },"post",function(data){
+          loadingTip.hide()
+            if(data.success){
+              
+              messageTip.show("成功！")
+                $("em",self).html("已赞")
+                $("span",self).html($("span",self).html()*1+1)
+            }else{
+              alert(data.info)
+            }
+        },function(){
+
+        },null,function(){
+        HtmlJS.util.ajax("/job/#{job.id}/zan",{
+          score:$(self).attr("data-index")
+        },"post",function(data){
+          loadingTip.hide()
+            if(data.success){
+              messageTip.show("成功！")
+                $("em",self).html("已赞")
+                $("span",self).html($("span",self).html()*1+1)
+            }else{
+              alert(data.info)
+            }
+        },function(){
+
+        },null,function(){
+        
+      })
+      })
+      })
+      $('.user').tooltip({
+          placement:"bottom"
+      })
       var comment_tpl = $("#comment-tpl").html()
       var comment_tpl_1 = $("#comment-tpl-q").html()
       moment.lang('zh-cn')

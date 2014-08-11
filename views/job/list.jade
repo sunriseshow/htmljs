@@ -40,9 +40,10 @@ html
           each job in jobs
             .job
               .title 
+                
+                a.t(href="/job/#{job.id}") #{job.title}
                 a.headpic(href="/user/#{job.user.id}")
                   img(src="#{job.user.head_pic}")
-                a.t(href="/job/#{job.id}") #{job.title}
               .con
                 div
                   span.item 

@@ -109,7 +109,7 @@ html
             //默认的编辑区域高度
             initialFrameHeight:100,
             textarea:"desc",
-            initialContent:"!{resume.desc}",
+            initialContent:"!{locals.resume?resume.desc:''}",
             autoClearinitialContent:0
             //更多其他参数，请参考ueditor.config.js中的配置项
         })

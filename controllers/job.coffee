@@ -69,7 +69,7 @@ module.exports.controllers =
           res.render 'job/add'
     post:(req,res,next)->
       func_job.update req.params.id,req.body,(error)->
-        res.redirect 'back'
+        res.redirect 'job/'+req.params.id
   "/resume/add":
     get:(req,res,next)->
       res.render 'job/add-resume'

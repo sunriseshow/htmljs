@@ -24,7 +24,7 @@ html
                   legend 编辑简历
                 else
                   legend 添加简历
-                if locals.job
+                if locals.resume
                   input(type='hidden', value = "#{resume.id}",name='id')
                 input(type='hidden', value = "#{user.id}",name='user_id')
                 .control-group

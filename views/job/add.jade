@@ -48,7 +48,7 @@ html
                   select#min_price(name="min_price",value="#{locals.job?locals.job.min_price:''}")
                     option(value="0") 请选择
                     each p in minprices
-                      option(value="#{p}",selected="#{locals.job?(locals.job.min_price==p?'selected':''):''}") #{p}
+                      |<option value="#{p}" #{locals.job?(locals.job.min_price==p?'selected=\'selected\'':''):''}>#{p}</option>
                     
                   | - 
                   select#max_price(name="max_price",value="#{locals.job?locals.job.max_price:''}")

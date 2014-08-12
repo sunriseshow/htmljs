@@ -53,9 +53,10 @@ html
                   span.item 
                     span.key 招聘职位：
                     span.value #{job.zhiwei}
+                div
                   span.item 
                     span.key 薪水范围：
-                    span.value #{job.zhaopin_price}
+                    span.value #{job.min_price} - #{job.max_price==0?"不限":job.max_price}
                 div
                   span.item 
                     span.key 公司规模：

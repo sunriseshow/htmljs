@@ -43,7 +43,7 @@ html
                   input#zhaopin_jingyan.input-xlarge(type='text', value = "#{locals.job?locals.job.zhaopin_jingyan:''}",name='zhaopin_jingyan', placeholder='工作经验要求')
                 .control-group
                   label 薪资范围
-                  select#min_price(name="min_price")
+                  select#min_price(name="min_price",value="#{locals.job?locals.job.min_price:''}")
                     option(value="0") 请选择
                     option(value="2000") 2000
                     option(value="3000") 3000
@@ -59,7 +59,7 @@ html
                     option(value="25000") 25000
                     option(value="30000") 30000
                   | - 
-                  select#max_price(name="max_price")
+                  select#max_price(name="max_price",value="#{locals.job?locals.job.max_price:''}")
                     option(value="0") 请选择
                     option(value="2000") 2000
                     option(value="3000") 3000
@@ -120,7 +120,8 @@ html
             elementPathEnabled:false,
             //默认的编辑区域高度
             initialFrameHeight:100,
-            content:"测试",
+            content:"",
+            initialContent:"#{locals.job?locals.job.company_desc:''}",
             textarea:"company_desc"
             //更多其他参数，请参考ueditor.config.js中的配置项
         })
@@ -135,10 +136,10 @@ html
             //默认的编辑区域高度
             initialFrameHeight:300,
             textarea:"zhaopin_desc",
-            initialContent:"测试",
+            initialContent:"#{locals.job?locals.job.zhaopin_desc:''}",
             autoClearinitialContent:0
             //更多其他参数，请参考ueditor.config.js中的配置项
         })
-      new PCAS("company_country","company_city")
+      new PCAS("company_country","company_city",#{locals.job?locals.job.company_country:''},#{locals.job?locals.job.company_city:''})
 
       

@@ -36,7 +36,7 @@ html
                 each tag in tags
                   .tag
                     if tag.id==3
-                      a.name.important(href="/job") 招聘
+                      a.name.important(href="/job") 招聘求职
                     else
                       a.name(href="/topic?tag_id=#{tag.id}",class="#{locals.tag_id==tag.id?'active':''} #{tag.important?'important':''}") #{tag.name}
                     

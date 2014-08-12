@@ -35,7 +35,10 @@ html
                 //- a(href="/topic",class="#{!locals.tag_id?'active':''}") 全部
                 each tag in tags
                   .tag
-                    a.name(href="/topic?tag_id=#{tag.id}",class="#{locals.tag_id==tag.id?'active':''} #{tag.important?'important':''}") #{tag.name}
+                    if tag.id==3
+                      a.name(href="/job")
+                    else
+                      a.name(href="/topic?tag_id=#{tag.id}",class="#{locals.tag_id==tag.id?'active':''} #{tag.important?'important':''}") #{tag.name}
                     
                     .others
                       span.views.item

@@ -58,7 +58,7 @@ html
                   span.value #{job.min_price} - #{job.max_price}
                 .item 
                   span.key 所在城市：
-                  span.value #{job.company_city}
+                  span.value #{job.company_country} #{job.company_city}
                 .item 
                   span.key 招聘人数：
                   span.value #{job.zhaopin_personcount}
@@ -100,6 +100,7 @@ html
                 
                   if locals.user && (user.is_admin||user.id==job.user_id)
                     a.action(href="/job/#{job.id}/edit") <i class="icon-pencil icon-gray"></i>编辑
+                  a(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/topic/"+topic.id+"#comment-"+ans.id)}&title=分享一则@前端乱炖 招聘频道的招聘信息【#{job.title}】公司：#{job.company_name} 职位：#{job.zhiwei} 所在城市：#{job.company_country} #{job.company_city} 详情见：&appkey=659341943") 分享
             //-       a.action#add_fav(href="javascript:void(0);") 
             //-         i.icon-heart
             //-         span 收藏 #{locals.favs?locals.favs.length:0}

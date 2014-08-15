@@ -1,8 +1,7 @@
 func_job = __F 'job/job'
 
 module.exports = (req,res,next)->
-  condition = 
-    is_publish:1
+  condition = {}
   if res.locals.user && res.locals.user.is_admin
     condition = {}
   page = req.query.page || 1

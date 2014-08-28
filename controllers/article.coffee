@@ -7,6 +7,7 @@ func_bi = __F 'bi'
 func_email = __F 'email'
 func_search = __F 'search'
 func_comment = __F 'comment'
+func_payment = __F 'payment'
 config = require './../config.coffee'
 authorize=require("./../lib/sdk/authorize.js");
 md5 = require 'MD5'
@@ -349,6 +350,21 @@ module.exports.controllers =
     get:(req,res,next)->
       (__F 'create_thumbnail').create_article req.params.id
       res.redirect 'back'
+  "/:id/pay":
+    get:(req,res,next)->
+      func_article.getById req.params.id,(error,article)->
+        func_payment.add
+          trade_num:uuid.v4().replace(/-/g,"")
+          trade_title:"前端乱炖活动付费："+article.title
+          target_uuid:article.id
+          trade_price:1
+          target_type:2
+          target_user_id:res.locals.user.id
+        ,(error,payment)->
+          if error
+            next error
+          else
+            res.redirect "/alipay/create?trade_num="+payment.trade_num
   "/column":
     get:(req,res,next)->
       res.render 'article/columns.jade'
@@ -549,7 +565,8 @@ module.exports.filters =
   "/add/recommend":
     get:['checkLogin',"checkCard"]
     post:['checkLoginJson',"checkCard"]
-
+  "/:id/pay":
+    get:['checkLogin']
   "/":
     get:['freshLogin','get_infos','article/my-columns','article/public-columns','article/all-publish-articles','article/jian-articles','article/jian_columns','article/jian-hots']#'article/index-columns','article/column-articles','article/checkRss']
   "/user/:id":
@@ -557,7 +574,7 @@ module.exports.filters =
   "/old":
     get:['freshLogin','getRecent','get_infos','article/new-comments']
   "/:id":
-    get:['freshLogin','getRecent','get_infos','article/get-article','article/article-writer','article/get-article-column','article/this-column','article/comments','article/article_zan_logs','article/favs','book/some-books']
+    get:['freshLogin','getRecent','get_infos','article/get-article','article/article-writer','article/get-article-column','article/this-column','article/comments','article/article_zan_logs','article/favs','article/get-canread']
   
   "/:id/zan":
     post:['checkLoginJson']

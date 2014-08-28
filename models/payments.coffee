@@ -8,7 +8,7 @@ module.exports =
   trade_title:"varchar(200)"
   target_uuid:"varchar(40)"
   trade_price:"double"
-  target_type:"int" # 1 报名活动
+  target_type:"int" # 1 报名活动 2 文章付费
   target_user_id:"int" # 付款者
   alipay_tradenum:"varchar(100)"
   status: #1 创建 2已付，等待确认收货 3已完成付款 4 确认收货

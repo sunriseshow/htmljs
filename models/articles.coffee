@@ -57,3 +57,7 @@ module.exports =
     type:"double"
     private:true
   pinyin:"varchar(1000)"
+  is_buy: #是否收费
+    defaultValue:0
+    type:"tinyint"
+

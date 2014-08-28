@@ -4,6 +4,7 @@ func_payment = __F 'payment'
 func_act = __F 'act'
 func_user = __F 'user'
 func_card = __F 'card'
+func_article = __F 'article/article'
 Sina=require("./../lib/sdk/sina.js")
 module.exports.controllers = 
   "/create":
@@ -19,31 +20,51 @@ module.exports.controllers =
       func_payment.getByTradeNum req.query.trade_num,(error,payment)->
         if error then next error
         else
-          func_card.getByUserId payment.target_user_id,(error,card)->
-            if card && card.name && card.tel  && card.email
-              if payment.need_address && (!card.address)
-                next new Error '信息不完整，不能付款，需要在花名册中填写收货地址，<a href="/edit-card">编辑花名册</a>'
+          if payment.target_type==1
+            func_card.getByUserId payment.target_user_id,(error,card)->
+              if card && card.name && card.tel  && card.email
+                if payment.need_address && (!card.address)
+                  next new Error '信息不完整，不能付款，需要在花名册中填写收货地址，<a href="/edit-card">编辑花名册</a>'
+                  return
+                data =
+                  out_trade_no:payment.trade_num#req.body.WIDout_trade_no
+                  subject:payment.trade_title#req.body.WIDsubject
+                  total_fee:payment.trade_price#req.body.WIDtotal_fee
+                  body: payment.trade_title#req.body.WIDbody
+                  show_url:"http://www.html-js.com/act/"+payment.target_uuid#req.body.WIDshow_url
+                  quantity  : "1"#req.body.WIDquantity,
+                  payment_type:"1"
+                  price:payment.trade_price
+                  logistics_fee : "0"#req.body.WIDlogistics_fee,
+                  logistics_type  : "POST"#req.body.WIDlogistics_type,
+                  logistics_payment : "SELLER_PAY"#req.body.WIDlogistics_payment,
+                  receive_name  : card.name#req.body.WIDreceive_name,
+                  receive_address : if card.address then card.address else '无'#req.body.WIDreceive_address,
+                  receive_zip : "123456"#req.body.WIDreceive_zip,
+                  receive_mobile  : card.tel#req.body.WIDreceive_mobile
+                alipay.trade_create_by_buyer(data, res);
+              else
+                next new Error '信息不完整，不能付款，需要在花名册中填写真实姓名，邮箱，手机号，<a href="/edit-card">编辑花名册</a>'
                 return
-              data = 
-                out_trade_no:payment.trade_num#req.body.WIDout_trade_no 
-                subject:payment.trade_title#req.body.WIDsubject 
-                total_fee:payment.trade_price#req.body.WIDtotal_fee 
-                body: payment.trade_title#req.body.WIDbody
-                show_url:"http://www.html-js.com/act/"+payment.target_uuid#req.body.WIDshow_url
+          else
+            func_user.getById payment.target_user_id,(error,user)->
+              data =
+                out_trade_no:payment.trade_num #req.body.WIDout_trade_no
+                subject:payment.trade_title #req.body.WIDsubject
+                total_fee:payment.trade_price #req.body.WIDtotal_fee
+                body: payment.trade_title #req.body.WIDbody
+                show_url:"http://www.html-js.com/article/"+payment.target_uuid #req.body.WIDshow_url
                 quantity  : "1"#req.body.WIDquantity,
                 payment_type:"1"
                 price:payment.trade_price
                 logistics_fee : "0"#req.body.WIDlogistics_fee,
                 logistics_type  : "POST"#req.body.WIDlogistics_type,
                 logistics_payment : "SELLER_PAY"#req.body.WIDlogistics_payment,
-                receive_name  : card.name#req.body.WIDreceive_name,
-                receive_address : if card.address then card.address else '无'#req.body.WIDreceive_address,
+                receive_name  : user.nick,
+                receive_address :  '无'#req.body.WIDreceive_address,
                 receive_zip : "123456"#req.body.WIDreceive_zip,
-                receive_mobile  : card.tel#req.body.WIDreceive_mobile      
+                receive_mobile  : "12345678901"
               alipay.trade_create_by_buyer(data, res);
-            else
-              next new Error '信息不完整，不能付款，需要在花名册中填写真实姓名，邮箱，手机号，<a href="/edit-card">编辑花名册</a>'
-              return
   "/trade_create_by_buyer/notify_url":
     post:(req,res,next)->
       console.log req.body
@@ -66,31 +87,37 @@ module.exports.controllers =
                 buyer_id:req.body.buyer_id
                 trade_no:req.body.trade_no
               .success ()->
-                func_user.getById payment.target_user_id,(error,user)->
-                  if error 
-                    console.log error
-                    res.end 'fail'
-                  else
-                    func_act.addJoiner payment.target_uuid,user,(error,joiner)->
-                      if error 
-                        result.info = error.message
-                        res.end 'fail'
-                      else
-                        
-                        func_act.getById payment.target_uuid,(error,act)->
-                          if error 
-                            console.log error
-                          if act
-                            console.log act
-                            sina=new Sina(__C.sdks.sina)
-                            share_txt = "我在@前端乱炖 报名了【"+act.title+"】的活动，欢迎关注：http://www.html-js.com/act/"+req.params.id
-                            if act.share_text
-                              share_txt = act.share_text
-                            sina.statuses.update 
-                              access_token:user.weibo_token
-                              status:share_txt
-                        res.end 'success'
-
+                if payment.target_type == 1
+                  func_user.getById payment.target_user_id,(error,user)->
+                    if error 
+                      console.log error
+                      res.end 'fail'
+                    else
+                      func_act.addJoiner payment.target_uuid,user,(error,joiner)->
+                        if error 
+                          result.info = error.message
+                          res.end 'fail'
+                        else
+                          
+                          func_act.getById payment.target_uuid,(error,act)->
+                            if error 
+                              console.log error
+                            if act
+                              console.log act
+                              sina=new Sina(__C.sdks.sina)
+                              share_txt = "我在@前端乱炖 报名了【"+act.title+"】的活动，欢迎关注：http://www.html-js.com/act/"+req.params.id
+                              if act.share_text
+                                share_txt = act.share_text
+                              sina.statuses.update 
+                                access_token:user.weibo_token
+                                status:share_txt
+                          res.end 'success'
+                else if payment.target_type == 2
+                  func_article.addPay payment.target_uuid,payment.target_user_id,(e)->
+                    if e 
+                      res.end 'fail'
+                    else
+                      res.end 'success'
               .error (e)->
                 console.log e
                 res.end 'fail'
@@ -107,4 +134,7 @@ module.exports.controllers =
       func_payment.getByTradeNumNoCheck req.query.out_trade_no,(error,payment)->
         if error then next error
         else
-          res.redirect '/act/'+payment.target_uuid
+          if payment.target_type == 1
+            res.redirect '/act/'+payment.target_uuid
+          else if payment.target_type == 2
+            res.redirect '/article/'+payment.target_uuid

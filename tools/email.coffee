@@ -10,9 +10,9 @@ mustache.compileAndRender('./../static/htmljs-weekly-clear.html', {})
 .on 'end',()->
   mail({
     subject:"前端乱炖周刊-每周为您精选新鲜营养！",
-    #to:"676588498@qq.com",
-    to:"weekly@htmljs.sendcloud.org",
-    use_maillist:"true",
+    to:"xinyu198736@gmail.com",
+    #to:"weekly@htmljs.sendcloud.org",
+    #use_maillist:"true",
     api_user:config.mail.api_user_list,
     api_key: config.mail.api_key_list,
     html:buffer

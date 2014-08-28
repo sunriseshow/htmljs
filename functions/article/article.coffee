@@ -16,6 +16,10 @@ ArticleZanLogs = __M 'article_zan_logs'
 User.hasOne ArticleZanLogs,{foreignKey:"user_id"}
 ArticleZanLogs.belongsTo User,{foreignKey:"user_id"}
 ArticleZanLogs.sync()
+
+CanRead = __M "article_canread"
+CanRead.sync()
+
 cache = 
   recent:[]
 func_article =  
@@ -201,6 +205,26 @@ func_article =
       raw:true
     .success (logs)->
       callback null,logs
+    .error (e)->
+      callback e
+  addPay:(article_id,user_id,callback)->
+    CanRead.create
+      article_id:article_id
+      user_id:user_id
+    .success ()->
+      callback()
+    .error (e)->
+      callback e
+  checkCanRead:(user_id,article_id,callback)->
+    CanRead.find
+      where:
+        article_id:article_id
+        user_id:user_id
+    .success (c)->
+      if c
+        callback()
+      else
+        callback new Error '无权限查看'
     .error (e)->
       callback e
 __FC func_article,Article,['update','count','delete','addCount']

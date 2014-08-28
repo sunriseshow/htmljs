@@ -202,15 +202,16 @@ module.exports.controllers =
           result.info = error.message
         else
           result.success = 1
-          func_info.add 
-            target_user_id:1
-            type:8
-            source_user_id:res.locals.user.id
-            source_user_nick:res.locals.user.nick
-            time:new Date()
-            target_path:'/article/'+article.id
-            action_name:"请求开通付费"
-            target_path_name:article.title     
+          if req.body.fufei
+            func_info.add 
+              target_user_id:1
+              type:8
+              source_user_id:res.locals.user.id
+              source_user_nick:res.locals.user.nick
+              time:new Date()
+              target_path:'/article/'+article.id
+              action_name:"请求开通付费"
+              target_path_name:article.title     
           func_article.update article.id,{sort:article.id}
           (__F 'coin').add 40,article.user_id,"发表了一篇专栏文章"
           if req.body.column_id

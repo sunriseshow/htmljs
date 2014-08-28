@@ -18,6 +18,8 @@ ArticleZanLogs.belongsTo User,{foreignKey:"user_id"}
 ArticleZanLogs.sync()
 
 CanRead = __M "article_canread"
+User.hasOne CanRead,{foreignKey:"user_id"}
+CanRead.belongsTo User,{foreignKey:"user_id"}
 CanRead.sync()
 
 cache = 
@@ -227,5 +229,15 @@ func_article =
         callback new Error '无权限查看'
     .error (e)->
       callback e
+  canReaders:(article_id,callback)->
+    CanRead.findAll
+      where:
+        article_id:article_id
+      include:[User]
+    .success (readers)->
+      callback null,readers
+    .error (e)->
+      callback e
+
 __FC func_article,Article,['update','count','delete','addCount']
 module.exports=func_article

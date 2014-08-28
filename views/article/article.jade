@@ -81,9 +81,9 @@ html
                     - var matches = article.html.match(/<p>.*?<\/p>/g);
                     - var match_result = matches.splice(0,4);
                     | !{match_result.join("").replace(/<code>/g,"<code class='language-javascript'>")}
-                    a.btn(href="/article/#{article.id}/pay") 本文长度：#{article.md.length} 字，点击付费
+                    a.btn(href="/article/#{article.id}/pay") 本文长度：#{article.md.length} 字，点击付费1元
                     br
-                    .more-but-pay 您好，这是一篇付费文章，您需要支付1元才能查看原文，所有费用都会支付给作者，谢谢您对社区作者的小小支持
+                    .more-but-pay 您好，这是一篇付费文章，您需要支付 1元 才能查看原文，所有费用都会支付给作者，谢谢您对社区作者的小小支持
                   else
                     | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>")}
                   | <script src="#{assets_head}/js/tuiku.js"></script>

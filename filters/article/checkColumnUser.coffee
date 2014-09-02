@@ -8,7 +8,7 @@ module.exports = (req,res,next)->
     res.locals.column_canedit = false
     if users && res.locals.user
       users.forEach (u)->
-        if u.id==res.locals.user.id
+        if u.user.id==res.locals.user.id
           res.locals.column_canedit = true
 
     next()

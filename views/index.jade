@@ -381,14 +381,7 @@ html
     //-   iframe(src="/static/geek.html",style="width:280px;height:280px;", frameborder="no",border="0",scrolling="no" )
     script(src="#{assets_head}/js/messageTip.js")
     script(src="#{assets_head}/js/loadingTip.js")
-    script
-      $.getScript("http://localhost:8765/assets/socket.io/socket.io.js",function(){
-        var socket = io.connect('http://localhost');
-        socket.on('news', function (data) {
-          console.log(data);
-          socket.emit('my other event', { my: 'data' });
-        });
-      }
+    
     
 
       

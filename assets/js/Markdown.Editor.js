@@ -2130,16 +2130,20 @@
     commandProto.fullscreen = function(chunk, postProcessing) {
         $("#fullscreen-editor").removeClass("hidden")
         $("#fullscreen-exit").removeClass("hidden")
+        $("#save-article").removeClass("hidden")
         $("#wmd-button-bar").appendTo($("#fullscreen-editor"))
         $("#wmd-editor-con").appendTo($("#fullscreen-editor"))
         $("#wmd-preview-con").appendTo($("#fullscreen-editor"))
         $("#fullscreen-editor #wmd-preview").css({
             height: $(window).height() - 93
         });
+        $("#fullscreen-editor textarea").focus();
         $("#fullscreen-editor textarea").css({
             height: $(window).height() - 73,
             overflowY: "auto"
         }).addClass("fullscreen-textarea");
+
+
 
 
     }

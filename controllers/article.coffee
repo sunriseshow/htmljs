@@ -214,23 +214,24 @@ module.exports.controllers =
               action_name:"请求开通付费"
               target_path_name:article.title     
           (__F 'coin').add 40,article.user_id,"发表了一篇专栏文章"
-          if req.body.column_id
-            func_column.update req.body.column_id,{last_article_time:(new Date()).getTime()},()->
-            func_column.addCount req.body.column_id,"article_count",(error)->
-            func_column.getRsses req.body.column_id,(error,rsses)->
-              if rsses && rsses.length>0
-                emails = []
-                rsses.forEach (rss)->
-                  if rss.cards&&rss.cards.email
-                    emails.push rss.cards.email
-                func_email.sendArticleRss article,emails.join(";")
-          func_search.add {type:"article","pid":article.uuid,"title":article.title,"html":article.html.replace(/<[^>]*>/g,""),"udid":article.uuid,"id": article.id},()->
-          (__F 'create_thumbnail').create_article article.id,()->
-            if req.body.to_weibo
-              sina.statuses.upload 
-                access_token:res.locals.user.weibo_token
-                pic:path.join __dirname,"../uploads/article_thumb/"+article.id+".png"
-                status:'我在@前端乱炖 发表了一篇原创文章《'+article.title+'》点击查看：http://www.html-js.com/article/'+article.id+" 。前端乱炖是一个专业的前端原创内容社区"
+          if req.body.is_pub
+            if req.body.column_id
+              func_column.update req.body.column_id,{last_article_time:(new Date()).getTime()},()->
+              func_column.addCount req.body.column_id,"article_count",(error)->
+              func_column.getRsses req.body.column_id,(error,rsses)->
+                if rsses && rsses.length>0
+                  emails = []
+                  rsses.forEach (rss)->
+                    if rss.cards&&rss.cards.email
+                      emails.push rss.cards.email
+                  func_email.sendArticleRss article,emails.join(";")
+            func_search.add {type:"article","pid":article.uuid,"title":article.title,"html":article.html.replace(/<[^>]*>/g,""),"udid":article.uuid,"id": article.id},()->
+            (__F 'create_thumbnail').create_article article.id,()->
+              if req.body.to_weibo
+                sina.statuses.upload 
+                  access_token:res.locals.user.weibo_token
+                  pic:path.join __dirname,"../uploads/article_thumb/"+article.id+".png"
+                  status:'我在@前端乱炖 发表了一篇原创文章《'+article.title+'》点击查看：http://www.html-js.com/article/'+article.id+" 。前端乱炖是一个专业的前端原创内容社区"
             
         res.send result
   "/add-direct":
@@ -314,6 +315,25 @@ module.exports.controllers =
           result.info = error.message
         else
           result.success = 1
+        if req.body.is_pub
+            if req.body.column_id
+              func_column.update req.body.column_id,{last_article_time:(new Date()).getTime()},()->
+              func_column.addCount req.body.column_id,"article_count",(error)->
+              func_column.getRsses req.body.column_id,(error,rsses)->
+                if rsses && rsses.length>0
+                  emails = []
+                  rsses.forEach (rss)->
+                    if rss.cards&&rss.cards.email
+                      emails.push rss.cards.email
+                  func_email.sendArticleRss article,emails.join(";")
+            func_search.add {type:"article","pid":article.uuid,"title":article.title,"html":article.html.replace(/<[^>]*>/g,""),"udid":article.uuid,"id": article.id},()->
+            (__F 'create_thumbnail').create_article article.id,()->
+              if req.body.to_weibo
+                sina.statuses.upload 
+                  access_token:res.locals.user.weibo_token
+                  pic:path.join __dirname,"../uploads/article_thumb/"+article.id+".png"
+                  status:'我在@前端乱炖 发表了一篇原创文章《'+article.title+'》点击查看：http://www.html-js.com/article/'+article.id+" 。前端乱炖是一个专业的前端原创内容社区"
+            
         res.send result
   "/:id/update":
     get:(req,res,next)->

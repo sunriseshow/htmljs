@@ -61,60 +61,6 @@ html(xmlns:wb='http://open.weibo.com/wb')
               span.divider /
             li.active
               span #{column.name}
-          //- .column
-          //-   .col-title 专栏名：#{column.name}
-          //-   .col-user 所有者：#{column.user.nick}
-          //-   .col-desc !{column.desc_html}
-          //-   .col-share.item.share#bdshare.bdshare_t.bds_tools.get-codes-bdshare.clearfix(style="width:300px;margin-top:10px;float:none;margin-left:0px;")
-          //-       span.index(style="float:left;line-height:30px;") 分享：
-          //-       a.bds_tsina
-          //-       a.bds_qzone
-          //-       a.bds_tqq
-          //-       a.bds_douban
-          //-       a.bds_renren
-          //-       a.shareCount
-            
-          //-   .col-action
-          //-     if column.is_public || (locals.user&&user.id==column.user_id)
-          //-       a.btn(href="/article/add?column_id=#{column.id}",data-original-title="",style="margin-right:10px;") 
-          //-         i.icon-plus.icon-white
-          //-         |  在此专栏发表文章
-          //-     if !locals.is_rssed
-          //-       a.btn(href="/article/column/#{column.id}/rss") 
-          //-         i.icon-message-plus
-          //-         |  订阅此专栏
-                
-          //-     else
-          //-       a.btn.disabled
-          //-         |已订阅
-      //- .actions     
-      //-   a.btn(href="/article/column/add") <i class="icon-white icon-book-open"></i> 创建专栏
-      //-   a(href="/article/column",style="margin-left:20px;") 所有专栏
-      //- .module.my_columns
-      //-   .hd 我的专栏
-      //-   .bd
-      //-     - var now = new Date().getTime();
-      //-     if locals.my_columns && my_columns.length
-      //-       each column in my_columns
-      //-         .my_column
-      //-           .title 
-      //-             a(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
-      //-             //- a.go(href="/article/add?column_id=#{column.id}") 添加文章
-      //-       div
-      //-         a.btn.small-btn(href="/article/column/add") 创建新专栏
-      //-     else
-      //-       .no 还没有专栏，先创建专栏再发表原创文章吧！
-      //-         a(href="/article/column/add") 创建专栏
-      //- .module.my_columns
-      //-   .hd 开放投稿的专栏
-      //-   .bd
-      //-     - var now = new Date().getTime();
-      //-     if locals.public_columns && public_columns.length
-      //-       each column in public_columns
-      //-         .my_column
-      //-           .title 
-      //-             a(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
-      //-             //- a.go(href="/article/add?column_id=#{column.id}") 添加文章
       .module
         .my_columns
           .hd 我的专栏
@@ -131,6 +77,14 @@ html(xmlns:wb='http://open.weibo.com/wb')
             else
               .no 还没有专栏，先创建专栏再发表原创文章吧！
                 a(href="/article/column/add") 创建专栏
+          if locals.nopublish_articles
+            .hd 我的草稿
+            .bd.nopublish_articles 
+              each article in locals.nopublish_articles
+                div 
+                  a.t(href="") #{article.title}
+                  a(href="/article/#{article.id}/edit") 继续编辑
+                  a(href="/article/#{article.id}/delete") 删除
 
       
       .content

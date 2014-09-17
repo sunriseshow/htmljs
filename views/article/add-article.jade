@@ -10,16 +10,20 @@ html
     - locals.pageId=1;
 
     include ../header
-    #content
-      .content
-        .left
-          .module
-            form.form-horizontal#form(method='post')
+    form.form-horizontal#form(method='post')
+      #content
+      
+        .content
+          .left
+            .module
               input(type='hidden', name='is_yuanchuang',value="1")
+              input(type='hidden', name='is_publish',value="1")
               fieldset
                 legend #{locals.article?"编辑文章":"发表新文章"}
                 if locals.article
-                  input(type="hidden",name="id",value="#{article.id}")
+                  input#article_id(type="hidden",name="id",value="#{article.id}")
+                else
+                  input#article_id(type="hidden",name="id",value="")
                 .control-group
                   input#title(type='text', name='title', placeholder='文章标题',value="#{locals.article?article.title:''}",required)
                 //- ul.editor-tab.nav.nav-tabs
@@ -55,14 +59,19 @@ html
                           span.label(data-id="#{column.id}",class="label-success",data-original-title="#{column.desc_md&&column.desc_md.substr(0,100)}",title="#{column.desc_md&&column.desc_md.substr(0,100)}") #{column.name}
                 .control-group
                   label.checkbox
-                    input(type="checkbox",name="to_weibo",checked="true")
+                    input(type="checkbox",name="to_weibo")
                     |分享到微博
                 .control-group
                   label.checkbox
                     input(type="checkbox",name="fufei")
                     |申请付费阅读
                 .control-group
+
                   button.btn#submit(type='submit') 发表
+                  if !(locals.article&&article.is_publish)
+                    a.btn.save-article(style="margin-left:10px;")
+                      i.icon-circle-ok 
+                      span 保存草稿
                 .control-group#wmd-preview-parent
                   .wmd-panel.wmd-preview#wmd-preview-con
                     .padding
@@ -81,37 +90,32 @@ html
                 <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
                 <button class="btn btn-primary">插入</button>
               </div>
-      .right 
-        .module
-          .hd 提示
-          .bd 
-            div.item 每篇技术专栏通过审核后即可获得本站的10元基础赞助，小小心意，希望大家多多分享自己的心得。
-            div.item 可以使用markdown语法，可以插入图片。
-            div.item 插入代码，请先输入代码，然后选中后点击工具栏里的 <> 符号。
-        .module
-          .hd 准则
-          .bd
-            .item 专栏第一准则：我们特别欣赏【入门式】，【基础性】，【总结性】，【普及式】，【系列化】的文章。以帮助别人为本，而不是为了炫技为了让别人看着觉得很”牛逼“。
-      #fullscreen-editor.hidden
-      #fullscreen-exit.hidden 
-        a.btn
-          i.icon-resize-small
+        .right 
+          .module
+            .hd 提示
+            .bd 
+              div.item 每篇技术专栏通过审核后即可获得本站的10元基础赞助，小小心意，希望大家多多分享自己的心得。
+              div.item 可以使用markdown语法，可以插入图片。
+              div.item 插入代码，请先输入代码，然后选中后点击工具栏里的 <> 符号。
+          .module
+            .hd 准则
+            .bd
+              .item 专栏第一准则：我们特别欣赏【入门式】，【基础性】，【总结性】，【普及式】，【系列化】的文章。以帮助别人为本，而不是为了炫技为了让别人看着觉得很”牛逼“。
+        #fullscreen-editor.hidden
+        #fullscreen-exit.hidden 
+          a.btn
+            i.icon-resize-small
+            |  返回
+        if !(locals.article&&article.is_publish)
+          #save-article.hidden.save-article
+            a.btn
+              i.icon-circle-ok 
+              span 保存草稿
     script(src='#{assets_head}/js/ajaxfileupload.js')
     script(src='#{assets_head}/js/loadingTip.js')
     script(src='#{assets_head}/js/messageTip.js')
     script
-      //- UE.getEditor('myEditor',{
-      //-       //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-      //-       //focus时自动清空初始化时的内容
-      //-       autoClearinitialContent:true,
-      //-       //关闭字数统计
-      //-       wordCount:false,
-      //-       //关闭elementPath
-      //-       elementPathEnabled:false,
-      //-       //默认的编辑区域高度
-      //-       initialFrameHeight:300
-      //-       //更多其他参数，请参考ueditor.config.js中的配置项
-      //-   })
+      
       $(".columns .label").click(function(){
         $(".columns .label").removeClass("label-success")
         $(this).addClass("label-success");
@@ -125,32 +129,79 @@ html
       var editor1 = new Markdown.Editor(converter1);
 
       editor1.run();
-     
-      if(!article_id){
-       $("#wmd-input").val(localStorage.getItem("textarea_article_add"))
-        $("#wmd-input").keyup(function(){
-          localStorage.setItem("textarea_article_add",this.value)
+      $(".save-article").click(function(){
+        var url = "";
+        if($("#article_id").val()){
+          url="/article/"+$("#article_id").val()+"/edit"
+        }else{
+          url="/article/add"
+        }
+        $(".save-article span").html("保存中")
+        var postData ={};
+        $("#form").serialize().split("&").forEach(function(e){
+          var s = e.split("=")
+          postData[s[0]] = decodeURIComponent(s[1]);
           })
-        $("#title").val(localStorage.getItem("textarea_article_add_title"))
-        $("#title").keyup(function(){
-          localStorage.setItem("textarea_article_add_title",this.value)
-          })
-      }
+        postData.is_publish = 0;
+        HtmlJS.util.ajax(url,postData,"post",function(data){
+             setTimeout(function(){
+                  $(".save-article span").html("保存草稿")
+                },3000)
+            if(data.success){
+            if(data.article&&data.article.id){
+              $("#article_id").val(data.article.id)
+            }
+               $(".save-article span").html("保存成功")
+              
+            }else{
+              alert(data.info)
+            }
+          },function(){
+
+          },$("#submit"))
+        })
+       $("#wmd-input").one("click",function(){
+          $("#fullscreen-editor").removeClass("hidden")
+          $("#fullscreen-exit").removeClass("hidden")
+          $("#save-article").removeClass("hidden")
+          $("#wmd-button-bar").appendTo($("#fullscreen-editor"))
+          $("#wmd-editor-con").appendTo($("#fullscreen-editor"))
+          $("#wmd-preview-con").appendTo($("#fullscreen-editor"))
+          $("#fullscreen-editor #wmd-preview").css({height:$(window).height()-93});
+          $("#fullscreen-editor textarea").css({height:$(window).height()-73,overflowY:"auto"}).addClass("fullscreen-textarea");
+      })
+      //- if(!article_id){
+      //-  $("#wmd-input").val(localStorage.getItem("textarea_article_add"))
+      //-   $("#wmd-input").keyup(function(){
+      //-     localStorage.setItem("textarea_article_add",this.value)
+      //-     })
+      //-   $("#title").val(localStorage.getItem("textarea_article_add_title"))
+      //-   $("#title").keyup(function(){
+      //-     localStorage.setItem("textarea_article_add_title",this.value)
+      //-     })
+      //- }
        
       $("#form").submit(function(e){
         e.preventDefault()
-        
-        HtmlJS.util.ajax("",$("#form").serialize(),"post",function(data){
+        var url = "";
+        if($("#article_id").val()){
+          url="/article/"+$("#article_id").val()+"/edit"
+        }else{
+          url="/article/add"
+        }
+        var postData ={};
+        $("#form").serialize().split("&").forEach(function(e){
+          var s = e.split("=")
+          postData[s[0]] = decodeURIComponent(s[1]);
+          })
+        postData.is_publish = 1;
+        HtmlJS.util.ajax(url,postData,"post",function(data){
             if(data.success){
              if(!article_id) alert("发布成功")
              
-             if($("#column").val()){
-             window.location.href="/article/column/"+$("#column").val()
-             }else{
              window.location.href="/article"
-             }
-             !article_id&&localStorage.setItem("textarea_article_add","")
-             !article_id&&localStorage.setItem("textarea_article_add_title","")
+             //- !article_id&&localStorage.setItem("textarea_article_add","")
+             //- !article_id&&localStorage.setItem("textarea_article_add_title","")
 
             }else{
               alert(data.info)

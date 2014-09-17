@@ -479,6 +479,8 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #read article.post .entry-title .item{font-size:12px;margin-right:20px;}#read article.post .entry-title .item .index{color:#aaa;}
 #read article.post .entry-title .item .value{color:#888;}
 #read article.post .entry-content{padding:20px 0;color:#404040;font-size:13px;}
+#articles .nopublish_articles .t{color:#333;line-height:30px;font-size:13px;}
+#articles .nopublish_articles a{margin-right:20px;}
 #articles .invite-user-dropdown{width:362px;border:1px solid #ddd;background:#fff;position:absolute;left:-25px;z-index:10000;top:30px;}#articles .invite-user-dropdown li{list-style:none;line-height:20px;font-size:13px;padding:5px;cursor:pointer;}
 #articles .invite-user-dropdown li:hover{background:#5bb793;color:#fff;}
 #articles .editor-add .editors .editor{width:260px;float:left;border:1px solid #eee;background:#f7f7f7;padding:10px;margin-right:10px;margin-bottom:10px;}#articles .editor-add .editors .editor .head-pic{float:left;width:50px;overflow:hidden;height:50px;border-radius:60px;}#articles .editor-add .editors .editor .head-pic img{width:50px;height:50px;display:block;border-radius:60px;}
@@ -628,16 +630,17 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #cards .f2er-list .sns .blog{background:url(http://htmljs.b0.upaiyun.com/images/icon-blog.png) no-repeat center center;height:15px;width:15px;display:inline-block;text-indent:-1000px;overflow:hidden;}
 #cards .f2er-list .sns .github{background:url(http://htmljs.b0.upaiyun.com/images/github.png) no-repeat center center;height:15px;width:15px;display:inline-block;text-indent:-1000px;overflow:hidden;}
 #cards .f2er-list .sns .weibo{background:url(http://htmljs.b0.upaiyun.com/images/icon-weibo.png?d) no-repeat center center;height:15px;width:15px;display:inline-block;text-indent:-1000px;overflow:hidden;}
-#cards .f2er-list .card{width:465px;background:#fff;list-style:none;margin:0;display:inline-block;vertical-align:top;margin-top:10px;padding:15px;height:140px;overflow:hidden;font-size:12px;color:#666;margin-right:10px;box-shadow:1px 1px 2px #ddd;position:relative;}
+#cards .f2er-list .card{width:465px;background:#fff;list-style:none;margin:0;display:inline-block;vertical-align:top;margin-top:10px;padding:15px;height:40px;overflow:hidden;font-size:12px;color:#666;margin-right:10px;box-shadow:1px 1px 2px #ddd;position:relative;border:1px solid #fff;}
+#cards .f2er-list .card:hover{background:#f3f3f3;border:1px solid #fff;}
 #cards .f2er-list .card span{word-wrap:normal;word-break:break-all;}
-#cards .f2er-list .card .head_pic{width:50px;height:50px;}#cards .f2er-list .card .head_pic img{border-radius:50px;border:2px solid #fff;box-shadow:0px 0px 4px #aaa;}
+#cards .f2er-list .card .head_pic{width:35px;height:35px;margin-right:5px;}#cards .f2er-list .card .head_pic img{border-radius:50px;border:2px solid #fff;box-shadow:0px 0px 4px #aaa;}
 #cards .f2er-list .card .key{margin-left:10px;color:#666;}
 #cards .f2er-list .card .value{color:#999;}
 #cards .f2er-list .card .shanchang .key{float:left;}
 #cards .f2er-list .card .shanchang .value{float:left;color:#999;width:260px;}
 #cards .f2er-list .card .more{margin-left:10px;}
 #cards .main{width:1000px;}
-#cards .infos{float:left;width:310px;}
+#cards .infos{float:left;width:310px;margin-top:-3px;font-size:14px;line-height:25px;}
 #cards .left{float:left;width:800px;margin-right:-220px;}
 #cards .right{float:left;width:200px;margin-left:-200px;padding-top:10px;}#cards .right .module{margin-left:10px;background:#fff;padding:20px;margin-bottom:10px;}#cards .right .module .item{border-bottom:1px solid #eee;padding:5px 0;}#cards .right .module .item a{color:#6fb79b;}
 #card #bdshare,#me #bdshare{float:none;}
@@ -852,7 +855,7 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #jobs .job-list .job .con .item .value{color:#999;}
 #jobs .job-list .job .con .count em{color:#999;margin-right:10px;}
 #jobs .job-list .job .user .nick{float:left;font-size:14px;line-height:50px;margin:10px;}
-#job .job-base-info .item{display:inline-block;vertical-align:top;line-height:30px;font-size:14px;width:200px;}#job .job-base-info .item .key{color:#999;}
+#job .job-base-info .item{display:inline-block;vertical-align:top;line-height:30px;font-size:14px;width:300px;}#job .job-base-info .item .key{color:#999;}
 #job .job-base-info .item .value{color:#333;margin-left:10px;}
 #job .right .module.count span{font-size:12px;color:#999;padding-right:10px;}
 #job .right .module.count a{font-size:12px;padding-right:10px;}

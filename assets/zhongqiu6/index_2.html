@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="Shortcut Icon" href="http://htmljs.b0.upaiyun.com//images/logo.ico?123">
+    <link href="http://htmljs.b0.upaiyun.com//images/logo.ico?123" rel="shortcut icon" type="image/x-icon">
+    <title>中秋快乐</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="http://htmljs.b0.upaiyun.com//js/jquery.js"></script>
+    <link href="http://htmljs.b0.upaiyun.com//images/icon.png" rel="apple-touch-icon"/>
+    <style>
+
+    html,body{
+        width:100%;
+        height:100%;
+        margin:0;
+        padding:0;
+        overflow: hidden;
+         min-height: 500px;
+        position: relative;
+    }
+        .bg{
+            width:100%;
+            height:100%;
+            background: url(./images/2_bg.jpg);
+            background-size:100% 100%;
+        }
+       
+        .logo{
+            width:96px;
+            height:86px;
+            background: url(./images/logo.png);
+            position: absolute;
+            background-repeat: no-repeat;
+            left:0px;
+            top:20px;
+            background-size: 100%;
+        }
+        .editor{
+            width:250px;
+            height:130px;
+            z-index: 10;
+            background: url(./images/2_text-bg.png);
+            position: absolute;
+            background-repeat: no-repeat;
+            left:30px;
+            bottom:50px;
+            background-size: 100%;
+        }
+        .title{
+            width:320px;
+            height:200px;
+            background: url(./images/2_text.png);
+            position: absolute;
+            background-repeat: no-repeat;
+            right:-10px;
+            top:0px;
+            background-size: 100%;
+        }
+        .car{
+            width:106px;
+            height:35px;
+            background: url(./images/2_car.png);
+            position: absolute;
+            background-repeat: no-repeat;
+            left:100px;
+            top:150px;
+            background-size: 100%;
+        }
+        .car-left{
+            width:16px;
+            height:16px;
+            background: url(./images/2_car_left.png);
+            position: absolute;
+            background-repeat: no-repeat;
+            left:13px;
+            top:16px;
+            background-size: 100%;
+            -webkit-transition: all 1s linear 0;
+            
+            -webkit-transform:rotate(0deg);
+        }
+        .car-right{
+            width:16px;
+            height:16px;
+            background: url(./images/2_car_left.png);
+            position: absolute;
+            background-repeat: no-repeat;
+            left:80px;
+            top:16px;
+            background-size: 100%;
+            -webkit-transition: all 1s linear 0;
+            
+            -webkit-transform:rotate(0deg);
+        }
+        .main-text{
+           width: 218px;
+height: 60px;
+            padding:15px;
+            font-size: 18px;
+            color:#aedeff;
+background: none;
+            border:none;
+        }
+        .name-text{
+            width: 228px;
+            height: 20px;
+            padding:0 10px;
+            text-align: right;
+            font-size: 14px;
+            color:#aedeff;
+            background: none;
+            border:none;
+        }
+        
+        .arrow{
+            position: absolute;
+            left:0;
+            top:-20px;
+            width:100%;
+            height:200px;
+            background: url(./images/arrow.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            z-index: 101;
+        }
+        .buttons{
+            width:100%;
+            height:40px;
+            position: absolute;
+            bottom:0px;
+            text-align: center;
+        }
+        .buttons a:link,.buttons a:hover,.buttons a:visited{
+            line-height: 25px;
+            padding:0 10px;
+            background: #333;
+            color:#fff;
+            border-radius: 5px;
+            display: inline-block;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .layer{
+            width:100%;
+            height:100%;
+            background: #000;
+            opacity: 0.5;
+            position: absolute;
+            top:0;
+            left:0;
+z-index:100;
+        }
+        .earth{
+            position: absolute;
+            left:50px;
+            top:145px;
+            width:220px;
+            height:220px;
+            background: url(./images/2_earth.png);
+            background-size: auto 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            -webkit-transition: -webkit-transform 6s linear 0;
+            
+            -webkit-transform:rotate(0deg);
+        }
+        .popup{
+            width:90%;
+            position: absolute;
+            left:5%;
+            top:100px;
+            height:300px;
+            background:#333;
+            border-radius: 15px;
+            z-index:1000;
+        }
+        .popup-layer{
+            width:100%;
+            height:100%;
+            background: #000;
+            opacity: 0.8;
+            position: absolute;
+            top:0;
+            left:0;
+z-index:100;
+        }
+        .popup .t{
+            color:#fff;
+            font-size: 20px;
+            text-align: center;
+            line-height: 50px;
+        }
+        .popup .c{
+            padding:20px;
+        }
+        .popup .c a{
+            color:#ddd;
+            font-size: 14px;
+            text-align: center;
+            line-height: 60px;
+            display: block;
+            padding-left: 20px;
+            text-decoration: none;
+        }
+        .popup .c a img{
+            width:40px;height:40px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    </style>
+  </head>
+  <body id="index">
+    <div class="bg"></div>
+    <div class="logo"></div>
+    <div class="earth"></div>
+    <div class="editor"><textarea class="main-text" placeholder="请输入祝福语">明月照归途，
+遥寄团圆情</textarea>
+        <input type="text" class="name-text" placeholder="请留下您的称呼"/></div>
+    <div class="title"></div>
+    <div class="car"><div class="car-left"></div><div class="car-right"></div></div>
+    <div class="buttons">
+        <a href="" id="reply">转发</a>
+        <a href="" id="edit">送朋友</a>
+    </div>
+    <div class="layer" style="display:none"></div>
+    <div class="arrow" style="display:none;"></div>
+    <div class="popup" style="display:none;">
+        <div class="t">请选择主题</div>
+        <div class="c">
+        <a href="index.html?name=&main="><img src="images/topic_1.jpg"/>月圆夜，寄乡思</a>
+        <a href="index_2.html?name=&main="><img src="images/topic_2.jpg"/>团圆路，兹送福</a>
+        <a href="index_3.html?name=&main="><img src="images/topic_3.jpg"/>悦圆满，共此时</a>
+        </div>
+    </div>
+    <div class="popup-layer" style="display:none;"></div>
+    <script>
+    $(".earth").css({
+        left:$(window).width()/2 - 220/2
+    })
+    $(".car").css({
+        left:$(window).width()/2 - 90/2
+    })
+    $(".editor").css({
+        left:$(window).width()/2 - $(".editor").width()/2
+    })
+    $("#reply").click(function(e){
+        e.preventDefault();
+        $(".layer").show();
+        $(".arrow").show();
+    })
+    $(".arrow,.layer").click(function(e){
+        e.preventDefault();
+        $(".layer").hide();
+        $(".arrow").hide();
+    })
+    $("#edit").click(function(e){
+        e.preventDefault();
+        $(".main-text").val("")
+        $(".name-text").val("")
+        $(".popup").show();
+        $(".popup-layer").show();
+    })
+
+    function getQueryString(name)
+{
+    // 如果链接没有参数，或者链接中不存在我们要获取的参数，直接返回空
+    if(location.href.indexOf("?")==-1 || location.href.indexOf(name+'=')==-1)
+    {
+        return '';
+    }
+ 
+    // 获取链接中参数部分
+    var queryString = location.href.substring(location.href.indexOf("?")+1);
+ 
+    // 分离参数对 ?key=value&key2=value2
+    var parameters = queryString.split("&");
+ 
+    var pos, paraName, paraValue;
+    for(var i=0; i<parameters.length; i++)
+    {
+        // 获取等号位置
+        pos = parameters[i].indexOf('=');
+        if(pos == -1) { continue; }
+ 
+        // 获取name 和 value
+        paraName = parameters[i].substring(0, pos);
+        paraValue = parameters[i].substring(pos + 1);
+ 
+        // 如果查询的name等于当前name，就返回当前值，同时，将链接中的+号还原成空格
+        if(paraName == name)
+        {
+            return (paraValue.replace(/\+/g, " "));
+        }
+    }
+    return '';
+};
+        var main_text=decodeURIComponent(getQueryString("main"));
+        var name_text=decodeURIComponent(getQueryString("name"));
+        if(main_text){
+            $(".main-text").val(main_text)
+        }else{
+            main_text = $(".main-text").val();
+        }
+        $(".name-text").val(name_text)
+        setInterval(function(){
+            main_text = $(".main-text").val();
+            name_text = $(".name-text").val();
+        },30)
+        $(".main-text").on("keyup",function(){
+            if(this.value.length>60){
+                alert("只能输入60个字！")
+                this.value = this.value.substr(0,59)
+            }
+        })
+         try{
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                
+                WeixinJSBridge.on('menu:share:timeline', function(argv){
+                    if(!name_text){
+                        alert("请填写您的称呼")
+                        return;
+                    }
+                    WeixinJSBridge.invoke('shareTimeline',{
+                        "img_url":"http://htmljs.b0.upaiyun.com/zhongqiu1/images/topic_2.jpg",
+                        "img_width":"114",
+                        "img_height":"114",
+                        "link":window.location.href.replace(/\?.*$/,"")+"?name="+encodeURIComponent(name_text)+"&main="+encodeURIComponent(main_text),
+                        "desc":main_text,
+                        "title":name_text+" 给你送来的中秋祝福"
+                    }, function(res){
+                        new Image().src="http://www.html-js.com/data/add_share_timeline"
+                        window.location.href="success.html"
+                    });
+                });
+                WeixinJSBridge.on('menu:share:appmessage', function(argv){
+                    if(!name_text){
+                        alert("请填写您的称呼")
+                        return;
+                    }
+                    WeixinJSBridge.invoke('sendAppMessage',{
+                        "img_url":"http://htmljs.b0.upaiyun.com/zhongqiu1/images/topic_2.jpg",
+                        "img_width":"114",
+                        "img_height":"114",
+                        "link":window.location.href.replace(/\?.*$/,"")+"?name="+encodeURIComponent(name_text)+"&main="+encodeURIComponent(main_text),
+                        "desc":main_text,
+                        "title":name_text+" 给你送来的中秋祝福"
+                    }, function(res){
+                        new Image().src="http://www.html-js.com/data/add_share_friend"
+                        window.location.href="success.html"
+                    });
+                });
+            });
+        }catch(e){
+
+        }
+
+        var rotatevalue = 0;
+        rotatevalue-=360
+        
+        setInterval(function(){
+            $(".earth").css({
+                "-webkit-transform":"rotate("+rotatevalue+"deg)"
+            })
+        },100)
+        setInterval(function(){
+            rotatevalue-=360
+            $(".earth").css({
+                "-webkit-transform":"rotate("+rotatevalue+"deg)"
+            })
+        },6000)
+
+        var carrotate = 0;
+        carrotate+=360
+        setInterval(function(){
+            $(".car-left,.car-right").css({
+                "-webkit-transform":"rotate("+carrotate+"deg)"
+            })
+        },100)
+        setInterval(function(){
+            carrotate+=360
+            $(".car-left,.car-right").css({
+                "-webkit-transform":"rotate("+carrotate+"deg)"
+            })
+        },1000)
+        new Image().src="http://www.html-js.com/data/add_open_2"
+      //   window.addEventListener("deviceorientation", function(event) {
+      //     var alpha = event.gamma;
+      //     $(".moon").css({
+      //       right:-100-alpha
+      //     })
+      // }, true);
+    </script>
+    <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F194b0e45c7c9214c485ba8ce9e7e3fa6' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+  </body>
+</html>

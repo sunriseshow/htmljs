@@ -191,9 +191,9 @@ module.exports.controllers =
         user_headpic:res.locals.user.head_pic
         publish_time:new Date().getTime()/1000
         is_yuanchuang:1
-        is_publish:1
         main_pic:if match then match[1] else null
         desc:req.body.desc
+        is_publish:req.body.is_publish
       
       result = 
         success:0
@@ -202,6 +202,7 @@ module.exports.controllers =
           result.info = error.message
         else
           result.success = 1
+          result.article = article
           if req.body.fufei
             func_info.add 
               target_user_id:1
@@ -212,7 +213,6 @@ module.exports.controllers =
               target_path:'/article/'+article.id
               action_name:"请求开通付费"
               target_path_name:article.title     
-          func_article.update article.id,{sort:article.id}
           (__F 'coin').add 40,article.user_id,"发表了一篇专栏文章"
           if req.body.column_id
             func_column.update req.body.column_id,{last_article_time:(new Date()).getTime()},()->
@@ -306,6 +306,7 @@ module.exports.controllers =
         main_pic:if match then match[1] else null
         desc:safeConverter.makeHtml req.body.md.substr(0,600)
         column_id:req.body.column_id
+        is_publish:req.body.is_publish
       result = 
         success:0
       func_article.update req.params.id,data,(error,article)->
@@ -322,18 +323,12 @@ module.exports.controllers =
           res.redirect 'back'
   "/:id/delete":
     get:(req,res,next)->
-      func_article.delete req.params.id,(error,article)->
-        if error then next error
-        else
-          func_bi.add 
-            user_id:article.user_id
-            count:__C.bi.article*-1
-            day:(new Date()).getTime()/1000*60*60*24
-            reason:"文章被删除"
-            from_title:null
-            from_user_nick:"管理员"
-          ,()->
-          res.redirect 'back'
+      func_article.getById req.params.id,(error,article)->
+        if article.user_id == res.locals.user.id || res.locals.user.is_admin
+          func_article.delete req.params.id,(error,article)->
+            if error then next error
+            else
+              res.redirect 'back'
   "/:id/zan":
     post:(req,res,next)->
       result = 
@@ -577,7 +572,7 @@ module.exports.filters =
   "/:id/pay":
     get:['checkLogin']
   "/":
-    get:['freshLogin','get_infos','article/my-columns','article/public-columns','article/all-publish-articles','article/jian-articles','article/jian_columns','article/jian-hots']#'article/index-columns','article/column-articles','article/checkRss']
+    get:['freshLogin','get_infos','article/my-columns','article/public-columns','article/all-publish-articles','article/jian-articles','article/jian_columns','article/jian-hots','article/all-notpublish']#'article/index-columns','article/column-articles','article/checkRss']
   "/user/:id":
     get:['freshLogin','article/who','article/his-articles']
   "/old":

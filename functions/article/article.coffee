@@ -78,7 +78,6 @@ func_article =
     
     Article.create(data)
     .success (article)->
-      console.log article
       Column.find
         where:
           id:article.column_id

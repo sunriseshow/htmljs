@@ -66,13 +66,31 @@
 }
 #fullscreen-exit {
   position: fixed;
-  right:20px;
+  right:0px;
   top:10px;
   font-size: 18px;
   color:#777;
-  width:30px;
+  width:90px;
   height:30px;
   z-index:100000001;
+}
+#fullscreen-exit a{
+  display: inline-block;
+  margin-right: 10px;
+}
+#save-article {
+  position: fixed;
+  right:70px;
+  top:10px;
+  font-size: 18px;
+  color:#777;
+  width:120px;
+  height:30px;
+  z-index:100000001;
+}
+#save-article a{
+  display: inline-block;
+  margin-right: 10px;
 }
 #fullscreen-editor .btn-toolbar .btn i{color:#444;background: none;}
 #fullscreen-editor #wmd-preview{

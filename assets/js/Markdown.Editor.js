@@ -1,6 +1,6 @@
 ﻿// needs Markdown.Converter.js at the moment
 
-(function () {
+(function() {
 
     var util = {},
         position = {},
@@ -8,9 +8,11 @@
         doc = window.document,
         re = window.RegExp,
         nav = window.navigator,
-        SETTINGS = { lineLength: 72 },
+        SETTINGS = {
+            lineLength: 72
+        },
 
-    // Used to work around some browser bugs where we can't use feature testing.
+        // Used to work around some browser bugs where we can't use feature testing.
         uaSniffed = {
             isIE: /msie/.test(nav.userAgent.toLowerCase()),
             isIE_5or6: /msie 6/.test(nav.userAgent.toLowerCase()) || /msie 5/.test(nav.userAgent.toLowerCase()),
@@ -49,47 +51,57 @@
     // - getConverter() returns the markdown converter object that was passed to the constructor
     // - run() actually starts the editor; should be called after all necessary plugins are registered. Calling this more than once is a no-op.
     // - refreshPreview() forces the preview to be updated. This method is only available after run() was called.
-    Markdown.Editor = function (markdownConverter, idPostfix, help) {
+    Markdown.Editor = function(markdownConverter, idPostfix, help) {
 
         idPostfix = idPostfix || "";
 
         var hooks = this.hooks = new Markdown.HookCollection();
-        hooks.addNoop("onPreviewRefresh");       // called with no arguments after the preview has been refreshed
+        hooks.addNoop("onPreviewRefresh"); // called with no arguments after the preview has been refreshed
         hooks.addNoop("postBlockquoteCreation"); // called with the user's selection *after* the blockquote was created; should return the actual to-be-inserted text
-        hooks.addFalse("insertImageDialog");     /* called with one parameter: a callback to be called with the URL of the image. If the application creates
-                                                  * its own image insertion dialog, this hook should return true, and the callback should be called with the chosen
-                                                  * image url (or null if the user cancelled). If this hook returns false, the default dialog will be used.
-                                                  */
-        $("#fullscreen-exit").click(function(){
+        hooks.addFalse("insertImageDialog");
+        /* called with one parameter: a callback to be called with the URL of the image. If the application creates
+         * its own image insertion dialog, this hook should return true, and the callback should be called with the chosen
+         * image url (or null if the user cancelled). If this hook returns false, the default dialog will be used.
+         */
+        $("#fullscreen-exit").click(function() {
             $("#fullscreen-editor").addClass("hidden")
             $("#fullscreen-exit").addClass("hidden")
-             $("#wmd-button-bar").appendTo($("#wmd-bar-parent"))
+            $("#save-article").addClass("hidden")
+            $("#wmd-button-bar").appendTo($("#wmd-bar-parent"))
             $("#wmd-editor-con").appendTo($("#wmd-editor-parent"))
             $("#wmd-preview-con").appendTo($("#wmd-preview-parent"))
-            $("#wmd-preview").css({height:"auto"});
-            $(".wmd-panel textarea").css({height:300}).removeClass("fullscreen-textarea");
-          })
-        this.getConverter = function () { return markdownConverter; }
+            $("#wmd-preview").css({
+                height: "auto"
+            });
+            $(".wmd-panel textarea").css({
+                height: 300
+            }).removeClass("fullscreen-textarea");
+        })
+        this.getConverter = function() {
+            return markdownConverter;
+        }
 
         var that = this,
             panels;
 
-        this.run = function () {
+        this.run = function() {
             if (panels)
                 return; // already initialized
 
             panels = new PanelCollection(idPostfix);
             var commandManager = new CommandManager(hooks);
-            var previewManager = new PreviewManager(markdownConverter, panels, function () { hooks.onPreviewRefresh(); });
+            var previewManager = new PreviewManager(markdownConverter, panels, function() {
+                hooks.onPreviewRefresh();
+            });
             var undoManager, uiManager;
 
             if (!/\?noundo/.test(doc.location.href)) {
-                undoManager = new UndoManager(function () {
+                undoManager = new UndoManager(function() {
                     previewManager.refresh();
                     if (uiManager) // not available on the first call
                         uiManager.setUndoRedoButtonStates();
                 }, panels);
-                this.textOperation = function (f) {
+                this.textOperation = function(f) {
                     undoManager.setCommandMode();
                     f();
                     that.refreshPreview();
@@ -99,7 +111,9 @@
             uiManager = new UIManager(idPostfix, panels, undoManager, previewManager, commandManager, help);
             uiManager.setUndoRedoButtonStates();
 
-            var forceRefresh = that.refreshPreview = function () { previewManager.refresh(true); };
+            var forceRefresh = that.refreshPreview = function() {
+                previewManager.refresh(true);
+            };
 
             forceRefresh();
         };
@@ -108,11 +122,11 @@
 
     // before: contains all the text in the input box BEFORE the selection.
     // after: contains all the text in the input box AFTER the selection.
-    function Chunks() { }
+    function Chunks() {}
 
     // startRegex: a regular expression to find the start tag
     // endRegex: a regular expresssion to find the end tag
-    Chunks.prototype.findTags = function (startRegex, endRegex) {
+    Chunks.prototype.findTags = function(startRegex, endRegex) {
 
         var chunkObj = this;
         var regex;
@@ -122,7 +136,7 @@
             regex = util.extendRegExp(startRegex, "", "$");
 
             this.before = this.before.replace(regex,
-                function (match) {
+                function(match) {
                     chunkObj.startTag = chunkObj.startTag + match;
                     return "";
                 });
@@ -130,7 +144,7 @@
             regex = util.extendRegExp(startRegex, "^", "");
 
             this.selection = this.selection.replace(regex,
-                function (match) {
+                function(match) {
                     chunkObj.startTag = chunkObj.startTag + match;
                     return "";
                 });
@@ -141,7 +155,7 @@
             regex = util.extendRegExp(endRegex, "", "$");
 
             this.selection = this.selection.replace(regex,
-                function (match) {
+                function(match) {
                     chunkObj.endTag = match + chunkObj.endTag;
                     return "";
                 });
@@ -149,7 +163,7 @@
             regex = util.extendRegExp(endRegex, "^", "");
 
             this.after = this.after.replace(regex,
-                function (match) {
+                function(match) {
                     chunkObj.endTag = match + chunkObj.endTag;
                     return "";
                 });
@@ -160,20 +174,26 @@
     // to the before/after regions.
     //
     // If remove is true, the whitespace disappears.
-    Chunks.prototype.trimWhitespace = function (remove) {
+    Chunks.prototype.trimWhitespace = function(remove) {
         var beforeReplacer, afterReplacer, that = this;
         if (remove) {
             beforeReplacer = afterReplacer = "";
         } else {
-            beforeReplacer = function (s) { that.before += s; return ""; }
-            afterReplacer = function (s) { that.after = s + that.after; return ""; }
+            beforeReplacer = function(s) {
+                that.before += s;
+                return "";
+            }
+            afterReplacer = function(s) {
+                that.after = s + that.after;
+                return "";
+            }
         }
-        
+
         this.selection = this.selection.replace(/^(\s*)/, beforeReplacer).replace(/(\s*)$/, afterReplacer);
     };
 
 
-    Chunks.prototype.skipLines = function (nLinesBefore, nLinesAfter, findExtraNewlines) {
+    Chunks.prototype.skipLines = function(nLinesBefore, nLinesAfter, findExtraNewlines) {
 
         if (nLinesBefore === undefined) {
             nLinesBefore = 1;
@@ -262,13 +282,12 @@
 
     // Returns true if the DOM element is visible, false if it's hidden.
     // Checks if display is anything other than none.
-    util.isVisible = function (elem) {
+    util.isVisible = function(elem) {
 
         if (window.getComputedStyle) {
             // Most browsers
             return window.getComputedStyle(elem, null).getPropertyValue("display") !== "none";
-        }
-        else if (elem.currentStyle) {
+        } else if (elem.currentStyle) {
             // IE
             return elem.currentStyle["display"] !== "none";
         }
@@ -277,12 +296,11 @@
 
     // Adds a listener callback to a DOM element which is fired on a specified
     // event.
-    util.addEvent = function (elem, event, listener) {
+    util.addEvent = function(elem, event, listener) {
         if (elem.attachEvent) {
             // IE only.  The "on" is mandatory.
             elem.attachEvent("on" + event, listener);
-        }
-        else {
+        } else {
             // Other browsers.
             elem.addEventListener(event, listener, false);
         }
@@ -291,19 +309,18 @@
 
     // Removes a listener callback from a DOM element which is fired on a specified
     // event.
-    util.removeEvent = function (elem, event, listener) {
+    util.removeEvent = function(elem, event, listener) {
         if (elem.detachEvent) {
             // IE only.  The "on" is mandatory.
             elem.detachEvent("on" + event, listener);
-        }
-        else {
+        } else {
             // Other browsers.
             elem.removeEventListener(event, listener, false);
         }
     };
 
     // Converts \r\n and \r to \n.
-    util.fixEolChars = function (text) {
+    util.fixEolChars = function(text) {
         text = text.replace(/\r\n/g, "\n");
         text = text.replace(/\r/g, "\n");
         return text;
@@ -317,7 +334,7 @@
     // The flags are unchanged.
     //
     // regex is a RegExp, pre and post are strings.
-    util.extendRegExp = function (regex, pre, post) {
+    util.extendRegExp = function(regex, pre, post) {
 
         if (pre === null || pre === undefined) {
             pre = "";
@@ -330,7 +347,7 @@
         var flags;
 
         // Replace the flags with empty space and store them.
-        pattern = pattern.replace(/\/([gim]*)$/, function (wholeMatch, flagsPart) {
+        pattern = pattern.replace(/\/([gim]*)$/, function(wholeMatch, flagsPart) {
             flags = flagsPart;
             return "";
         });
@@ -345,7 +362,7 @@
     // UNFINISHED
     // The assignment in the while loop makes jslint cranky.
     // I'll change it to a better loop later.
-    position.getTop = function (elem, isInner) {
+    position.getTop = function(elem, isInner) {
         var result = elem.offsetTop;
         if (!isInner) {
             while (elem = elem.offsetParent) {
@@ -355,15 +372,15 @@
         return result;
     };
 
-    position.getHeight = function (elem) {
+    position.getHeight = function(elem) {
         return elem.offsetHeight || elem.scrollHeight;
     };
 
-    position.getWidth = function (elem) {
+    position.getWidth = function(elem) {
         return elem.offsetWidth || elem.scrollWidth;
     };
 
-    position.getPageSize = function () {
+    position.getPageSize = function() {
 
         var scrollWidth, scrollHeight;
         var innerWidth, innerHeight;
@@ -372,12 +389,10 @@
         if (self.innerHeight && self.scrollMaxY) {
             scrollWidth = doc.body.scrollWidth;
             scrollHeight = self.innerHeight + self.scrollMaxY;
-        }
-        else if (doc.body.scrollHeight > doc.body.offsetHeight) {
+        } else if (doc.body.scrollHeight > doc.body.offsetHeight) {
             scrollWidth = doc.body.scrollWidth;
             scrollHeight = doc.body.scrollHeight;
-        }
-        else {
+        } else {
             scrollWidth = doc.body.offsetWidth;
             scrollHeight = doc.body.offsetHeight;
         }
@@ -386,13 +401,11 @@
             // Non-IE browser
             innerWidth = self.innerWidth;
             innerHeight = self.innerHeight;
-        }
-        else if (doc.documentElement && doc.documentElement.clientHeight) {
+        } else if (doc.documentElement && doc.documentElement.clientHeight) {
             // Some versions of IE (IE 6 w/ a DOCTYPE declaration)
             innerWidth = doc.documentElement.clientWidth;
             innerHeight = doc.documentElement.clientHeight;
-        }
-        else if (doc.body) {
+        } else if (doc.body) {
             // Other versions of IE
             innerWidth = doc.body.clientWidth;
             innerHeight = doc.body.clientHeight;
@@ -416,7 +429,7 @@
         var inputStateObj;
 
         // Set the mode for later logic steps.
-        var setMode = function (newMode, noSave) {
+        var setMode = function(newMode, noSave) {
             if (mode != newMode) {
                 mode = newMode;
                 if (!noSave) {
@@ -426,28 +439,27 @@
 
             if (!uaSniffed.isIE || mode != "moving") {
                 timer = setTimeout(refreshState, 1);
-            }
-            else {
+            } else {
                 inputStateObj = null;
             }
         };
 
-        var refreshState = function (isInitialState) {
+        var refreshState = function(isInitialState) {
             inputStateObj = new TextareaState(panels, isInitialState);
             timer = undefined;
         };
 
-        this.setCommandMode = function () {
+        this.setCommandMode = function() {
             mode = "command";
             saveState();
             timer = setTimeout(refreshState, 0);
         };
 
-        this.canUndo = function () {
+        this.canUndo = function() {
             return stackPtr > 1;
         };
 
-        this.canRedo = function () {
+        this.canRedo = function() {
             if (undoStack[stackPtr + 1]) {
                 return true;
             }
@@ -455,15 +467,14 @@
         };
 
         // Removes the last state and restores it.
-        this.undo = function () {
+        this.undo = function() {
 
             if (undoObj.canUndo()) {
                 if (lastState) {
                     // What about setting state -1 to null or checking for undefined?
                     lastState.restore();
                     lastState = null;
-                }
-                else {
+                } else {
                     undoStack[stackPtr] = new TextareaState(panels);
                     undoStack[--stackPtr].restore();
 
@@ -479,7 +490,7 @@
         };
 
         // Redo an action.
-        this.redo = function () {
+        this.redo = function() {
 
             if (undoObj.canRedo()) {
 
@@ -496,7 +507,7 @@
         };
 
         // Push the input area state to the stack.
-        var saveState = function () {
+        var saveState = function() {
             var currState = inputStateObj || new TextareaState(panels);
 
             if (!currState) {
@@ -521,7 +532,7 @@
             }
         };
 
-        var handleCtrlYZ = function (event) {
+        var handleCtrlYZ = function(event) {
 
             var handled = false;
 
@@ -541,8 +552,7 @@
                     case "z":
                         if (!event.shiftKey) {
                             undoObj.undo();
-                        }
-                        else {
+                        } else {
                             undoObj.redo();
                         }
                         handled = true;
@@ -562,7 +572,7 @@
         };
 
         // Set the mode depending on what is going on in the input area.
-        var handleModeChange = function (event) {
+        var handleModeChange = function(event) {
 
             if (!event.ctrlKey && !event.metaKey) {
 
@@ -572,22 +582,18 @@
                     // 33 - 40: page up/dn and arrow keys
                     // 63232 - 63235: page up/dn and arrow keys on safari
                     setMode("moving");
-                }
-                else if (keyCode == 8 || keyCode == 46 || keyCode == 127) {
+                } else if (keyCode == 8 || keyCode == 46 || keyCode == 127) {
                     // 8: backspace
                     // 46: delete
                     // 127: delete
                     setMode("deleting");
-                }
-                else if (keyCode == 13) {
+                } else if (keyCode == 13) {
                     // 13: Enter
                     setMode("newlines");
-                }
-                else if (keyCode == 27) {
+                } else if (keyCode == 27) {
                     // 27: escape
                     setMode("escape");
-                }
-                else if ((keyCode < 16 || keyCode > 20) && keyCode != 91) {
+                } else if ((keyCode < 16 || keyCode > 20) && keyCode != 91) {
                     // 16-20 are shift, etc. 
                     // 91: left window key
                     // I think this might be a little messed up since there are
@@ -597,8 +603,8 @@
             }
         };
 
-        var setEventHandlers = function () {
-            util.addEvent(panels.input, "keypress", function (event) {
+        var setEventHandlers = function() {
+            util.addEvent(panels.input, "keypress", function(event) {
                 // keyCode 89: y
                 // keyCode 90: z
                 if ((event.ctrlKey || event.metaKey) && (event.keyCode == 89 || event.keyCode == 90)) {
@@ -606,7 +612,7 @@
                 }
             });
 
-            var handlePaste = function () {
+            var handlePaste = function() {
                 if (uaSniffed.isIE || (inputStateObj && inputStateObj.text != panels.input.value)) {
                     if (timer == undefined) {
                         mode = "paste";
@@ -618,7 +624,7 @@
 
             util.addEvent(panels.input, "keydown", handleCtrlYZ);
             util.addEvent(panels.input, "keydown", handleModeChange);
-            util.addEvent(panels.input, "mousedown", function () {
+            util.addEvent(panels.input, "mousedown", function() {
                 setMode("moving");
             });
 
@@ -626,7 +632,7 @@
             panels.input.ondrop = handlePaste;
         };
 
-        var init = function () {
+        var init = function() {
             setEventHandlers();
             refreshState(true);
             saveState();
@@ -644,7 +650,7 @@
         // Aliases
         var stateObj = this;
         var inputArea = panels.input;
-        this.init = function () {
+        this.init = function() {
             if (!util.isVisible(inputArea)) {
                 return;
             }
@@ -662,7 +668,7 @@
 
         // Sets the selected text in the input box after we've performed an
         // operation.
-        this.setInputAreaSelection = function () {
+        this.setInputAreaSelection = function() {
 
             if (!util.isVisible(inputArea)) {
                 return;
@@ -674,8 +680,7 @@
                 inputArea.selectionStart = stateObj.start;
                 inputArea.selectionEnd = stateObj.end;
                 inputArea.scrollTop = stateObj.scrollTop;
-            }
-            else if (doc.selection) {
+            } else if (doc.selection) {
 
                 if (doc.activeElement && doc.activeElement !== inputArea) {
                     return;
@@ -691,14 +696,13 @@
             }
         };
 
-        this.setInputAreaSelectionStartEnd = function () {
+        this.setInputAreaSelectionStartEnd = function() {
 
             if (!panels.ieCachedRange && (inputArea.selectionStart || inputArea.selectionStart === 0)) {
 
                 stateObj.start = inputArea.selectionStart;
                 stateObj.end = inputArea.selectionEnd;
-            }
-            else if (doc.selection) {
+            } else if (doc.selection) {
 
                 stateObj.text = util.fixEolChars(inputArea.value);
 
@@ -732,7 +736,7 @@
 
                 if (panels.ieCachedRange)
                     stateObj.scrollTop = panels.ieCachedScrollTop; // this is set alongside with ieCachedRange
-                
+
                 panels.ieCachedRange = null;
 
                 this.setInputAreaSelection();
@@ -740,7 +744,7 @@
         };
 
         // Restore this state into the input area.
-        this.restore = function () {
+        this.restore = function() {
 
             if (stateObj.text != undefined && stateObj.text != inputArea.value) {
                 inputArea.value = stateObj.text;
@@ -750,7 +754,7 @@
         };
 
         // Gets a collection of HTML chunks from the inptut textarea.
-        this.getChunks = function () {
+        this.getChunks = function() {
 
             var chunk = new Chunks();
             chunk.before = util.fixEolChars(stateObj.text.substring(0, stateObj.start));
@@ -764,7 +768,7 @@
         };
 
         // Sets the TextareaState properties given a chunk of markdown.
-        this.setChunks = function (chunk) {
+        this.setChunks = function(chunk) {
 
             chunk.before = chunk.before + chunk.startTag;
             chunk.after = chunk.endTag + chunk.after;
@@ -787,7 +791,7 @@
         var startType = "delayed"; // The other legal value is "manual"
 
         // Adds event listeners to elements
-        var setupEvents = function (inputElem, listener) {
+        var setupEvents = function(inputElem, listener) {
 
             util.addEvent(inputElem, "input", listener);
             inputElem.onpaste = listener;
@@ -797,26 +801,24 @@
             util.addEvent(inputElem, "keydown", listener);
         };
 
-        var getDocScrollTop = function () {
+        var getDocScrollTop = function() {
 
             var result = 0;
 
             if (window.innerHeight) {
                 result = window.pageYOffset;
+            } else
+            if (doc.documentElement && doc.documentElement.scrollTop) {
+                result = doc.documentElement.scrollTop;
+            } else
+            if (doc.body) {
+                result = doc.body.scrollTop;
             }
-            else
-                if (doc.documentElement && doc.documentElement.scrollTop) {
-                    result = doc.documentElement.scrollTop;
-                }
-                else
-                    if (doc.body) {
-                        result = doc.body.scrollTop;
-                    }
 
             return result;
         };
 
-        var makePreviewHtml = function () {
+        var makePreviewHtml = function() {
 
             // If there is no registered preview panel
             // there is nothing to do.
@@ -827,8 +829,7 @@
             var text = panels.input.value;
             if (text && text == oldInputText) {
                 return; // Input text hasn't changed.
-            }
-            else {
+            } else {
                 oldInputText = text;
             }
 
@@ -845,7 +846,7 @@
         };
 
         // setTimeout is already used.  Used as an event listener.
-        var applyTimeout = function () {
+        var applyTimeout = function() {
 
             if (timeout) {
                 clearTimeout(timeout);
@@ -867,31 +868,30 @@
             }
         };
 
-        var getScaleFactor = function (panel) {
+        var getScaleFactor = function(panel) {
             if (panel.scrollHeight <= panel.clientHeight) {
                 return 1;
             }
             return panel.scrollTop / (panel.scrollHeight - panel.clientHeight);
         };
 
-        var setPanelScrollTops = function () {
+        var setPanelScrollTops = function() {
             if (panels.preview) {
                 panels.preview.scrollTop = (panels.preview.scrollHeight - panels.preview.clientHeight) * getScaleFactor(panels.preview);
             }
         };
 
-        this.refresh = function (requiresRefresh) {
+        this.refresh = function(requiresRefresh) {
 
             if (requiresRefresh) {
                 oldInputText = "";
                 makePreviewHtml();
-            }
-            else {
+            } else {
                 applyTimeout();
             }
         };
 
-        this.processingTime = function () {
+        this.processingTime = function() {
             return elapsedTime;
         };
 
@@ -900,7 +900,7 @@
         // IE doesn't let you use innerHTML if the element is contained somewhere in a table
         // (which is the case for inline editing) -- in that case, detach the element, set the
         // value, and reattach. Yes, that *is* ridiculous.
-        var ieSafePreviewSet = function (text) {
+        var ieSafePreviewSet = function(text) {
             var preview = panels.preview;
             var parent = preview.parentNode;
             var sibling = preview.nextSibling;
@@ -912,13 +912,13 @@
                 parent.insertBefore(preview, sibling);
         }
 
-        var nonSuckyBrowserPreviewSet = function (text) {
+        var nonSuckyBrowserPreviewSet = function(text) {
             panels.preview.innerHTML = text;
         }
 
         var previewSetter;
 
-        var previewSet = function (text) {
+        var previewSet = function(text) {
             if (previewSetter)
                 return previewSetter(text);
 
@@ -931,7 +931,7 @@
             }
         };
 
-        var pushPreviewHtml = function (text) {
+        var pushPreviewHtml = function(text) {
 
             var emptyTop = position.getTop(panels.input) - getDocScrollTop();
 
@@ -950,16 +950,15 @@
             var fullTop = position.getTop(panels.input) - getDocScrollTop();
 
             if (uaSniffed.isIE) {
-                setTimeout(function () {
+                setTimeout(function() {
                     window.scrollBy(0, fullTop - emptyTop);
                 }, 0);
-            }
-            else {
+            } else {
                 window.scrollBy(0, fullTop - emptyTop);
             }
         };
 
-        var init = function () {
+        var init = function() {
 
             setupEvents(panels.input, applyTimeout);
             makePreviewHtml();
@@ -972,7 +971,7 @@
         init();
     };
 
-    
+
     // This simulates a modal dialog box and asks for the URL when you
     // click the hyperlink or image buttons.
     //
@@ -981,12 +980,12 @@
     // callback: The function which is executed when the prompt is dismissed, either via OK or Cancel.
     //      It receives a single argument; either the entered text (if OK was chosen) or null (if Cancel
     //      was chosen).
-    ui.prompt = function (title, text, defaultInputText, callback) {
+    ui.prompt = function(title, text, defaultInputText, callback) {
 
         // These variables need to be declared at this level since they are used
         // in multiple functions.
-        var dialog;         // The dialog box.
-        var input;         // The text box where you enter the hyperlink.
+        var dialog; // The dialog box.
+        var input; // The text box where you enter the hyperlink.
 
 
         if (defaultInputText === undefined) {
@@ -995,7 +994,7 @@
 
         // Used as a keydown event handler. Esc dismisses the prompt.
         // Key code 27 is ESC.
-        var checkEscape = function (key) {
+        var checkEscape = function(key) {
             var code = (key.charCode || key.keyCode);
             if (code === 27) {
                 close(true);
@@ -1005,14 +1004,13 @@
         // Dismisses the hyperlink input box.
         // isCancel is true if we don't care about the input text.
         // isCancel is false if we are going to keep the text.
-        var close = function (isCancel) {
+        var close = function(isCancel) {
             util.removeEvent(doc.body, "keydown", checkEscape);
             var text = input.value;
 
             if (isCancel) {
                 text = null;
-            }
-            else {
+            } else {
                 // Fixes common pasting errors.
                 text = text.replace(/^http:\/\/(https?|ftp):\/\//, '$1://');
                 if (!/^(?:https?|ftp):\/\//.test(text))
@@ -1028,7 +1026,7 @@
 
 
         // Create the text input box form/window.
-        var createDialog = function () {
+        var createDialog = function() {
             // <div class="modal" id="myModal">
             //   <div class="modal-header">
             //     <a class="close" data-dismiss="modal">×</a>
@@ -1051,7 +1049,7 @@
             // The header.
             var header = doc.createElement("div");
             header.className = "modal-header";
-            header.innerHTML = '<a class="close" data-dismiss="modal">×</a> <h3>'+title+'</h3>';
+            header.innerHTML = '<a class="close" data-dismiss="modal">×</a> <h3>' + title + '</h3>';
             dialog.appendChild(header);
 
             // The body.
@@ -1073,7 +1071,9 @@
             // The web form container for the text box and buttons.
             var form = doc.createElement("form"),
                 style = form.style;
-            form.onsubmit = function () { return close(false); };
+            form.onsubmit = function() {
+                return close(false);
+            };
             style.padding = "0";
             style.margin = "0";
             body.appendChild(form);
@@ -1092,14 +1092,18 @@
             var okButton = doc.createElement("button");
             okButton.className = "btn btn-primary";
             okButton.type = "button";
-            okButton.onclick = function () { return close(false); };
+            okButton.onclick = function() {
+                return close(false);
+            };
             okButton.innerHTML = "OK";
 
             // The cancel button
             var cancelButton = doc.createElement("button");
             cancelButton.className = "btn btn-primary";
             cancelButton.type = "button";
-            cancelButton.onclick = function () { return close(true); };
+            cancelButton.onclick = function() {
+                return close(true);
+            };
             cancelButton.innerHTML = "Cancel";
 
             footer.appendChild(okButton);
@@ -1113,7 +1117,7 @@
 
         // Why is this in a zero-length timeout?
         // Is it working around a browser bug?
-        setTimeout(function () {
+        setTimeout(function() {
 
             createDialog();
 
@@ -1121,20 +1125,19 @@
             if (input.selectionStart !== undefined) {
                 input.selectionStart = 0;
                 input.selectionEnd = defTextLen;
-            }
-            else if (input.createTextRange) {
+            } else if (input.createTextRange) {
                 var range = input.createTextRange();
                 range.collapse(false);
                 range.moveStart("character", -defTextLen);
                 range.moveEnd("character", defTextLen);
                 range.select();
             }
-            
-            $(dialog).on('shown', function () {
+
+            $(dialog).on('shown', function() {
                 input.focus();
             })
-            
-            $(dialog).on('hidden', function () {
+
+            $(dialog).on('hidden', function() {
                 dialog.parentNode.removeChild(dialog);
             })
 
@@ -1155,7 +1158,7 @@
             keyEvent = "keypress";
         }
 
-        util.addEvent(inputBox, keyEvent, function (key) {
+        util.addEvent(inputBox, keyEvent, function(key) {
 
             // Check to see if we have a button key and, if so execute the callback.
             if ((key.ctrlKey || key.metaKey) && !key.altKey && !key.shiftKey) {
@@ -1200,8 +1203,7 @@
                     case "z":
                         if (key.shiftKey) {
                             doClick(buttons.redo);
-                        }
-                        else {
+                        } else {
                             doClick(buttons.undo);
                         }
                         break;
@@ -1221,7 +1223,7 @@
         });
 
         // Auto-indent on shift-enter
-        util.addEvent(inputBox, "keyup", function (key) {
+        util.addEvent(inputBox, "keyup", function(key) {
             if (key.shiftKey && !key.ctrlKey && !key.metaKey) {
                 var keyCode = key.charCode || key.keyCode;
                 // Character 13 is Enter
@@ -1235,7 +1237,7 @@
 
         // special handler because IE clears the context of the textbox on ESC
         if (uaSniffed.isIE) {
-            util.addEvent(inputBox, "keydown", function (key) {
+            util.addEvent(inputBox, "keydown", function(key) {
                 var code = key.keyCode;
                 if (code === 27) {
                     return false;
@@ -1280,7 +1282,7 @@
                 // Yes this is awkward and I think it sucks, but there's
                 // no real workaround.  Only the image and link code
                 // create dialogs and require the function pointers.
-                var fixupInputArea = function () {
+                var fixupInputArea = function() {
 
                     inputBox.focus();
 
@@ -1311,7 +1313,7 @@
                 button.disabled = false;
 
                 if (!button.isHelp) {
-                    button.onclick = function () {
+                    button.onclick = function() {
                         if (this.onmouseout) {
                             this.onmouseout();
                         }
@@ -1319,8 +1321,7 @@
                         return false;
                     }
                 }
-            }
-            else {
+            } else {
                 button.disabled = true;
             }
         }
@@ -1328,7 +1329,9 @@
         function bindCommand(method) {
             if (typeof method === "string")
                 method = commandManager[method];
-            return function () { method.apply(commandManager, arguments); }
+            return function() {
+                method.apply(commandManager, arguments);
+            }
         }
 
         function makeSpritedButtonRow() {
@@ -1339,7 +1342,7 @@
             buttonRow.className = 'btn-toolbar';
             buttonRow = buttonBar.appendChild(buttonRow);
 
-            var makeButton = function (id, title, icon, textOp, group) {
+            var makeButton = function(id, title, icon, textOp, group) {
                 var button = document.createElement("button");
                 button.className = "btn";
                 var buttonImage = document.createElement("i");
@@ -1347,8 +1350,8 @@
                 button.id = id + postfix;
                 button.appendChild(buttonImage);
                 button.title = title;
-                button.innerHTML=title;
-//                $(button).tooltip({placement: 'bottom'})
+                button.innerHTML = title;
+                //                $(button).tooltip({placement: 'bottom'})
                 if (textOp)
                     button.textOp = textOp;
                 setupButton(button, true);
@@ -1359,7 +1362,7 @@
                 }
                 return button;
             };
-            var makeGroup = function (num) {
+            var makeGroup = function(num) {
                 var group = document.createElement("div");
                 group.className = "btn-group wmd-button-group" + num;
                 group.id = "wmd-button-group" + num + postfix;
@@ -1370,44 +1373,48 @@
             group1 = makeGroup(1);
             buttons.bold = makeButton("wmd-bold-button", "加粗", "icon-bold", bindCommand("doBold"), group1);
             buttons.italic = makeButton("wmd-italic-button", "斜体", "icon-italic", bindCommand("doItalic"), group1);
-            
+
             group2 = makeGroup(2);
-            buttons.link = makeButton("wmd-link-button", "链接", "icon-link", bindCommand(function (chunk, postProcessing) {
+            buttons.link = makeButton("wmd-link-button", "链接", "icon-link", bindCommand(function(chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, false);
             }), group2);
             buttons.quote = makeButton("wmd-quote-button", "引用", "icon-left-indent", bindCommand("doBlockquote"), group2);
             buttons.code = makeButton("wmd-code-button", "代码", "icon-embed", bindCommand("doCode"), group2);
-            buttons.jsfiddler = makeButton("wmd-jsfiddler-button", "jsfiddler", "icon-jsfiddler", bindCommand(function (chunk, postProcessing) {
+            buttons.jsfiddler = makeButton("wmd-jsfiddler-button", "jsfiddler", "icon-jsfiddler", bindCommand(function(chunk, postProcessing) {
                 return this.doJsFiddler(chunk, postProcessing, true);
             }), group2);
-            buttons.image = makeButton("wmd-image-button", "图片", "icon-picture", bindCommand(function (chunk, postProcessing) {
+            buttons.image = makeButton("wmd-image-button", "图片", "icon-picture", bindCommand(function(chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, true);
             }), group2);
-            
+
 
             group3 = makeGroup(3);
-            buttons.olist = makeButton("wmd-olist-button", "数字列表", "icon-list", bindCommand(function (chunk, postProcessing) {
+            buttons.olist = makeButton("wmd-olist-button", "数字列表", "icon-list", bindCommand(function(chunk, postProcessing) {
                 this.doList(chunk, postProcessing, true);
             }), group3);
-            buttons.ulist = makeButton("wmd-ulist-button", "无序列表", "icon-list", bindCommand(function (chunk, postProcessing) {
+            buttons.ulist = makeButton("wmd-ulist-button", "无序列表", "icon-list", bindCommand(function(chunk, postProcessing) {
                 this.doList(chunk, postProcessing, false);
             }), group3);
             buttons.heading = makeButton("wmd-heading-button", "标题", "icon-header", bindCommand("doHeading"), group3);
-           // buttons.hr = makeButton("wmd-hr-button", "插入一根虚线 - Ctrl+R", "icon-minus", bindCommand("doHorizontalRule"), group3);
-            
+            // buttons.hr = makeButton("wmd-hr-button", "插入一根虚线 - Ctrl+R", "icon-minus", bindCommand("doHorizontalRule"), group3);
+
             group4 = makeGroup(4);
             buttons.undo = makeButton("wmd-undo-button", "Undo", "icon-unshare", null, group4);
-            buttons.undo.execute = function (manager) { if (manager) manager.undo(); };
+            buttons.undo.execute = function(manager) {
+                if (manager) manager.undo();
+            };
 
             var redoTitle = /win/.test(nav.platform.toLowerCase()) ?
                 "Redo - Ctrl+Y" :
                 "Redo - Ctrl+Shift+Z"; // mac and other non-Windows platforms
 
             buttons.redo = makeButton("wmd-redo-button", "redo", "icon-share", null, group4);
-            buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
+            buttons.redo.execute = function(manager) {
+                if (manager) manager.redo();
+            };
             group5 = makeGroup(5);
-//            buttons.time = makeButton("wmd-time-button", "插入现在的时间", "icon-clock", bindCommand("nowTime"), group5);
-            
+            //            buttons.time = makeButton("wmd-time-button", "插入现在的时间", "icon-clock", bindCommand("nowTime"), group5);
+
             if (helpOptions) {
                 group5 = makeGroup(5);
                 group5.className = group5.className + " pull-right";
@@ -1419,16 +1426,18 @@
                 helpButton.id = "wmd-help-button" + postfix;
                 helpButton.isHelp = true;
                 helpButton.title = helpOptions.title || defaultHelpHoverTitle;
-                $(helpButton).tooltip({placement: 'bottom'})
+                $(helpButton).tooltip({
+                    placement: 'bottom'
+                })
                 helpButton.onclick = helpOptions.handler;
 
                 setupButton(helpButton, true);
                 group5.appendChild(helpButton);
                 buttons.help = helpButton;
             }
-            if($("#fullscreen-editor").length){
-               buttons.fullscreen = makeButton("wmd-fullscreen-button", "全屏", "icon-fullscreen", bindCommand("fullscreen"), group5);
-             
+            if ($("#fullscreen-editor").length) {
+                buttons.fullscreen = makeButton("wmd-fullscreen-button", "全屏", "icon-fullscreen", bindCommand("fullscreen"), group5);
+
             }
             setUndoRedoButtonStates();
         }
@@ -1454,17 +1463,17 @@
     commandProto.prefixes = "(?:\\s{4,}|\\s*>|\\s*-\\s+|\\s*\\d+\\.|=|\\+|-|_|\\*|#|\\s*\\[[^\n]]+\\]:)";
 
     // Remove markdown symbols from the chunk selection.
-    commandProto.unwrap = function (chunk) {
+    commandProto.unwrap = function(chunk) {
         var txt = new re("([^\\n])\\n(?!(\\n|" + this.prefixes + "))", "g");
         chunk.selection = chunk.selection.replace(txt, "$1 $2");
     };
 
-    commandProto.wrap = function (chunk, len) {
+    commandProto.wrap = function(chunk, len) {
         this.unwrap(chunk);
         var regex = new re("(.{1," + len + "})( +|$\\n?)", "gm"),
             that = this;
 
-        chunk.selection = chunk.selection.replace(regex, function (line, marked) {
+        chunk.selection = chunk.selection.replace(regex, function(line, marked) {
             if (new re("^" + that.prefixes, "").test(line)) {
                 return line;
             }
@@ -1474,18 +1483,18 @@
         chunk.selection = chunk.selection.replace(/\s+$/, "");
     };
 
-    commandProto.doBold = function (chunk, postProcessing) {
+    commandProto.doBold = function(chunk, postProcessing) {
         return this.doBorI(chunk, postProcessing, 2, "strong text");
     };
 
-    commandProto.doItalic = function (chunk, postProcessing) {
+    commandProto.doItalic = function(chunk, postProcessing) {
         return this.doBorI(chunk, postProcessing, 1, "emphasized text");
     };
 
     // chunk: The selected region that will be enclosed with */**
     // nStars: 1 for italics, 2 for bold
     // insertText: If you just click the button without highlighting text, this gets inserted
-    commandProto.doBorI = function (chunk, postProcessing, nStars, insertText) {
+    commandProto.doBorI = function(chunk, postProcessing, nStars, insertText) {
 
         // Get rid of whitespace and fixup newlines.
         chunk.trimWhitespace();
@@ -1502,16 +1511,14 @@
         if ((prevStars >= nStars) && (prevStars != 2 || nStars != 1)) {
             chunk.before = chunk.before.replace(re("[*]{" + nStars + "}$", ""), "");
             chunk.after = chunk.after.replace(re("^[*]{" + nStars + "}", ""), "");
-        }
-        else if (!chunk.selection && starsAfter) {
+        } else if (!chunk.selection && starsAfter) {
             // It's not really clear why this code is necessary.  It just moves
             // some arbitrary stuff around.
             chunk.after = chunk.after.replace(/^([*_]*)/, "");
             chunk.before = chunk.before.replace(/(\s?)$/, "");
             var whitespace = re.$1;
             chunk.before = chunk.before + starsAfter + whitespace;
-        }
-        else {
+        } else {
 
             // In most cases, if you don't have any selected text and click the button
             // you'll get a selected, marked up region with the default text inserted.
@@ -1528,10 +1535,10 @@
         return;
     };
 
-    commandProto.stripLinkDefs = function (text, defsToAdd) {
+    commandProto.stripLinkDefs = function(text, defsToAdd) {
 
         text = text.replace(/^[ ]{0,3}\[(\d+)\]:[ \t]*\n?[ \t]*<?(\S+?)>?[ \t]*\n?[ \t]*(?:(\n*)["(](.+?)[")][ \t]*)?(?:\n+|$)/gm,
-            function (totalMatch, id, link, newlines, title) {
+            function(totalMatch, id, link, newlines, title) {
                 defsToAdd[id] = totalMatch.replace(/\s*$/, "");
                 if (newlines) {
                     // Strip the title and return that separately.
@@ -1544,7 +1551,7 @@
         return text;
     };
 
-    commandProto.addLinkDef = function (chunk, linkDef) {
+    commandProto.addLinkDef = function(chunk, linkDef) {
 
         var refNumber = 0; // The current reference number
         var defsToAdd = {}; //
@@ -1556,7 +1563,7 @@
         var defs = "";
         var regex = /(\[)((?:\[[^\]]*\]|[^\[\]])*)(\][ ]?(?:\n[ ]*)?\[)(\d+)(\])/g;
 
-        var addDefNumber = function (def) {
+        var addDefNumber = function(def) {
             refNumber++;
             def = def.replace(/^[ ]{0,3}\[(\d+)\]:/, "  [" + refNumber + "]:");
             defs += "\n" + def;
@@ -1567,7 +1574,7 @@
         //    of regex, inner is always a proper substring of wholeMatch, and
         // b) more than one level of nesting is neither supported by the regex
         //    nor making a lot of sense (the only use case for nesting is a linked image)
-        var getLink = function (wholeMatch, before, inner, afterInner, id, end) {
+        var getLink = function(wholeMatch, before, inner, afterInner, id, end) {
             inner = inner.replace(regex, getLink);
             if (defsToAdd[id]) {
                 addDefNumber(defsToAdd[id]);
@@ -1580,8 +1587,7 @@
 
         if (linkDef) {
             addDefNumber(linkDef);
-        }
-        else {
+        } else {
             chunk.selection = chunk.selection.replace(regex, getLink);
         }
 
@@ -1604,13 +1610,13 @@
     // takes the line as entered into the add link/as image dialog and makes
     // sure the URL and the optinal title are "nice".
     function properlyEncoded(linkdef) {
-        return linkdef.replace(/^\s*(.*?)(?:\s+"(.+)")?\s*$/, function (wholematch, link, title) {
-            link = link.replace(/\?.*$/, function (querypart) {
+        return linkdef.replace(/^\s*(.*?)(?:\s+"(.+)")?\s*$/, function(wholematch, link, title) {
+            link = link.replace(/\?.*$/, function(querypart) {
                 return querypart.replace(/\+/g, " "); // in the query string, a plus and a space are identical
             });
             link = decodeURIComponent(link); // unencode first, to prevent double encoding
             link = encodeURI(link).replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29');
-            link = link.replace(/\?.*$/, function (querypart) {
+            link = link.replace(/\?.*$/, function(querypart) {
                 return querypart.replace(/\+/g, "%2b"); // since we replaced plus with spaces in the query part, all pluses that now appear where originally encoded
             });
             if (title) {
@@ -1621,7 +1627,7 @@
         });
     }
 
-    commandProto.doLinkOrImage = function (chunk, postProcessing, isImage) {
+    commandProto.doLinkOrImage = function(chunk, postProcessing, isImage) {
 
         chunk.trimWhitespace();
         chunk.findTags(/\s*!?\[/, /\][ ]?(?:\n[ ]*)?(\[.*?\])?/);
@@ -1633,9 +1639,8 @@
             chunk.endTag = "";
             this.addLinkDef(chunk, null);
 
-        }
-        else {
-            
+        } else {
+
             // We're moving start and end tag back into the selection, since (as we're in the else block) we're not
             // *removing* a link, but *adding* one, so whatever findTags() found is now back to being part of the
             // link text. linkEnteredCallback takes care of escaping any brackets.
@@ -1649,7 +1654,7 @@
             var that = this;
             // The function to be executed when you enter a link and press OK or Cancel.
             // Marks up the link and adds the ref.
-            var linkEnteredCallback = function (link) {
+            var linkEnteredCallback = function(link) {
 
                 if (link !== null) {
                     // (                          $1
@@ -1671,7 +1676,7 @@
                     // would mean a zero-width match at the start. Since zero-width matches advance the string position,
                     // the first bracket could then not act as the "not a backslash" for the second.
                     chunk.selection = (" " + chunk.selection).replace(/([^\\](?:\\\\)*)(?=[[\]])/g, "$1\\").substr(1);
-                    
+
                     var linkDef = " [999]: " + properlyEncoded(link);
 
                     var num = that.addLinkDef(chunk, linkDef);
@@ -1681,8 +1686,7 @@
                     if (!chunk.selection) {
                         if (isImage) {
                             chunk.selection = "enter image description here";
-                        }
-                        else {
+                        } else {
                             chunk.selection = "enter link description here";
                         }
                     }
@@ -1694,14 +1698,13 @@
             if (isImage) {
                 if (!this.hooks.insertImageDialog(linkEnteredCallback))
                     ui.prompt('Insert Image', imageDialogText, imageDefaultText, linkEnteredCallback);
-            }
-            else {
+            } else {
                 ui.prompt('Insert Link', linkDialogText, linkDefaultText, linkEnteredCallback);
             }
             return true;
         }
     };
-    commandProto.doJsFiddler = function (chunk, postProcessing, isImage) {
+    commandProto.doJsFiddler = function(chunk, postProcessing, isImage) {
 
         chunk.trimWhitespace();
         chunk.findTags(/\s*!?\[/, /\][ ]?(?:\n[ ]*)?(\[.*?\])?/);
@@ -1713,9 +1716,8 @@
             chunk.endTag = "";
             this.addLinkDef(chunk, null);
 
-        }
-        else {
-            
+        } else {
+
             // We're moving start and end tag back into the selection, since (as we're in the else block) we're not
             // *removing* a link, but *adding* one, so whatever findTags() found is now back to being part of the
             // link text. linkEnteredCallback takes care of escaping any brackets.
@@ -1729,7 +1731,7 @@
             var that = this;
             // The function to be executed when you enter a link and press OK or Cancel.
             // Marks up the link and adds the ref.
-            var linkEnteredCallback = function (link) {
+            var linkEnteredCallback = function(link) {
 
                 if (link !== null) {
                     // (                          $1
@@ -1751,14 +1753,14 @@
                     // would mean a zero-width match at the start. Since zero-width matches advance the string position,
                     // the first bracket could then not act as the "not a backslash" for the second.
                     chunk.selection = link;
-                    
+
                     var linkDef = " [999]: " + properlyEncoded(link);
 
                     var num = that.addLinkDef(chunk, linkDef);
-                    chunk.startTag ='<iframe width="100%" height="300" src="';
+                    chunk.startTag = '<iframe width="100%" height="300" src="';
                     chunk.endTag = '" allowfullscreen="allowfullscreen" frameborder="0"></iframe>';
 
-                    
+
                 }
                 postProcessing();
             };
@@ -1771,7 +1773,7 @@
 
     // When making a list, hitting shift-enter will put your cursor on the next line
     // at the current indent level.
-    commandProto.doAutoindent = function (chunk, postProcessing) {
+    commandProto.doAutoindent = function(chunk, postProcessing) {
 
         var commandMgr = this,
             fakeSelection = false;
@@ -1779,13 +1781,13 @@
         chunk.before = chunk.before.replace(/(\n|^)[ ]{0,3}([*+-]|\d+[.])[ \t]*\n$/, "\n\n");
         chunk.before = chunk.before.replace(/(\n|^)[ ]{0,3}>[ \t]*\n$/, "\n\n");
         chunk.before = chunk.before.replace(/(\n|^)[ \t]+\n$/, "\n\n");
-        
+
         // There's no selection, end the cursor wasn't at the end of the line:
         // The user wants to split the current list item / code line / blockquote line
         // (for the latter it doesn't really matter) in two. Temporarily select the
         // (rest of the) line to achieve this.
         if (!chunk.selection && !/^[ \t]*(?:\n|$)/.test(chunk.after)) {
-            chunk.after = chunk.after.replace(/^[^\n]*/, function (wholeMatch) {
+            chunk.after = chunk.after.replace(/^[^\n]*/, function(wholeMatch) {
                 chunk.selection = wholeMatch;
                 return "";
             });
@@ -1807,24 +1809,24 @@
                 commandMgr.doCode(chunk);
             }
         }
-        
+
         if (fakeSelection) {
             chunk.after = chunk.selection + chunk.after;
             chunk.selection = "";
         }
     };
 
-    commandProto.doBlockquote = function (chunk, postProcessing) {
+    commandProto.doBlockquote = function(chunk, postProcessing) {
 
         chunk.selection = chunk.selection.replace(/^(\n*)([^\r]+?)(\n*)$/,
-            function (totalMatch, newlinesBefore, text, newlinesAfter) {
+            function(totalMatch, newlinesBefore, text, newlinesAfter) {
                 chunk.before += newlinesBefore;
                 chunk.after = newlinesAfter + chunk.after;
                 return text;
             });
 
         chunk.before = chunk.before.replace(/(>[ \t]*)$/,
-            function (totalMatch, blankLine) {
+            function(totalMatch, blankLine) {
                 chunk.selection = blankLine + chunk.selection;
                 return "";
             });
@@ -1872,14 +1874,14 @@
                 var good = false;
                 line = lines[i];
                 inChain = inChain && line.length > 0; // c) any non-empty line continues the chain
-                if (/^>/.test(line)) {                // a)
+                if (/^>/.test(line)) { // a)
                     good = true;
-                    if (!inChain && line.length > 1)  // c) any line that starts with ">" and has at least one more character starts the chain
+                    if (!inChain && line.length > 1) // c) any line that starts with ">" and has at least one more character starts the chain
                         inChain = true;
-                } else if (/^[ \t]*$/.test(line)) {   // b)
+                } else if (/^[ \t]*$/.test(line)) { // b)
                     good = true;
                 } else {
-                    good = inChain;                   // c) the line is not empty and does not start with ">", so it matches if and only if we're in the chain
+                    good = inChain; // c) the line is not empty and does not start with ">", so it matches if and only if we're in the chain
                 }
                 if (good) {
                     match += line + "\n";
@@ -1888,7 +1890,7 @@
                     match = "\n";
                 }
             }
-            if (!/(^|\n)>/.test(match)) {             // d)
+            if (!/(^|\n)>/.test(match)) { // d)
                 leftOver += match;
                 match = "";
             }
@@ -1904,25 +1906,25 @@
         }
 
         chunk.after = chunk.after.replace(/^(((\n|^)(\n[ \t]*)*>(.+\n)*.*)+(\n[ \t]*)*)/,
-            function (totalMatch) {
+            function(totalMatch) {
                 chunk.endTag = totalMatch;
                 return "";
             }
         );
 
-        var replaceBlanksInTags = function (useBracket) {
+        var replaceBlanksInTags = function(useBracket) {
 
             var replacement = useBracket ? "> " : "";
 
             if (chunk.startTag) {
                 chunk.startTag = chunk.startTag.replace(/\n((>|\s)*)\n$/,
-                    function (totalMatch, markdown) {
+                    function(totalMatch, markdown) {
                         return "\n" + markdown.replace(/^[ ]{0,3}>?[ \t]*$/gm, replacement) + "\n";
                     });
             }
             if (chunk.endTag) {
                 chunk.endTag = chunk.endTag.replace(/^\n((>|\s)*)\n/,
-                    function (totalMatch, markdown) {
+                    function(totalMatch, markdown) {
                         return "\n" + markdown.replace(/^[ ]{0,3}>?[ \t]*$/gm, replacement) + "\n";
                     });
             }
@@ -1951,14 +1953,14 @@
 
         if (!/\n/.test(chunk.selection)) {
             chunk.selection = chunk.selection.replace(/^(> *)/,
-            function (wholeMatch, blanks) {
-                chunk.startTag += blanks;
-                return "";
-            });
+                function(wholeMatch, blanks) {
+                    chunk.startTag += blanks;
+                    return "";
+                });
         }
     };
 
-    commandProto.doCode = function (chunk, postProcessing) {
+    commandProto.doCode = function(chunk, postProcessing) {
 
         var hasTextBefore = /\S[ ]*$/.test(chunk.before);
         var hasTextAfter = /^[ ]*\S/.test(chunk.after);
@@ -1968,7 +1970,7 @@
         if ((!hasTextAfter && !hasTextBefore) || /\n/.test(chunk.selection)) {
 
             chunk.before = chunk.before.replace(/[ ]{4}$/,
-                function (totalMatch) {
+                function(totalMatch) {
                     chunk.selection = totalMatch + chunk.selection;
                     return "";
                 });
@@ -1988,20 +1990,17 @@
             if (!chunk.selection) {
                 chunk.startTag = "    ";
                 chunk.selection = "enter code here";
-            }
-            else {
+            } else {
                 if (/^[ ]{0,3}\S/m.test(chunk.selection)) {
                     if (/\n/.test(chunk.selection))
                         chunk.selection = chunk.selection.replace(/^/gm, "    ");
                     else // if it's not multiline, do not select the four added spaces; this is more consistent with the doList behavior
                         chunk.before += "    ";
-                }
-                else {
+                } else {
                     chunk.selection = chunk.selection.replace(/^[ ]{4}/gm, "");
                 }
             }
-        }
-        else {
+        } else {
             // Use backticks (`) to delimit the code block.
 
             chunk.trimWhitespace();
@@ -2012,18 +2011,16 @@
                 if (!chunk.selection) {
                     chunk.selection = "enter code here";
                 }
-            }
-            else if (chunk.endTag && !chunk.startTag) {
+            } else if (chunk.endTag && !chunk.startTag) {
                 chunk.before += chunk.endTag;
                 chunk.endTag = "";
-            }
-            else {
+            } else {
                 chunk.startTag = chunk.endTag = "";
             }
         }
     };
 
-    commandProto.doList = function (chunk, postProcessing, isNumberedList) {
+    commandProto.doList = function(chunk, postProcessing, isNumberedList) {
 
         // These are identical except at the very beginning and end.
         // Should probably use the regex extension function to make this clearer.
@@ -2039,20 +2036,19 @@
         var num = 1;
 
         // Get the item prefix - e.g. " 1. " for a numbered list, " - " for a bulleted list.
-        var getItemPrefix = function () {
+        var getItemPrefix = function() {
             var prefix;
             if (isNumberedList) {
                 prefix = " " + num + ". ";
                 num++;
-            }
-            else {
+            } else {
                 prefix = " " + bullet + " ";
             }
             return prefix;
         };
 
         // Fixes the prefixes of the other list items.
-        var getPrefixedItem = function (itemText) {
+        var getPrefixedItem = function(itemText) {
 
             // The numbering flag is unset when called by autoindent.
             if (isNumberedList === undefined) {
@@ -2061,7 +2057,7 @@
 
             // Renumber/bullet the list element.
             itemText = itemText.replace(/^[ ]{0,3}([*+-]|\d+[.])\s/gm,
-                function (_) {
+                function(_) {
                     return getItemPrefix();
                 });
 
@@ -2095,7 +2091,7 @@
         var nLinesUp = 1;
 
         chunk.before = chunk.before.replace(previousItemsRegex,
-            function (itemText) {
+            function(itemText) {
                 if (/^\s*([*+-])/.test(itemText)) {
                     bullet = re.$1;
                 }
@@ -2112,7 +2108,7 @@
         var nLinesDown = 1;
 
         chunk.after = chunk.after.replace(nextItemsRegex,
-            function (itemText) {
+            function(itemText) {
                 nLinesDown = /[^\n]\n\n[^\n]/.test(itemText) ? 1 : 0;
                 return getPrefixedItem(itemText);
             });
@@ -2125,24 +2121,29 @@
         chunk.selection = chunk.selection.replace(/\n/g, "\n" + spaces);
 
     };
-    commandProto.nowTime = function(chunk, postProcessing){
+    commandProto.nowTime = function(chunk, postProcessing) {
         chunk.startTag = "";
         var d = new Date();
-        chunk.selection = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+        chunk.selection = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
         chunk.endTag = "";
     }
-    commandProto.fullscreen = function(chunk, postProcessing){
-       $("#fullscreen-editor").removeClass("hidden")
-       $("#fullscreen-exit").removeClass("hidden")
-         $("#wmd-button-bar").appendTo($("#fullscreen-editor"))
+    commandProto.fullscreen = function(chunk, postProcessing) {
+        $("#fullscreen-editor").removeClass("hidden")
+        $("#fullscreen-exit").removeClass("hidden")
+        $("#wmd-button-bar").appendTo($("#fullscreen-editor"))
         $("#wmd-editor-con").appendTo($("#fullscreen-editor"))
         $("#wmd-preview-con").appendTo($("#fullscreen-editor"))
-        $("#fullscreen-editor #wmd-preview").css({height:$(window).height()-93});
-        $("#fullscreen-editor textarea").css({height:$(window).height()-73,overflowY:"auto"}).addClass("fullscreen-textarea");
+        $("#fullscreen-editor #wmd-preview").css({
+            height: $(window).height() - 93
+        });
+        $("#fullscreen-editor textarea").css({
+            height: $(window).height() - 73,
+            overflowY: "auto"
+        }).addClass("fullscreen-textarea");
 
-        
+
     }
-    commandProto.doHeading = function (chunk, postProcessing) {
+    commandProto.doHeading = function(chunk, postProcessing) {
 
         // Remove leading/trailing whitespace and reduce internal spaces to single spaces.
         chunk.selection = chunk.selection.replace(/\s+/g, " ");
@@ -2157,7 +2158,7 @@
             return;
         }
 
-        var headerLevel = 0;     // The existing header level of the selected text.
+        var headerLevel = 0; // The existing header level of the selected text.
 
         // Remove any existing hash heading markdown and save the header level.
         chunk.findTags(/#+[ ]*/, /[ ]*#+/);
@@ -2201,7 +2202,7 @@
         }
     };
 
-    commandProto.doHorizontalRule = function (chunk, postProcessing) {
+    commandProto.doHorizontalRule = function(chunk, postProcessing) {
         chunk.startTag = "----------\n";
         chunk.selection = "";
         chunk.skipLines(2, 1, true);

@@ -72,11 +72,14 @@ html(xmlns:wb='http://open.weibo.com/wb')
                   .title 
                     a(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
                     //- a.go(href="/article/add?column_id=#{column.id}") 添加文章
+              
+              .publish-tip.alert(style="margin-bottom:10px;") 如要发表文章，请点击专栏名进入之后，再发表到此专栏。
               div
                 a.btn.small-btn(href="/article/column/add") 创建新专栏
             else
               .no 还没有专栏，先创建专栏再发表原创文章吧！
                 a(href="/article/column/add") 创建专栏
+
           if locals.nopublish_articles
             .hd 我的草稿
             .bd.nopublish_articles 

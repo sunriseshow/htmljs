@@ -35,41 +35,48 @@ html
               .item.add-job 我是招聘企业
                 a.btn.small-btn(href="/job/add",style="margin-left:10px;") 发布招聘信息
       if locals.jobs
-        .job-list-hd 工作机会
-        .job-list.clearfix
-          each job in jobs
-            .job
-              .title 
-                
-                a.t(href="/job/#{job.id}") #{job.title}
-                a.headpic.user(href="/user/#{job.user.id}",data-original-title="#{job.user.nick}")
-                  img(src="#{job.user.head_pic}")
-              .con
-                div
-                  span.item 
-                    span.key 公司：
-                    span.value #{job.company_name}
-                div
-                  span.item 
-                    span.key 招聘职位：
-                    span.value #{job.zhiwei}
-                div
-                  span.item 
-                    span.key 薪水范围：
-                    span.value #{job.min_price} - #{job.max_price==0?"不限":job.max_price}
-                div
-                  span.item 
-                    span.key 公司规模：
-                    span.value #{job.company_personcount}
-                  span.item 
-                    span.key 所在城市：
-                    span.value #{job.company_city}
-                .item 
-                  span.key 发布者：
-                  a.value(href="/user/#{job.user.id}") #{job.user.nick}
-                .count 访问：<em>#{job.visit_count}</em> 关注：<em>#{job.zan_count}</em> 
-              
-        include ../page
+        .content
+          .left
+            .joblist
+                .job-list.clearfix
+                  each job in jobs
+                    .job
+                      .title
+
+                        a.t(href="/job/#{job.id}") #{job.title}
+                        a.headpic.user(href="/user/#{job.user.id}",data-original-title="#{job.user.nick}")
+                          img(src="#{job.user.head_pic}")
+                      .con
+                          span.item
+                            span.key 公司：
+                            span.value #{job.company_name}
+                          span.item
+                            span.key 招聘职位：
+                            span.value #{job.zhiwei}
+                          span.item
+                            span.key 薪水范围：
+                            span.value #{job.min_price} - #{job.max_price==0?"不限":job.max_price}
+
+                          div
+                              span.item
+                                span.key 公司规模：
+                                span.value #{job.company_personcount}
+                              span.item
+                                span.key 所在城市：
+                                span.value #{job.company_city}
+                              if locals.user && locals.user.is_admin
+                                    if job.is_jian
+                                        a(href="/job/#{job.id}/update?is_jian=0") no推荐
+                                    else
+                                        a(href="/job/#{job.id}/update?is_jian=1") 推荐
+                include ../page
+        .right
+          .module.jian-jobs
+            .hd 推荐职位
+            .bd
+                each a in jian_jobs
+                    div.item <a href="/topic/#{a.id}">#{a.title}</a>
+        include ../footer
         script.
           $('.user').tooltip({
               placement:"bottom"

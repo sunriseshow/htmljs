@@ -38,6 +38,16 @@ module.exports.controllers =
         else
           result.success = 1
           res.send result
+  "/:id/update":
+    get:(req,res,next)->
+      result =
+        success:0
+        info:""
+      func_job.update req.params.id,req.query,(error)->
+        if error
+          next error
+        else
+          res.redirect 'back'
   "/:id/create_mail":
     get:(req,res,next)->
       func_cloudmail.addLocalEmail req.query.source,req.query.target,req.query.user_id,(error)->
@@ -89,13 +99,15 @@ module.exports.controllers =
 
 module.exports.filters = 
   "/":
-    get:['freshLogin','job/all-publish-jobs','job/check-resume']
+    get:['freshLogin','job/all-publish-jobs','job/check-resume','job/jian_jobs']
   "/add":
     get:['checkLogin']
   "/:id":
     get:['freshLogin',"job/comments","job/get-job","job/his-jobs","job/city-jobs","job/has_zan","job/zan-logs"]
   "/:id/zan":
     post:['checkLoginJson']
+  "/:id/update":
+    get:['checkLogin']
   "/:id/add":
     post:['checkLogin']
   "/:id/edit":

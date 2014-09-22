@@ -37,3 +37,6 @@ module.exports =
   is_publish:
     type:"tinyint"
     defaultValue:0
+  is_jian:
+    defaultValue:0
+    type:"tinyint"

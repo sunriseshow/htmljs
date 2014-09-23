@@ -1,9 +1,9 @@
 var page = require('webpage').create();
 page.viewportSize = {
-    width: 1200,
+    width: 440,
     height: 600
 };
-page.open('http://www.html-js.com/topic/128?is_clear=1', function() {
-    page.render('example.pdf');
+page.open('http://www.html-js.com/static/htmljs-weekly-6-clear.html', function() {
+    page.render('example.png');
     phantom.exit();
 });

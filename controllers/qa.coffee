@@ -37,6 +37,10 @@ module.exports.controllers =
       req.body.user_id = res.locals.user.id
       req.body.user_headpic = res.locals.user.head_pic
       req.body.user_nick = res.locals.user.nick
+      if /小姐|援交|小妹|公主/.test req.body.title
+        result.info = "能免费提供给群主么？"
+        res.send result
+        return;
       if add_history[req.body.user_id]
         if (new Date().getTime() - add_history[req.body.user_id] <1000*60*5)
           result.info = "不要发布太频繁哦，稍后再试"

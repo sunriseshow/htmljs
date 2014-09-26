@@ -5,6 +5,8 @@ htmljs
 
 本站代码仅供参考，缺少配置文件在本地不能运行，基于express，rainbow，sequelize，jade，coffeescript，less，moment等技术和框架。
 
+update:本站代码比较老，建议参考RabbitJS的实现思路，更清晰，原理与此相同：https://github.com/xinyu198736/Rabbit.js
+
 约定模式：
 ==
 * 整个系统从数据到最终逻辑分为五层：1.models，2.functions，3.filters，4.routes，5.views

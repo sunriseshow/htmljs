@@ -97,9 +97,12 @@ html
                   else
                     | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>")}
                   | <script src="#{assets_head}/js/tuiku.js"></script>
-                  div(style="margin:30px 0 10px -15px;")
-                    a(href="https://coding.net/u/zengsha/p/Onion-Monkey-Emoji/topic/4272?hmsr=%E4%B9%B1%E7%82%96%E7%BD%91&hmmd=%E6%96%87%E5%AD%97&hmpl=&hmkw=&hmci=",target="_blank",style="display:block;line-height:25px;") 【广告】Coding.net 让你体验云端开发的快感！创意表情火热征集中！
-                    a(href=" http://www.jobdeer.com/?fr=htmljs",target="_blank",style="display:block;line-height:25px;") 【广告】优秀的人才不找工作，都在「 JobDeer.com 」拍卖自己！
+                .entry-more
+                    i.icon.icon-download(style="margin-right:10px;color:#999;")
+                    |文章挺长的啊，点击查看更多~~
+                div(style="margin:30px 0 10px 0;")
+                  a(href="https://coding.net/u/zengsha/p/Onion-Monkey-Emoji/topic/4272?hmsr=%E4%B9%B1%E7%82%96%E7%BD%91&hmmd=%E6%96%87%E5%AD%97&hmpl=&hmkw=&hmci=",target="_blank",style="display:block;line-height:25px;") 【广告】Coding.net 让你体验云端开发的快感！创意表情火热征集中！
+                  //a(href=" http://www.jobdeer.com/?fr=htmljs",target="_blank",style="display:block;line-height:25px;") 【广告】优秀的人才不找工作，都在「 JobDeer.com 」拍卖自己！
                     
                 div()
                   a(href="https://worktile.com?hmsr=http%3A%2F%2Fwww.html-js.com%2F&hmmd=%E5%9B%BE%E7%89%87%E5%B9%BF%E5%91%8A&hmpl=&hmkw=&hmci=",target="_blank") 
@@ -230,8 +233,7 @@ html
         var bds_config={"bdText":"分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} {{前端乱炖是国内最专业的前端知识原创内容社区}}","bdPic":"http://www.html-js.com/uploads/article_thumb/#{article.id}.png","snsKey":{'tsina':'659341943','tqq':'','t163':'','tsohu':''}}
         document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
         </script>
-    include ../footer
-    include ../320ad
+
     script(src="#{assets_head}/js/mustache.js")
     script(src="#{assets_head}/js/messageTip.js")
     script(src="#{assets_head}/js/loadingTip.js")
@@ -387,7 +389,18 @@ html
                 })
             })
             });
-          
+          if($(".entry-content").height()>500){
+            $(".entry-content").css({
+                height:500
+            })
+            $(".entry-more").removeClass("hidden")
+          }
+          $(".entry-more").on("click",function(){
+            $(".entry-content").css({
+                height:"auto"
+            })
+            $(".entry-more").addClass("hidden")
+          })
           //- $(window).scroll(function(){
           //-   var scrollTop = $(window).scrollTop();
           //-   if (offset.top < scrollTop+40) 
@@ -427,5 +440,6 @@ html
           //-     });
           //-   }
           //-   })();
-            
+    include ../footer
+    include ../320ad
    include ../googlead

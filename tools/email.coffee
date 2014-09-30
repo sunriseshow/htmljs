@@ -4,7 +4,7 @@ config = require './../config.coffee'
 
 buffer = ""
 
-mustache.compileAndRender('./../static/htmljs-weekly-6-clear.html', {})
+mustache.compileAndRender('./../static/htmljs-weekly-7-clear.html', {})
 .on 'data',(c)->
    buffer += c.toString()
 .on 'end',()->

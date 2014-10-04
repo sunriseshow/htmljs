@@ -33,140 +33,111 @@ html
       if !article
         p.alert 不存在的阅读篇章
       else
-        .content
-            
-            .title
+          .title
               .wrapper
 
-                div(class="#{Math.floor(Math.random()*100)}",style="font-size: 30px;line-height:50px;",href='http://p.html-js.com/article/#{article.id}', title='#{article.title}', rel='bookmark') #{article.title}
-                .info
-                  div.line
-                    span.author.vcard.item
-                      a.value.url.fn(rel='author', href='/user/#{article.user_id}') #{article.user_nick} 
-                      |  发布在 
-                      if locals.column
-                        a.value(href="/article/column/#{column.id}") #{column.name}
-                    span.item
-                      span.index view：
-                      span.value #{article.visit_count}
-                  
-                //- .actions
-                  
-                //-   a.zan.action(href="javascript:void(0);") 
-                //-     i.icon-thumbs-up
-                //-     if locals.has_zan
-                //-       |<em>已赞</em> <span>#{article.zan_count}</span>
-                //-     else
-                //-       |<em>赞</em> <span>#{article.zan_count}</span>
-                //-   a#bdshare.action.bdshare_t.bds_tools.get-codes-bdshare(href="#comment",style="float:none;") 
-                //-     i.icon-new-window
-                //-     em.bds_more(style="background:none !important;float:none;display:inline;padding:0;") 分享
-                //-   if locals.user && (user.is_admin||user.id==article.user_id)
-                //-     a.action(href="/article/#{article.id}/edit") 编辑
-                //-   a.add_fav.action(href="javascript:void(0);") 
-                //-     //- i.icon-heart
-                //-     if locals.has_fav
-                //-       |<em>已收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
-                //-     else
-                //-       |<em>收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
-            
-            article.post(id="post-#{article.id}")
-              
-              .artivle_nav
-                ul.nav
-              .wrapper
-                include ../recommend_books
-                .entry-content
-                  if !(locals.user && locals.user.id==article.user_id)&&article.is_buy && !locals.can_read
-                    - var matches = article.html.match(/<p>.*?<\/p>/g);
-                    - var match_result = matches.splice(0,4);
-                    | !{match_result.join("").replace(/<code>/g,"<code class='language-javascript'>")}
-                    a.btn(href="/article/#{article.id}/pay") 本文长度：#{article.md.length} 字，点击付费1元
-                    br
-                    .more-but-pay 您好，这是一篇付费文章，您需要支付 1元 才能查看原文，所有费用都会支付给作者，谢谢您对社区作者的小小支持
-                    .module 
-                      .hd 已付费用户
-                      .bd
-                        if locals.payers && locals.payers.length
-                          span.zanlogs
-                            each zan in payers
-                              a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
-                                img(src='#{zan.user.head_pic}')
-                        else
-                          span 暂无付费用户
-                  else
-                    | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>")}
-                  | <script src="#{assets_head}/js/tuiku.js"></script>
-                .entry-more
-                    i.icon.icon-download(style="margin-right:10px;color:#999;")
-                    |文章挺长的啊，点击查看全文~~
-                .vertical-actions.hidden
-                  a.action
-                    |赞
-                  a.action
-                    |分享
-                  a.action
-                    |讨论
-                  //- if article.card && article.card.alipay 
-                //-   div.donate.module(style="margin-top:10px;")
-                //-     .hd 如果本文对您有帮助，本站希望您能为作者赞助一点心意，
-                //-     .bd
-                //-       p(style="color:#999;") 本站推荐按照您的情况，为作者捐助一下金额：1元，5元，10元，20元，或者更多。
-                //-       p 
-                //-         a(href="#{article.card.alipay}",target="_blank") 点击这里用支付宝捐助
-            .bottom-action
-              .wrapper
-                .actions
-                  a.zan.action(href="javascript:void(0);") 
-                    i.icon-thumbs-up
-                    if locals.has_zan
-                      |<em>已赞</em> <span>#{article.zan_count}</span>
-                    else
-                      |<em>赞</em> <span>#{article.zan_count}</span>
-                  if locals.zan_logs
-                    span.zanlogs
-                      each zan in zan_logs
-                        a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
-                          img(src='#{zan.user.head_pic}')
-                .actions
-                  a.action(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/article/"+article.id)}&title=分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} 。前端乱炖是一个专业的前端知识原创内容社区&pic=http://www.html-js.com/uploads/article_thumb/#{article.id}.png&appkey=659341943")
-                    i.icon-new-window
-                    em.bds_more(style="background:none !important;float:none;display:inline;padding:0;") 分享到微博
-                  
-                  
-                  if locals.user && (user.is_admin||user.id==article.user_id)
-                    a.action(href="/article/#{article.id}/edit") 编辑
-                  a.add_fav.action(href="javascript:void(0);") 
-                    //- i.icon-heart
-                    if locals.has_fav
-                      |<em>已收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
-                    else
-                      |<em>收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
+                  div(class="#{Math.floor(Math.random()*100)}",style="font-size: 30px;line-height:50px;",href='http://p.html-js.com/article/#{article.id}', title='#{article.title}', rel='bookmark') #{article.title}
+                  .info
+                      div.line
+                          span.author.vcard.item
+                              a.value.url.fn(rel='author', href='/user/#{article.user_id}') #{article.user_nick}
+                              |  发布在
+                              if locals.column
+                                  a.value(href="/article/column/#{column.id}") #{column.name}
+                          span.item
+                              span.index view：
+                              span.value #{article.visit_count}
 
-                .entry-meta
-                  p 本站专栏文章皆为原创，转载请注明出处（带有 前端乱炖 字样）和本文的显式链接(<a href="http://www.html-js.com/article/#{article.id}">http://www.html-js.com/article/#{article.id}</a>)，本站和作者保留随时要求删除文章的权利！
-            .ads
-                .wrapper(style="width:700px;margin: 0 auto;")
-                    div(style="margin:30px 0 10px 0;")
-                        a(href="https://coding.net/u/zengsha/p/Onion-Monkey-Emoji/topic/4272?hmsr=%E4%B9%B1%E7%82%96%E7%BD%91&hmmd=%E6%96%87%E5%AD%97&hmpl=&hmkw=&hmci=",target="_blank",style="display:block;line-height:25px;") 【广告】Coding.net 让你体验云端开发的快感！创意表情火热征集中！
-                        //a(href=" http://www.jobdeer.com/?fr=htmljs",target="_blank",style="display:block;line-height:25px;") 【广告】优秀的人才不找工作，都在「 JobDeer.com 」拍卖自己！
+        .content-wapper
+          .content
+            .left
+                article.post(id="post-#{article.id}")
 
-                        div()
+                  .artivle_nav
+                    ul.nav
+                  .wrapper
+                    include ../recommend_books
+                    .entry-content
+                      if !(locals.user && locals.user.id==article.user_id)&&article.is_buy && !locals.can_read
+                        - var matches = article.html.match(/<p>.*?<\/p>/g);
+                        - var match_result = matches.splice(0,4);
+                        | !{match_result.join("").replace(/<code>/g,"<code class='language-javascript'>")}
+                        a.btn(href="/article/#{article.id}/pay") 本文长度：#{article.md.length} 字，点击付费1元
+                        br
+                        .more-but-pay 您好，这是一篇付费文章，您需要支付 1元 才能查看原文，所有费用都会支付给作者，谢谢您对社区作者的小小支持
+                        .module
+                          .hd 已付费用户
+                          .bd
+                            if locals.payers && locals.payers.length
+                              span.zanlogs
+                                each zan in payers
+                                  a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
+                                    img(src='#{zan.user.head_pic}')
+                            else
+                              span 暂无付费用户
+                      else
+                        | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>")}
+                      | <script src="#{assets_head}/js/tuiku.js"></script>
+
+                    .ads
+                      .wrapper(style="width:700px;margin: 0 auto;")
+                        div(style="margin:30px 0 10px 0;")
+                          a(href="https://coding.net/u/zengsha/p/Onion-Monkey-Emoji/topic/4272?hmsr=%E4%B9%B1%E7%82%96%E7%BD%91&hmmd=%E6%96%87%E5%AD%97&hmpl=&hmkw=&hmci=",target="_blank",style="display:block;line-height:25px;") 【广告】Coding.net 让你体验云端开发的快感！创意表情火热征集中！
+                          //a(href=" http://www.jobdeer.com/?fr=htmljs",target="_blank",style="display:block;line-height:25px;") 【广告】优秀的人才不找工作，都在「 JobDeer.com 」拍卖自己！
+
+                          div(style="margin-top:20px;height:100px;")
                             a(href="https://worktile.com?hmsr=http%3A%2F%2Fwww.html-js.com%2F&hmmd=%E5%9B%BE%E7%89%87%E5%B9%BF%E5%91%8A&hmpl=&hmkw=&hmci=",target="_blank")
-                                img(style="border:1px solid #ddd;",src="http://htmljs.b0.upaiyun.com/uploads/1409633580559-%E5%89%8D%E6%AE%B5%E4%B9%B1%E7%82%96final.png")
+                              img(style="border:1px solid #ddd;",src="http://htmljs.b0.upaiyun.com/uploads/1409633580559-%E5%89%8D%E6%AE%B5%E4%B9%B1%E7%82%96final.png")
+                    .entry-meta
+                      p 本站专栏文章皆为原创，转载请注明出处（带有 前端乱炖 字样）和本文的显式链接(<a href="http://www.html-js.com/article/#{article.id}">http://www.html-js.com/article/#{article.id}</a>)，本站和作者保留随时要求删除文章的权利！
+
+                .comment.module#comment
+                  .hd 评论
+                  .bd
+                    .publish
+                      textarea.input-block-level#comment-text(placeholder="参与讨论。支持markdown语法")
+                      .btn.comment-submit#comment-submit 发表评论
+                    .comment-list
+                      if comments.length
+                        each comment in comments
+                          .comment-item.clearfix
+                            a.headpic
+                              img(src="#{comment.user_headpic}",width=70,height=70)
+                            .comment-right
+                              div.con
+                                span.author.vcard.item
+                                  a.value.url.fn(rel='author', href='/user/#{comment.user_id}') #{comment.user_nick}
+                                  .hd-time #{moment(comment.createdAt).fromNow()}
+                                .html !{comment.html}
+                              .time
+                                a.reply(data-nick="#{comment.user_nick}") 回复
+                      else
+                        div 暂无评论
+                    script#comment-tpl(type="text/template")
+                      .comment-item.clearfix
+                        a.headpic
+                          img(src="{{user_headpic}}",width=70,height=70)
+                        .comment-right
+                          div.con
+                            span.author.vcard.item
+                              a.value.url.fn(rel='author', href='/user/{{user_id}}') {{user_nick}}：
+                            .html {{{html}}}
+                          .time {{createdAt}}
+                            a.reply(data-nick="{{user_nick}}") 回复
+          .right
+
 
             .writer-and-column.clearfix
-              .wrapper
-                .writer.clearfix
+                .writer.module
                   .hd WRITTEN BY
-                  a.head-pic(href="/user/#{writer.id}")
-                    img(src='#{writer.head_pic}')
+                  //a.head-pic(href="/user/#{writer.id}")
+                  //  img(src='#{writer.head_pic}')
                   .info
                     a.nick(href="/user/#{writer.id}") #{writer.nick}
                     .desc #{writer.desc}
                     a.weibo(href="http://weibo.cn/#{writer.weibo_id}",target="_blank") TA的新浪微博
                 if locals.column
-                  .column.clearfix
+                  .column.module
                     .hd PUBLISHED IN
                     .info
                       a.name(href="/article/column/#{column.id}") #{column.name}
@@ -175,16 +146,48 @@ html
                         a.rssit.btn.small-btn(href="/article/column/1/rss")
                           i.rss.social
                           |  订阅
-            if column_articles && column_articles.length
+            if locals.column_articles && column_articles.length
               .other-articles.module
                 .hd 本专栏其他文章
                 .bd
                   each article,i in column_articles
-                    div
-                      a(href="/article/#{article.id}") · #{article.title} 
-                      span.time 时间:#{moment(article.createdAt).format("YYYY-MM-DD")}
-                      span.visit_count 浏览:#{article.visit_count}
-                      span.zan_count 赞:#{article.zan_count}
+                    div.item
+                      a(href="/article/#{article.id}") #{article.title}
+                      .others
+                        span.time 时间:#{moment(article.createdAt).format("YYYY-MM-DD")}
+                        span.visit_count 浏览:#{article.visit_count}
+                        span.zan_count 赞:#{article.zan_count}
+            #fixed-modules
+              .bottom-action.module
+                .wrapper
+                  .actions
+                    a.zan.action(href="javascript:void(0);")
+                      i.icon-thumbs-up
+                      if locals.has_zan
+                        |<em>已赞</em> <span>#{article.zan_count}</span>
+                      else
+                        |<em>赞</em> <span>#{article.zan_count}</span>
+                    if locals.zan_logs
+                      span.zanlogs
+                        each zan in zan_logs
+                          a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
+                            img(src='#{zan.user.head_pic}')
+                  .actions
+                    a.action(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/article/"+article.id)}&title=分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} 。前端乱炖是一个专业的前端知识原创内容社区&pic=http://www.html-js.com/uploads/article_thumb/#{article.id}.png&appkey=659341943")
+                      i.icon-new-window
+                      em.bds_more(style="background:none !important;float:none;display:inline;padding:0;") 分享到微博
+
+
+                    if locals.user && (user.is_admin||user.id==article.user_id)
+                      a.action(href="/article/#{article.id}/edit") 编辑
+                    a.add_fav.action(href="javascript:void(0);")
+                      //- i.icon-heart
+                      if locals.has_fav
+                        |<em>已收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
+                      else
+                        |<em>收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
+
+
             //- p.
             //-   <!-- UJian Button BEGIN -->
             //-   <div class="ujian-hook" style="width:700px;margin:0 auto;"></div>
@@ -193,39 +196,7 @@ html
             //-   <a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
             //-   <!-- UJian Button END -->
 
-            .comment.module#comment
-              .hd 评论
-              .bd
-                .publish 
-                  textarea.input-block-level#comment-text(placeholder="参与讨论。支持markdown语法")
-                  .btn.comment-submit#comment-submit 发表评论
-                .comment-list
-                  if comments.length
-                    each comment in comments
-                      .comment-item.clearfix
-                        a.headpic
-                          img(src="#{comment.user_headpic}",width=70,height=70)
-                        .comment-right
-                          div.con 
-                            span.author.vcard.item
-                              a.value.url.fn(rel='author', href='/user/#{comment.user_id}') #{comment.user_nick}
-                              .hd-time #{moment(comment.createdAt).fromNow()}
-                            .html !{comment.html}
-                          .time 
-                            a.reply(data-nick="#{comment.user_nick}") 回复
-                  else
-                    div 暂无评论
-                script#comment-tpl(type="text/template")
-                  .comment-item.clearfix
-                    a.headpic
-                      img(src="{{user_headpic}}",width=70,height=70)
-                    .comment-right
-                      div.con 
-                        span.author.vcard.item
-                          a.value.url.fn(rel='author', href='/user/{{user_id}}') {{user_nick}}：
-                        .html {{{html}}}
-                      .time {{createdAt}} 
-                        a.reply(data-nick="{{user_nick}}") 回复
+
       - locals.shareImgs = article.html.match(/img\s*?src=["|'](.*?)["|']/);
       
       p.
@@ -391,18 +362,7 @@ html
                 })
             })
             });
-          if($(".entry-content").height()>700){
-            $(".entry-content").css({
-                height:700
-            })
-            $(".entry-more").removeClass("hidden")
-          }
-          $(".entry-more").on("click",function(){
-            $(".entry-content").css({
-                height:"auto"
-            })
-            $(".entry-more").addClass("hidden")
-          })
+//
           //- $(window).scroll(function(){
           //-   var scrollTop = $(window).scrollTop();
           //-   if (offset.top < scrollTop+40) 

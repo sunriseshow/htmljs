@@ -149,6 +149,9 @@ html(xmlns:wb='http://open.weibo.com/wb')
                         if locals.user && (user.is_admin||user.id==article.user_id)
                           span.views.item
                             a.value(href="/article/#{article.id}/edit") 编辑
+                        if locals.user && (user.is_admin||user.id==article.user_id)
+                          span.views.item
+                            a.value(href="/article/#{article.id}/delete") 删除
                         if locals.user && user.is_admin
                           span.views.item
                             if article.sort == 100000

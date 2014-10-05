@@ -23,8 +23,8 @@ html
               //-   a(href="http://www.html-js.com/topic/827",target="_blank")
               //-     img(src="http://htmljs.b0.upaiyun.com/uploads/1407342491684-banner1.png",width="750")
               //- else
-              a(href="http://www.jikexueyuan.com/?hmsr=html-js.com_banner_index")
-                img(src="http://htmljs.b0.upaiyun.com/uploads/1409906348625-%E5%89%8D%E7%AB%AF%E4%B9%B1%E7%82%96760x230.jpg",width="750")
+              a(href="http://www.imooc.com/view/173?from=luandun")
+                img(src="http://htmljs.b0.upaiyun.com/uploads/1412509063393-759.jpg",width="750")
               img.wxqcode(style="width:200px;float:right;",src="http://htmljs.b0.upaiyun.com/uploads/1393256038450-fff.png")
             //- div http://htmljs.b0.upaiyun.com/uploads/1406609053094-banner.png
             //-   a(href="https://www.upyun.com/op/dev/?md=html-js_dev",target="_blank")
@@ -74,24 +74,24 @@ html
                         else
                           a.rss.tooltip-trigger(href="/article/column/#{column.id}/rss",data-original-title="订阅此专栏")
                             i.rss.social
-          if locals.tuan_columns
-            .module.tuanColumn
-              .hd 团队专栏
-              .bd
-                .column-list
-                  each column in tuan_columns
-                    .column
-                      a.title(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
-                      .desc !{column.desc_html?column.desc_html.replace(/<[^>]*>/g,'').replace(/\s/g,'').substr(0,50)+"...":""}
-                      .user
-                        span 作者：
-                        a(href="/user/#{column.user.id}") #{column.user.nick}
-                      .actions
-                          a.rss-btn(href="/article/column/#{column.id}/rss")
-                            i.rss.social
-                            |  邮件订阅（#{column.rss_count}）
-                .actions
-                  a.btn(href="/article/column/add") 创建专栏 
+          //if locals.tuan_columns
+          //  .module.tuanColumn
+          //    .hd 团队专栏
+          //    .bd
+          //      .column-list
+          //        each column in tuan_columns
+          //          .column
+          //            a.title(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
+          //            .desc !{column.desc_html?column.desc_html.replace(/<[^>]*>/g,'').replace(/\s/g,'').substr(0,50)+"...":""}
+          //            .user
+          //              span 作者：
+          //              a(href="/user/#{column.user.id}") #{column.user.nick}
+          //            .actions
+          //                a.rss-btn(href="/article/column/#{column.id}/rss")
+          //                  i.rss.social
+          //                  |  邮件订阅（#{column.rss_count}）
+          //      .actions
+          //        a.btn(href="/article/column/add") 创建专栏
           if locals.questions
             .module.mod
               .hd
@@ -360,10 +360,12 @@ html
         if locals.top_users
           #fixed-modules
             
-            
-    script(src='#{assets_head}/js/ad.js')
-    script.
-      window.onload=function(){var b='<div style="font-size:14px;font-weight:bold;margin-bottom:5px;"><a href="http://www.jikexueyuan.com/path/html5/?hmsr=htmljs_tc_html5" rel="nofollow" target="_blank">独家分享，HTML5开发学习路径图</a></div><div style="line-height:20px;font-size:12px;"><a href="http://www.jikexueyuan.com/path/html5/?hmsr=htmljs_tc_html5" rel="nofollow" target="_blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1408843588272-ad.png" height="100" width="100" style="float:left">新WEB / HTML5的时代马上就要到来, 还不把握先机？从入门到完整项目开发啥都有。 </a></div>';html580ads.init("极客学院精品课程",b,250,130)};
+    .ad320(style="position:fixed;right:0;bottom:0")
+      a(href="http://www.imooc.com/wenda/detail/39403?from=luandun",target="_blank")
+        img(src="http://htmljs.b0.upaiyun.com/uploads/1412509087392-250x250.jpg",style="width:200px;")
+    //script(src='#{assets_head}/js/ad.js')
+    //script.
+    //  window.onload=function(){var b='<div style="font-size:14px;font-weight:bold;margin-bottom:5px;"><a href="http://www.jikexueyuan.com/path/html5/?hmsr=htmljs_tc_html5" rel="nofollow" target="_blank">独家分享，HTML5开发学习路径图</a></div><div style="line-height:20px;font-size:12px;"><a href="http://www.jikexueyuan.com/path/html5/?hmsr=htmljs_tc_html5" rel="nofollow" target="_blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1408843588272-ad.png" height="100" width="100" style="float:left">新WEB / HTML5的时代马上就要到来, 还不把握先机？从入门到完整项目开发啥都有。 </a></div>';html580ads.init("极客学院精品课程",b,250,130)};
     style.
 
       #miaov_float_layer h2{

@@ -5,6 +5,8 @@ module.exports =
     primaryKey: true
   uuid:"varchar(40)"
   user_id:"int"
+  user_nick:"varchar(100)"
+  user_headpic:"varchar(255)"
   answer_count:  #回答过多少个问题
     type:"int"
     defaultValue:0

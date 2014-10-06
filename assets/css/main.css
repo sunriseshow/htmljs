@@ -218,11 +218,12 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #index .mod .item .desc .desc-item .value{color:#999;}
 #index .mod .item.yooo{background:#F7F7F7;}
 #index .mod .item.new .title{color:#5bb793;font-weight:bold;}
-#index .recent_articles .columns{width:100%;margin-top:20px;}#index .recent_articles .columns .column{display:inline-block;vertical-align:top;margin-right:10px;margin-top:10px;border-bottom:1px solid #eee;background:#efefef;width:152px;height:30px;overflow:hidden;padding:0 10px;position:relative;}#index .recent_articles .columns .column img{width:17px;}
-#index .recent_articles .columns .column .name{line-height:30px;font-size:12px;padding-left:10px;color:#444;}
-#index .recent_articles .columns .column .desc{color:#999;}#index .recent_articles .columns .column .desc *{margin:0;font-size:12px;}
-#index .recent_articles .columns .column .rss{position:absolute;right:2px;top:2px;z-index:1000;padding:4px;display:block;background:#efefef;width:16px;height:16px;}#index .recent_articles .columns .column .rss i:before,#index .recent_articles .columns .column .rss i{color:#5bb793;font-size:16px;}
-#index .recent_articles .columns .column .rssed{position:absolute;right:2px;width:16px;height:16px;top:2px;z-index:1000;display:block;padding:4px;background:#efefef;}#index .recent_articles .columns .column .rssed i:before,#index .recent_articles .columns .column .rssed i{color:#ccc;font-size:16px;}
+#index .article-mod .lft{width:600px;float:left;}
+#index .article-mod .rht{width:300px;float:left;}
+#index .article-mod .hd a{color:#444;}
+#index .recent_articles .item{float:none;display:block;width:580px;}#index .recent_articles .item .title{font-size:12px;height:25px;line-height:25px;display:inline;}
+#index .recent_articles .item .infos{float:right;color:#999;padding-right:10px;}
+#index .recent_articles .item .u{display:inline;margin-left:10px;color:#999;}
 #index .visitors{margin-top:20px;}#index .visitors .visitor{display:inline-block;margin-right:5px;}#index .visitors .visitor img{width:25px;}
 #index .tags{width:1000px;margin-top:20px;}#index .tags .tag{padding:0 12px;color:#666;background:#eee;border-radius:5px;line-height:25px;display:inline-block;margin-top:10px;margin-right:10px;text-decoration:none;}
 #index .tags .tag:hover{background:#5bb793;color:#fff;}

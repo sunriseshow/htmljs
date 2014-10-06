@@ -33,7 +33,16 @@ func_counts =
           callback&&callback error
     .error (e)->
       callback&&callback e
-
+  getTopUser:(field,count,callback)->
+    Counts.findAll
+      offset: 0
+      limit: count
+      order: field+" desc"
+      raw:true
+    .success (users)->
+      callback null,users
+    .error (e)->
+      callback e
 __FC func_counts,Counts,['getAll','add','getByField']
 
 module.exports = func_counts

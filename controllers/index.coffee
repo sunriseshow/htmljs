@@ -405,10 +405,9 @@ module.exports.filters =
     'index/recent_columns',
     'index/all_tags',
     'index/all_topic_tags',
-    'article/checkRss',
     'index/recent_users',
     'all_count',
-    'article/get-tuan-columns']
+    'index/article_top_users']
   "/card/:id/zan":
     post:['checkLoginJson']
   "/card/:id/kai":

@@ -223,12 +223,12 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #index .article-mod .hd a{color:#444;}
 #index .article-mod .top-user{margin-bottom:20px;}#index .article-mod .top-user .bd{padding-top:10px;}
 #index .article-mod .top-user .user{width:50%;display:inline;float:left;height:30px;line-height:30px;margin-bottom:10px;}#index .article-mod .top-user .user img{width:25px;height:25px;border-radius:25px;margin-right:5px;}
-#index .article-mod .top-user .user .t{margin-right:10px;max-width:80px;display:inline-block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:30px;vertical-align:middle;line-height:30px;}
-#index .article-mod .top-user .user span{color:#999;}
+#index .article-mod .top-user .user .t{margin-right:10px;max-width:75px;display:inline-block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:30px;vertical-align:middle;line-height:30px;}
+#index .article-mod .top-user .user span{color:#999;float:right;margin-right:10px;}
 #index .article-mod .columns .bd{padding-top:10px;}
 #index .article-mod .column{width:50%;display:inline;float:left;height:30px;line-height:30px;margin-bottom:10px;}#index .article-mod .column img{width:25px;height:25px;border-radius:25px;margin-right:5px;}
-#index .article-mod .column .t{margin-right:10px;max-width:90px;display:inline-block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:30px;vertical-align:middle;line-height:30px;}
-#index .article-mod .column span{color:#999;padding-left:10px;}
+#index .article-mod .column .t{margin-right:10px;max-width:80px;display:inline-block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:30px;vertical-align:middle;line-height:30px;}
+#index .article-mod .column span{color:#999;padding-left:10px;float:right;margin-right:10px;}
 #index .recent_articles .item{float:none;display:block;width:580px;}#index .recent_articles .item .title{font-size:12px;height:25px;line-height:25px;display:inline;}
 #index .recent_articles .item .infos{float:right;color:#999;padding-right:10px;}
 #index .recent_articles .item .u{display:inline;margin-left:10px;color:#999;}

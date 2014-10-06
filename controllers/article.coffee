@@ -228,7 +228,7 @@ module.exports.controllers =
                       emails.push rss.cards.email
                   func_email.sendArticleRss article,emails.join(";")
             func_count.addCount res.locals.user.id,"article_count",()->
-              
+
             func_search.add {type:"article","pid":article.uuid,"title":article.title,"html":article.html.replace(/<[^>]*>/g,""),"udid":article.uuid,"id": article.id},()->
             (__F 'create_thumbnail').create_article article.id,()->
               if req.body.to_weibo

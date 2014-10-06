@@ -72,7 +72,7 @@ html
                           a.tooltip-trigger(href="/user/#{column.user_id}",data-original-title="#{column.user.nick}")
                             img(src="#{column.user.head_pic}")
                           a.t.tooltip-trigger(href="/article/column/#{column.id}",data-original-title="#{column.name}  #{moment(column.last_article_time*1).fromNow()}") #{column.name.substr(0,16)}
-                          span #{moment(column.last_article_time*1).fromNow()}
+                          span #{moment(column.last_article_time*1).format("MM/DD")}
           //if locals.tuan_columns
           //  .module.tuanColumn
           //    .hd 团队专栏

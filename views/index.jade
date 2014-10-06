@@ -32,7 +32,7 @@ html
             //-     img(src="http://htmljs.b0.upaiyun.com/uploads/1397745433102-html-js.png",style="width:100%;")
 
           if locals.articles
-            .module.article-mod
+            .module.article-mod.mod
               .lft
                 .mod.recent_articles
                   .hd
@@ -53,7 +53,7 @@ html
                             span.index 赞
                             a.value #{article.zan_count}
               .rht
-                .top-user
+                .top-user.rht-mod
                   .hd 高产大大
                   .bd.clearfix
                     each u in article_top_users
@@ -93,43 +93,55 @@ html
           //        a.btn(href="/article/column/add") 创建专栏
           if locals.questions
             .module.mod
-              .hd
-                a(href="/qa") 最新的问题（#{locals.all_count?all_count.question:0}）
-              .bd
-                each question,i in questions
-                  .item(class="#{question.answer_count<1?'new':''}  #{Math.floor(i/2)%2==1?'yooo':''}")
-                    a.title(href="/qa/#{question.pinyin?question.pinyin:question.id}") #{question.title}
-                    .desc 
-                      a.user(href="/user/#{question.user_id}") #{question.user_nick}
-                      span.time #{moment(question.createdAt).fromNow()}
-                      span.desc-item
-                        span.index 浏览
-                        a.value #{question.visit_count}
-                      span.desc-item
-                        span.index 回答
-                        a.value #{question.answer_count}
+              .lft
+                .new-qa
+                  .hd
+                    a(href="/qa") 最新的问题（#{locals.all_count?all_count.question:0}）
+                  .bd
+                    each question,i in questions
+                      .item(class="#{question.answer_count<1?'new':''}  #{Math.floor(i%2)==1?'yooo':''}")
+                        a.title(href="/qa/#{question.pinyin?question.pinyin:question.id}") #{question.title.substr(0,40)}
+                        a.u(href="/user/#{question.user_id}") #{question.user_nick}
+                        span.infos #{question.visit_count}读/#{question.answer_count}回答
+              .rht
+                .top-user.rht-mod
+                  .hd 回答问题最多的大大
+                  .bd.clearfix
+                    each u in answer_top_users
+                      .user
+                        a.p(href="/user/#{u.user_id}",data-original-title="#{u.user_nick}")
+                          img(src="#{u.user_headpic}")
+                        a.t(href="/user/#{u.user_id}",data-original-title="#{u.user_nick}") #{u.user_nick}
+                        span #{u.answer_count}次回答
                 .tags
-                  a.hd(href="/tag") 问题标签
-                  each tag,i in tags
-                    a.tag(href="/tag/#{tag.id}") #{tag.name}
+                  a.hd(href="/tag") 问题分类
+                  .bd.clearfix
+                    each tag,i in tags
+                      a.tag(href="/tag/#{tag.id}") #{tag.name}
+                        span #{tag.qa_count}
           if locals.topics
             .module.mod
-              .hd
-                a(href="/topic") 最新的话题（#{locals.all_count?all_count.topic:0}）
-              .bd
-                each topic,i in topics
-                  .item(class="#{topic.visit_count<30?'new':''}  #{Math.floor(i/2)%2==1?'yooo':''}")
-                    a.title(href="/topic/#{topic.id}") #{topic.title}
-                    .desc 
-                      if topic.last_comment_user_id
-                        | <a class="user" href="/user/#{topic.last_comment_user_id}">#{topic.last_comment_user_nick}</a>
-                      span.time #{moment(topic.last_comment_time).fromNow()}
-                      span.desc-item
-                        span.index 浏览
-                        a.value #{topic.visit_count}
-                      span.desc-item
-                        span.index 跟帖
-                        a.value #{topic.comment_count}
+              .lft
+                .new-topics
+                  .hd
+                    a(href="/topic") 最新的话题（#{locals.all_count?all_count.topic:0}）
+                  .bd
+                    each topic,i in topics
+                      .item(class="#{topic.visit_count<30?'new':''}  #{Math.floor(i%2)==1?'yooo':''}")
+                        a.title(href="/topic/#{topic.id}") #{topic.title}
+                        if topic.last_comment_user_id
+                          | <a class="u" href="/user/#{topic.last_comment_user_id}">#{topic.last_comment_user_nick}</a>
+                        span.infos #{topic.visit_count}阅/#{topic.comment_count}回
+              .rht
+                .top-user.rht-mod
+                  .hd 积极参与讨论的大大
+                  .bd.clearfix
+                    each u in topic_top_users
+                      .user
+                        a.p(href="/user/#{u.user_id}",data-original-title="#{u.user_nick}")
+                          img(src="#{u.user_headpic}")
+                        a.t(href="/user/#{u.user_id}",data-original-title="#{u.user_nick}") #{u.user_nick}
+                        span #{u.topic_comment_count}次回复
                 .topic_tags
                   .hd 话题类型
                   each tag in topic_tags

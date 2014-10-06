@@ -407,7 +407,9 @@ module.exports.filters =
     'index/all_topic_tags',
     'index/recent_users',
     'all_count',
-    'index/article_top_users']
+    'index/article_top_users',
+    'index/answer_top_users',
+    'index/topic_top_users']
   "/card/:id/zan":
     post:['checkLoginJson']
   "/card/:id/kai":

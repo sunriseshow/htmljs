@@ -155,10 +155,6 @@
         color:#444;
        }
     }
-    .bd{
-      width:110%;
-
-    }
     .item{
       width:470px;
       display: inline-block;
@@ -229,7 +225,7 @@
       }
     }
   }
-  .article-mod{
+  .mod{
     .lft{
       width:600px;
       float: left;
@@ -243,7 +239,28 @@
         color:#444;
       }
     }
-    .top-user{
+    .item{
+      float:none;
+      display: block;
+      width:580px;
+      .title{
+        font-size: 12px;
+        height:25px;
+        line-height: 25px;
+        display: inline;
+      }
+      .infos{
+        float: right;
+        color:#999;
+        padding-right: 10px;
+      }
+      .u{
+        display: inline;
+        margin-left: 10px;
+        color:#999;
+      }
+    }
+    .rht-mod{
       margin-bottom: 20px;
       .bd{
         padding-top: 10px;
@@ -319,27 +336,7 @@
     }
   }
   .recent_articles{
-    .item{
-      float:none;
-      display: block;
-      width:580px;
-      .title{
-        font-size: 12px;
-        height:25px;
-        line-height: 25px;
-        display: inline;
-      }
-      .infos{
-        float: right;
-        color:#999;
-        padding-right: 10px;
-      }
-      .u{
-        display: inline;
-        margin-left: 10px;
-        color:#999;
-      }
-    }
+
 //    .columns{
 //      width:100%;
 //      margin-top:20px;
@@ -414,48 +411,34 @@
       }
     }
   }
-  .tags{
-    width:1000px;
-    margin-top:20px;
+  .tags,.topic_tags{
+    width:110%;
     .tag{
       padding:0 12px;
       color:#666;
+      width:150px;
       background:#eee;
-      border-radius:5px;
-      line-height:25px;
+      border-radius:3px;
+      line-height:29px;
       display:inline-block;
-      margin-top:10px;
+      margin-top:5px;
       margin-right:10px;
+      font-size: 12px;
       text-decoration:none;
+      height:29px;
+      overflow: hidden;
+      span{
+        float: right;
+        color: #aaa;
+        padding-right: 5px;
+      }
     }
     .tag:hover{
       background:@green;
       color:#fff;
     }
   }
-  .topic_tags{
-    width:990px;
-    margin-top:20px;
-    a{
-      padding:0 12px;
-      color:#666;
-      background:#eee;
-      border-radius:5px;
-      line-height:25px;
-      display:inline-block;
-      margin-top:10px;
-      margin-right:10px;
-      text-decoration:none;
-    }
-    a:hover{
-      background:@green;
-      color:#fff;
-    }
-    a.important{
-      color:@red;
-      font-weight:bold;
-    }
-  }
+
   .recent_cards{
     .card{
       display:inline-block;

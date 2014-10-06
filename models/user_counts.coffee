@@ -19,6 +19,9 @@ module.exports =
   article_count: #发表文章的次数
     type:"int"
     defaultValue:0
+  topic_comment_count:
+    type:"int"
+    defaultValue:0
   b_comment_count: #被评论的次数
     type:"int"
     defaultValue:0

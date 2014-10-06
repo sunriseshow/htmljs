@@ -80,7 +80,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
               .no 还没有专栏，先创建专栏再发表原创文章吧！
                 a(href="/article/column/add") 创建专栏
 
-          if locals.nopublish_articles
+          if locals.nopublish_articles&&locals.nopublish_articles.length
             .hd 我的草稿
             .bd.nopublish_articles 
               each article in locals.nopublish_articles

@@ -6,7 +6,8 @@ html
     |<meta name="description" content="前端乱炖，这里是最专业的前端知识平台，汇集国内大部分前端开发人员的前端花名册，最精彩的原创文章专栏，最专业的问答平台，最火热的话题频道，最丰富的线下线上活动。html,js,css,nodejs,前端开发,前端招聘,jquery,qianduan">
     style
       #bdshare a{}
-      
+      .textwidget div{float:left;line-height: 30px;font-size:14px;margin-right: 20px;}
+      .textwidget div em{font-style:normal;color:#999;font-weight: bold;}
     script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
     script(src='#{assets_head}/js/lazyload.js')
 
@@ -23,13 +24,13 @@ html
               //-   a(href="http://www.html-js.com/topic/827",target="_blank")
               //-     img(src="http://htmljs.b0.upaiyun.com/uploads/1407342491684-banner1.png",width="750")
               //- else
-              a(href="http://www.imooc.com/view/173?from=luandun")
-                img(src="http://htmljs.b0.upaiyun.com/uploads/1412509063393-759.jpg",width="750")
-              img.wxqcode(style="width:200px;float:right;",src="http://htmljs.b0.upaiyun.com/uploads/1393256038450-fff.png")
+              a(href="http://www.imooc.com/view/173?from=luandun",style="display:block;float:left;")
+                img(src="http://htmljs.b0.upaiyun.com/uploads/1412563721271-759-2.jpg",width="750",style="height:220px;")
+              img.wxqcode(style="width:180px;margin-top:0px;float:right;",src="http://htmljs.b0.upaiyun.com/uploads/1412563549964-1393256038450-fff.png")
             //- div http://htmljs.b0.upaiyun.com/uploads/1406609053094-banner.png
             //-   a(href="https://www.upyun.com/op/dev/?md=html-js_dev",target="_blank")
             //-     img(src="http://htmljs.b0.upaiyun.com/uploads/1397745433102-html-js.png",style="width:100%;")
-          
+
             .module.about
               a(href="http://www.html-js.com/topic/115") 关于乱炖
               span JS&Node.js乱炖：<em style=";">95323225</em>
@@ -37,8 +38,6 @@ html
               span 求职招聘群: <em style=";"> 12892863</em>
               a(href="http://www.html-js.com/talk") 在线聊天
               |<a href="http://weibo.com/1734409185" target="_blank" title="前端乱炖" class="weibo"><img src="http://htmljs.b0.upaiyun.com/uploads/1390798045853-20140127124729317_easyicon_net_32.png" width="25" style="vertical-align:-8px"/></a>
-              a(href="http://www.html-js.com/act/4") 
-                img(src="#{assets_head}/images/zanzhu.png",style="height:25px;vertical-align:-8px;")
               //- <div>自由职业者: <em style=";"> 275182059</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=5fdf12b1a777677e8b1f25e32cec5cee7cfd59417cce2bd7bc46a8cac95972ea">加入</a></div>
               //- <div>求职招聘群: <em style=";"> 12892863</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=e941d6613691a264555ae3fe62168d2d56928bc2a7a7d53d80536ff44fdb63d3">加入</a></div>
               //- <div>站长的QQ: <em style=";"> 676588498</em></div>
@@ -158,227 +157,48 @@ html
                           .sex.nv
                     .name
                       a(href="/card/#{card.id}")  #{card.nick}
-          include google970
-          .module.support 
-            .hd 赞助商
-            .bd 
-              ul.clearfix
-                li
-                  a(href="http://s.click.taobao.com/t?e=m%3D2%26s%3Daog6LWNOofkcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAtVWTZ7hrUeALZXTD7FAd8gUi1nXxNpcV7GVtqq2b5mrbvZHh0K3svQzWimYLr3rp%2Bdn1BbglxZYxUhy8exlzcq9AmARIwX9K2Zg%2BdzdQFOwfMRvoxSVDSdLyrb2g0H2G5JcxXijM%2BwneEHpPTskRHlFYAAV9gnNuPTL%2BS6jTvPzN7YQp05KcLcunFBf1wJnpg%3D%3D",target="_blank",title="便宜稳定的云主机提供商") 
-                    img(src="#{assets_head}/images/logo-aliyun.png")
-                    .desc 便宜稳定的云主机提供商
-                
-                li
-                  a(href="https://www.upyun.com",target="_blank")
-                    img(src="http://htmljs.b0.upaiyun.com/uploads/1385469219452-Snip20131126_10.png")
-                    .desc 高速稳定的存储服务
-                li
-                  a(href="http://oneapm.com/",target="_blank",title="优秀的性能分析工具") 
-                    img(src="#{assets_head}/images/logo-apm.png")
-                    .desc 优秀的性能分析工具
-              .add
-                a(href="http://www.html-js.com/topic/827") 我也要赞助
+
           
-          //- .module.timelines
-          //-   each timeline in timelines
-          //-     if timeline.card_id
-          //-       .card-item.timeline-item.clearfix
-          //-         a.t-user(href="/user/#{timeline.card_user_id}",data-original-title="#{timeline.card_nick}")
-          //-           img(data-original="#{timeline.card_head_pic}",width="20")
-          //-         span.value  #{moment(timeline.createdAt).fromNow()} 
-          //-         a(href="/card/#{timeline.card_id}") #{timeline.card_nick} 
-          //-         span 添加了自己的名片：
-          //-         a(href="/card/#{timeline.card_id}") 查看名片 
-          //-         .entry-name <i class="icon-nameplate" title="名片"></i>
-          //-     else if timeline.article_id
-          //-       .article-item.timeline-item.clearfix
-          //-         .entry-title
-          //-           h2.title
-          //-             a.t-user(href="/user/#{timeline.article_user_id}",data-original-title="#{timeline.article_user_nick}")
-          //-               img(data-original="#{timeline.article_user_headpic}",width="20")
-          //-             span.suo 「专栏」
-          //-             a.real-title(href='/article/#{timeline.article_id}', title='#{timeline.article_title}', rel='bookmark') #{timeline.article_title}
-          //-         .entry-foot
-          //-           div.others
-          //-             span.time.item
-          //-               span.value #{moment(timeline.createdAt).fromNow()} 由
-          //-               a.value.url.fn(rel='author', href='/user/#{timeline.article_user_id}')  #{timeline.article_user_nick} 
-          //-               span.value 
-          //-                 | 发布在 
-          //-                 if timeline.article_column_id && locals.columns
-          //-                   each column in columns
-          //-                     if column.id == timeline.article_column_id
-          //-                       a(href="/article/column/#{column.id}") #{column.name}
-          //-                 |  专栏
-          //-             span.item
-          //-               span.index 浏览 
-          //-               span.value #{timeline.article_visit_count}
-          //-             span.item
-          //-               span.index 评论 
-          //-               span.value  #{timeline.article_comment_count}
-          //-             span.item
-          //-               span.index 评分
-          //-               a.value(href="/article/#{timeline.article_id}#score")  #{timeline.article_score}
-          //-             if locals.user&&locals.user.is_admin
-          //-               span.actions.item
-          //-                 span.index 操作：
-          //-                 if timeline.sort ==10000
-          //-                   a(href="/index/#{timeline.id}/update?sort=0") 取消置顶
-          //-                 else
-          //-                   a(href="/index/#{timeline.id}/update?sort=10000") 置顶
-          //-         .entry-name <i class="icon-book-open" title="专栏原创文章"></i>
-                      
-          //-     else if timeline.question_id
-          //-       .question-item.timeline-item.clearfix
-          //-         .entry-title
-          //-           h2.title
-          //-             a.t-user(href="/user/#{timeline.question_user_id}",data-original-title="#{timeline.question_user_nick}")
-          //-               img(data-original="#{timeline.question_user_headpic}",width="20")
-          //-             span.suo 「问题」
-          //-             a.real-title(href='/qa/#{timeline.question_id}', title='#{timeline.question_title}', rel='bookmark') #{timeline.question_title}
-          //-         .entry-foot
-          //-           div.others
-          //-             span.time.item
-          //-               span.value #{moment(timeline.createdAt).fromNow()} 由
-          //-               a.value.url.fn(rel='author', href='/user/#{timeline.question_user_id}')  #{timeline.question_user_nick} 
-          //-               span.value 发布在 问答区
-          //-             span.item
-          //-               span.index 浏览 
-          //-               span.value #{timeline.question_visit_count}
-          //-             span.item
-          //-               span.index 回答 
-          //-               span.value #{timeline.question_answer_count}
-          //-             if locals.user&&locals.user.is_admin
-          //-               span.actions.item
-          //-                 span.index 操作：
-          //-                 if timeline.sort ==10000
-          //-                   a(href="/index/#{timeline.id}/update?sort=0") 取消置顶
-          //-                 else
-          //-                   a(href="/index/#{timeline.id}/update?sort=10000") 置顶
-          //-         .entry-name <i class="icon-lightbulb"  title="问答"></i>
-          //-     else if timeline.topic_id
-          //-       .topic-item.timeline-item.clearfix
-          //-         .entry-title
-          //-           h2.title
-          //-             a.t-user(href="/user/#{timeline.topic_user_id}",data-original-title="#{timeline.topic_user_nick}")
-          //-               img(data-original="#{timeline.topic_user_headpic}",width="20")
-          //-             span.suo 「话题」
-          //-             a.real-title(href='/topic/#{timeline.topic_id}', title='#{timeline.topic_title}', rel='bookmark') #{timeline.topic_title}
-          //-         .entry-foot
-          //-           div.others
-          //-             span.time.item
-          //-               span.value #{moment(timeline.createdAt).fromNow()} 由
-          //-               a.value.url.fn(rel='author', href='/user/#{timeline.topic_user_id}')  #{timeline.topic_user_nick} 
-          //-               span.value 发布在 话题区
-          //-             span.item
-          //-               span.index 浏览 
-          //-               span.value #{timeline.topic_visit_count}
-          //-             span.item
-          //-               span.index 跟帖
-          //-               span.value  #{timeline.topic_comment_count}
-          //-             if locals.user&&locals.user.is_admin
-          //-               span.actions.item
-          //-                 span.index 操作：
-          //-                 if timeline.sort ==10000
-          //-                   a(href="/index/#{timeline.id}/update?sort=0") 取消置顶
-          //-                 else
-          //-                   a(href="/index/#{timeline.id}/update?sort=10000") 置顶
-          //-         .entry-name <i class="icon-conversation" title="话题"></i>
-          //-     else if timeline.act_id
-          //-       .topic-item.timeline-item.clearfix
-          //-         .entry-title
-          //-           h2.title
-          //-             a.real-title(href='/act/#{timeline.act_id}', title='#{timeline.act_title}', rel='bookmark') 【活动】#{timeline.act_title}
-          //-         .entry-foot
-          //-           div.others
-          //-             span.time.item
-          //-               span.value #{moment(timeline.createdAt).fromNow()} 
-          //-               span.value 发布在 活动区
-          //-             span.item
-          //-               span.index 浏览 
-          //-               span.value #{timeline.act_visit_count}
-          //-             span.item
-          //-               span.index 跟帖
-          //-               span.value  #{timeline.act_comment_count}
-          //-             if locals.user&&locals.user.is_admin
-          //-               span.actions.item
-          //-                 span.index 操作：
-          //-                 if timeline.sort ==10000
-          //-                   a(href="/index/#{timeline.id}/update?sort=0") 取消置顶
-          //-                 else
-          //-                   a(href="/index/#{timeline.id}/update?sort=10000") 置顶
-          //-         .entry-name <i class="icon-sampler" title="活动"></i>
-              //- .timeline-item.clearfix
-              //-   .user
-              //-     .headpic(href="/user/#{timeline.who_id}") 
-              //-       img(src="#{timeline.who_headpic}")
-              //-   .infos
-              //-     .action 
-              //-       a.nick(href="/user/#{timeline.who_id}") #{timeline.who_nick}
-              //-       |#{timeline.action}
-              //-       a.title(href="#{timeline.target_url}") #{timeline.target_name}
-              //-       span.time #{moment(timeline.createdAt).fromNow()}
-              //-     if timeline.desc
-              //-       .desc.clearfix !{timeline.desc}
-            //- include page
-      //- .right
-        //- .module
-        //-   .hd 公告
-        //-   .bd
-        
-        .module
-          .hd 乱炖是什么？
-          .bd
-            .desc 乱炖是做一个前端知识平台。它可以支撑我们的线下活动（活动频道），可以提供一个展示自己的平台（专栏频道），可以解答疑惑（问答频道），也可以讨论感兴趣的话题（话题频道）。<br/>我们将其的定位是知识社区，以内容为主，内容来自于目标用户，然后也使目标用户受益。
-            a(href="http://www.html-js.com/topic/115") 更多信息
-        
-        .module.text
-            .hd 赞助本站（支付宝扫描）
-            .bd
-              img(src="http://htmljs.b0.upaiyun.com/uploads/1387784312296-%E5%89%8D%E7%AB%AF%E4%B9%B1%E7%82%96.png")
-        .module
-          .hd QQ群组
-          .bd.
+
+        .module.
             <div class="textwidget">
-              <div>乱炖情感群:<em style=";">46532005</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=785525cf168fab8c11415bd56f5602c3735497d10a66635115b300baf8769e65">加入</a></div>
-              <div>乱炖技术群：<em style=";">227896607</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=9b89fe56ea2eb39e08003541dab7282679ba2f0c1fbec2abf1d00d1b7607b280">加入</a></div>
-              <div>NodeJS乱炖: <em style=";">95323225</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=bcf7977843816c9dde25f8b8caae2d81675f2224a50545ea313e4e98e33c06dc">加入</a></div>
-              <div>自由职业者: <em style=";"> 275182059</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=5fdf12b1a777677e8b1f25e32cec5cee7cfd59417cce2bd7bc46a8cac95972ea">加入</a></div>
-              <div>IOS 乱炖: <em style=";"> 292062123</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=3f6b8c853435e0a68b1b86f036eb823a97488cd68c728c7dfe3569a3a9902f7e">加入</a></div>
-              <div>求职招聘群: <em style=";"> 12892863</em><a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=e941d6613691a264555ae3fe62168d2d56928bc2a7a7d53d80536ff44fdb63d3">加入</a></div>
+              <div>乱炖情感群:<em style=";"> 46532005</em></div>
+              <div>乱炖技术群：<em style=";"> 227896607</em></div>
+              <div>NodeJS乱炖: <em style=";"> 95323225</em></div>
+              <div>自由职业者: <em style=";"> 275182059</em></div>
+              <div>IOS 乱炖: <em style=";"> 292062123</em></div>
+              <div>求职招聘群: <em style=";"> 12892863</em></div>
               <div>站长的QQ: <em style=";"> 676588498</em></div>
             </div>
+        include google970
 
-        //- .module.top-users
-        //-   .hd 最新动态
-        //-   .bd
-        //-     each active in locals.actives
-        //-       .item 
-        //-         a(href="/user/#{active.source_user_id}") #{active.source_user_nick} 
-        //-         span #{active.action_name.replace("您的","").replace("您","")}
-        //-         a(href="#{active.target_path}") #{active.target_path_name.substr(0,20)}
-        if locals.top_users
-          #fixed-modules
-            
-    .ad320-index(style="position:fixed;right:0;bottom:0")
+      .module.support
+        .hd 赞助商
+        .bd
+          ul.clearfix
+            li
+              a(href="http://s.click.taobao.com/t?e=m%3D2%26s%3Daog6LWNOofkcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAtVWTZ7hrUeALZXTD7FAd8gUi1nXxNpcV7GVtqq2b5mrbvZHh0K3svQzWimYLr3rp%2Bdn1BbglxZYxUhy8exlzcq9AmARIwX9K2Zg%2BdzdQFOwfMRvoxSVDSdLyrb2g0H2G5JcxXijM%2BwneEHpPTskRHlFYAAV9gnNuPTL%2BS6jTvPzN7YQp05KcLcunFBf1wJnpg%3D%3D",target="_blank",title="便宜稳定的云主机提供商")
+                img(src="#{assets_head}/images/logo-aliyun.png")
+                .desc 便宜稳定的云主机提供商
+
+            li
+              a(href="https://www.upyun.com",target="_blank")
+                img(src="http://htmljs.b0.upaiyun.com/uploads/1385469219452-Snip20131126_10.png")
+                .desc 高速稳定的存储服务
+            li
+              a(href="http://oneapm.com/",target="_blank",title="优秀的性能分析工具")
+                img(src="#{assets_head}/images/logo-apm.png")
+                .desc 优秀的性能分析工具
+          .add
+            a(href="http://www.html-js.com/topic/827") 我也要赞助
+
+    .ad320-index(style="z-index:100;position:fixed;right:0;bottom:0")
       a(href="http://www.imooc.com/wenda/detail/39403?from=luandun",target="_blank")
         img(src="http://htmljs.b0.upaiyun.com/uploads/1412509087392-250x250.jpg",style="width:200px;")
     //script(src='#{assets_head}/js/ad.js')
     //script.
     //  window.onload=function(){var b='<div style="font-size:14px;font-weight:bold;margin-bottom:5px;"><a href="http://www.jikexueyuan.com/path/html5/?hmsr=htmljs_tc_html5" rel="nofollow" target="_blank">独家分享，HTML5开发学习路径图</a></div><div style="line-height:20px;font-size:12px;"><a href="http://www.jikexueyuan.com/path/html5/?hmsr=htmljs_tc_html5" rel="nofollow" target="_blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1408843588272-ad.png" height="100" width="100" style="float:left">新WEB / HTML5的时代马上就要到来, 还不把握先机？从入门到完整项目开发啥都有。 </a></div>';html580ads.init("极客学院精品课程",b,250,130)};
-    style.
 
-      #miaov_float_layer h2{
-      margin:0;
-      }
-      #miaov_float_layer a{color:#369;}
-      #miaov_float_layer img{
-      width:90px !important;
-      height:90px !important;
-      margin-right:10px;
-      margin-bottom:20px;
-
-      }
     
 
     //- .ad320(style="padding:0px;background:#fff;position:fixed;right:0;bottom:0;")

@@ -14,7 +14,7 @@
                 a(href="/article") <i class="icon-book-open"></i>专栏
               li(class="#{locals.pageId==7?'active':''}",pageId="7")
                 a(href="/qa") <i class="icon-lightbulb"></i>问答
-              li.hidden(class="#{locals.pageId==10?'active':''}",pageId="10")
+              li(class="#{locals.pageId==10?'active':''}",pageId="10")
                 a(href="/topic") <i class="icon-group"></i>讨论区
               li.hidden(class="#{locals.pageId==20?'active':''}",pageId="20")
                 a(href="/talk") <i class="icon-conversation"></i>实时讨论
@@ -55,14 +55,11 @@
               else
                 li
                   a(href="/user/login?redirect=#{encodeURIComponent(locals.url)}") 登录
-              li.sub-trigger()
-                a 快捷入口
-                ul.sub-menu.hidden
-                  li
-                    a(href="/qa/add") 提问
-                  li
-                    a(href="/article/column/add") 创建专栏
-              li.sub-trigger()
+              li
+                a(href="/talk")
+                  i.icon-conversation
+                  |在线聊天
+              li.hidden.sub-trigger()
                 a 其他功能
                 ul.sub-menu.hidden
                   
@@ -73,7 +70,7 @@
                     span.my-favs
                   li()
                     a(href="/talk")  
-                      i.icon-conversation
+
                       |实时讨论
               if locals.user
                 li 

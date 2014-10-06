@@ -8,6 +8,7 @@ func_email = __F 'email'
 func_search = __F 'search'
 func_comment = __F 'comment'
 func_payment = __F 'payment'
+func_count = __F 'user/count'
 config = require './../config.coffee'
 authorize=require("./../lib/sdk/authorize.js");
 md5 = require 'MD5'
@@ -203,6 +204,7 @@ module.exports.controllers =
         else
           result.success = 1
           result.article = article
+
           if req.body.fufei
             func_info.add 
               target_user_id:1
@@ -225,6 +227,8 @@ module.exports.controllers =
                     if rss.cards&&rss.cards.email
                       emails.push rss.cards.email
                   func_email.sendArticleRss article,emails.join(";")
+            func_count.addCount res.locals.user.id,"article_count",()->
+              
             func_search.add {type:"article","pid":article.uuid,"title":article.title,"html":article.html.replace(/<[^>]*>/g,""),"udid":article.uuid,"id": article.id},()->
             (__F 'create_thumbnail').create_article article.id,()->
               if req.body.to_weibo

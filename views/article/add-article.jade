@@ -62,9 +62,9 @@ html
                           span.label(data-id="#{column.id}",class="label-success",data-original-title="#{column.desc_md&&column.desc_md.substr(0,100)}",title="#{column.desc_md&&column.desc_md.substr(0,100)}") #{column.name}
                 .control-group
                   label.checkbox
-                    input(type="checkbox",name="to_weibo")
+                    input(type="checkbox",name="to_weibo",checked="true")
                     |分享到微博
-                .control-group
+                .control-group.hidden
                   label.checkbox
                     input(type="checkbox",name="fufei")
                     |申请付费阅读

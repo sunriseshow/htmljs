@@ -5,11 +5,16 @@ Notify.prototype.isSupport = function(){
 }
 //需要向用户申请权限来确定是否支持webkitNotifications，如果得到权限，就会执行callback，参数为true.
 Notify.prototype.getPermission = function(callback){
-    window.webkitNotifications.requestPermission(function(){
-        if (callback) {
-            callback(this.checkPermission());
-        }
-    });
+    try {
+        window.webkitNotifications.requestPermission(function () {
+            if (callback) {
+                callback(this.checkPermission());
+            }
+        });
+        Notification.requestPermission();
+    }catch(e){
+
+    }
 }
 //查看是否得到权限
 Notify.prototype.checkPermission = function(){
@@ -21,6 +26,10 @@ Notify.prototype.show = function(icon, title, body){
     try{
         var _notify = window.webkitNotifications.createNotification(icon, title, body);
         _notify.show();
+        new Notification("前端乱炖通知", {
+            title: title,
+            body: body
+        });
     }catch(e){
 
     }

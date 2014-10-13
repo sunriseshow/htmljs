@@ -22,7 +22,7 @@ Notify.prototype.show = function(icon, title, body){
         var _notify = window.webkitNotifications.createNotification(icon, title, body);
         _notify.show();
     }catch(e){
-        
+
     }
 
 }
@@ -42,7 +42,7 @@ $("#status").html("正在连接聊天服务器中。。。")
       socket.emit('get-uuid',{id:"dd"});
     });
     socket.on("new-message",function(data){
-      notify.show("", "前端乱炖新消息", data.user_nick+"："+data.html.replace(/<[^>]*?>/g,""))
+      notify.show("", "前端乱炖新消息", data.talk.user_nick+"："+data.talk.html.replace(/<[^>]*?>/g,""))
       var m = $(Mustache.render(talk_tpl,data.talk));
       $("#message-list").prepend(m)
       $(".message").removeClass("shan")

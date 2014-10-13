@@ -1,4 +1,36 @@
-    $("#status").html("正在连接聊天服务器中。。。")
+var Notify = function(){}
+//判断是否支持webkitNotifications
+Notify.prototype.isSupport = function(){
+    return !!window.webkitNotifications;
+}
+//需要向用户申请权限来确定是否支持webkitNotifications，如果得到权限，就会执行callback，参数为true.
+Notify.prototype.getPermission = function(callback){
+    window.webkitNotifications.requestPermission(function(){
+        if (callback) {
+            callback(this.checkPermission());
+        }
+    });
+}
+//查看是否得到权限
+Notify.prototype.checkPermission = function(){
+    return !!(window.webkitNotifications.checkPermission() == 0);
+}
+//声明一个webkitNotifications实例，并且使用show方法触发桌面提示框
+Notify.prototype.show = function(icon, title, body){
+    //声明webkitNotifications实例
+    var _notify = window.webkitNotifications.createNotification(icon, title, body);
+    _notify.show();
+}
+window.onload = function(){
+    var notify = new Notify();
+    if (!notify.isSupport()) {
+//        alert("Your browser don't support webkitNotifications!!");
+        return;
+    }
+    notify.getPermission();
+
+}
+$("#status").html("正在连接聊天服务器中。。。")
     var uuid = null;
     var talk_tpl = $("#talk-tpl").html()
     var user_tpl = $("#user-tpl").html()
@@ -8,6 +40,7 @@
       socket.emit('get-uuid',{id:"dd"});
     });
     socket.on("new-message",function(data){
+        notify.show("", "前端乱炖新消息", data.user_nick+"："+data.html.replace(/<[^>]*?>/g,""))
       var m = $(Mustache.render(talk_tpl,data.talk));
       $("#message-list").prepend(m)
       $(".message").removeClass("shan")
@@ -15,7 +48,7 @@
       renderUser(data.onlines)
     })
     socket.on("alert",function(data){
-      alert(data.sender+" 刚刚at了你")
+      notify.show("", "前端乱炖实时讨论", data.sender+" 刚刚at了你")
     })
     socket.socket.on("error",function(data){
       console.log("error:"+data)

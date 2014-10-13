@@ -34,10 +34,12 @@ Notify.prototype.show = function(icon, title, body){
     try{
         new Notification("前端乱炖通知", {
             title: title,
-            body: body
+            body: body,
+            icon:"http://htmljs.b0.upaiyun.com//images/logo.png?123",
+            time:5
         });
     }catch(e){
-        
+
     }
 
 }

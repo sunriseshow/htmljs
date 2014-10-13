@@ -6,6 +6,7 @@ html
     include ../head
     link(href='#{assets_head}/css/Markdown.Editor.css?ddd2', type='text/css', rel='stylesheet', charset='utf-8')
     include ../editor_head
+    base(target="_blank")
   body#talk
     - locals.pageId = 20;
     include ../header
@@ -72,6 +73,7 @@ html
     script(src="#{assets_head}/socket.io/socket.io.js")
     script(src='#{assets_head}/js/ajaxfileupload.js')
     script
+      var user_id = #{user.id}
       $.getScript("http://talk.html-js.com:8765/assets/js/talk.js?dd",function(){})
       var converter1 =new  Markdown.Converter();
       Markdown.Extra.init(converter1);

@@ -24,14 +24,20 @@ Notify.prototype.checkPermission = function(){
 Notify.prototype.show = function(icon, title, body){
     //声明webkitNotifications实例
     try{
+
         var _notify = window.webkitNotifications.createNotification(icon, title, body);
         _notify.show();
+
+    }catch(e){
+
+    }
+    try{
         new Notification("前端乱炖通知", {
             title: title,
             body: body
         });
     }catch(e){
-
+        
     }
 
 }

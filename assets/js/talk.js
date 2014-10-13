@@ -18,18 +18,20 @@ Notify.prototype.checkPermission = function(){
 //声明一个webkitNotifications实例，并且使用show方法触发桌面提示框
 Notify.prototype.show = function(icon, title, body){
     //声明webkitNotifications实例
-    var _notify = window.webkitNotifications.createNotification(icon, title, body);
-    _notify.show();
-}
-window.onload = function(){
-    var notify = new Notify();
-    if (!notify.isSupport()) {
-//        alert("Your browser don't support webkitNotifications!!");
-        return;
+    try{
+        var _notify = window.webkitNotifications.createNotification(icon, title, body);
+        _notify.show();
+    }catch(e){
+        
     }
-    notify.getPermission();
 
 }
+    var notify = new Notify();
+    if (notify.isSupport()) {
+        notify.getPermission();
+    }
+
+
 $("#status").html("正在连接聊天服务器中。。。")
     var uuid = null;
     var talk_tpl = $("#talk-tpl").html()
@@ -40,7 +42,7 @@ $("#status").html("正在连接聊天服务器中。。。")
       socket.emit('get-uuid',{id:"dd"});
     });
     socket.on("new-message",function(data){
-        notify.show("", "前端乱炖新消息", data.user_nick+"："+data.html.replace(/<[^>]*?>/g,""))
+      notify.show("", "前端乱炖新消息", data.user_nick+"："+data.html.replace(/<[^>]*?>/g,""))
       var m = $(Mustache.render(talk_tpl,data.talk));
       $("#message-list").prepend(m)
       $(".message").removeClass("shan")

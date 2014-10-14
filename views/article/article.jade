@@ -6,6 +6,7 @@ html
     |<meta name="description" content="#{locals.article?article.html.replace(/<[^>]*?>/g,'').replace(/\s/g,'').substr(0,100):""}">
     style
       #bdshare a{}
+      .entry-content img{border:1px solid #ddd;box-shadow: 0px 0px 2px #ddd;}
     script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
     script(src='#{assets_head}/js/bootstrap/bootstrap-scrollspy.js')
   body#article

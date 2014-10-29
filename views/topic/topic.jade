@@ -49,9 +49,8 @@ html
             .topic-content
 
               .desc !{topic.html.replace(/<code>/g,"<code class='language-javascript'>")}
-              div(style="margin:30px 0 10px -15px;")
-                a(href="http://www.jobdeer.com/?fr=htmljs",target="_blank",style="display:block;line-height:25px;") 【广告】NB的人才不找工作，都在「 JobDeer.com 」拍卖自己！
-                a(href="http://oneapm.com/events/ironman.html?hmsr=%E5%89%8D%E6%AE%B5%E4%B9%B1%E7%82%96&hmmd=%E6%96%87%E5%AD%97%E9%93%BE%E5%B9%BF%E5%91%8A&hmpl=%E5%AE%98%E7%BD%91%E6%B4%BB%E5%8A%A8%E4%B8%93%E9%A2%98&hmkw=www.html-js.com&hmci=",target="_blank",style="display:block;line-height:25px;") 【广告】注册100%有礼，机械键盘、钢铁侠T恤、音乐台灯、曲径加速服务免费拿！
+              a.ad-blank(href="http://www.html-js.com/topic/827",style="width:650px;height:100px;")
+                .ad-inner 广告位 点击查看投放指南
             .topic-user.clearfix
               .zans.clearfix
                 a.zan.action(href="javascript:void(0);") 
@@ -177,6 +176,8 @@ html
               each a in sametag_topics
                 if a.id != topic.id
                   div.item <a href="/topic/#{a.id}">#{a.title}</a>
+          a.ad-blank(href="http://www.html-js.com/topic/827",style="width:280px;height:280px;")
+            .ad-inner 广告位 点击查看投放指南
 
     script#comment-tpl(type="text/template")
       .comment-item.clearfix

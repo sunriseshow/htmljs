@@ -73,24 +73,32 @@ html
                             img(src="#{column.user.head_pic}")
                           a.t.tooltip-trigger(href="/article/column/#{column.id}",data-original-title="#{column.name}  #{moment(column.last_article_time*1).fromNow()}") #{column.name.substr(0,16)}
                           span #{moment(column.last_article_time*1).format("MM/DD")}
-          //if locals.tuan_columns
-          //  .module.tuanColumn
-          //    .hd 团队专栏
-          //    .bd
-          //      .column-list
-          //        each column in tuan_columns
-          //          .column
-          //            a.title(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
-          //            .desc !{column.desc_html?column.desc_html.replace(/<[^>]*>/g,'').replace(/\s/g,'').substr(0,50)+"...":""}
-          //            .user
-          //              span 作者：
-          //              a(href="/user/#{column.user.id}") #{column.user.nick}
-          //            .actions
-          //                a.rss-btn(href="/article/column/#{column.id}/rss")
-          //                  i.rss.social
-          //                  |  邮件订阅（#{column.rss_count}）
-          //      .actions
-          //        a.btn(href="/article/column/add") 创建专栏
+
+          .module.tuanColumn
+            .hd 乱炖周刊（每周二更新）
+            .bd
+              .column-list
+                a.column(style="background:#ef6f67;",href="/static/htmljs-weekly-9.html")
+                  .title 乱炖周刊 · 第9期
+                  .user
+                    span 发布时间：2014-10-28
+                  .actions
+                a.column(style="background:#46afe4;",href="/static/htmljs-weekly-8.html")
+                  .title 乱炖周刊 · 第8期
+                  .user
+                    span 发布时间：2014-10-21
+                  .actions
+                a.column(style="background:#81cc7a;",href="/static/htmljs-weekly-7.html")
+                  .title 乱炖周刊 · 第7期
+                  .user
+                    span 发布时间：2014-10-14
+                  .actions
+                a.column(style="background:#00cbbd;",href="/static/htmljs-weekly-6.html")
+                  .title 乱炖周刊 · 第6期
+                  .user
+                    span 发布时间：2014-10-7
+                  .actions
+
           if locals.questions
             .module.mod
               .lft

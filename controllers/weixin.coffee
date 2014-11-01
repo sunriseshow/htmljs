@@ -82,5 +82,7 @@ module.exports.controllers =
                 if match
                     func_rss_email.add
                       email:match[0]
+            else if message.substr(0,2) == "抽奖"
+              res.reply '恭喜您，报名抽奖成功！请在微博关注抽奖结果！'
 
             )

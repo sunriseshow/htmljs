@@ -16,12 +16,12 @@
 /* 主题背景 */
 .screen{background:url(./我是歌手第三季活动_files/page-bg.jpg) top center no-repeat;background-color:#0c0532;background-size:100% auto;}
 /* 旋转背景和幕布 */
-.rotateBox{background:url(http://ziycdn.u.qiniudn.com/sl.png) top center no-repeat;background-size:100% auto; background-color: #1c1a1a;}
-.rotateBox .mainLeft{background:url(http://mat1.gtimg.com/ent/mowenwei/rotate_bg_left.jpg) top right repeat-x;background-size:auto 110%;}
-.rotateBox .mainRight{background:url(http://mat1.gtimg.com/ent/mowenwei/rotate_bg_right.jpg) top right repeat-x;background-size:auto 110%;}
+/*.rotateBox{background:url(http://ziycdn.u.qiniudn.com/sl.png) top center no-repeat;background-size:100% auto; background-color: #1c1a1a;}*/
+/*.rotateBox .mainLeft{background:url(http://mat1.gtimg.com/ent/mowenwei/rotate_bg_left.jpg) top right repeat-x;background-size:auto 110%;}*/
+/*.rotateBox .mainRight{background:url(http://mat1.gtimg.com/ent/mowenwei/rotate_bg_right.jpg) top right repeat-x;background-size:auto 110%;}*/
 /* 播放音乐背景 */
 /* 分享背景 */
-.mc_result{background:url(http://ziycdn.u.qiniudn.com/cgjs.jpg) center top no-repeat;background-size:100% auto;background-color: #1f2124;}
+.mc_result{background:url(./我是歌手第三季活动_files/result-bg.jpg) center top no-repeat;background-size:100% auto;background-color: #1f2124;}
 .mc_result_click{background:url(http://ziycdn.u.qiniudn.com/cgjs.jpg) center top no-repeat;}
 
 /* totateBox */
@@ -49,7 +49,7 @@
     </p>
 </div>
 <!-- /loading -->
-<div id="main" class="main ease" style="visibility: visible; width: 360px; height: 1920px; -webkit-transform: translate3d(0px, -1280px, 0px);">
+<div id="main" class="main ease" style="width: 360px; height: 1920px; -webkit-transform: translate3d(0px, 0px, 0px);">
     <section id="screen-1" class="screen screen-1" style="width: 360px; height: 640px;">
             <div class="inner">
                 <div class="pic">
@@ -149,11 +149,11 @@
                             <div id="mine_title" class="mine_title"></div>
                             <div id="mine_desc" class="mine_desc"></div>
                             <!--<a class="sharebtn" href="javascript:;" data-title="" data-url="" data-des="" data-pic="http://ziycdn.u.qiniudn.com/gslogo.png">邀请朋友来玩</a>-->
-                            <a class="ssharebtn" href="http://bb.kunpo.cc/cg/form.html">开启我的评审之路</a>
+
 
                             <!-- uedwfe -->
                             <style type="text/css">
-                                .mc_result .txtbox{bottom:0px;}
+                                .mc_result .txtbox{top:100px;}
                                 .uedwfe{padding:10px 0 0;color:#f2f2f2;font-size:12px;text-align:center;}
                             </style>
                             <div class="uedwfe">
@@ -164,6 +164,7 @@
                             </div>
                             <!-- /uedwfe -->
                         </div>
+                        <a class="ssharebtn" href="http://bb.kunpo.cc/cg/form.html">开启我的评审之路</a>
                     </div>
 
                 </div>
@@ -224,11 +225,10 @@ var reData = {
     loadImg(pics, function(){
         setTimeout(function(){
             $(".loading").hide();
-            $("#main").animate({"visibility":"visible"});
+//            $("#main").animate({"visibility":"visible"});
             Screen.init();
         }, 500);
     });
 
 </script>
 
-<div class="yanwenzi_topcontainer"><div class="yanwenzi_keytip">箭头键移动选择，点击ctrl或者command键即可上屏。<a href="http://item.taobao.com/item.htm?spm=0.0.0.0.aNORnL&id=40412199308" style="margin-left:10px;">赞助我</a><a href="http://itunes.apple.com/cn/app/yan-wen-zi/id866753915?ls=1&mt=8" style="margin-left:10px;">iphone/ipad版</a></div><a class="yanwenzi_close">关闭</a><div class="yanwenzi_container" style="z-index: 100000000000;"></div></div></body></html>

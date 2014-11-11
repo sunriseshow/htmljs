@@ -129,11 +129,9 @@ function showCard(){
     console.log("showCard")
     if(cardIndex-1 >= 0){
         $('.mc_card').eq(cardIndex-1).addClass('right_to_left_fadeOut');
-        setTimeout(function(){
             $('.mc_card').eq(cardIndex-1).hide();
             $('.mc_card').eq(cardIndex).show().addClass('right_to_left_fadeIn');
             cardIndex++;
-        },100);
     }else{
         $('.mc_card').eq(cardIndex).show().addClass('right_to_left_fadeIn');
         cardIndex++;

@@ -100,7 +100,6 @@ resList(arrRes);
 
 $('ul.topic_list li').on(TAP, function(){
     var $this = this;
-    $(this).addClass("active");
     if(_play_switch_){
         alert('\u8bf7\u5148\u70b9\u51fb\u64ad\u653e' + NAME + '\u7684\u5531\u7247, \u518d\u9009\u6f14\u5531\u8005\u54e6~');
         return false;
@@ -126,7 +125,6 @@ $('ul.topic_list li').on(TAP, function(){
 
 
 function showCard(){
-    console.log("showCard")
     if(cardIndex-1 >= 0){
         $('.mc_card').eq(cardIndex-1).addClass('right_to_left_fadeOut');
         setTimeout(function(){
@@ -238,18 +236,18 @@ var rotate = function(){
         });
         totalAngle = totalAngle < 0 ? -totalAngle : totalAngle;
 
-//        if(totalAngle > 10){
-//            $mainL.animate({"left": "0%"}, 800);
-//            $mainR.animate({"right": "0%"}, 800);
-//            setTimeout(function(){
-//                $("#rotateBox").css({top:"-100%"}).hide();
-//                if(flag){
-//                    $('#mc_content').show();
-//                    showCard();
-//                }
-//                flag = false;
-//            }, 1000);
-//        }
+        if(totalAngle > 10){
+            $mainL.animate({"left": "0%"}, 800);
+            $mainR.animate({"right": "0%"}, 800);
+            setTimeout(function(){
+                $("#rotateBox").css({top:"-100%"}).hide();
+                if(flag){
+                    $('#mc_content').show();
+                    showCard();
+                }
+                flag = false;
+            }, 1000);
+        }
 /*
         temp = (totalAngle / 720) * 100 > 50 ? 50 : (totalAngle / 720) * 100;
         $mainL.css({"left": - (50 - temp) + "%"});
@@ -344,7 +342,7 @@ var Screen = {
         $main = _this.main,
         $screen = _this.screen,
         len = _this.len;
-        $("#screen-2 .mu").on("touchstart",function(){
+        $("#screen-2").on("touchstart",function(){
 
             $("#screen-2 .tip").addClass("disappear")
             $("#screen-2 .wutai").addClass("appear")
@@ -356,7 +354,6 @@ var Screen = {
 
             },3000)
             setTimeout(function(){
-                $("#screen-3").show();
                 showCard()
                 $('.playaudio').trigger(TAP)
             },4000)
@@ -370,7 +367,7 @@ var Screen = {
         // 初始化元素高度
         $main.css({"width": $w + "px", "height": $h * _this.len + "px"}).addClass("ease");
         $screen.css({"width": $w + "px", "height": $h + "px"});
-        $("#screen-3").css({"width": $w + "px", "height": $h + "px"});
+
         // 初始化 page(0)
         _this.page(_this.idx);
 

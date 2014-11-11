@@ -553,7 +553,7 @@ top:0;}
     left: 60%;margin-left:50px;transform:rotate(0deg);-ms-transform:rotate(0deg);-moz-transform:rotate(46deg);-webkit-transform:rotate(0deg);-o-transform:rotate(0deg);z-index:10}
 .mc_card .musicname{text-align:center;padding-top:20px;font-size:20px;color:#fff0c7;}
 .topic_list{position: absolute;top:340px;padding-left:20px;}
-.topic_list li{float:left;background-color:none;border-radius:25px;height:50px;line-height:50px;font-size:20px;text-align:center;color:#fff0c7;padding:0 20px;border:2px solid #fff0c7;margin-left:40px;}
+.topic_list li{float:left;background-color:none;border-radius:25px;height:50px;line-height:50px;font-size:20px;text-align:center;color:#fff0c7;padding:0 20px;border:2px solid #fff0c7;margin-left:25px;}
 
 @-webkit-keyframes rotatingLoader{
     0%{-webkit-transform:rotate(0);transform:rotate(0)}

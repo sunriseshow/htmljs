@@ -85,7 +85,7 @@ module.exports =
       buffer += c.toString()
     .on 'end',()->
       mail({
-        subject:"您的专栏被订阅了，但是您已经超过5天没有更新了",
+        subject:"您的专栏被订阅了，赶紧来更新文章吧！",
         to:card.email,
         html:buffer
       })

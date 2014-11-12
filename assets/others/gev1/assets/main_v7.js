@@ -66,16 +66,12 @@ $('.playaudio').on(TAP,function(){
         AUDIO.onplaying = function(){
             $this.hide();
             $card.find('img.playingaudio').addClass('rotatingLoader');
-            $card.find('img.bar').css('transform','rotate(-40deg) translate3d(-10px, -10px, 0px)');
-            $card.find('img.bar').css('-webkit-transform','rotate(-40deg) translate3d(-10px, -10px, 0px)');
             $card.find('p.musicname').text('\u8bf7\u9009\u62e9, \u8fd9\u9996\u6b4c\u7684\u6f14\u5531\u8005\u53eb\u4ec0\u4e48?');
         };
         AUDIO.addEventListener('playing',AUDIO.onplaying, false);
         AUDIO.onpause = function(){
             $card.find('img.playingaudio').removeClass('rotatingLoader');
             $this.show();
-            $card.find('img.bar').css('transform','rotate(0deg)');
-            $card.find('img.bar').css('-webkit-transform','rotate(0deg)');
             _play_switch_ = true;
         }
         AUDIO.addEventListener('ended', AUDIO.onpause, false);
@@ -126,14 +122,12 @@ $('ul.topic_list li').on(TAP, function(){
 
 
 function showCard(){
-    console.log("showCard")
+    console.log("showCard："+cardIndex)
     if(cardIndex-1 >= 0){
         $('.mc_card').eq(cardIndex-1).addClass('right_to_left_fadeOut');
-        setTimeout(function(){
             $('.mc_card').eq(cardIndex-1).hide();
             $('.mc_card').eq(cardIndex).show().addClass('right_to_left_fadeIn');
             cardIndex++;
-        },100);
     }else{
         $('.mc_card').eq(cardIndex).show().addClass('right_to_left_fadeIn');
         cardIndex++;
@@ -153,7 +147,7 @@ function showCard(){
 
     var len = $("#mc_content .mc_card").length;
 
-    if(cardIndex >= len){
+    if(cardIndex > len){
         var mc_title ='';
         var mc_desc = ''; 
         var my_score = bingo / len * 100;
@@ -185,11 +179,13 @@ function showCard(){
 
         document.title = mc_title.replace("<span>", "").replace("</span>", "");
 
-        $('#mc_content').hide();
+        $('#mc_content').remove();
         $('#mc_result').show();
     }
 }
-
+$("#mc_result").on("touchstart",function(){
+    window.location.href=$(".ssharebtn").attr("href");
+})
 function creatVideo(did){
     var scale = 16 / 9;
     var ww = $(window).width();
@@ -361,7 +357,7 @@ var Screen = {
         len = _this.len;
         $("#screen-2 .mu").on("touchstart",function(){
 
-
+            
         })
         var ua = UA();
         if(ua.iphone && ua.qqnews){

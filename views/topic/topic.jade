@@ -49,8 +49,6 @@ html
             .topic-content
 
               .desc !{topic.html.replace(/<code>/g,"<code class='language-javascript'>")}
-              a.ad-blank(href="http://www.html-js.com/topic/827",style="width:650px;height:100px;")
-                .ad-inner 广告位 点击查看投放指南
             .topic-user.clearfix
               .zans.clearfix
                 a.zan.action(href="javascript:void(0);") 
@@ -81,14 +79,6 @@ html
                   a(href="/user/#{topic.user_id}") #{topic.user_nick} 
                   em(title="经验值") #{topic.user.coin||0}
                 .time #{moment(topic.createdAt).fromNow()}
-          div.module(style="margin-top:20px;padding:0px;").
-            <script type="text/javascript">
-                /*728*90，创建于2013-12-16*/
-                var cpro_id = "u1636372";
-            </script>
-            <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
-
-          include ../recommend_books
           .topic-comments.module(class="#{locals.is_clear?'hidden':''}")
             .hd 跟帖
             .bd 

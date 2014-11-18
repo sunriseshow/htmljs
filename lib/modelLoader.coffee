@@ -270,7 +270,7 @@ __BaseFunction.prototype =
     .success (m)->
       if m
         updates = {}
-        updates[field]=m[field]*1+(if count then count else 1)
+        updates[field]=m[field]*1+(if count then Math.ceil(Math.random()*count) else 1)
         m.updateAttributes(updates,[field])
         .success ()->
           callback&&callback null,m

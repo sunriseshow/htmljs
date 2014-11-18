@@ -1,6 +1,7 @@
 .clearfix:after,.clearfix:before,.headerCon:before{display:table;content:"";overflow:hidden;}
 .headerCon:after,.clearfix:after{clear:both;}
 .headerCon,.clearfix{zoom:1;}
+body{font-family:'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC','Hiragino Sans GB','Microsoft YaHei',"微软雅黑",STHeiti,'WenQuanYi Micro Hei',SimSun,sans-serif;}
 .red_bg{background:#f27369 !important;}
 .red_border{border-color:#f27369 !important;}
 .hidden{display:none !important;}

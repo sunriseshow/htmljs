@@ -198,7 +198,7 @@ module.exports.controllers =
     post:(req,res)->
       result = 
         success:0
-      if req.body.email
+      if req.body.email && (req.body.email.indexOf("@")!=-1)
         func_user.update res.locals.user.id,{email:req.body.email},(error)->
           result.success = 1
           res.send result

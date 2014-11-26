@@ -24,7 +24,26 @@ CanRead.sync()
 
 cache = 
   recent:[]
-func_article =  
+
+func_article =
+  run_sort:()->
+    self = this
+    this.getAllByField 1,10000,null,(error,articles)->
+      if articles && articles.length
+        articles.forEach (a)->
+          self.run_sort_byid a.id
+  run_sort_byid:(articleId)->
+    Article.find
+      where:
+        id:articleId
+    .success (article)->
+      if article && article.publish_time&&article.publish_time>1000000
+        score = (article.zan_count+article.comment_count+article.visit_count/1000)/Math.pow((new Date().getTime()/1000-article.publish_time)/60/60+2,1.5)
+        article.updateAttributes({score:score},['score'])
+        .success ()->
+    .error (error)->
+      callback error
+
   getAll:(page,count,condition,order,callback)->
     if not callback
       callback = order
@@ -33,6 +52,24 @@ func_article =
       offset: (page - 1) * count
       limit: count
       order: order
+      include:[User,Column]
+      raw:false
+    if condition then query.where = condition
+    Article.findAll(query)
+    .success (articles)->
+      cache.recent = articles
+      callback null,articles
+    .error (error)->
+      callback error
+  getAllByField:(page,count,condition,order,callback)->
+    if not callback
+      callback = order
+      order = "sort desc,id desc"
+    query =
+      offset: (page - 1) * count
+      limit: count
+      order: order
+      attributes:['id','publish_time','zan_count','comment_count','visit_count']
       include:[User,Column]
       raw:false
     if condition then query.where = condition

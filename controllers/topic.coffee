@@ -162,6 +162,7 @@ module.exports.controllers =
   
   "/comment/:id/zan":
     post:(req,res,next)->
+
       func_topic_comment.addCount req.params.id,"zan_count",()->
         res.send({success:1})
       if res.locals.user
@@ -179,8 +180,6 @@ module.exports.controllers =
     post:(req,res,next)->
       result = 
         success:0
-      if res.locals.user.is_admin
-        func_topic.addCount req.params.id,"zan_count"
       func_topic.addZan req.params.id,res.locals.user.id,req.body.score,(error,log,article)->
         if error 
           result.info = error.message

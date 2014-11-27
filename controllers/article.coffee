@@ -362,8 +362,7 @@ module.exports.controllers =
     post:(req,res,next)->
       result = 
         success:0
-      if res.locals.user.is_admin
-        func_article.addCount req.params.id,"zan_count"
+
       func_article.addZan req.params.id,res.locals.user.id,req.body.score,(error,log,article)->
         if error 
           result.info = error.message
@@ -378,6 +377,19 @@ module.exports.controllers =
             target_path:"/article/"
             action_name:"【赞】了您的原创文章"
             target_path_name:article.title
+        data =
+          md:"赞了此文章！"
+        data.html = "赞了此文章！"
+        data.user_id = res.locals.user.id
+        data.user_headpic = res.locals.user.head_pic
+        data.user_nick = res.locals.user.nick
+        data.target_id = "article_"+req.params.id
+        func_comment.add data,(error,comment,topic)->
+          if error
+            result.info = error.message
+          else
+            result.success = 1
+            func_article.addCount req.params.id,"comment_count"
         res.send result
   "/:id/create_pic":
     get:(req,res,next)->

@@ -13,7 +13,41 @@ TopicZanLogs.belongsTo User,{foreignKey:"user_id"}
 TopicZanLogs.sync()
 Topic.sync()
 TopicComment.sync()
-func_topic = 
+
+func_topic =
+  run_sort:()->
+    self = this
+    this.getAllByField 1,10000,null,(error,articles)->
+      if articles && articles.length
+        articles.forEach (a)->
+          self.run_sort_byid a.id
+  run_sort_byid:(articleId)->
+    Topic.find
+      where:
+        id:articleId
+    .success (article)->
+      if article && article.last_comment_time
+        score = (article.comment_count+article.visit_count/100)/Math.pow((new Date().getTime()-article.last_comment_time.getTime())/1000/60/60+2,1.5)
+        article.updateAttributes({score:score},['score'])
+        .success ()->
+    .error (error)->
+      callback error
+  getAllByField:(page,count,condition,order,callback)->
+    if not callback
+      callback = order
+      order = "sort desc,id desc"
+    query =
+      offset: (page - 1) * count
+      limit: count
+      order: order
+      attributes:['id','last_comment_time','comment_count','visit_count']
+      raw:false
+    if condition then query.where = condition
+    Topic.findAll(query)
+    .success (articles)->
+      callback null,articles
+    .error (error)->
+      callback error
   getById:(id,callback)->
     Topic.find
       where:

@@ -31,3 +31,4 @@ module.exports =
   tag_id:"int"
   pinyin:"varchar(1500)"
   zan_count:"int"
+  score:"int"

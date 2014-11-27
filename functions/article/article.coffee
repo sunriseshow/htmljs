@@ -70,12 +70,10 @@ func_article =
       limit: count
       order: order
       attributes:['id','publish_time','zan_count','comment_count','visit_count']
-      include:[User,Column]
       raw:false
     if condition then query.where = condition
     Article.findAll(query)
     .success (articles)->
-      cache.recent = articles
       callback null,articles
     .error (error)->
       callback error

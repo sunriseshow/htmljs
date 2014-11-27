@@ -12,6 +12,10 @@ config = require './../config.coffee'
 Sina=require("./../lib/sdk/sina.js")
 sina=new Sina(config.sdks.sina)
 moment = require 'moment'
+func_topic.run_sort()
+setInterval ()->
+  func_topic.run_sort()
+,1000*60*10
 module.exports.controllers = 
   "/":
     get:(req,res,next)->
@@ -31,6 +35,7 @@ module.exports.controllers =
       req.body.user_headpic = res.locals.user.head_pic
       req.body.user_nick = res.locals.user.nick
       req.body.last_comment_time = new Date()
+      req.body.score = 1
       func_topic.add req.body,(error,topic)->
         if error 
           result.info = error.message

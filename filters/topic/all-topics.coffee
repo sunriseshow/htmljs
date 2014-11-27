@@ -12,7 +12,7 @@ module.exports = (req,res,next)->
       res.locals.total=_count
       res.locals.totalPage=Math.ceil(_count/count)
       res.locals.page = (req.query.page||1)
-      (__F 'topic').getAll page,count,condition,"sort desc,last_comment_time desc",(error,topics)->
+      (__F 'topic').getAll page,count,condition,"sort desc,score desc",(error,topics)->
         if error then next error
         else
           res.locals.topics = topics

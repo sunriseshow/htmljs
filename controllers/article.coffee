@@ -200,7 +200,7 @@ module.exports.controllers =
         main_pic:if match then match[1] else null
         desc:req.body.desc
         is_publish:req.body.is_publish
-        score:1
+        score:10
       result = 
         success:0
       func_article.add data,(error,article)->

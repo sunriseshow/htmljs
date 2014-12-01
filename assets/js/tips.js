@@ -75,12 +75,14 @@ Tip.prototype = {
             HtmlJS.util.ajax(self.url,submitData,"post",function(data){
                 self._loadTip(self.commentForm.tipId?self.commentForm.tipId:data.id)
                 $("textarea",self.commentForm).val("")
+                self.lastTip.uuid = data.id
             },function(){
 
             },null,function(){
                 HtmlJS.util.ajax(self.url,submitData,"post",function(data){
                     self._loadTip(self.commentForm.tipId?self.commentForm.tipId:data.id)
                     $("textarea",self.commentForm).val("")
+                    self.lastTip.uuid = data.id
                 },function(){
 
                 },null,function(){

@@ -9,6 +9,8 @@ html
       .entry-content img{border:1px solid #ddd;box-shadow: 0px 0px 2px #ddd;}
     script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
     script(src='#{assets_head}/js/bootstrap/bootstrap-scrollspy.js')
+    script(src='#{assets_head}/js/tips.js')
+    link(rel="stylesheet",href="#{assets_head}/css/tips.css?2d2ddddddd",type="text/css")
   body#article
     - locals.pageId=1;
     include ../header
@@ -214,7 +216,16 @@ html
         var bds_config={"bdText":"分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} {{前端乱炖是国内最专业的前端知识原创内容社区}}","bdPic":"http://www.html-js.com/uploads/article_thumb/#{article.id}.png","snsKey":{'tsina':'659341943','tqq':'','t163':'','tsohu':''}}
         document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
         </script>
-
+      script#tip_tpl(type="text/template").
+        {{#tips}}
+          <li class="ng-scope single-comment pin-comment">
+            <div class="comment-body ng-binding" >{{content}}</div>
+            <div class="comment-meta">
+              <span class="author-name ng-binding">— {{user_nick}} </span>
+              <time class="create-time" >{{time}}</time>
+            </div>
+          </li>
+          {{/tips}}
     script(src="#{assets_head}/js/mustache.js")
     script(src="#{assets_head}/js/messageTip.js")
     script(src="#{assets_head}/js/loadingTip.js")
@@ -370,46 +381,14 @@ html
                 })
             })
             });
-//
-          //- $(window).scroll(function(){
-          //-   var scrollTop = $(window).scrollTop();
-          //-   if (offset.top < scrollTop+40) 
-          //-     $(".vertical-actions").css({top:0})
-          //-   else $('#fixed-modules').removeClass('fixed').css({
-          //-     position:"relative",top:0
-          //-   });
-          //-   if($('#fixed-modules').height()+$('#fixed-modules').offset().top>$("#footer").offset().top+60){
-          //-     $('#fixed-modules').css({position:"absolute",top:$("#content").height()-$('#fixed-modules').height()+60})
-          //-   }
-          //- });
-          //- (function(){
-          //-   var ts = ['h1','h2','h3','h4']
-          //-   var html = ""
-          //-   var id_count = 0;
-          //-   $(".post .entry-content").find("h1,h2,h3,h4").each(function(i,h){
-          //-     id_count++
-          //-     h.id="h"+id_count
-          //-     html+="<li class='item item-"+h.tagName+"'><a href='#h"+id_count+"'> · "+h.innerHTML+"</a></li>"
-          //-   })
-          //-     $(".artivle_nav .nav").html(html)
-          //-     $('.artivle_nav').scrollspy()
-          //-     if($('.artivle_nav').length){
-          //-     var offset = $('.artivle_nav').offset();
-          //-     $(window).scroll(function(){
-          //-       var scrollTop = $(window).scrollTop();
-          //-       if (offset.top < scrollTop+40) 
-          //-         $('.artivle_nav').addClass('fixed').css({
-          //-         position:"fixed",top:0
-          //-         });
-          //-       else $('.artivle_nav').removeClass('fixed').css({
-          //-         position:"absolute",top:0
-          //-       });
-          //-       if($('.artivle_nav').height()+$('.artivle_nav').offset().top>$(".bottom-action").offset().top+60){
-          //-         $('.artivle_nav').css({position:"absolute",top:$(".post").height()-$('.artivle_nav').height()+60})
-          //-       }
-          //-     });
-          //-   }
-          //-   })();
+            $(document).ready(function(){
+                new Tip().init({
+                    selector:".post",
+                    url:"/tip/add",
+                    uuid:"#{article.id}"
+                })
+            })
+
     include ../footer
     include ../320ad
    //include ../googlead

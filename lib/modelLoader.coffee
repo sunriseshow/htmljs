@@ -278,4 +278,11 @@ __BaseFunction.prototype =
           callback&&callback error
     .error (error)->
       callback&&callback error
+  getByField: (condition,callback)->
+    this.model.find
+      where:condition
+    .success (m)->
+      callback null,m
+    .error (e)->
+      callback e
 global.__BaseFunction = __BaseFunction

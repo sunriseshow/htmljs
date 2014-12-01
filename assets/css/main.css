@@ -453,6 +453,7 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #article #fixed-modules{width:280px;}
 #article .module{background:#f3f3f3;border:none;padding:15px;}
 #article .more-but-pay{line-height:25px;margin:20px 0;font-size:14px;background:#fff6c1;display:block;padding:10px;border-radius:5px;border:1px solid #ffea75;color:#333;}
+#article .left{overflow:visible;}
 #article .vertical-actions{margin-top:20px;position:absolute;top:100px;right:-40px;}#article .vertical-actions .action{color:#666;font-size:13px;line-height:30px;text-decoration:none;height:30px;padding:0 10px;display:inline-block;background:#fff;border-radius:5px;}#article .vertical-actions .action em{font-style:normal;}
 #article .vertical-actions .action span{color:#aaa;font-size:12px;}
 #article .vertical-actions i{background:none;font-size:15px;margin-right:5px;color:#aaa;}
@@ -498,7 +499,7 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #article .post .entry-title .title{font-size:20px;line-height:30px;margin:0;color:#404040;font-weight:normal;}
 #article .post .entry-title .item{font-size:12px;margin-right:20px;}#article .post .entry-title .item .index{color:#aaa;}
 #article .post .entry-title .item .value{color:#888;}
-#article .post .entry-content{color:#555;padding:20px 0;font-size:14px;overflow:hidden;line-height:25px;-webkit-font-smoothing:antialiased;word-wrap:break-word;}#article .post .entry-content h1,#article .post .entry-content h2,#article .post .entry-content h3,#article .post .entry-content h4,#article .post .entry-content h5{font-size:1.5em;}
+#article .post .entry-content{color:#555;padding:20px 0;font-size:14px;line-height:25px;-webkit-font-smoothing:antialiased;word-wrap:break-word;}#article .post .entry-content h1,#article .post .entry-content h2,#article .post .entry-content h3,#article .post .entry-content h4,#article .post .entry-content h5{font-size:1.5em;}
 #article .post .entry-content h1{font-size:18px;}
 #article .post .entry-content h2{font-size:16px;}
 #article .post .entry-content h3{font-size:14px;}
@@ -594,6 +595,7 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #article #fixed-modules{width:280px;}
 #article .module{background:#f3f3f3;border:none;padding:15px;}
 #article .more-but-pay{line-height:25px;margin:20px 0;font-size:14px;background:#fff6c1;display:block;padding:10px;border-radius:5px;border:1px solid #ffea75;color:#333;}
+#article .left{overflow:visible;}
 #article .vertical-actions{margin-top:20px;position:absolute;top:100px;right:-40px;}#article .vertical-actions .action{color:#666;font-size:13px;line-height:30px;text-decoration:none;height:30px;padding:0 10px;display:inline-block;background:#fff;border-radius:5px;}#article .vertical-actions .action em{font-style:normal;}
 #article .vertical-actions .action span{color:#aaa;font-size:12px;}
 #article .vertical-actions i{background:none;font-size:15px;margin-right:5px;color:#aaa;}
@@ -639,7 +641,7 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #article .post .entry-title .title{font-size:20px;line-height:30px;margin:0;color:#404040;font-weight:normal;}
 #article .post .entry-title .item{font-size:12px;margin-right:20px;}#article .post .entry-title .item .index{color:#aaa;}
 #article .post .entry-title .item .value{color:#888;}
-#article .post .entry-content{color:#555;padding:20px 0;font-size:14px;overflow:hidden;line-height:25px;-webkit-font-smoothing:antialiased;word-wrap:break-word;}#article .post .entry-content h1,#article .post .entry-content h2,#article .post .entry-content h3,#article .post .entry-content h4,#article .post .entry-content h5{font-size:1.5em;}
+#article .post .entry-content{color:#555;padding:20px 0;font-size:14px;line-height:25px;-webkit-font-smoothing:antialiased;word-wrap:break-word;}#article .post .entry-content h1,#article .post .entry-content h2,#article .post .entry-content h3,#article .post .entry-content h4,#article .post .entry-content h5{font-size:1.5em;}
 #article .post .entry-content h1{font-size:18px;}
 #article .post .entry-content h2{font-size:16px;}
 #article .post .entry-content h3{font-size:14px;}

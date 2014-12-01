@@ -132,7 +132,7 @@ HtmlJS.util = function(){
 //       });
 // });
 $(document).ready(function(){
-  if($('#fixed-modules').length){
+  if($(window).width()>700&&$('#fixed-modules').length){
      var offset = $('#fixed-modules').offset();
           $(window).scroll(function(){
             var scrollTop = $(window).scrollTop();

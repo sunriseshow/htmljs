@@ -10,7 +10,7 @@ html
     script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
     script(src='#{assets_head}/js/bootstrap/bootstrap-scrollspy.js')
     script(src='#{assets_head}/js/tips.js')
-    link(rel="stylesheet",href="#{assets_head}/css/tips.css?2d2ddddddd",type="text/css")
+    link(rel="stylesheet",href="#{assets_head}/css/tips.css?2dd2ddddddd",type="text/css")
   body#article
     - locals.pageId=1;
     include ../header
@@ -56,11 +56,10 @@ html
             .left
                 article.post(id="post-#{article.id}")
 
-                  .artivle_nav
-                    ul.nav
                   .wrapper
                     include ../recommend_books
                     .entry-content
+                      .alert 在文章任何区域点击鼠标，即可给文章添加【评注】，欢迎试用！浮到评注点上可以查看详情。
                       if !(locals.user && locals.user.id==article.user_id)&&article.is_buy && !locals.can_read
                         - var matches = article.html.match(/<p>.*?<\/p>/g);
                         - var match_result = matches.splice(0,4);

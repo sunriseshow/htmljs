@@ -49,7 +49,6 @@ module.exports.controllers =
           if tips&&tips.length
             tips.forEach (tip)->
               tip.dataValues.time =  moment(tip.createdAt).fromNow()
-              console.log(tip)
           res.send tips
   "/p/:id":
     get:(req,res,next)->

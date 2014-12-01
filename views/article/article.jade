@@ -381,11 +381,14 @@ html
             })
             });
             $(document).ready(function(){
-                new Tip().init({
-                    selector:".post",
-                    url:"/tip/add",
-                    uuid:"#{article.id}"
-                })
+                if($(window).width()>600){
+                  new Tip().init({
+                      selector:".post",
+                      url:"/tip/add",
+                      uuid:"#{article.id}"
+                  })
+                }
+
             })
 
     include ../footer

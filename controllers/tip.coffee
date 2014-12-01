@@ -19,7 +19,7 @@ module.exports.controllers =
             if article
               sina.statuses.update
                 access_token:res.locals.user.weibo_token
-                status:'我在@前端乱炖 为原创文章《'+article.title+'》http://www.html-js.com/article/'+req.body.target_id +'添加了一枚【评注】:'+req.body.content
+                status:'我在@前端乱炖 为原创文章《'+article.title+'》http://www.html-js.com/article/'+req.body.target_id+'添加了一枚【评注】:'+req.body.content
   "/:id":
     get:(req,res,next)->
       tip_func.getById req.params.id,(error,tip)->

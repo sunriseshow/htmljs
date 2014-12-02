@@ -102,6 +102,14 @@ Tip.prototype = {
         $(document.body).on("click",function(){
             self._hideComments()
         })
+        $("#hide_tip").on("click",function(e){
+            e.stopPropagation();
+            if(this.checked){
+                $(".tip-point").hide();
+            }else{
+                $(".tip-point").show();
+            }
+        })
     },
     _hideComments:function(){
         this.is_hide = true;

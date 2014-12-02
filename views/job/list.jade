@@ -43,32 +43,32 @@ html
                     .job
                       .title
 
-                        a.t(href="/job/#{job.id}") #{job.title}
+                        a.t(href="/job/#{job.id}") [#{job.company_city=="市辖区"?job.company_country:job.company_city}]【#{job.company_name}】 招聘 【#{job.zhiwei}】 (#{job.min_price}元 - #{job.max_price==0?"不限":job.max_price+"元"})
                         a.headpic.user(href="/user/#{job.user.id}",data-original-title="#{job.user.nick}")
                           img(src="#{job.user.head_pic}")
-                      .con
-                          span.item
-                            span.key 公司：
-                            span.value #{job.company_name}
-                          span.item
-                            span.key 招聘职位：
-                            span.value #{job.zhiwei}
-                          span.item
-                            span.key 薪水范围：
-                            span.value #{job.min_price} - #{job.max_price==0?"不限":job.max_price}
-
-                          div
-                              span.item
-                                span.key 公司规模：
-                                span.value #{job.company_personcount}
-                              span.item
-                                span.key 所在城市：
-                                span.value #{job.company_city}
-                              if locals.user && locals.user.is_admin
-                                    if job.is_jian
-                                        a(href="/job/#{job.id}/update?is_jian=0") no推荐
-                                    else
-                                        a(href="/job/#{job.id}/update?is_jian=1") 推荐
+                      //.con
+                      //    span.item
+                      //      span.key 公司：
+                      //      span.value #{job.company_name}
+                      //    span.item
+                      //      span.key 招聘职位：
+                      //      span.value #{job.zhiwei}
+                      //    span.item
+                      //      span.key 薪水范围：
+                      //      span.value #{job.min_price} - #{job.max_price==0?"不限":job.max_price}
+                      //
+                      //    div
+                      //        span.item
+                      //          span.key 公司规模：
+                      //          span.value #{job.company_personcount}
+                      //        span.item
+                      //          span.key 所在城市：
+                      //          span.value #{job.company_city}
+                      //        if locals.user && locals.user.is_admin
+                      //              if job.is_jian
+                      //                  a(href="/job/#{job.id}/update?is_jian=0") no推荐
+                      //              else
+                      //                  a(href="/job/#{job.id}/update?is_jian=1") 推荐
                 include ../page
         .right
           .module.jian-jobs

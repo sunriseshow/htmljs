@@ -887,7 +887,8 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #jobs .my-resume .item .value{color:#444;padding-left:10px;}
 #jobs .my-resume .add-job{border-top:1px solid #eee;padding-top:10px;margin-top:10px;}
 #jobs .job-list-hd{line-height:16px;margin:10px 0;font-size:16px;height:16px;font-weight:100;color:#666;border-left:3px solid #88d1b4;padding-left:8px;margin-top:20px;}
-#jobs .job-list .job{background:#fff;overflow:hidden;}#jobs .job-list .job .title{background:#fff;padding:5px 10px;font-size:14px;line-height:30px;}
+#jobs .job-list .job:nth-child(2n){background:#F7F7F7;}
+#jobs .job-list .job{background:#fff;overflow:hidden;}#jobs .job-list .job .title{padding:5px 10px;font-size:14px;line-height:40px;}
 #jobs .job-list .job .title img{width:30px;height:30px;border-radius:50px;}
 #jobs .job-list .job .title .headpic{float:right;}
 #jobs .job-list .job .con{padding:10px;line-height:25px;background:#f7f7f7;}#jobs .job-list .job .con .item{margin-right:10px;display:inline-block;font-size:13px;}#jobs .job-list .job .con .item .key{color:#666;}

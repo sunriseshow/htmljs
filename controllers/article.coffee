@@ -636,9 +636,9 @@ module.exports.filters =
     get:['checkLogin','checkCard']
     post:['checkLoginJson','checkCard']
   "/:id/update":
-    get:['checkLogin','checkAdmin']
+    get:['checkLogin']
   "/:id/delete":
-    get:['checkLogin','checkAdmin']
+    get:['checkLogin']
   "/column/:id/edit":
     get:['checkLogin','checkCard',"article/get-column"]
     post:['checkLogin','checkCard']

@@ -73,16 +73,25 @@ Tip.prototype = {
                 submitData.parent_id = self.commentForm.tipId
             }
             HtmlJS.util.ajax(self.url,submitData,"post",function(data){
-                self._loadTip(self.commentForm.tipId?self.commentForm.tipId:data.id)
-                $("textarea",self.commentForm).val("")
-                self.lastTip.uuid = data.id
+                if(data.code){
+                    alert("在一个页面最多只能添加5枚评注")
+                }else{
+                    self._loadTip(self.commentForm.tipId?self.commentForm.tipId:data.id)
+                    $("textarea",self.commentForm).val("")
+                    self.lastTip.uuid = data.id
+                }
+
             },function(){
 
             },null,function(){
                 HtmlJS.util.ajax(self.url,submitData,"post",function(data){
-                    self._loadTip(self.commentForm.tipId?self.commentForm.tipId:data.id)
-                    $("textarea",self.commentForm).val("")
-                    self.lastTip.uuid = data.id
+                    if(data.code){
+                        alert("在一个页面最多只能添加5枚评注")
+                    }else{
+                        self._loadTip(self.commentForm.tipId?self.commentForm.tipId:data.id)
+                        $("textarea",self.commentForm).val("")
+                        self.lastTip.uuid = data.id
+                    }
                 },function(){
 
                 },null,function(){

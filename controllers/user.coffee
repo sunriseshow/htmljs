@@ -60,7 +60,7 @@ module.exports.controllers =
                   res.redirect '/user/email?'+querystring.stringify(req.query)
                   return
                 if req.query.mini
-                  res.send '<script>parent.window.HtmlJS.util.logincallback&&parent.window.HtmlJS.util.logincallback()</script>'
+                  res.send '<script>document.domain="html-js.com";parent.window.HtmlJS.util.logincallback&&parent.window.HtmlJS.util.logincallback()</script>'
                 else
                   res.redirect req.query.redirect||"/user"
               .error (error)->

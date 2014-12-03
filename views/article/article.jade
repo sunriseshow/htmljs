@@ -73,7 +73,7 @@ html
                             if locals.payers && locals.payers.length
                               span.zanlogs
                                 each zan in payers
-                                  if zan.user
+                                  if zan.user&&zan.user.id
                                     a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
                                       img(src='#{zan.user.head_pic}')
                             else

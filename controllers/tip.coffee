@@ -51,8 +51,9 @@ module.exports.controllers =
           if ts
             tips = tips.concat(ts)
           if tips&&tips.length
-            tips.forEach (tip)->
-              tip.dataValues.time =  moment(tip.createdAt).fromNow()
+            tips.forEach (_tip)->
+
+              _tip.dataValues.time =  moment(_tip.createdAt).fromNow()
           res.send tips
   "/p/:id":
     get:(req,res,next)->

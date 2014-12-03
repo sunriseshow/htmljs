@@ -1,4 +1,5 @@
 var HtmlJS =HtmlJS||{};
+document.domain = "html-js.com"
 HtmlJS.util = function(){
   return {
     loginback:null,

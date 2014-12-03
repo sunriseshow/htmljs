@@ -435,7 +435,7 @@ html
         $("#myModal").modal("show");
         $("#file")[0].onchange=function(){
           $.ajaxFileUpload({
-            url:"http://html-js.com/upload",
+            url:"/upload",
             secureuri:false,
             fileElementId:'file',
             dataType: 'json',

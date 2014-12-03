@@ -1,5 +1,4 @@
 var HtmlJS =HtmlJS||{};
-document.domain = "html-js.com"
 HtmlJS.util = function(){
   return {
     loginback:null,
@@ -24,6 +23,7 @@ HtmlJS.util = function(){
             btn.html(btn.attr("data-text"))
           }
           if(data.isnotlogin){
+              document.domain="html-js.com"
               alert("此操作需要登录，登录后会继续提交")
                 ///window.location.href='/user/login?redirect='+encodeURIComponent(window.location.href)
                 HtmlJS.util.loginback = loginback

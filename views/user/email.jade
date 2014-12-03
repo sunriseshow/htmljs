@@ -42,6 +42,7 @@ html
         input(type="text",name="email",placeholder="Email地址")
         button.btn 提交注册
     script
+      document.domain="html-js.com";
       var query = !{JSON.stringify(query)};
       $("#form").submit(function(e){
         e.preventDefault();

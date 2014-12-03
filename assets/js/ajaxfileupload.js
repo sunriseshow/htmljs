@@ -18,7 +18,7 @@ jQuery.extend({
 
             }	
         }
-        iframeHtml += ' />';
+        iframeHtml += ' /><script>document.domain="html-js.com"</script>';
         jQuery(iframeHtml).appendTo(document.body);
 
         return jQuery('#' + frameId).get(0);			

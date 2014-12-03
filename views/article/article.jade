@@ -180,8 +180,9 @@ html
                     if locals.zan_logs
                       span.zanlogs
                         each zan in zan_logs
-                          a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
-                            img(src='#{zan.user.head_pic}')
+                          if zan.user&&zan.user.id
+                            a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
+                              img(src='#{zan.user.head_pic}')
                   .actions
                     a.action(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/article/"+article.id)}&title=分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} 。前端乱炖是一个专业的前端知识原创内容社区&pic=http://www.html-js.com/uploads/article_thumb/#{article.id}.png&appkey=659341943")
                       i.icon-new-window

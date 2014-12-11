@@ -38,7 +38,7 @@ func_article =
         id:articleId
     .success (article)->
       if article && article.publish_time&&article.publish_time>1000000
-        score = (article.comment_count+article.visit_count/1000)/Math.pow((new Date().getTime()/1000-article.publish_time)/60/60+2,1.3)
+        score = (article.comment_count/10+article.visit_count/1000)/Math.pow((new Date().getTime()/1000-article.publish_time)/60/60+2,1.5)
         article.updateAttributes({score:score},['score'])
         .success ()->
     .error (error)->

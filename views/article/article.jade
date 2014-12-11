@@ -9,7 +9,7 @@ html
       .entry-content img{border:1px solid #ddd;box-shadow: 0px 0px 2px #ddd;}
     script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
     script(src='#{assets_head}/js/bootstrap/bootstrap-scrollspy.js')
-    script(src='#{assets_head}/js/tips.js?ddddd')
+    script(src='#{assets_head}/js/tips.js?dddddd')
     link(rel="stylesheet",href="#{assets_head}/css/tips.css?2dd2ddddddd",type="text/css")
   body#article
     - locals.pageId=1;
@@ -59,7 +59,7 @@ html
                   .wrapper
                     include ../recommend_books
                     .entry-content
-                      .alert 在文章任何区域点击即可给文章添加【评注】！浮到评注点上可以查看详情。<div class="checkbox" style="float:right;line-height:40px;color:#333;padding-top:3px;"><label><input type="checkbox" id="hide_tip">隐藏标注</label></div>
+                      .alert 在文章任何区域双击击即可给文章添加【评注】！浮到评注点上可以查看详情。<div class="checkbox" style="float:right;line-height:40px;color:#333;padding-top:3px;"><label><input type="checkbox" id="hide_tip">隐藏标注</label></div>
                       if !(locals.user && locals.user.id==article.user_id)&&article.is_buy && !locals.can_read
                         - var matches = article.html.match(/<p>.*?<\/p>/g);
                         - var match_result = matches.splice(0,4);

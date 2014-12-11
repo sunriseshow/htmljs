@@ -43,7 +43,7 @@ Tip.prototype = {
     },
     _bind:function(){
         var self = this;
-        this.ele.on("click",function(e){
+        this.ele.on("dblclick",function(e){
             if(self.is_hide){
                 self._createTip(e.pageX-self.ele.offset().left, e.pageY-self.ele.offset().top);
                 e.stopPropagation()

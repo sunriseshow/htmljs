@@ -12,5 +12,8 @@ module.exports =
   visit_count:
     type:"int"
     defaultValue:0
+  comment_count:
+    type:"int"
+    defaultValue:0
   user_id:"int"
   time:"varchar(40)"

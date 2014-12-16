@@ -12,7 +12,6 @@ config = require './../config.coffee'
 Sina=require("./../lib/sdk/sina.js")
 sina=new Sina(config.sdks.sina)
 moment = require 'moment'
-func_topic.run_sort()
 setInterval ()->
   func_topic.run_sort()
 ,1000*60*10

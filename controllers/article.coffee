@@ -21,7 +21,6 @@ read = require("readability")
 path = require 'path'
 request = require 'request'
 RSS=require 'rss'
-func_article.run_sort()
 setInterval ()->
   func_article.run_sort()
 ,1000*60*10

@@ -166,35 +166,38 @@ html
                         span.time 时间:#{moment(article.createdAt).format("YYYY-MM-DD")}
                         span.visit_count 浏览:#{article.visit_count}
                         span.zan_count 赞:#{article.zan_count}
-            #fixed-modules
 
-              .bottom-action.module
-                .wrapper
-                  .actions
-                    a.zan.action(href="javascript:void(0);")
-                      i.icon-thumbs-up
-                      if locals.has_zan
-                        |<em>已赞</em> <span>#{article.zan_count}</span>
-                      else
-                        |<em>赞</em> <span>#{article.zan_count}</span>
-                    if locals.zan_logs
-                      span.zanlogs
-                        each zan in zan_logs
-                          if zan.user&&zan.user.id
-                            a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
-                              img(src='#{zan.user.head_pic}')
-                  .actions
-                    a.action(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/article/"+article.id)}&title=分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} 。前端乱炖是一个专业的前端知识原创内容社区&pic=http://www.html-js.com/uploads/article_thumb/#{article.id}.png&appkey=659341943")
-                      i.icon-new-window
-                      em.bds_more(style="background:none !important;float:none;display:inline;padding:0;") 分享到微博
-                    if locals.user && (user.is_admin||user.id==article.user_id)
-                      a.action(href="/article/#{article.id}/edit") 编辑
-                    a.add_fav.action(href="javascript:void(0);")
-                      //- i.icon-heart
-                      if locals.has_fav
-                        |<em>已收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
-                      else
-                        |<em>收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
+
+            .bottom-action.module
+              .wrapper
+                .actions
+                  a.zan.action(href="javascript:void(0);")
+                    i.icon-thumbs-up
+                    if locals.has_zan
+                      |<em>已赞</em> <span>#{article.zan_count}</span>
+                    else
+                      |<em>赞</em> <span>#{article.zan_count}</span>
+                  if locals.zan_logs
+                    span.zanlogs
+                      each zan in zan_logs
+                        if zan.user&&zan.user.id
+                          a.tooltip-trigger(href="/user/#{zan.user.id}",data-original-title="#{zan.user.desc}")
+                            img(src='#{zan.user.head_pic}')
+                .actions
+                  a.action(target="_blank",href="http://service.weibo.com/share/share.php?url=#{encodeURIComponent("http://www.html-js.com/article/"+article.id)}&title=分享一篇@#{article.user_nick} 的原创文章【#{article.title}】来自@前端乱炖 #{column?'专栏「'+column.name+'」':''} 。前端乱炖是一个专业的前端知识原创内容社区&pic=http://www.html-js.com/uploads/article_thumb/#{article.id}.png&appkey=659341943")
+                    i.icon-new-window
+                    em.bds_more(style="background:none !important;float:none;display:inline;padding:0;") 分享到微博
+                  if locals.user && (user.is_admin||user.id==article.user_id)
+                    a.action(href="/article/#{article.id}/edit") 编辑
+                  a.add_fav.action(href="javascript:void(0);")
+                    //- i.icon-heart
+                    if locals.has_fav
+                      |<em>已收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
+                    else
+                      |<em>收藏</em> <span>#{locals.favs?locals.favs.length:0}</span>
+            #fixed-modules
+              a.ad-blank(target="_blank",href="http://amazeui.org")
+                img(src="http://htmljs.b0.upaiyun.com/uploads/1418870524674-前端乱炖%20广告图.jpg")
               a.ad-blank(target="_blank",href="https://coding.net/app?hmsr=%E5%89%8D%E6%AE%B5%E4%B9%B1%E7%82%96&hmmd=%E5%9B%BE%E7%89%87%E5%B9%BF%E5%91%8A&hmpl=app&hmkw=&hmci=",style="width:280px;height:180px;display:block;")
                 img(src="http://htmljs.b0.upaiyun.com/uploads/1418704939163-280x180.jpg")
               a.ad-blank(target="_blank",href="https://100offer.com/join/dun",style="display:block;width:280px;height:180px;")

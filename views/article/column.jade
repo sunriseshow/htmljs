@@ -198,7 +198,6 @@ html(xmlns:wb='http://open.weibo.com/wb')
             matchUsers.push(u)
           }
           })
-        console.log(matchUsers)
         showUsers(matchUsers)
         })
       $('.actions a').tooltip({
@@ -233,7 +232,6 @@ html(xmlns:wb='http://open.weibo.com/wb')
           },
           dataType:"json",
           success:function(data){
-            console.log(data)
               if(data.success){
                 alert("添加成功！")
                 window.location.reload();

@@ -62,7 +62,6 @@ html
       editor1.run();
       
       editor1.hooks.chain("onPreviewRefresh", function () {
-        console.log($("#wmd-preview").html())
         $("#desc_html").val($("#wmd-preview").html())
       });
       editor1.hooks.set('insertImageDialog', function(callback) {

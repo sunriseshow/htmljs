@@ -36,7 +36,6 @@ html
                     button.btn 搜索
               if locals.relative_words&&relative_words.length
                 span 推荐搜索：
-                  - console.log (relative_words)
                   for w,i in relative_words
                     a(href="/search?q=#{w}",style="margin-right:10px;") #{w}
           if locals.results
@@ -53,8 +52,7 @@ html
                       else
                         - var link = "/"+result.type+"/"+result.id;
                       h2.title 
-                        - console.log (result)
-                        a(href="#{link}",target="_blank") 
+                        a(href="#{link}",target="_blank")
                           if result.type == 'article'
                             |「专栏」
                           else if result.type == 'card'

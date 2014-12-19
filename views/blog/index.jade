@@ -31,12 +31,23 @@ html(xmlns:wb='http://open.weibo.com/wb')
         .bd 
           each article in articles
             .article
-              .title 
-                //- img(src="http://g.etfv.co/#{article.blogBlog.url}",width="15",height="15",style="margin-right:5px;")
+              .title
+                if locals.user && locals.user.is_admin
+                  //- img(src="http://g.etfv.co/#{article.blogBlog.url}",width="15",height="15",style="margin-right:5px;")
+                  select.tags(style="height:20px;width:100px;",data-id="#{article.id}")
+                    option(value="0") 请选择
+                    each tag in locals.tags
+                      |<option value="#{tag.id}" #{tag.id==article.tag_id?"selected":""}>#{tag.name}</option>
                 a(href="/blog/#{article.id}",rel="nofollow") #{article.title}
+
               .desc #{article.content.replace(/<[^>]*?>/g,"").substr(0,Math.floor(Math.random()*40+60))+"..."}
               .time #{article.time?moment(article.time*1).format("YYYY-MM-DD"):''}
           include ../page
-      
+      script.
+        $(".tags").on("change",function(){
+            var name = this.options[this.selectedIndex].innerHTML;
+            var id = this.value;
+            window.location.href="/blog/"+$(this).attr("data-id")+"/update?tag_name="+name+"&tag_id="+id;
+        })
     include ../simple-footer
     

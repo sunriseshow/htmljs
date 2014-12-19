@@ -62,6 +62,24 @@ func_article =
       callback null,articles
     .error (error)->
       callback error
+  getAllWithContent:(page,count,condition,order,callback)->
+    if not callback
+      callback = order
+      order = "sort desc,id desc"
+    query =
+      offset: (page - 1) * count
+      limit: count
+      order: order
+      attributes:['id','publish_time','html','zan_count','comment_count','visit_count','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
+      include:[User,Column]
+      raw:false
+    if condition then query.where = condition
+    Article.findAll(query)
+    .success (articles)->
+      cache.recent = articles
+      callback null,articles
+    .error (error)->
+      callback error
   getAllByField:(page,count,condition,order,callback)->
     if not callback
       callback = order

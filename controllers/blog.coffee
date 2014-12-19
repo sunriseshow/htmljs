@@ -64,6 +64,35 @@ module.exports.controllers =
         else
           result.success = 1
           res.send 'hihihi('+JSON.stringify(result)+')'
+  "/all.json":
+    get:(req,res,next)->
+      if res.locals.articles
+        res.locals.articles.forEach (a)->
+          a.content = a.content.replace(/<[^>]*?>/g,'').replace(/\s/g,'').substr(0,100)
+          a.title = a.title.replace(/<[^>]*?>/g,'').replace(/\s/g,'').substr(0,100)
+          a.time = moment(a.createdAt).fromNow()
+      obj = {}
+
+      obj.total = res.locals.total
+      obj.totalPage = res.locals.totalPage
+      obj.page = res.locals.page
+      obj.articles = res.locals.articles
+      res.send obj
+  "/:id.json":
+    get:(req,res,next)->
+
+      func_article.getById req.params.id,(error,blog)->
+        if error then next error
+        else
+          blog.title = blog.title.replace(/<[^>]*?>/g,'').replace(/\s/g,'').substr(0,100)
+          blog.time = moment(blog.createdAt).fromNow()
+          res.send blog
+  "/:id/update":
+    get:(req,res,next)->
+      func_article.update req.params.id,req.query,(error,blog)->
+        if error then next error
+        else
+          res.redirect "back"
   "/:id":
     get:(req,res,next)->
       func_article.getById req.params.id,(error,blog)->
@@ -72,9 +101,12 @@ module.exports.controllers =
           res.locals.blog = blog
           func_article.addCount req.params.id,'visit_count',()->
           res.render 'blog/jump.jade'
+
 module.exports.filters =
   "/":
-    get:['freshLogin','blog/get-all-blogs','blog/get-all-articles']
+    get:['freshLogin','blog/get-all-blogs','blog/get-all-articles','tag/all-tags']
   "/add-blog":
     get:['checkLogin','checkAdmin']
     post:['checkLogin','checkAdmin']
+  "/all.json":
+    get:['blog/get-all-articles']

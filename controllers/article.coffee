@@ -9,6 +9,7 @@ func_search = __F 'search'
 func_comment = __F 'comment'
 func_payment = __F 'payment'
 func_count = __F 'user/count'
+moment = require 'moment'
 config = require './../config.coffee'
 authorize=require("./../lib/sdk/authorize.js");
 md5 = require 'MD5'
@@ -49,29 +50,30 @@ module.exports.controllers =
               author: article.user_nick
               date: article.publish_time*1000
           res.end feed.xml()
-  # ".json":
-  #   "get":(req,res,next)->
-  #     condition = 
-  #       is_yuanchuang:1
-  #     result = 
-  #       success:0
-  #       data:{}
-  #     func_article.count condition,(error,count)->
-  #       if error 
-  #         result.info = error.message
-  #       else
-  #         result.data.total=count
-  #         result.data.totalPage=Math.ceil(count/10)
-  #         result.data.page = (req.query.page||1)
-  #         func_article.getAll result.data.page,10,condition,(error,articles)->
-  #           if error 
-  #             result.info = error.message
-  #           else
-  #             result.success = 1
-  #             articles.forEach (a)->
-  #               delete a.html
-  #             result.data.articles = articles
-  #           res.send result
+  ".json":
+     "get":(req,res,next)->
+       condition =
+         is_yuanchuang:1
+       result =
+         success:0
+         data:{}
+       func_article.count condition,(error,count)->
+         if error
+           result.info = error.message
+         else
+           result.data.total=count
+           result.data.totalPage=Math.ceil(count/10)
+           result.data.page = (req.query.page||1)
+           func_article.getAllWithContent result.data.page,10,condition,(error,articles)->
+             if error
+               result.info = error.message
+             else
+               result.success = 1
+               articles.forEach (article)->
+                 article.publish_time = moment(article.publish_time).fromNow()
+                 article.html = article.html.replace(/<[^>]*?>/g,'').replace(/\s/g,'').substr(0,100)
+               result.data.articles = articles
+             res.send result
   "/old":
     "get":(req,res,next)->
       condition = 

@@ -14,7 +14,6 @@ module.exports.controllers =
       result = 
         success:0
         info:''
-      console.log req.body
       if !req.body.time || !req.body.title || !req.body.content
         result.info = "error"
         res.send result

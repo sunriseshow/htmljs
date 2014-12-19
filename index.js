@@ -38,7 +38,7 @@
 
     logger.setLevel('INFO');
 
-    black = ['webmeup', 'DNSPod', 'monitor', 'snarfware', 'majestic12', 'easou', 'yunyun', 'sougou', 'sogou', 'yunrang', 'ahrefs', "longurl", 'rogerbot'];
+    black = ['webmeup', 'DNSPod', 'monitor', 'snarfware', 'majestic12', 'easou', 'yunyun', 'sougou', 'sogou', 'yunrang', 'ahrefs', "longurl", 'rogerbot','YisouSpider'];
 
     ipblack = ['211.144.76.89'];
     app.configure(function() {

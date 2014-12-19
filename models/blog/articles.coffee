@@ -17,3 +17,5 @@ module.exports =
     defaultValue:0
   user_id:"int"
   time:"varchar(40)"
+  tag_id:"int"
+  tag_name:"varchar(30)"

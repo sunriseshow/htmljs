@@ -57,11 +57,30 @@ html
      script.
        var list_tpl = $("#list-tpl").html();
         var list_template = Handlebars.compile(list_tpl);
-       $.ajax({
-            url:"/article.json",
-            dataType:"json",
-            success:function(data){
-                $("#tui_list").append(list_template(data.data))
+        var is_loading = false;
+        var page = 1;
+        var loadPage = function(){
+        if(is_loading) return;
+        is_loading = true;
+          $.ajax({
+          url:"/article.json",
+          data:{
+          page:page++
+          },
+          dataType:"json",
+          success:function(data){
+            $("#tui_list").append(list_template(data.data))
+            is_loading = false
+            },
+            error:function(){
+            is_loading = false
+            }
+            })
+        }
+        loadPage();
+        $(window).on("scroll",function(){
+            if($(window).scrollTop()+$(window).height()>$(document.body).height()-100){
+                loadPage();
             }
         })
        $(function() {
@@ -74,8 +93,6 @@ html
                 "title": "前端乱炖移动版"
               }
             },
-
-
             list1: {
                       "options": {
                         "type": "thumb",

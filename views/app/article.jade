@@ -5,7 +5,17 @@ html
     link(rel="Shortcut Icon",href="#{assets_head}/images/logo.ico?123")
     link(href="#{assets_head}/amazeui/css/amazeui.min.css",rel="stylesheet",type="image/x-icon")
     link(href="#{assets_head}/amazeui/css/app.css",rel="stylesheet",type="image/x-icon")
-    title 前端乱炖移动版
+    title
+    style.
+      .ds-comments{padding:0;}
+      .ds-comments li{list-style: none;border-bottom:1px dashed #eee;}
+      .ds-post{}
+      .ds-avatar{width:10%;display: inline-block;}
+      .ds-avatar img{width:30px;height:30px;border-radius: 30px;margin-top:10px;margin-left:5px;}
+      .ds-comment-body{width:80%;display:inline-block;}
+      .ds-user-name{font-size:12px;line-height: 30px;}
+      .ds-time{color:#999;margin-left:10px;font-size:12px;}
+      .ds-comment-body p{font-size:12px;line-height:20px;}
     |<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
    body
      script(type="text/x-handlebars-template",id="list-tpl").
@@ -16,10 +26,39 @@ html
                data-am-paragraph="\{ tableScrollable: true, pureview: true \}">
           {{{html}}}
           </article>
+     script(type="text/x-handlebars-template",id="comment-tpl").
+       {{#comments}}
+       <li class="ds-post clearfix" data-post-id="1163513100117216283">
+         <div class="ds-post-self" data-post-id="1163513100117216283" data-thread-id="1163513100117217799" data-root-id="0" data-source="duoshuo">
+           <div class="ds-avatar">
+             <img src="{{user_headpic}}" alt="{{user_nick}}">
+           </div>
+           <div class="ds-comment-body">
+             <div class="ds-comment-header">
+             <span class="ds-user-name" data-qqt-account="">{{user_nick}}</span>
+             <span class="ds-time" datetime="2014-12-17T15:54:17+08:00" title="2014年12月17日 下午3:54:17">12月17日</span>
+             </div>
+             <p>{{{html}}}</p>
+             <div class="ds-comment-footer ds-comment-actions">
+
+             </div>
+           </div>
+         </div>
+       </li>
+       {{/comments}}
      script(type="text/x-handlebars-template",id="amz-tpl").
         {{>header header}}
         <div id="tui_article">
 
+        </div>
+        <div id="">
+          <div  class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
+            <div class="ds-thread">
+              <ul class="ds-comments" id="tui_comments">
+
+              </ul>
+            </div>
+          </div>
         </div>
 
 
@@ -31,11 +70,14 @@ html
      script.
        var list_tpl = $("#list-tpl").html();
         var list_template = Handlebars.compile(list_tpl);
+        var comment_tpl = $("#comment-tpl").html();
+        var comment_template = Handlebars.compile(comment_tpl);
        $.ajax({
             url:"/article/#{id}.json",
             dataType:"json",
             success:function(data){
                 $("#tui_article").append(list_template(data.data.article))
+                $("#tui_comments").append(comment_template(data.data))
             }
         })
        $(function() {

@@ -1,15 +1,9 @@
-doctype html
-html
+!!! 5
+html(xmlns:wb='http://open.weibo.com/wb')
   head
-    meta(charset='utf-8')
-    link(rel="Shortcut Icon",href="#{assets_head}/images/logo.ico?123")
-    link(href="#{assets_head}/amazeui/css/amazeui.min.css",rel="stylesheet",type="image/x-icon")
-    title 睡前故事
+    include ../head
+    title 二十一点·睡前故事
     style.
-      #content{
-        padding:20px;
-
-        }
       #header{
         background: url(http://htmljs.b0.upaiyun.com/uploads/1420209087983-music-bg.jpg) no-repeat;
         background-size:cover;
@@ -21,41 +15,30 @@ html
         padding-left:10px;
         text-align: center;
       }
-      .share-tip{height:25px;background: #eee;color:#444;line-height: 25px;
-      padding-left:10px;font-size:12px;}
-    |<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  body
+  body#articles
     #header 二十一点 · 睡前故事
+    #content.clearfix
+      .content
+          if musics && musics.length
+            .articles
+              each music,i in musics
+                article(id="post-#{music.id}",class="#{i%2==0?'yooo':''}")
+                  h2.entry-title
+                    a.real-title(href='/article/#{music.id}', title='#{music.title}', rel='bookmark') 第#{music.index}期《#{music.title}》
+                  .entry-foot
+                    div.others
+                      span.time.item
+                        span.index
+                          i.icon-eye-open
+                        a.value #{music.visit_count}
+                      span.time.item
+                        span.index
+                          i.icon-clock
+                        a.value #{moment(music.createdAt).format("YYYY-MM-DD")}
+                      if locals.user && user.is_admin
+                        span.views.item
+                          a.value(href="/music/#{music.id}/edit") 编辑
 
-
-    .share-tip 点击右上角可以通过微信分享给朋友们哦,谢谢大家的支持！
-    #content
-      article.am-article
-        .am-article-hd
-          h1.am-article-title 第37期《生气汤》
-          p.am-article-meta 十一
-        .am-article-bd
-          p.am-article-lead 当孩子不开心，很生气很愤怒的时候怎么办呢？<br/><br/>这就需要大人在孩子的身边，陪伴幼儿，并且帮助幼儿用正确的方式去排解不良情绪。<br/><br/>生气并不可怕，可怕的是不知道如何去面对它。<br/><br/>一本很有意思的绘本《生气汤》，不管是大朋友还是小朋友，生气的时候，来煮一锅生气汤吧！
-          .am-article-divider
-          p <audio src="http://yutou.oss-cn-hangzhou.aliyuncs.com/%E7%94%9F%E6%B0%94%E6%B1%A4%281%29.mp3" preload="auto" controls="true"/>
-          p
-            img(src="http://htmljs.b0.upaiyun.com/uploads/1420206188080-未标题-1.jpg")
-          p.am-article-lead 二十一点 微信公众号，是由卓老师维护的一个面向各位小朋友和大朋友的深夜故事公众号。<br/><br/>卓老师每天晚上都会讲一个非常可爱的故事，然后录音发布在公众号上。<br/><br/>记住哦~每天晚上九点发布<br/>赶紧关注卓老师的公众号：二十一点<br/><br/>如果您觉得卓老师讲的不错，欢迎多多分享给自己的朋友哦。谢谢啦~\(≧▽≦)/~
-          p.
-            <!-- 多说评论框 start -->
-              <div class="ds-thread" data-thread-key="1" data-title="二十一点睡前故事《生气汤》37" data-url="http://www.html-js.com/music"></div>
-            <!-- 多说评论框 end -->
-            <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-            <script type="text/javascript">
-            var duoshuoQuery = {short_name:"htmljs"};
-              (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                 || document.getElementsByTagName('body')[0]).appendChild(ds);
-              })();
-              </script>
-            <!-- 多说公共JS代码 end -->
-
+          else
+            .articles 暂无
+          include ../page

@@ -1,7 +1,9 @@
 !!! 5
 html(xmlns:wb='http://open.weibo.com/wb')
   head
-    include ../head
+    link(rel="Shortcut Icon",href="http://htmljs.b0.upaiyun.com/uploads/1420299703794-icon.png")
+    link(rel="stylesheet",href="#{assets_head}/css/bootstrap.css?dddddddd",type="text/css")
+    link(rel="stylesheet",href="#{assets_head}/css/music.css?zdzddddddddd92dd3dz",type="text/css")
     title 二十一点·睡前故事
     style.
       #header{
@@ -13,10 +15,11 @@ html(xmlns:wb='http://open.weibo.com/wb')
         color:#fff;
         line-height: 50px;
         text-align: center;
+        display: block;
       }
       article img{width:100%;}
   body#musics
-    #header 二十一点 · 睡前故事
+    a#header(href="/music") 二十一点 · 睡前故事
     #content.clearfix
       .content
           if musics && musics.length

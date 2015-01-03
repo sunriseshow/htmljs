@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    link(rel="Shortcut Icon",href="#{assets_head}/images/logo.ico?123")
+    link(rel="Shortcut Icon",href="http://htmljs.b0.upaiyun.com/uploads/1420299703794-icon.png")
     link(href="#{assets_head}/amazeui/css/amazeui.min.css",rel="stylesheet",type="image/x-icon")
     title 二十一点·睡前故事 第#{music.index}期《#{music.title}》
     style.
@@ -19,6 +19,7 @@ html
         color:#fff;
         line-height: 50px;
         text-align: center;
+        display: block;
       }
       .nav-music{
         margin-bottom:10px;
@@ -36,7 +37,7 @@ html
       padding-left:10px;font-size:12px;}
     |<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   body
-    #header 二十一点 · 睡前故事
+    a#header(href="/music") 二十一点 · 睡前故事
     .share-tip 点击右上角通过微信分享给朋友们哦,谢谢大家的支持！
     #content
       div.nav-music

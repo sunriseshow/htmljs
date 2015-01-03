@@ -12,7 +12,7 @@ module.exports.controllers =
           res.locals.total=_count
           res.locals.totalPage=Math.ceil(_count/count)
           res.locals.page = (req.query.page||1)
-          func_music.getAll page,count,condition,(error,musics)->
+          func_music.getAll page,count,condition,'index desc',(error,musics)->
             if error then next error
             else
               res.locals.musics = musics

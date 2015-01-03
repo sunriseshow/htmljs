@@ -15,7 +15,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
         padding-left:10px;
         text-align: center;
       }
-  body#articles
+  body#musics
     #header 二十一点 · 睡前故事
     #content.clearfix
       .content
@@ -24,17 +24,12 @@ html(xmlns:wb='http://open.weibo.com/wb')
               each music,i in musics
                 article(id="post-#{music.id}",class="#{i%2==0?'yooo':''}")
                   h2.entry-title
-                    a.real-title(href='/article/#{music.id}', title='#{music.title}', rel='bookmark') 第#{music.index}期《#{music.title}》
+                    a.real-title(href='/article/#{music.id}', title='#{music.title}', rel='bookmark') 第#{music.index}期 睡前故事《#{music.title}》
+                  .entry-img
+                    img(src="#{music.cover}")
                   .entry-foot
                     div.others
-                      span.time.item
-                        span.index
-                          i.icon-eye-open
-                        a.value #{music.visit_count}
-                      span.time.item
-                        span.index
-                          i.icon-clock
-                        a.value #{moment(music.createdAt).format("YYYY-MM-DD")}
+                      div.item.meta 十一 <time style="margin-left:10px;">#{moment(music.createdAt).format("YYYY-MM-DD")}</time> <span style="margin-left:10px;">#{music.visit_count}浏览</span>
                       if locals.user && user.is_admin
                         span.views.item
                           a.value(href="/music/#{music.id}/edit") 编辑

@@ -964,15 +964,16 @@ body{background:url(../images/bg-repeat.png);background:#e5e5e5;}
 #job .publish .fake-form{padding-top:10px;}#job .publish .fake-form textarea{width:600px;border-radius:3px;}
 #weeklys #content{width:700px;margin:0 auto;}
 #weeklys .item{margin-top:30px;width:700px;height:200px;font-size:30px;text-align:center;display:table-cell;vertical-align:middle;}
-#musics article{background:#fff;padding:10px 15px;position:relative;border-bottom:1px solid #f1f1f1;}#musics article .lft{display:none;height:50px;width:50px;color:#666;border:1px solid #ddd;vertical-align:top;text-align:center;margin-right:10px;line-height:30px;}#musics article .lft i{background:none;}
+#musics .content{max-width:400px;margin:0 auto;float:none;}
+#musics article{background:#fff;margin-bottom:20px;padding:10px 15px;position:relative;border-bottom:1px solid #f1f1f1;}#musics article .lft{display:none;height:50px;width:50px;color:#666;border:1px solid #ddd;vertical-align:top;text-align:center;margin-right:10px;line-height:30px;}#musics article .lft i{background:none;}
 #musics article .lft .count{color:#999;padding-left:3px;}
 #musics article .rht{display:inline-block;}
-#musics article .entry-title{margin:0;height:30px;overflow:hidden;font-size:15px;line-height:30px;font-weight:normal;color:#444;}#musics article .entry-title .t-tip{font-style:normal;font-size:14px;color:#fff;background:#50a7de;padding:0px 2px;display:inline-block;line-height:18px;margin-right:5px;font-family:"STXihei";vertical-align:1px;}
+#musics article .entry-title{margin:0;overflow:hidden;font-size:18px;line-height:50px;font-weight:normal;color:#444;}#musics article .entry-title .t-tip{font-style:normal;font-size:14px;color:#fff;background:#50a7de;padding:0px 2px;display:inline-block;line-height:18px;margin-right:5px;font-family:"STXihei";vertical-align:1px;}
 #musics article .entry-title a{color:#444;}
 #musics article .entry-title .column-title{font-size:12px;padding:0 2px;color:#888;}
 #musics article .entry-foot .meta{color:#999;}
 #musics article .entry-foot .right-foot{float:right;}
-#musics article .entry-foot .item{font-size:12px;line-height:25px;margin-right:10px;}#musics article .entry-foot .item i{background:none;margin-right:1px;vertical-align:-2px;}
+#musics article .entry-foot .item{font-size:12px;line-height:30px;margin-right:10px;}#musics article .entry-foot .item i{background:none;margin-right:1px;vertical-align:-2px;}
 #musics article .entry-foot .item i:before{color:#aaa;background:none;}
 #musics article .entry-foot .item a{color:#aaa;}
 #musics article .user{position:absolute;right:7px;top:15px;}#musics article .user a{display:block;}

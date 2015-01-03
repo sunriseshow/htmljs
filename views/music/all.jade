@@ -22,7 +22,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
           if musics && musics.length
             .articles
               each music,i in musics
-                article(id="post-#{music.id}",class="#{i%2==0?'yooo':''}")
+                article(id="post-#{music.id}",class="")
                   h2.entry-title
                     a.real-title(href='/music/#{music.id}', title='#{music.title}', rel='bookmark') 第#{music.index}期 睡前故事《#{music.title}》
                   .entry-img

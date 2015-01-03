@@ -21,15 +21,27 @@ html
         padding-left:10px;
         text-align: center;
       }
+      .nav-music{
+        margin-bottom:10px;
+      }
+      .all-music{
+        line-height:40px;
+        font-size:14px;
+        color:#999;
+        border:1px solid #ddd;
+        padding:10px;
+        margin-right:10px;
+
+      }
       .share-tip{height:25px;background: #eee;color:#444;line-height: 25px;
       padding-left:10px;font-size:12px;}
     |<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   body
     #header 二十一点 · 睡前故事
-
-
     .share-tip 点击右上角通过微信分享给朋友们哦,谢谢大家的支持！
     #content
+      div.nav-music
+        a.all-music(href="/music") 查看往期的睡前故事
       article.am-article
         .am-article-hd
           h1.am-article-title 第#{music.index}期《#{music.title}》

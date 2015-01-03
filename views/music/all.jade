@@ -24,7 +24,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
               each music,i in musics
                 article(id="post-#{music.id}",class="#{i%2==0?'yooo':''}")
                   h2.entry-title
-                    a.real-title(href='/article/#{music.id}', title='#{music.title}', rel='bookmark') 第#{music.index}期 睡前故事《#{music.title}》
+                    a.real-title(href='/music/#{music.id}', title='#{music.title}', rel='bookmark') 第#{music.index}期 睡前故事《#{music.title}》
                   .entry-img
                     img(src="#{music.cover}")
                   .entry-foot

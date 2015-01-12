@@ -1,5 +1,4 @@
 config.coffee
-.gitignore
 alipay_config.js
 node_modules
 .DS_Store
@@ -9,3 +8,4 @@ uploads
 sftp-config.json
 lib/uploads
 lib/card-*.png
+route_static

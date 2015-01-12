@@ -90,6 +90,24 @@
             }
             return next();
         });
+        app.use(function(req, res, next) {
+            var userAgent = req.headers['user-agent'].toLowerCase();
+            if(userAgent.indexOf("bot")!=-1||userAgent.indexOf("spider")!=-1) {
+                var static_path = __dirname + "/route_static/" + req.originalUrl.replace(/\//g, "_");
+                if (fs.existsSync(static_path)) {
+                    var mtime = fs.statSync(static_path).mtime;
+                    if (new Date().getTime() - mtime.getTime() < 1000 * 60 * 60 * 24) {
+
+                        console.log("read from cache")
+                        res.send(fs.readFileSync(static_path))
+                        return;
+                    }
+
+                } else {
+                }
+            }
+            return next();
+        });
         app.use(app.router);
         rainbow.route(app, {
             controllers: '/controllers/',

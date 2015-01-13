@@ -40,7 +40,7 @@
 
     black = ['webmeup', 'DNSPod', 'monitor', 'snarfware', 'majestic12', 'easou', 'yunyun', 'sougou', 'sogou', 'yunrang', 'ahrefs', "longurl", 'rogerbot','YisouSpider'];
 
-    ipblack = ['211.144.76.89'];
+    ipblack = ['211.144.76.89','118.193.54.172'];
     app.configure(function() {
         var static_jades;
         app.set("port", config.run_port);

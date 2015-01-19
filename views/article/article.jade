@@ -85,15 +85,10 @@ html
                     .ads
                       .wrapper(style="width:700px;margin: 0 auto;")
                         div(style="margin:30px 0 10px 0;")
-                          - var codenum = Math.random();
-                          - var codead = codenum>0.5?"Coding 官方技术博客上线咯 !":"创业? 私活? 零成本，性能最好的云端开发工具，来Coding.net 立马干!  "
-                          - var codeurl =codenum>0.5?"http://blog.coding.net/":"https://coding.net"
                           //a(href="#{codeurl}",target="_blank",style="display:block;line-height:25px;") 【广告】#{codead}
                           //a(href=" http://www.jobdeer.com/?fr=htmljs",target="_blank",style="display:block;line-height:25px;") 【广告】优秀的人才不找工作，都在「 JobDeer.com 」拍卖自己！
-                          
-                          div(style="margin-top:20px;height:100px;")
-                            a(href="http://www.jiankongbao.com",target="_blank")
-                              img(style="border:1px solid #ddd;",src="http://htmljs.b0.upaiyun.com/uploads/1419996812882-700X100.jpg")
+                        a.ad-blank(href="http://www.html-js.com/topic/827",style="width:700px;height:100px;margin-top:20px;")
+                          .ad-inner 广告位 点击查看投放指南
                     .entry-meta
                       p 本站专栏文章皆为原创，转载请注明出处（带有 前端乱炖 字样）和本文的显式链接(<a href="http://www.html-js.com/article/#{article.id}">http://www.html-js.com/article/#{article.id}</a>)，本站和作者保留随时要求删除文章的权利！
 

@@ -29,7 +29,7 @@ setInterval ()->
 module.exports.controllers = 
   "/":
     "get":(req,res,next)->
-      res.render 'article/articles-list.jade'
+      res.render 'article/articles.jade'
   "/rss|/rss.xml":
     "get":(req,res,next)->
       feed = new RSS

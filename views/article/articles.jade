@@ -13,14 +13,14 @@ html(xmlns:wb='http://open.weibo.com/wb')
     - locals.pageId=1;
     include ../header
     #content.clearfix
-      ul.breadcrumb
-        li
-          a(href="/") 首页
-          span.divider /
-        li.active
-          span 专栏文章
-          
-        
+      if locals.weekTopUsers
+        .module
+          .hd 本周贡献榜
+          .bd
+            each h in weekTopUsers
+              div.user
+                a(data-original-title="#{h.user.nick}",href="/user/#{h.user.id}")
+                  img(src="#{h.user.head_pic}")
       if !locals.column
           //- .column-list.clearfix.module
           //-   .bd
@@ -61,150 +61,102 @@ html(xmlns:wb='http://open.weibo.com/wb')
               span.divider /
             li.active
               span #{column.name}
-          //- .column
-          //-   .col-title 专栏名：#{column.name}
-          //-   .col-user 所有者：#{column.user.nick}
-          //-   .col-desc !{column.desc_html}
-          //-   .col-share.item.share#bdshare.bdshare_t.bds_tools.get-codes-bdshare.clearfix(style="width:300px;margin-top:10px;float:none;margin-left:0px;")
-          //-       span.index(style="float:left;line-height:30px;") 分享：
-          //-       a.bds_tsina
-          //-       a.bds_qzone
-          //-       a.bds_tqq
-          //-       a.bds_douban
-          //-       a.bds_renren
-          //-       a.shareCount
-            
-          //-   .col-action
-          //-     if column.is_public || (locals.user&&user.id==column.user_id)
-          //-       a.btn(href="/article/add?column_id=#{column.id}",data-original-title="",style="margin-right:10px;") 
-          //-         i.icon-plus.icon-white
-          //-         |  在此专栏发表文章
-          //-     if !locals.is_rssed
-          //-       a.btn(href="/article/column/#{column.id}/rss") 
-          //-         i.icon-message-plus
-          //-         |  订阅此专栏
-                
-          //-     else
-          //-       a.btn.disabled
-          //-         |已订阅
-      //- .actions     
-      //-   a.btn(href="/article/column/add") <i class="icon-white icon-book-open"></i> 创建专栏
-      //-   a(href="/article/column",style="margin-left:20px;") 所有专栏
-      .module.my_columns
-        .hd 我的专栏
-        .bd
-          - var now = new Date().getTime();
-          if locals.my_columns && my_columns.length
-            each column in my_columns
-              .my_column
-                .title 
-                  a(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
-                .time 最后更新：<span class="#{now-column.last_article_time>1000*60*60*24*5?'imp':''}">#{column.last_article_time?moment(column.last_article_time).fromNow():"从未更新"} </span>
-                  a.go(href="/article/add?column_id=#{column.id}") 添加文章
-            div
-              a.btn(href="/article/column/add") 创建新专栏
-          else
-            .no 还没有专栏，先创建专栏再发表原创文章吧！
-              a(href="/article/column/add") 创建专栏
-        
+      .module
+        .my_columns
+          .hd 我的专栏
+          .bd
+            - var now = new Date().getTime();
+            if locals.my_columns && my_columns.length
+              each column in my_columns
+                .my_column
+                  .title 
+                    a(href="/article/column/#{column.id}") #{column.name}（#{column.article_count}）
+                    //- a.go(href="/article/add?column_id=#{column.id}") 添加文章
+              
+              .publish-tip.alert(style="margin-bottom:10px;") 如要发表文章，请点击专栏名进入之后，再发表到此专栏。
+              div
+                a.btn.small-btn(href="/article/column/add") 创建新专栏
+            else
+              .no 还没有专栏，先创建专栏再发表原创文章吧！
+                a(href="/article/column/add") 创建专栏
+
+          if locals.nopublish_articles&&locals.nopublish_articles.length
+            .hd 我的草稿
+            .bd.nopublish_articles 
+              each article in locals.nopublish_articles
+                div 
+                  a.t(href="") #{article.title}
+                  a(href="/article/#{article.id}/edit") 继续编辑
+                  a(href="/article/#{article.id}/delete") 删除
+
+      
       .content
-          .columns
-            each column in columns
-              .column
-                .h
-                  a.title(href="/article/column/#{column.id}") #{column.name}
-                  .desc !{column.desc_html?column.desc_html.replace(/<[^>]*>/g,'').replace(/\s/g,'').substr(0,50)+"...":""}
-                  .user.hidden
-                    span 作者：
-                    a(href="/user/#{column['users.id']}") #{column['users.nick']}
-                  .time 最后更新时间：#{moment(column.last_article_time*1).fromNow()}
-                  .actions
-                    if column.is_rssed
-                      span
-                        i.rss.social
-                        |  已订阅（#{column.rss_count}）
-                    else
-                      a.rss-btn(href="/article/column/#{column.id}/rss")
-                        i.rss.social
-                        |  邮件订阅（#{column.rss_count}）
-                    
-                if column.articles && column.articles.length
-                  .articles
-                    each article,i in column.articles
-                      article(id="post-#{article.id}",class="#{i%2==0?'yooo':''} ")
-                        h2.entry-title
-                            a.real-title(href='/article/#{article.pinyin?article.pinyin:article.id}', title='#{article.title}', rel='bookmark') #{article.title}
-                        if article.desc
-                          .entry-content.hidden.clearfix 
-                            |!{article.desc.replace(/<[^>]*?>/g," ").substr(0,200)}
-                            a(href="/article/#{article.id}")  阅读更多>>
-                        .entry-foot
-                          div.others
-                            span.author.vcard.item
-                              span.index 
-                                i.icon-user
-                              a.value.url.fn(rel='author', href='/user/#{article.user_id}') #{article.user_nick}
-                            
-                            
-                            span.time.item
-                              span.index 
-                                i.icon-clock
-                              a.value #{moment(article.publish_time*1000).fromNow()}
-                              
-                            if locals.user && (user.is_admin||user.id==article.user_id)
-                              span.views.item
-                                a.value(href="/article/#{article.id}/edit") 编辑
-                            span.right-foot
-                              span.views.item
-                                span.index 
-                                  i.icon-thumbs-up
-                                a.value #{article.zan_count}
-                              //- span.views.item
-                              //-   span.index 
-                              //-     i.icon-signal
-                              //-   a.value #{article.visit_count}
-                else
-                  .articles 暂无文章
-                .more
-                  a(href="/article/column/#{column.id}") 查看更多文章（#{column.article_count}）
+          if articles && articles.length
+            .articles
+              each article,i in articles
+                article(id="post-#{article.id}",class="#{i%2==0?'yooo':''}")
+
+                    a.entry-title(,href='/article/#{article.pinyin?article.pinyin:article.id}', title='#{article.title}', rel='bookmark')
+                        if article.main_pic
+                          .pic
+                            .img(style="background:url(#{article.main_pic});background-size:cover;")
+                        else
+                          .pic.text
+                            .t #{article.title}
+                        .cover-pic
+                          .t #{article.title}
+                        span.real-t(class="real-title-#{Math.floor(Math.random()*100)}")
+                            if article.is_jian
+                                |<i class="t-tip tip-jing">精</i>
+                            |#{article.title}
+                        //span.column-col
+                          if article['column']
+                            |[
+                            a.column-title(href="/article/column/#{article['column']['id']}")
+                              |#{article['column']['name']}
+                            |] 
+                    .entry-foot
+                      div.others
+                        .author.vcard
+                          div.user
+                            a(data-original-title="#{article.user_nick}",href="/user/#{article.user_id}")
+                              img(src="#{article.user_headpic}")
+                          a.username.value.url.fn(rel='author', href='/user/#{article.user_id}') #{article.user_nick}
+                      .other-r
+                        span.views.item
+                          span.index 
+                            i.icon-eye-open
+                          a.value #{article.visit_count}
+                        span.views.item
+                          span.index 
+                            i.icon-chat
+                          a.value #{article.comment_count}
+                        if locals.user && (user.is_admin||user.id==article.user_id)
+                          span.views.item
+                            a.value(href="/article/#{article.id}/edit") 编辑
+                        if locals.user && (user.is_admin||user.id==article.user_id)
+                          span.views.item
+                            a.value(href="/article/#{article.id}/delete") 删除
+                        if locals.user && user.is_admin
+                          span.views.item
+                            if article.sort == 100000
+                              a.value(href="/article/#{article.id}/update?sort=#{article.id}") 取消置顶
+                            else
+                              a.value(href="/article/#{article.id}/update?sort=100000") 置顶
+                          span.views.item
+                            if article.is_jian == 1
+                              a.value(href="/article/#{article.id}/update?is_jian=0") 不荐
+                            else
+                              a.value(href="/article/#{article.id}/update?is_jian=1") 荐
+                          //- span.views.item
+                          //-   span.index 
+                          //-     i.icon-signal
+                          //-   a.value #{article.visit_count}
+
+          else
+            .articles 暂无文章
           include ../page
-      //- .right
-        
-      //-   .module.recent_columns
-      //-     .hd 最近更新的专栏
-      //-       a.right_more(href="/article/column") 所有专栏
-      //-     each column in recent_columns
-      //-       .recent_column
-      //-         a.title(href="/article/column/#{column.id}") #{column.name}
-      //-         .desc !{column.desc_html?column.desc_html.replace(/<[^>]*>/g,'').replace(/\s/g,'').substr(0,50)+"...":""}
-      //-         .user
-      //-           span 作者：
-      //-           a(href="/user/#{column['users.id']}") #{column['users.nick']}
-      //-         .time 更新时间：#{moment(column.last_article_time*1).fromNow()}
-      //-         .actions
-      //-           a(href="/article/column/#{column.id}/rss")
-      //-             i.rss.social
-      //-             |  邮件订阅（#{column.rss_count}）
-      //-   .module.recent
-      //-     .hd 近期评论
-      //-     .bd
-      //-       if locals.comments
-      //-         each comment in comments
-      //-           div.item #{comment.user_nick}：<a href="/article/#{comment.target_id.split("_")[1]}">!{comment.md.substr(0,20)}</a>
-      //-   //- .module.recent
-      //-   //-   .hd 近期文章
-      //-   //-   .bd
-      //-   //-     if locals.recents
-      //-   //-       each recent in recents
-      //-   //-         div.item <a href="/article/#{recent.id}">#{recent.title}</a>
-      //-   //
-      //-     .module.text
-      //-       .hd 微信公众账号
-      //-       .bd
-      //-         img(src="#{assets_head}/images/qrcode.jpg")
-      //-     .module.text
-      //-       .hd 广告
-      //-       .bd 暂无
+
     script(src="#{assets_head}/js/messageTip.js")
     script(src="#{assets_head}/js/loadingTip.js")
     script

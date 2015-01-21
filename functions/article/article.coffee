@@ -52,7 +52,7 @@ func_article =
       offset: (page - 1) * count
       limit: count
       order: order
-      attributes:['id','publish_time','zan_count','comment_count','visit_count','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
+      attributes:['id','publish_time','zan_count','comment_count','visit_count','main_pic','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
       include:[User,Column]
       raw:false
     if condition then query.where = condition
@@ -70,7 +70,7 @@ func_article =
       offset: (page - 1) * count
       limit: count
       order: order
-      attributes:['id','publish_time','html','zan_count','comment_count','visit_count','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
+      attributes:['id','publish_time','html','zan_count','comment_count','main_pic','visit_count','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
       include:[User,Column]
       raw:false
     if condition then query.where = condition

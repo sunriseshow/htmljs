@@ -78,7 +78,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
       .content
         include ../320ad
         if articles && articles.length
-          .articles
+          .articles.clearfix
             each article,i in articles
               article(id="post-#{article.id}",class="#{i%2==0?'yooo':''}")
 
@@ -95,12 +95,6 @@ html(xmlns:wb='http://open.weibo.com/wb')
                     if article.is_jian
                       |<i class="t-tip tip-jing">精</i>
                     |#{article.title}
-                  //span.column-col
-                    if article['column']
-                      |[
-                      a.column-title(href="/article/column/#{article['column']['id']}")
-                  |#{article['column']['name']}
-                |]
                 .entry-foot
                   div.others
                     .author.vcard
@@ -140,6 +134,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
                       //-   a.value #{article.visit_count}
         else
           .articles 暂无文章
+
         include ../page
       .invite-user-dropdown
       

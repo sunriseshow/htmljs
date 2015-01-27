@@ -50,6 +50,9 @@ html
                           span.item
                               span.index view：
                               span.value #{article.visit_count}
+                          if locals.full_tags
+                              each t in full_tags
+                                  span.item(style="margin-right:10px;color:#999;") #{t.name}
 
         .content-wapper
           .content

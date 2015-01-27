@@ -4,6 +4,9 @@ html
     include ../head
     title 添加专栏文章
     include ../editor_head
+    style
+      .control-group{width:680px;}
+      .tags .label{display: inline-block;margin-right:5px;margin-bottom:3px;}
     script
       var article_id = #{locals.article?article.id:0}
   body#add-article
@@ -60,6 +63,16 @@ html
                             span.label(data-id="#{column.id}",class="label-success",data-original-title="#{column.desc_md&&column.desc_md.substr(0,100)}",title="#{column.desc_md&&column.desc_md.substr(0,100)}") #{column.name}
                         else if column.id==locals.column_id
                           span.label(data-id="#{column.id}",class="label-success",data-original-title="#{column.desc_md&&column.desc_md.substr(0,100)}",title="#{column.desc_md&&column.desc_md.substr(0,100)}") #{column.name}
+                if locals.tags
+                  - if(locals.article&&article.tags){var ts = article.tags.split(",");}else{var ts=[]}
+                  .control-group
+                    .tags
+                      input#tags(type="hidden",name="tags",value="#{locals.article?article.tags:''}")
+                      .tags-hd 技术标签
+                      .tags-bd
+                        each tag,i in tags
+                          span.label(data-id="#{tag.id}",class="#{ts.indexOf(tag.id)==-1?'':'label-success'}") #{tag.name}
+                        a(href="/tag/add",target="_blank",style="padding-left:10px;font-size:12px;") 添加新标签
                 .control-group
                   label.checkbox
                     input(type="checkbox",name="to_weibo",checked="true")
@@ -118,7 +131,18 @@ html
     script(src='#{assets_head}/js/loadingTip.js')
     script(src='#{assets_head}/js/messageTip.js')
     script
-      
+      $(".tags .label").click(function(){
+        $(this).toggleClass("label-success");
+        var selectedTags = []
+        var selectedTagNames=[]
+        $(".tags .label").each(function(i,tag){
+          if($(tag).hasClass("label-success")){
+            selectedTags.push($(tag).attr("data-id"))
+              selectedTagNames.push($(tag).html())
+          }
+          })
+        $("#tags").val(selectedTags.join(","))
+        })
       $(".columns .label").click(function(){
         $(".columns .label").removeClass("label-success")
         $(this).addClass("label-success");

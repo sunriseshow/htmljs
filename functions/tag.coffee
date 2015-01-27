@@ -6,7 +6,8 @@ Question.hasMany QuestionTag,{foreignKey:"questionId"}
 QuestionTag.belongsTo Question,{foreignKey:"questionId"}
 
 QuestionTag.sync()
-
+ArticleTag = __M 'article_tag'
+ArticleTag.sync()
 
 Tag.sync()
 Question.sync()
@@ -28,6 +29,22 @@ func_tag =
       include:[Question]
     .success (qt)->
       callback null,qt
+    .error (e)->
+      callback e
+  getArticlesById:(id,page,count,callback)->
+    ArticleTag.findAll
+      where:
+        tagid:id
+    .success (as)->
+      callback null,as
+    .error (e)->
+      callback e
+  getTagsByIds:(ids,callback)->
+    Tag.findAll
+      where:
+        id:ids
+    .success (tags)->
+      callback null,tags
     .error (e)->
       callback e
   getQuestionsByTagNames:(tagNames,page,count,callback)->

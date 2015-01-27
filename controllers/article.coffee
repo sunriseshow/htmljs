@@ -202,6 +202,7 @@ module.exports.controllers =
         desc:req.body.desc
         is_publish:req.body.is_publish
         score:10
+        tags:req.body.tags
       result = 
         success:0
       func_article.add data,(error,article)->
@@ -210,7 +211,8 @@ module.exports.controllers =
         else
           result.success = 1
           result.article = article
-
+          if req.body.tags
+            func_article.addTagsToArticle article.id,req.body.tags.split(",")
           if req.body.fufei
             func_info.add 
               target_user_id:1
@@ -318,6 +320,7 @@ module.exports.controllers =
         desc:safeConverter.makeHtml req.body.md.substr(0,600)
         column_id:req.body.column_id
         is_publish:req.body.is_publish
+        tags:req.body.tags
       result = 
         success:0
       func_article.update req.params.id,data,(error,article)->
@@ -325,6 +328,8 @@ module.exports.controllers =
           result.info = error.message
         else
           result.success = 1
+          if req.body.tags
+            func_article.addTagsToArticle article.id,req.body.tags.split(",")
         if req.body.is_pub
             if req.body.column_id
               func_column.update req.body.column_id,{last_article_time:(new Date()).getTime()},()->
@@ -603,10 +608,10 @@ module.exports.controllers =
             res.send result
 module.exports.filters = 
   "/add":
-    get:['checkLogin',"checkCard","article/all-pub-columns"]
+    get:['checkLogin',"checkCard","article/all-pub-columns",'tag/all-tags']
     post:['checkLoginJson',"checkCard"]
   "/:id/edit":
-    get:['checkLogin',"checkCard","article/all-pub-columns"]
+    get:['checkLogin',"checkCard","article/all-pub-columns",'tag/all-tags']
     post:['checkLoginJson',"checkCard"]
   "/add/recommend":
     get:['checkLogin',"checkCard"]
@@ -620,7 +625,7 @@ module.exports.filters =
   "/old":
     get:['freshLogin','getRecent','get_infos','article/new-comments']
   "/:id":
-    get:['freshLogin','getRecent','get_infos','article/get-article','article/article-writer','article/get-article-column','article/this-column','article/comments','article/article_zan_logs','article/favs','article/get-canread','article/get-payer']
+    get:['freshLogin','getRecent','get_infos','article/get-article','article/article-writer','article/get-article-column','article/this-column','article/comments','article/article_zan_logs','article/favs','article/get-canread','article/get-payer','article/article_tags']
   
   "/:id/zan":
     post:['checkLoginJson']

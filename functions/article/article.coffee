@@ -21,11 +21,26 @@ CanRead = __M "article_canread"
 User.hasOne CanRead,{foreignKey:"user_id"}
 CanRead.belongsTo User,{foreignKey:"user_id"}
 CanRead.sync()
+ArticleTag = __M 'article_tag'
+ArticleTag.sync()
 
+Tags = __M 'tags'
+Tags.sync()
 cache = 
   recent:[]
 
 func_article =
+  addTagsToArticle:(article_id,tagIds)->
+    ArticleTag.findAll
+      where:
+        articleid:article_id
+    .success (qts)->
+      qts.forEach (qt)->
+        qt.destroy()
+      tagIds.forEach (tagid)->
+        ArticleTag.create
+          articleid:article_id
+          tagid:tagid
   run_sort:()->
     self = this
     this.getAllByField 1,10000,null,(error,articles)->

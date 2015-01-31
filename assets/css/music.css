@@ -2,13 +2,13 @@
 #musics .module .hd{line-height:16px;margin:10px 0;font-size:16px;height:16px;font-weight:100;color:#666;border-left:3px solid #88d1b4;padding-left:8px;}
 #musics .module .bd{font-size:12px;padding:0px;color:#666;margin-top:10px;}
 #musics .content{margin:0 auto;float:none;}
-#musics article{background:#fff;margin-top:20px;padding:10px 15px;position:relative;border-bottom:1px solid #f1f1f1;}#musics article .lft{display:none;height:50px;width:50px;color:#666;border:1px solid #ddd;vertical-align:top;text-align:center;margin-right:10px;line-height:30px;}#musics article .lft i{background:none;}
+#musics article{background:#fff;margin-top:10px;padding:10px;position:relative;border-bottom:1px solid #f1f1f1;}#musics article .lft{display:none;height:50px;width:50px;color:#666;border:1px solid #ddd;vertical-align:top;text-align:center;margin-right:10px;line-height:30px;}#musics article .lft i{background:none;}
 #musics article .lft .count{color:#999;padding-left:3px;}
 #musics article .rht{display:inline-block;}
-#musics article .entry-title{margin:0;overflow:hidden;font-size:18px;line-height:50px;font-weight:normal;color:#444;}#musics article .entry-title .t-tip{font-style:normal;font-size:14px;color:#fff;background:#50a7de;padding:0px 2px;display:inline-block;line-height:18px;margin-right:5px;font-family:"STXihei";vertical-align:1px;}
+#musics article .entry-title{margin:0;overflow:hidden;font-size:18px;line-height:50px;font-weight:normal;color:#444;display:none;}#musics article .entry-title .t-tip{font-style:normal;font-size:14px;color:#fff;background:#50a7de;padding:0px 2px;display:inline-block;line-height:18px;margin-right:5px;font-family:"STXihei";vertical-align:1px;}
 #musics article .entry-title a{color:#444;}
 #musics article .entry-title .column-title{font-size:12px;padding:0 2px;color:#888;}
-#musics article .entry-foot .meta{color:#999;}
+#musics article .entry-foot{display:none;}#musics article .entry-foot .meta{color:#999;}
 #musics article .entry-foot .right-foot{float:right;}
 #musics article .entry-foot .item{font-size:12px;line-height:40px;margin-right:10px;}#musics article .entry-foot .item i{background:none;margin-right:1px;vertical-align:-2px;}
 #musics article .entry-foot .item i:before{color:#aaa;background:none;}
@@ -22,4 +22,4 @@
 #musics .columns .user{font-size:12px;color:#999;line-height:20px;margin-top:5px;}
 #musics .columns .time{font-size:12px;color:#999;line-height:20px;}
 #musics .columns .more{line-height:30px;padding-left:10px;background:#fff;position:absolute;bottom:0;}#musics .columns .more a{color:#666;font-size:12px;}
-@media screen and (min-width:10px) and (max-width:1000px){.content{max-width:400px;}}@media screen and (min-width:1000px){#musics article .entry-title{height:50px;overflow:hidden;} .content{width:1000px;}.content .articles{width:1100px;} #musics article{margin-right:15px !important;width:290px;display:inline-block;vertical-align:top;}#musics article .entry-img{width:290px;height:290px;overflow:hidden;}}
+@media screen and (min-width:10px) and (max-width:1000px){#music .content{max-width:400px;}}@media screen and (min-width:1000px){#musics article .entry-title{height:50px;overflow:hidden;} .content{width:1000px;}.content .articles{width:1100px;} #musics .articles article{margin-right:10px !important;width:290px;margin-top:10px;margin-bottom:0;display:inline-block;vertical-align:top;}#musics .articles article .entry-img{width:290px;height:290px;overflow:hidden;}#musics .articles article .entry-img img{max-width:100%;min-height:100%;}}

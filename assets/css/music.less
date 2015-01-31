@@ -26,8 +26,8 @@
   article{
 
     background: #fff;
-    margin-top:20px;
-    padding:10px 15px;
+    margin-top:10px;
+    padding:10px;
     position: relative;
     border-bottom:1px solid #f1f1f1;
     .lft{
@@ -58,6 +58,7 @@
       line-height: 50px;
       font-weight: normal;
       color:#444;
+      display: none;
       .t-tip{
         font-style: normal;
         font-size: 14px;
@@ -82,7 +83,7 @@
 
     }
     .entry-foot{
-
+display: none;
   .meta{
     color:#999;
 
@@ -220,15 +221,21 @@
       width:1100px;
     }
   }
-  #musics article
+  #musics .articles article
   {
-    margin-right:15px !important;
+    margin-right:10px !important;
     width:290px;
+    margin-top:10px;
+    margin-bottom:0;
     display:inline-block;
     vertical-align: top;
     .entry-img{
       width:290px;height:290px;
       overflow: hidden;
+      img{
+        max-width: 100%;
+        min-height: 100%;
+      }
     }
   }
 }

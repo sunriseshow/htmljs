@@ -381,9 +381,9 @@
     width:110%;
   }
   article{
-    width:235px;
+    width:240px;
     float:left;
-    margin-right:20px;
+    margin-right:15px;
     position: relative;
     border-bottom:1px solid #f1f1f1;
     margin-top:20px;
@@ -392,7 +392,7 @@
     .entry-title:hover{
       text-decoration: none;
       .pic{
-        border:10px solid #fafafa;
+        border:7px solid #fafafa;
         box-shadow: 1px 1px 1px #aaa;
       }
       .cover-pic{
@@ -401,10 +401,11 @@
     }
     .entry-title{
       .pic{
-        width:210px;
-        height:140px;
+        width:100%;
+        height:168px;
+        box-sizing: border-box;
         overflow: hidden;
-        border:10px solid #fff;
+        border:7px solid #fff;
         box-shadow: 1px 1px 1px #ccc;
 
         .img{
@@ -421,16 +422,18 @@
         -webkit-box-pack:center;
         -webkit-box-align:center;
         padding:10px;
-        width:190px;
-        height:120px;
+        width:100%;
+        box-sizing: border-box;
+        height:168px;
       }
       .cover-pic{
         display:-webkit-box;
         -webkit-box-orient:horizontal;
         -webkit-box-pack:center;
         -webkit-box-align:center;
-        width:210px;
-        height:140px;
+        width:100%;
+        height:168px;
+        box-sizing: border-box;
         padding:10px;
         overflow: hidden;
         position: absolute;top:0;left:0;

@@ -27,6 +27,16 @@ module.exports.controllers =
             res.locals.qts =  qt
             res.locals.tag = tag
             res.render 'tag/tag.jade'
+  "/:id/articles":
+    get:(req,res,next)->
+      func_tag.getById req.params.id,(error,tag)->
+        if error then next error
+        else if not tag then next new Error '不存在的标签'
+        else
+          func_tag.getArticlesById tag.id,1,20,(error,qt)->
+            res.locals.articles =  qt
+            res.locals.tag = tag
+            res.render 'tag/tag-article.jade'
   "/n/:name":
     get:(req,res,next)->
       func_tag.getByName req.params.name,(error,tag)->

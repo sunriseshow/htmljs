@@ -10,24 +10,25 @@ accesses = [
 #  '2.00fsus3D0TxWci14bea75806wgrFKE',
 #  '2.00hD64tB0TxWci4963829b470VOKJE',
 #  '2.00bQrlEC0TxWci8873a0be81Wuh9aC',
-  '2.00Zc6zuB0TxWciaae5b2e9c1Jp_LbB',
-  '2.00XEnI3C0TxWci3b1100993avhw27D',
-  '2.00L8rMJC0TxWcib158f34f1b0IE_n8',
-  '2.00WuTR6C0TxWci330e3df100SqTUVE',
-  '2.00LwfzbC0TxWci7478c964a1004jA2',
-  '2.00vOHeED0TxWcib434c18d8evi6zWE',
-  '2.00t5SBVD0TxWci21de38d87ctXC5PD',
-  '2.00MzSjqB0TxWci450decf736Yau2BB',
-  '2.001omjGC0TxWci3ff7bff1570apl3x',
-  '2.006M6mvB0TxWcic028679d6ejfmfWC',
-  '2.00NzjtED0TxWci749431db2b0bsdeR'
-  '2.00LNw1AC0TxWcid3264a746erDEGDC',
-  '2.00h9IY2C0TxWci605c66717d3AZ5bE',
-  '2.005uhVWD0TxWci4b0fd154cfklQ7HE',
-  '2.00fS7egC0TxWci26e5cbe91e049Rnz',
-  '2.000I6BeE0TxWci81f3b8f259s_RYKE',
-  '2.00zd96FC0TxWci5026a22774xgfV1C',
-  '2.00VYDhqC0TxWcicd2fc91331LzMWQE'
+  '2.00Zc6zuB0TxWcia6e9294baa291LtD',
+  '2.00XEnI3C0TxWci8ad819fc67zLWjqD',
+  '2.00WuTR6C0TxWci428aab7cddriUDIC',
+  '2.00LwfzbC0TxWci34e2459e3b0QaFEv',
+  '2.00vOHeED0TxWcie221532e40rp2OQD',
+  '2.00t5SBVD0TxWcid0931f8fc34FicLE',
+  '2.00MzSjqB0TxWcie655cae2970cDLqE',
+  '2.001omjGC0TxWci98ee730da1u7IZWB',
+  '2.006M6mvB0TxWciaf600088aeguTsPD',
+  '2.00NzjtED0TxWci3dd12fd6f12H4G4E',
+  '2.00LNw1AC0TxWcied3d33bb34U2dGHC',
+  '2.00h9IY2C0TxWci2da6dab3e4pjuVgE',
+  '2.005uhVWD0TxWcia99064e528w3iafE',
+  '2.00fS7egC0TxWci531bbe9060jkrxID',
+  '2.000I6BeE0TxWci9c648ddac6pDgoMD',
+  '2.00zd96FC0TxWciad616cdfcd0yHptj',
+  '2.00VYDhqC0TxWci5c70e1f3e0TLBwfB',
+  '2.00fsus3D0TxWci67da164467XENWpD',
+  '2.00wVkPsB0TxWcicc5109411a3ZiiaE'
 ]
 queuedo = require("queuedo")
 
@@ -44,7 +45,7 @@ queuedo uids,(id,next,context)->
     process.exit()
   sina.comments.create
     id:id
-    comment:"我一直在用另一个更好用的“颜文字 输入法”，切换速度比这个快多了，而且表情更多更逗比，AppStore搜索“颜文字 输入法”第一个就是。"
+    comment:"推荐一个ios下面的软件，输入【颜】文字超方便，直接在输入法里输入，表情也非常多，AppStore搜索【颜文字 输入法】第一个就是。"
     access_token:accesses[index]
     rip:"122.224.209.220"
   ,(error,message)->

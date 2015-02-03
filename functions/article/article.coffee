@@ -28,7 +28,7 @@ Tags = __M 'tags'
 Tags.sync()
 cache = 
   recent:[]
-
+htmljs_cache = require './../../lib/cache.js'
 func_article =
   addTagsToArticle:(article_id,tagIds)->
     ArticleTag.findAll
@@ -60,9 +60,15 @@ func_article =
       callback error
 
   getAll:(page,count,condition,order,callback)->
+
     if not callback
       callback = order
       order = "sort desc,id desc"
+    arguments_key = ['article.getAll',page,count,condition,order].join("_")
+    cache_data = htmljs_cache.get(arguments_key)
+    if cache_data
+      callback null,cache_data
+      return
     query = 
       offset: (page - 1) * count
       limit: count
@@ -74,6 +80,7 @@ func_article =
     Article.findAll(query)
     .success (articles)->
       cache.recent = articles
+      htmljs_cache.set(arguments_key,articles,1000*60*60*30)
       callback null,articles
     .error (error)->
       callback error
@@ -81,6 +88,11 @@ func_article =
     if not callback
       callback = order
       order = "sort desc,id desc"
+    arguments_key = ['article.getAllWithContent',page,count,condition,order].join("_")
+    cache_data = htmljs_cache.get(arguments_key)
+    if cache_data
+      callback null,cache_data
+      return
     query =
       offset: (page - 1) * count
       limit: count
@@ -92,6 +104,7 @@ func_article =
     Article.findAll(query)
     .success (articles)->
       cache.recent = articles
+      htmljs_cache.set(arguments_key,articles,1000*60*60*30)
       callback null,articles
     .error (error)->
       callback error
@@ -134,11 +147,17 @@ func_article =
     .error (error)->
       callback error
   getByPinyin:(pinyin,callback)->
+    arguments_key = ['article.getByPinyin',pinyin].join("_")
+    cache_data = htmljs_cache.get(arguments_key)
+    if cache_data
+      callback null,cache_data
+      return
     Article.find
       where:
         pinyin:pinyin
       raw:true
     .success (article)->
+      htmljs_cache.set(arguments_key,article,1000*60*60*30)
       callback null,article
     .error (error)->
       callback error

@@ -619,7 +619,7 @@ module.exports.filters =
   "/:id/pay":
     get:['checkLogin']
   "/":
-    get:['freshLogin','get_infos','article/my-columns','article/public-columns','article/all-publish-articles','article/jian-articles','article/jian_columns','article/jian-hots','article/all-notpublish']#'article/index-columns','article/column-articles','article/checkRss']
+    get:['freshLogin','get_infos','article/my-columns','article/public-columns','article/all-publish-articles','article/all-notpublish']#'article/index-columns','article/column-articles','article/checkRss']
   "/user/:id":
     get:['freshLogin','article/who','article/his-articles']
   "/old":

@@ -17,7 +17,7 @@
     less = require('less');
 
     fs = require('fs');
-
+    var checkCache = require("./lib/checkCache.js");
     global.xss = require('xss');
 
     xss.whiteList['iframe'] = ['src', 'width', 'height', 'allowfullscreen', 'frameborder', 'id', 'class', 'style'];
@@ -91,8 +91,7 @@
             return next();
         });
         app.use(function(req, res, next) {
-            var userAgent = req.headers['user-agent'].toLowerCase();
-            if(userAgent.indexOf("bot")!=-1||userAgent.indexOf("spider")!=-1) {
+            if(checkCache(req)) {
                 var static_path = __dirname + "/route_static/" + req.originalUrl.replace(/\//g, "_");
                 if (fs.existsSync(static_path)) {
                     var mtime = fs.statSync(static_path).mtime;

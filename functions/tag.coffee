@@ -7,6 +7,11 @@ QuestionTag.belongsTo Question,{foreignKey:"questionId"}
 
 QuestionTag.sync()
 ArticleTag = __M 'article_tag'
+Article = __M 'articles'
+
+Article.hasMany ArticleTag,{foreignKey:"articleid"}
+ArticleTag.belongsTo Article,{foreignKey:"articleid"}
+
 ArticleTag.sync()
 
 Tag.sync()
@@ -35,6 +40,7 @@ func_tag =
     ArticleTag.findAll
       where:
         tagid:id
+      include:[Article]
     .success (as)->
       callback null,as
     .error (e)->

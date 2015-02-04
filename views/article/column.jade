@@ -92,10 +92,10 @@ html(xmlns:wb='http://open.weibo.com/wb')
                         .t #{article.title}
                     .cover-pic
                       .t #{article.title}
-                  span.real-t(class="real-title-#{Math.floor(Math.random()*100)}")
-                    if article.is_jian
-                      |<i class="t-tip tip-jing">精</i>
-                    |#{article.title}
+                span.real-t(class="real-title-#{Math.floor(Math.random()*100)}")
+                  if article.is_jian
+                    |<i class="t-tip tip-jing">精</i>
+                  |#{article.title}
                   //span.column-col
                     if article['column']
                       |[

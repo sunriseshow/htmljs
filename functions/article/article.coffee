@@ -64,7 +64,7 @@ func_article =
     if not callback
       callback = order
       order = "sort desc,id desc"
-    arguments_key = ['article.getAll',page,count,condition,order].join("_")
+    arguments_key = ['article.getAll',page,count,JSON.stringify(condition),order].join("_")
     cache_data = htmljs_cache.get(arguments_key)
     if cache_data
       callback null,cache_data
@@ -73,7 +73,7 @@ func_article =
       offset: (page - 1) * count
       limit: count
       order: order
-      attributes:['id','publish_time','zan_count','comment_count','visit_count','main_pic','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
+      attributes:['id','publish_time','createdAt','zan_count','comment_count','visit_count','main_pic','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
       include:[User,Column]
       raw:false
     if condition then query.where = condition
@@ -88,7 +88,7 @@ func_article =
     if not callback
       callback = order
       order = "sort desc,id desc"
-    arguments_key = ['article.getAllWithContent',page,count,condition,order].join("_")
+    arguments_key = ['article.getAllWithContent',page,count,JSON.stringify(condition),order].join("_")
     cache_data = htmljs_cache.get(arguments_key)
     if cache_data
       callback null,cache_data

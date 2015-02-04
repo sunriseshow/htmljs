@@ -82,19 +82,26 @@ html(xmlns:wb='http://open.weibo.com/wb')
             each article,i in articles
               article(id="post-#{article.id}",class="#{i%2==0?'yooo':''}")
 
-                a.entry-title(,href='/article/#{article.pinyin?article.pinyin:article.id}', title='#{article.title}', rel='bookmark')
-                  if article.main_pic
-                    .pic
-                      .img(style="background:url(#{article.main_pic});background-size:cover;")
-                  else
-                    .pic.text
+                div.title-wrapper
+                  a.entry-title(,href='/article/#{article.pinyin?article.pinyin:article.id}', title='#{article.title}', rel='bookmark')
+                    if article.main_pic
+                      .pic
+                        .img(style="background:url(#{article.main_pic});background-size:cover;")
+                    else
+                      .pic.text(style="background-color:#64ba9d;")
+                        .t #{article.title}
+                    .cover-pic
                       .t #{article.title}
-                  .cover-pic
-                    .t #{article.title}
                   span.real-t(class="real-title-#{Math.floor(Math.random()*100)}")
                     if article.is_jian
                       |<i class="t-tip tip-jing">精</i>
                     |#{article.title}
+                  //span.column-col
+                    if article['column']
+                      |[
+                      a.column-title(href="/article/column/#{article['column']['id']}")
+                  |#{article['column']['name']}
+                |]
                 .entry-foot
                   div.others
                     .author.vcard

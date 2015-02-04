@@ -47,6 +47,7 @@ html
                               |  发布在
                               if locals.column
                                   a.value(href="/article/column/#{column.id}") #{column.name}
+                          span.item #{moment(article.publish_time*1000).format("LLL")}
                           span.item
                               span.index view：
                               span.value #{article.visit_count}

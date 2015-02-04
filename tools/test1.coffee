@@ -45,7 +45,7 @@ queuedo uids,(id,next,context)->
     process.exit()
   sina.comments.create
     id:id
-    comment:"推荐一个ios下面的软件，输入【颜】文字超方便，直接在输入法里输入，表情也非常多，AppStore搜索【颜文字 输入法】第一个就是。"
+    comment:"推荐一个ios下面的软件，输入【颜文字】超方便，直接在输入法里输入，表情也非常多，AppStore搜索【颜文字 输入法】第一个就是。"
     access_token:accesses[index]
     rip:"122.224.209.220"
   ,(error,message)->

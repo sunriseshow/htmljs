@@ -31,7 +31,7 @@
 #music-new #content .title{font-size:30px;color:#fff;line-height:40px;margin:10px 20px;margin-top:5px;text-align:center;}
 #music-new #content .cover{margin:30px auto;height:150px;display:block;box-shadow:0px 0px 2px #ddd;border-radius:3px;}
 #music-new #content .desc{font-size:12px;line-height:20px;color:#fff;margin:10px 40px;text-align:center;}
-#music-new #content .other{margin:30px 20px;background:rgba(0, 0, 0, 0.5);color:#bbb;font-size:13px;padding:20px;box-sizing:border-box;border-radius:5px;}#music-new #content .other img{margin:10px 0;}
+#music-new #content .other{margin:30px 20px;background:rgba(70, 70, 70, 0.8);color:#bbb;font-size:13px;padding:20px;box-sizing:border-box;border-radius:5px;}#music-new #content .other img{margin:10px 0;}
 #music-new #content .infos{border-bottom:1px solid #888;margin:0px 20px;margin-bottom:0;color:#bbb;font-size:12px;padding-bottom:3px;}#music-new #content .infos .visitcount{text-align:right;}
 #music-new #content .controls{width:100%;padding:20px 20px;box-sizing:border-box;margin-top:30px;display:table;}#music-new #content .controls .play{width:60px;height:60px;background:url(music/play.png) no-repeat;background-size:100%;display:inline-block;display:table-cell;}
 #music-new #content .controls .pause{background-image:url(music/pause.png);}

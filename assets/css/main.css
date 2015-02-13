@@ -998,10 +998,10 @@ body{background:url(../images/bg-repeat.png);background:#efefef;}
 #music-new #header{height:60px;background:rgba(0, 0, 0, 0.3);color:#fff;font-size:14px;line-height:60px;display:table;width:100%;}#music-new #header .left{display:table-cell;}#music-new #header .left .home{background:url(music/home-75.png);width:20px;height:20px;background-size:100%;text-indent:-1000px;overflow:hidden;margin-left:15px;vertical-align:middle;display:inline-block;}
 #music-new #header .left .share{background:url(music/share-75.png);width:20px;height:20px;background-size:100%;text-indent:-1000px;overflow:hidden;margin-left:10px;vertical-align:middle;display:inline-block;}
 #music-new #header .right{display:table-cell;}#music-new #header .right .next{text-align:right;background:url(music/forward-75.png) right center no-repeat;background-size:auto 50%;margin-right:15px;padding-right:30px;color:#ddd;font-size:14px;height:60px;overflow:hidden;display:block;}
-#music-new #content .time{font-size:18px;color:#bebebe;line-height:30px;margin:10px 20px;margin-top:30px;}
-#music-new #content .title{font-size:30px;color:#fff;line-height:40px;margin:10px 20px;margin-top:5px;}
+#music-new #content .time{font-size:18px;color:#bebebe;line-height:30px;margin:10px 20px;margin-top:30px;text-align:center;}
+#music-new #content .title{font-size:30px;color:#fff;line-height:40px;margin:10px 20px;margin-top:5px;text-align:center;}
 #music-new #content .cover{margin:30px auto;height:150px;display:block;box-shadow:0px 0px 2px #ddd;border-radius:3px;}
-#music-new #content .desc{font-size:12px;line-height:20px;color:#fff;margin:10px 40px;}
+#music-new #content .desc{font-size:12px;line-height:20px;color:#fff;margin:10px 40px;text-align:center;}
 #music-new #content .other{margin:30px 20px;background:rgba(0, 0, 0, 0.5);color:#bbb;font-size:13px;padding:20px;box-sizing:border-box;border-radius:5px;}#music-new #content .other img{margin:10px 0;}
 #music-new #content .controls{width:100%;padding:20px 20px;box-sizing:border-box;margin-top:30px;display:table;}#music-new #content .controls .play{width:60px;height:60px;background:url(music/play.png) no-repeat;background-size:100%;display:inline-block;display:table-cell;}
 #music-new #content .controls .pause{background-image:url(music/pause.png);}

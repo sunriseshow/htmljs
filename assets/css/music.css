@@ -32,8 +32,9 @@
 #music-new #content .cover{margin:30px auto;height:150px;display:block;box-shadow:0px 0px 2px #ddd;border-radius:3px;}
 #music-new #content .desc{font-size:12px;line-height:20px;color:#fff;margin:10px 40px;text-align:center;}
 #music-new #content .other{margin:30px 20px;background:rgba(0, 0, 0, 0.5);color:#bbb;font-size:13px;padding:20px;box-sizing:border-box;border-radius:5px;}#music-new #content .other img{margin:10px 0;}
+#music-new #content .infos{border-bottom:1px solid #888;margin:0px 20px;margin-bottom:0;color:#bbb;font-size:12px;padding-bottom:3px;}#music-new #content .infos .visitcount{text-align:right;}
 #music-new #content .controls{width:100%;padding:20px 20px;box-sizing:border-box;margin-top:30px;display:table;}#music-new #content .controls .play{width:60px;height:60px;background:url(music/play.png) no-repeat;background-size:100%;display:inline-block;display:table-cell;}
 #music-new #content .controls .pause{background-image:url(music/pause.png);}
 #music-new #content .controls .process{display:table-cell;width:auto;vertical-align:middle;padding-left:10px;}#music-new #content .controls .process .times{font-size:10px;color:#aaa;margin-top:-10px;}#music-new #content .controls .process .times .left{float:left;}
 #music-new #content .controls .process .times .right{float:right;}
-#music-new #content .controls .process .line{height:3px;background:#aaa;}#music-new #content .controls .process .line .line-inner{height:3px;background:#fff;}
+#music-new #content .controls .process .line{height:3px;background:#bbb;}#music-new #content .controls .process .line .line-inner{height:3px;background:#fff;position:relative;}#music-new #content .controls .process .line .line-inner .line-circle{width:6px;height:6px;position:absolute;right:-6px;background:#fff;border-radius:10px;top:-1.5px;}

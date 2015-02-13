@@ -357,6 +357,17 @@
         margin:10px 0;
       }
     }
+    .infos{
+      border-bottom:1px solid #888;
+      margin:0px 20px;
+      margin-bottom:0;
+      color:#bbb;
+      font-size:12px;
+      padding-bottom:3px;
+      .visitcount{
+        text-align: right;
+      }
+    }
     .controls{
       width:100%;
       padding:20px 20px;
@@ -374,6 +385,7 @@
       .pause{
         background-image: url(music/pause.png)
       }
+
       .process{
         display: table-cell;
         width:auto;
@@ -392,10 +404,20 @@
         }
         .line{
           height:3px;
-          background: #aaa;
+          background: #bbb;
           .line-inner{
             height:3px;
             background: #fff;
+            position: relative;
+            .line-circle{
+              width:6px;
+              height:6px;
+              position: absolute;
+              right:-6px;
+              background: #fff;
+              border-radius: 10px;
+              top:-1.5px;
+            }
           }
         }
       }

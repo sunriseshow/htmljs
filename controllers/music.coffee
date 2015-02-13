@@ -28,7 +28,10 @@ module.exports.controllers =
       func_music.getById req.params.id,(error,music)->
         if error then next error
         else
-          res.locals.music = music
-          res.render 'music/music.jade'
-          func_music.addCount req.params.id,'visit_count',(()->),1
+          func_music.getNext req.params.id,(error,next)->
+            if(next)
+              res.locals.next = next
+            res.locals.music = music
+            res.render 'music/music.jade'
+            func_music.addCount req.params.id,'visit_count',(()->),1
 

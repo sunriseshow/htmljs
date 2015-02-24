@@ -61,9 +61,9 @@ func_article =
 
   getAll:(page,count,condition,order,callback)->
 
-#    if not callback
-#      callback = order
-#      order = "sort desc,id desc"
+    if not callback
+      callback = order
+      order = "sort desc,id desc"
 #    arguments_key = ['article.getAll',page,count,JSON.stringify(condition),order].join("_")
 #    cache_data = htmljs_cache.get(arguments_key)
 #    if cache_data
@@ -85,9 +85,9 @@ func_article =
     .error (error)->
       callback error
   getAllWithContent:(page,count,condition,order,callback)->
-#    if not callback
-#      callback = order
-#      order = "sort desc,id desc"
+    if not callback
+      callback = order
+      order = "sort desc,id desc"
 #    arguments_key = ['article.getAllWithContent',page,count,JSON.stringify(condition),order].join("_")
 #    cache_data = htmljs_cache.get(arguments_key)
 #    if cache_data

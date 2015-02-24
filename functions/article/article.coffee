@@ -80,7 +80,7 @@ func_article =
     Article.findAll(query)
     .success (articles)->
       cache.recent = articles
-      htmljs_cache.set(arguments_key,articles,1000*60*60*10)
+#      htmljs_cache.set(arguments_key,articles,1000*60*60*10)
       callback null,articles
     .error (error)->
       callback error
@@ -104,7 +104,7 @@ func_article =
     Article.findAll(query)
     .success (articles)->
       cache.recent = articles
-      htmljs_cache.set(arguments_key,articles,1000*60*60*10)
+#      htmljs_cache.set(arguments_key,articles,1000*60*60*10)
       callback null,articles
     .error (error)->
       callback error
@@ -157,7 +157,7 @@ func_article =
         pinyin:pinyin
       raw:true
     .success (article)->
-      htmljs_cache.set(arguments_key,article,1000*60*60*10)
+#      htmljs_cache.set(arguments_key,article,1000*60*60*10)
       callback null,article
     .error (error)->
       callback error

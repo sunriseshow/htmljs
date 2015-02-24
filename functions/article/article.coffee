@@ -61,14 +61,14 @@ func_article =
 
   getAll:(page,count,condition,order,callback)->
 
-    if not callback
-      callback = order
-      order = "sort desc,id desc"
-    arguments_key = ['article.getAll',page,count,JSON.stringify(condition),order].join("_")
-    cache_data = htmljs_cache.get(arguments_key)
-    if cache_data
-      callback null,cache_data
-      return
+#    if not callback
+#      callback = order
+#      order = "sort desc,id desc"
+#    arguments_key = ['article.getAll',page,count,JSON.stringify(condition),order].join("_")
+#    cache_data = htmljs_cache.get(arguments_key)
+#    if cache_data
+#      callback null,cache_data
+#      return
     query = 
       offset: (page - 1) * count
       limit: count
@@ -85,14 +85,14 @@ func_article =
     .error (error)->
       callback error
   getAllWithContent:(page,count,condition,order,callback)->
-    if not callback
-      callback = order
-      order = "sort desc,id desc"
-    arguments_key = ['article.getAllWithContent',page,count,JSON.stringify(condition),order].join("_")
-    cache_data = htmljs_cache.get(arguments_key)
-    if cache_data
-      callback null,cache_data
-      return
+#    if not callback
+#      callback = order
+#      order = "sort desc,id desc"
+#    arguments_key = ['article.getAllWithContent',page,count,JSON.stringify(condition),order].join("_")
+#    cache_data = htmljs_cache.get(arguments_key)
+#    if cache_data
+#      callback null,cache_data
+#      return
     query =
       offset: (page - 1) * count
       limit: count
@@ -147,11 +147,11 @@ func_article =
     .error (error)->
       callback error
   getByPinyin:(pinyin,callback)->
-    arguments_key = ['article.getByPinyin',pinyin].join("_")
-    cache_data = htmljs_cache.get(arguments_key)
-    if cache_data
-      callback null,cache_data
-      return
+#    arguments_key = ['article.getByPinyin',pinyin].join("_")
+#    cache_data = htmljs_cache.get(arguments_key)
+#    if cache_data
+#      callback null,cache_data
+#      return
     Article.find
       where:
         pinyin:pinyin

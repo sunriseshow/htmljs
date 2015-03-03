@@ -16,3 +16,13 @@ var server = require("./index.js")
 require('http').createServer(server).listen(server.get("port"), function() {
     console.log("Express server listening on port " + server.get("port"));
 }).setMaxListeners(0);
+
+setInterval(function(){
+    var use = process.memoryUsage().rss/1024/1024;
+    if(use>600){
+        console.log("memory out")
+        process.exit();
+    }else{
+        console.log("memery use:"+use)
+    }
+},1000)

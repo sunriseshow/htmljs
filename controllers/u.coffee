@@ -1,5 +1,16 @@
 func_url = __F 'url'
 module.exports.controllers =
+  "/":
+    get:(req,res,next)->
+      func_url.count condition,(error,count)->
+        if error then next error
+        else
+          res.locals.total=count
+          res.locals.totalPage=Math.ceil(count/20)
+          res.locals.page = (req.query.page||1)
+          func_url.getAll res.locals.page,20,{},"visit_count desc",(error,urls)->
+            res.locals.urls = urls
+            res.render 'urls.jade'
   "/add":
     get:(req,res,next)->
       if req.query.url

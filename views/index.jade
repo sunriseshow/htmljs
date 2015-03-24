@@ -38,7 +38,7 @@ html
                     a(href="/article") 最新的专栏文章（#{locals.all_count?all_count.article:0}）
                   .bd(role="list")
                     .item(class="new",role="listitem")
-                      a.title(href="http://community.apicloud.com/bbs/forum.php?mod=viewthread&tid=2820",style="color:#ff6700;") 最佳App开发模式-全国五大城市线下交流【杭州站】
+                      a.title(href="http://www.apicloud.com/",style="color:#ff6700;") 注册APICloud会员，缤纷好礼欢乐送！
                         a.u(href="http://apicloud.com") APICloud
                     each article,i in articles
                       .item(class="#{article.visit_count<60?'new':''} #{Math.floor(i%2)==1?'yooo':''}",role="listitem")

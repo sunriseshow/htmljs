@@ -261,7 +261,8 @@
   }
 }
 .my_columns{
-
+  padding:20px;
+  margin-bottom:10px;
   .my_column{
     margin-right: 10px;
     display: inline-block;
@@ -378,187 +379,55 @@
 
 #articles{
   .articles{
-    width:110%;
+    padding:0;
   }
   article{
-    width:240px;
-    float:left;
-    margin-right:15px;
-    position: relative;
-    border-bottom:1px solid #f1f1f1;
-    margin-top:20px;
-    height:250px;
-    overflow: hidden;
-    .entry-title:hover{
-//      text-decoration: none;
-//      .pic{
-//        border:7px solid #fafafa;
-//        box-shadow: 1px 1px 1px #aaa;
-//      }
-//
-
-      -webkit-transform: translateZ(-84px) rotateX(90deg);
-      -moz-transform: translateZ(-84px) rotateX(90deg);
-      -ms-transform: translateZ(-84px) rotateX(90deg);
-      -o-transform: translateZ(-84px) rotateX(90deg);
-      transform: translateZ(-84px) rotateX(90deg);
-      .cover-pic,.pic{
-        border-radius: 8px;
-      }
-    }
-    .title-wrapper{
-      -webkit-perspective: 5000px;
-     -moz-perspective: 5000px;
-      -ms-perspective: 5000px;
-      -o-perspective: 5000px;
-      perspective: 5000px;
-      display: inline-block;
-      vertical-align: top;
-      position: relative;
-      width:100%;
-      height:168px;
-    }
-    .entry-title{
-      display: block;
-      -webkit-transform-style: preserve-3d;
-      -moz-transform-style: preserve-3d;
-      -ms-transform-style: preserve-3d;
-      -o-transform-style: preserve-3d;
-      transform-style: preserve-3d;
-      -webkit-transition: -webkit-transform .8s;
-      -moz-transition: -moz-transform .8s;
-      -ms-transition: -ms-transform .8s;
-      -o-transition: -o-transform .8s;
-      transition: transform .8s;
-//      -webkit-transform: translateZ(0px) rotateX(95deg);
-//      -moz-transform: translateZ(-84px) rotateX(95deg);
-//      -ms-transform: translateZ(-84px) rotateX(95deg);
-//      -o-transform: translateZ(-84px) rotateX(95deg);
-//      transform: translateZ(0px) rotateX(95deg);
-      height:168px;
-      .pic{
-        width:100%;
-        height:168px;
-        box-sizing: border-box;
-        border:7px solid #fff;
-        box-shadow: 1px 1px 1px #ccc;
-
-        .img{
-          width:100%;
-          height:100%;
-          border:1px solid #eee;
-          box-sizing: border-box;
-        }
-        position: absolute;
-        top:0;
-        -webkit-transform: translateZ(84px);
-        -moz-transform: translateZ(84px);
-        -ms-transform: translateZ(84px);
-        -o-transform: translateZ(84px);
-        transform: translateZ(84px);
-        -webkit-transition: all .8s;
-        -moz-transition: all .8s;
-        -ms-transition: all .8s;
-        -o-transition: all .8s;
-        transition: all .8s;
-      }
-      .text{
-        display:-webkit-box;
-        -webkit-box-orient:horizontal;
-        -webkit-box-pack:center;
-        -webkit-box-align:center;
-        padding:10px;
-        width:100%;
-        box-sizing: border-box;
-        height:168px;
-      }
-      .cover-pic{
-        position: absolute;
-        top:0;
-        display:-webkit-box;
-        -webkit-box-orient:horizontal;
-        -webkit-box-pack:center;
-        -webkit-box-align:center;
-        width:100%;
-        height:168px;
-        box-sizing: border-box;
-        padding:10px;
-        overflow: hidden;
-        background: #333;
-        color:#fff;
-        .t{
-          color:#fff;
-          font-size: 18px;
-        }
-        -webkit-transform: rotateX(-90deg) translateZ(84px);
-        -moz-transform: rotateX(-90deg) translateZ(84px);
-        -ms-transform: rotateX(-90deg) translateZ(84px);
-        -o-transform: rotateX(-90deg) translateZ(84px);
-        transform: rotateX(-90deg) translateZ(84px);
-        -webkit-transition: all .8s;
-        -moz-transition: all .8s;
-        -ms-transition: all .8s;
-        -o-transition: all .8s;
-        transition: all .8s;
-      }
-      .real-t{
-
-      }
-      .t{
-        font-size: 16px;
-        line-height: 30px;
-        text-align: center;
-        color:#fff;
-      }
-      margin:0;
-      font-size:15px;
+    background: #f7f7f7;
+    padding:10px;
+    padding-left:15px;
+    .entry-title {
+      margin: 0;
+      height: 30px;
+      overflow: hidden;
+      font-size: 16px;
       line-height: 35px;
       font-weight: normal;
-      color:#666;
-
-
+      color: #444;
     }
-    .t-tip{
-      font-style: normal;
-      font-size: 16px;
+    .entry-title a {
+      color: #444;
+    }
+    .entry-title .column-col{
+      margin-left:10px;
+      font-size:14px;
+      color:#999;
+    }
+    .tip-jing{
+      background:@green;
       color:#fff;
-      background: rgba(80,167,222,0.5);
-      display: block;
-      width:40px;
-      height:40px;
-      line-height:40px;
+      font-size:12px;
+      display: inline-block;
+      width:20px;
+      height:20px;
+      line-height: 20px;
+      border-radius: 3px;
       text-align: center;
-      font-family: "STXihei";
-      border-radius: 40px;
-      vertical-align: 1px;
-      position: absolute;left:100px;top:60px;
-      display: none;
+      font-style:normal;
+      vertical-align: 2px;
+      margin-right:5px;
     }
-    .real-t{
-      color: #666;
-      margin-top:10px;
-      display: block;
-      height:35px;
-      overflow: hidden;
-      font-size: 12px;
-      overflow: hidden;
-    }
-    .column-title{
-      font-size: 12px;
-      padding:0 2px;
-      color:#888;
+    &.yooo {
+      background: #fff;
     }
     .entry-foot{
 
-      .other-r{float:right;
-      margin-top:-27px;}
+
       .right-foot{
         float: right;
         .item{
         }
       }
       .username{
-        margin-left:5px;
         color:#999;
         font-size: 12px;
         line-height:26px;
@@ -566,9 +435,9 @@
       .item{
         display: inline-block;
         font-size: 12px;
-        line-height: 25px;
+        line-height: 30px;
 
-        margin-left: 10px;
+        margin-right: 15px;
         i{
           background: none;
           margin-right: 1px;
@@ -591,20 +460,23 @@
     }
     .user{
       position: relative;
-      width:25px;
-      height:25px;
+      width:35px;
+      height:35px;
       vertical-align: top;
       display: inline-block;
-
+      float:right;
+      margin-top:-20px;
+      margin-right:10px;
       a{
         display: block;
       }
       img{
-        width:20px;
-        height:20px;
+        width:30px;
+        height:30px;
         border-radius: 33px;
         border:2px solid #fff;
         box-shadow: 1px 1px 1px #aaa;
+
       }
     }
   }

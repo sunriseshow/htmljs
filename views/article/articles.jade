@@ -61,8 +61,8 @@ html(xmlns:wb='http://open.weibo.com/wb')
               span.divider /
             li.active
               span #{column.name}
-      .module
-        .my_columns
+
+        .my_columns.mod-white
           .hd 我的专栏
           .bd
             - var now = new Date().getTime();
@@ -92,23 +92,15 @@ html(xmlns:wb='http://open.weibo.com/wb')
       
       .content
           if articles && articles.length
-            .articles
+            .articles.mod-white
               each article,i in articles
                 article(id="post-#{article.id}",class="#{i%2==0?'yooo':''}")
                   div.title-wrapper
                     a.entry-title(,href='/article/#{article.pinyin?article.pinyin:article.id}', title='#{article.title}', rel='bookmark')
-                        if article.main_pic
-                          .pic
-                            .img(style="background:url(#{article.main_pic});background-size:cover;")
-                        else
-                          .pic.text(style="background-color:#64ba9d;")
-                            .t #{article.title}
-                        .cover-pic
-                          .t #{article.title}
-                  span.real-t(class="real-title-#{Math.floor(Math.random()*100)}")
-                      if article.is_jian
-                          |<i class="t-tip tip-jing">精</i>
-                      |#{article.title}
+                      span.real-t(class="real-title-#{Math.floor(Math.random()*100)}")
+                          if article.is_jian
+                              |<i class="t-tip tip-jing">精</i>
+                          |#{article.title}
                   //span.column-col
                     if article['column']
                       |[
@@ -121,16 +113,18 @@ html(xmlns:wb='http://open.weibo.com/wb')
                         div.user
                           a(data-original-title="#{article.user_nick}",href="/user/#{article.user_id}")
                             img(src="#{article.user_headpic}")
-                        a.username.value.url.fn(rel='author', href='/user/#{article.user_id}') #{article.user_nick}
+
                     .other-r
                       span.views.item
-                        span.index
-                          i.icon-eye-open
+                        a.username.value.url.fn(rel='author', href='/user/#{article.user_id}') #{article.user_nick}
+                      span.views.item
+                        span.index 浏览：
                         a.value #{article.visit_count}
                       span.views.item
-                        span.index
-                          i.icon-chat
+                        span.index 评论：
                         a.value #{article.comment_count}
+                      span.views.item
+                        a.value #{moment(article.createdAt).fromNow()}
                       if locals.user && (user.is_admin||user.id==article.user_id)
                         span.views.item
                           a.value(href="/article/#{article.id}/edit") 编辑

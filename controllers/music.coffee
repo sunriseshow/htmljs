@@ -19,7 +19,11 @@ module.exports.controllers =
               res.render 'music/all.jade'
   ".json":
     get:(req,res,next)->
-      func_music.getAll 1,10000,null,'musics.index desc',(error,musics)->
+      last_id = req.query.last_id
+      condition = null
+      if last_id
+        condition = ['id > ?',last_id]
+      func_music.getAll 1,10000,condition,'musics.index desc',(error,musics)->
         if error
           res.send error
         else

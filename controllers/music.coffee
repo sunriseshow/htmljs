@@ -19,23 +19,12 @@ module.exports.controllers =
               res.render 'music/all.jade'
   ".json":
     get:(req,res,next)->
-      page = req.query.page || 1
-      count = req.query.count || 20
-      condition = null
-      func_music.count condition,(error,_count)->
-
+      func_music.getAll 1,10000,null,'musics.index desc',(error,musics)->
         if error
           res.send error
         else
-          res.locals.total=_count
-          res.locals.totalPage=Math.ceil(_count/count)
-          res.locals.page = (req.query.page||1)
-          func_music.getAll page,count,condition,'musics.index desc',(error,musics)->
-            if error
-              res.send error
-            else
-              res.locals.musics = musics
-              res.send musics
+          res.locals.musics = musics
+          res.send musics
   "/add":
     get:(req,res,next)->
       res.render 'music/add.jade'

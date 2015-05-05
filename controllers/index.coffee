@@ -226,7 +226,7 @@ module.exports.controllers =
       pack = req.files['pic']
       if pack && (pack.type == 'image/jpeg'||pack.type == "image/jpg"||pack.type=="image/png"||pack.type=="image/gif"||pack.type=="audio/mp3")
         sourcePath = pack.path
-        pack_name = (new Date()).getTime()+"-"+pack.name
+        pack_name = (new Date()).getTime()+"-"+md5(pack.name)+path.extname(pack.name)
         targetPath = config.upload_path+pack_name
         fs.rename sourcePath, targetPath, (err) ->
           

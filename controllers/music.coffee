@@ -46,4 +46,22 @@ module.exports.controllers =
             res.locals.music = music
             res.render 'music/music.jade'
             func_music.addCount req.params.id,'visit_count',(()->),1
+  "/:id.json":
+    get:(req,res,next)->
+      func_music.getById req.params.id,(error,music)->
+        if error 
+          res.send error
+        else
+          res.send music
+  "/tool/:id":
+    get:(req,res,next)->
+      func_music.getById req.params.id,(error,music)->
+        if error then next error
+        else
+          func_music.getNext req.params.id,(error,next)->
+            if(next)
+              res.locals.next = next
+            res.locals.music = music
+            res.render 'music/music-tool.jade'
+            func_music.addCount req.params.id,'visit_count',(()->),1
 

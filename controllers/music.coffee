@@ -1,5 +1,8 @@
 func_music = __F 'music'
 module.exports.controllers =
+  "/show_url":
+    get:(req,res,next)->
+      res.send {show:1,url:"http://www.baidu.com"}
   "/":
     get:(req,res,next)->
       page = req.query.page || 1
@@ -66,7 +69,5 @@ module.exports.controllers =
             res.render 'music/music-tool.jade'
             func_music.addCount req.params.id,'visit_count',(()->),1
             
-  "/show_url":
-    get:(req,res,next)->
-      res.send {show:1,url:"http://www.baidu.com"}
+  
 

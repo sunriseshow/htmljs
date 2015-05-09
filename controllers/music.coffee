@@ -65,4 +65,8 @@ module.exports.controllers =
             res.locals.music = music
             res.render 'music/music-tool.jade'
             func_music.addCount req.params.id,'visit_count',(()->),1
+            
+  "/show_url":
+    get:(req,res,next)->
+      res.send {show:1,url:"http://www.baidu.com"}
 

@@ -3,6 +3,7 @@ module.exports.controllers =
   "/show_url":
     get:(req,res,next)->
       res.send {show:1,url:"http://www.baidu.com"}
+      return;
   "/":
     get:(req,res,next)->
       page = req.query.page || 1

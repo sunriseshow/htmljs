@@ -2,7 +2,7 @@ func_music = __F 'music'
 module.exports.controllers =
   "/show_url":
     get:(req,res,next)->
-      res.send {show:1,url:"http://www.baidu.com"}
+      res.send {show:0,url:"http://www.baidu.com"}
       return;
   "/":
     get:(req,res,next)->

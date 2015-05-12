@@ -1,4 +1,5 @@
 func_music = __F 'music'
+musics = {}
 module.exports.controllers =
   "/show_url":
     get:(req,res,next)->
@@ -27,17 +28,27 @@ module.exports.controllers =
       condition = null
       if last_id
         condition = ['id > ?',last_id]
-      func_music.getAll 1,10000,condition,'musics.index desc',(error,musics)->
-        if error
-          res.send error
-        else
-          res.locals.musics = musics
-          res.send musics
+      if !last_id 
+            last_id = -1
+
+      if musics[last_id]
+        res.send musics
+      else
+        func_music.getAll 1,10000,condition,'musics.index desc',(error,musics)->
+          if error
+            res.send error
+          else
+            res.locals.musics = musics
+            res.send musics
+            
+            if !musics[last_id]
+              musics[last_id] = musics
   "/add":
     get:(req,res,next)->
       res.render 'music/add.jade'
     post:(req,res,next)->
       func_music.add req.body,(error,music)->
+        musics = {}
         res.redirect '/music/'+music.id
   "/:id.json":
     get:(req,res,next)->

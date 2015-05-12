@@ -12,3 +12,4 @@ module.exports =
   visit_count:
     type:"int"
     defaultValue:1
+  zip:"varchar(500)"

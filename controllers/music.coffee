@@ -56,6 +56,7 @@ module.exports.controllers =
           res.send error
         else
           res.send music
+          func_music.addCount req.params.id,'visit_count',(()->),1
   "/:id":
     get:(req,res,next)->
       func_music.getById req.params.id,(error,music)->

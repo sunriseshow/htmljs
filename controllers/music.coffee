@@ -29,10 +29,10 @@ module.exports.controllers =
       if last_id
         condition = ['id > ?',last_id]
       if !last_id 
-            last_id = -1
+        last_id = -1
 
       if musics[last_id]
-        res.send musics
+        res.send musics[last_id]
       else
         func_music.getAll 1,10000,condition,'musics.index desc',(error,musics)->
           if error
@@ -40,7 +40,6 @@ module.exports.controllers =
           else
             res.locals.musics = musics
             res.send musics
-            
             if !musics[last_id]
               musics[last_id] = musics
   "/add":

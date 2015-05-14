@@ -175,7 +175,7 @@ func_article =
         else
           title = article.title
         en_func title,(en)->
-          article.updateAttributes {pinyin:en},['pinyin']
+          article.updateAttributes {pinyin:en+' '+article.id},['pinyin']
       callback null,article
     .error (error)->
       callback error

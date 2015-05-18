@@ -13,13 +13,13 @@ module.exports.controllers =
       func_act.getAll page,count,{is_publish:1},(error,acts)->
         res.locals.acts = acts
         res.render 'act/index.jade'
-  "/marry_count":
+  "/marry/count":
     get:(req,res,next)->
       func_act.getById 100,(error,act)->
-        res.send act.visit_count
+        res.send act
     post:(req,res,next)->
       func_act.addCount 100,"visit_count",(error)->
-        
+
   "/add":
     get:(req,res,next)->
       res.render 'act/add.jade'

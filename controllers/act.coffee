@@ -15,9 +15,12 @@ module.exports.controllers =
         res.render 'act/index.jade'
   "/marry/count":
     get:(req,res,next)->
+      res.header("Access-Control-Allow-Origin", "*");
       func_act.getById 100,(error,act)->
+
         res.send act
     post:(req,res,next)->
+      res.header("Access-Control-Allow-Origin", "*");
       func_act.addCount 100,"visit_count",(error)->
 
   "/add":

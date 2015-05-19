@@ -55,6 +55,23 @@
               transform: scale(1,1);
           }
       }
+      @-webkit-keyframes heart2 {
+          0% {
+              opacity: 1;
+              -webkit-transform: scale(1,1);
+              transform: scale(1,1);
+          }
+          50% {
+              opacity: 0.5;
+              -webkit-transform: scale(1.1,1.1) translate3d(0px, 0px, 0);
+              transform: scale(1.1,1.1)  translate3d(0px, 0px, 0);
+          }
+          100% {
+              opacity: 1;
+               -webkit-transform: scale(1,1);
+              transform: scale(1,1);
+          }
+      }
       @-webkit-keyframes arrowMove {
           0% {
               opacity: 1;
@@ -155,7 +172,11 @@
       	}
       }
       .close{z-index:200000000000001;position: fixed;top:10px;right:10px;background: url(http://cheniu-openapi.qiniudn.com/activities/img/marry/close.png) no-repeat center center;background-size:80%;width:40px;height:40px;opacity: 0.7;}
-      .chat{z-index:1002221;position: fixed;top:5px;right:10px;background: url(http://cheniu-openapi.qiniudn.com/activities/img/marry/chat.png) no-repeat center center;background-size:70%;width:40px;height:40px;opacity: 0.7;}
+      .chat{z-index:1002221;position: fixed;top:5px;right:10px;background: url(http://cheniu-openapi.qiniudn.com/activities/img/marry/chat.png) no-repeat center center;background-size:70%;width:40px;height:40px;
+        -webkit-animation: heart2 1200ms ease-in-out infinite;
+          animation: heart2 1200ms ease-in-out infinite;
+
+          opacity: 0.7;}
       body .bdshare-button-style1-32 a{display:inline-block;float:none;}
       body #bdshare_weixin_qrcode_dialog{z-index:1000000000000;}
     </style>
@@ -198,7 +219,9 @@ var duoshuoQuery = {short_name:"htmljs"};
     <script src="http://cheniu-h5.qiniudn.com/common/js/zepto.min.js"></script>
     <script src="http://cheniu-h5.qiniudn.com/everydaycar/js/islider.js"></script>
     <script>
-      $(".chat").css({right:$(window).width()/2-430/2+10})
+      if($(window).width()>430){
+        $(".chat").css({right:$(window).width()/2-430/2+10})
+      }
       $(".close").on("click",function(){
         $(".close").hide()
         $(".talk").hide();

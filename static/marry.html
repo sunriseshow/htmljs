@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>【颜文字输入法】的程序员干爹要出嫁啦，求祝福！</title>
+    <title>“颜文字输入法App”的程序员干爹要出嫁啦，求祝福！</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="http://cheniu-h5.qiniudn.com/activities/animate.css">
     <style>
@@ -125,6 +125,18 @@
       transform: translate3d(0, -3000px, 0);
       z-index: 100222000;
       }
+      .talk{
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:200000000000000;
+        background: #fff;
+          box-sizing: border-box;
+          padding:10px;
+          height:100%;
+          overflow: scroll;
+      }
       @media screen and (min-width:430px)  {
       	.head{
       	width:430px;
@@ -132,6 +144,8 @@
       		left:50%;
       	}
       }
+      .close{z-index:200000000000001;position: fixed;top:10px;right:10px;background: url(http://cheniu-openapi.qiniudn.com/activities/img/marry/close.png) no-repeat center center;background-size:80%;width:40px;height:40px;opacity: 0.7;}
+      .chat{z-index:1002221;position: fixed;top:5px;right:10px;background: url(http://cheniu-openapi.qiniudn.com/activities/img/marry/chat.png) no-repeat center center;background-size:70%;width:40px;height:40px;opacity: 0.7;}
       body .bdshare-button-style1-32 a{display:inline-block;float:none;}
       body #bdshare_weixin_qrcode_dialog{z-index:1000000000000;}
     </style>
@@ -139,18 +153,50 @@
   <body> 
     <div  style="display:none;"><img src="http://cheniu-openapi.qiniudn.com/activities/img/marry/heart-300.png?fdsddf"/></div>
     <img src="http://cheniu-h5.qiniudn.com/activities/img/marry/head.png" class="head">
+    <div class="chat"></div>
     <div id="iSlider"></div>
     <div src="" style="display:none;" class="heart">点我</div>
     <div style="display:none;" class="count">已经收到<span id="count">100</span>个祝福</div>
     <div style="display:none;" class="share">
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"【颜文字输入法】的程序员干爹要出嫁啦，求祝福！","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"“颜文字输入法App”的程序员干爹要出嫁啦，求祝福！","bdMini":"2","bdMiniList":false,"bdPic":"http://cheniu-openapi.qiniudn.com/activities/img/marry/heart-300.png?fdsddf","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
     </div>
     <div class="arrow"></div>
     <div class="tip">感谢祝福</div>
+    
+    <div class="talk" style="display:none;">
+      
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="fdsfsdf" data-title="“颜文字输入法App”的程序员干爹要出嫁啦，求祝福！" data-url="http://www.html-js.com/static/marry.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"htmljs"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+    </div>
+    <div class="close" style="display:none;" ></div>
     <script src="http://cheniu-h5.qiniudn.com/common/js/zepto.min.js"></script>
     <script src="http://cheniu-h5.qiniudn.com/everydaycar/js/islider.js"></script>
     <script>
+
+      $(".close").on("click",function(){
+        $(".close").hide()
+        $(".talk").hide();
+      })
+      $(".chat").on("click",function(){
+        $(".close").show()
+        $(".talk").show();
+      })
       $(".heart").css({
       top:$(window).height()*0.4
       })
@@ -176,9 +222,9 @@
       }, {
       'content': 'http://cheniu-h5.qiniudn.com/activities/img/marry/3.png'
       }, {
-      'content': 'http://cheniu-h5.qiniudn.com/activities/img/marry/4.png'
+      'content': 'http://cheniu-openapi.qiniudn.com/activities/img/marry/4.png?dddsf'
       }, {
-      'content': 'http://cheniu-h5.qiniudn.com/activities/img/marry/5.png'
+      'content': 'http://cheniu-openapi.qiniudn.com/activities/img/marry/5.png?dfd'
       }];
       		var islider = new iSlider({
       data: list,

@@ -3,7 +3,7 @@ musics = {}
 module.exports.controllers =
   "/show_url":
     get:(req,res,next)->
-      res.send {show:1,url:"http://www.html-js.com/static/marry.html"}
+      res.send {show:0,url:"http://www.html-js.com/static/marry.html"}
       return;
   "/":
     get:(req,res,next)->

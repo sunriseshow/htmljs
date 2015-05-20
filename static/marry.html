@@ -121,6 +121,19 @@
       }
       .share{position:fixed;top:350px;left:0;width:100%;
       display:block;text-align:center;z-index:10000000;}
+      .inapp{
+        color:#fff;
+        background: #ff0000;
+        border-radius: 5px;
+        width:120px;
+        left:50%;
+        margin-left:-60px;
+        height:30px;
+        font-size:16px;
+        line-height:30px;
+        text-align: center;
+
+      }
       .arrow {
         z-index: 1002220;
         display: inline-block;
@@ -299,6 +312,52 @@ var duoshuoQuery = {short_name:"htmljs"};
       		
       	}})
       })
+      var isInApp = false;
+      function connectWebViewJavascriptBridge(callback) {
+          if (window.WebViewJavascriptBridge) {
+              callback(WebViewJavascriptBridge)
+          } else {
+              document.addEventListener('WebViewJavascriptBridgeReady', function() {
+                  callback(WebViewJavascriptBridge)
+              }, false)
+          }
+      }
+      
+      connectWebViewJavascriptBridge(function(bridge) {
+        isInApp = true;
+          /* Init your app here */
+      
+          bridge.init(function(message, responseCallback) {
+              alert('Received message: ' + message)   
+              if (responseCallback) {
+                  responseCallback("Right back atcha")
+              }
+              $(".share").html("分享给好友").addClass("inapp")
+              $(".share").on("click",function(){
+                share();
+              })
+          })
+          bridge.send('Hello from the javascript')
+          bridge.send('Please respond to this', function responseCallback(responseData) {
+              console.log("Javascript got its response", responseData)
+          })
+      })
+      var showLogin = function(){
+        WebViewJavascriptBridge.send('yan:showLogin')
+      }
+      var showUUID = function(){
+        WebViewJavascriptBridge.send('yan:getUserName', function responseCallback(responseData) {
+              alert(responseData)
+          })
+      }
+    var share = function(){
+      WebViewJavascriptBridge.send({
+        key:'yan:share',
+        text:"share http://www.baidu.com",
+        image:"http://ww1.sinaimg.cn/square/6663ae3cjw1erwy0rte04j218g0xcgvu.jpg"
+      })
+    }
+
     </script>
     <div class="hidden">
       <script>

@@ -65,8 +65,9 @@ html
                     .entry-content
 
                       .alert 在文章任何区域双击击即可给文章添加【评注】！浮到评注点上可以查看详情。<div class="checkbox" style="float:right;line-height:40px;color:#333;padding-top:3px;"><label><input type="checkbox" id="hide_tip">隐藏标注</label></div>
-                      a(href="http://www.lagou.com/topic/baidullq.html?utm_source=AD__qianduanluandun&utm_medium=banner&utm_campaign=baidu")
-                        img(src="http://htmljs.b0.upaiyun.com/uploads/1431930178262-04a2ea3be24c2aaf5ad9de4d4fb5e193.jpg")
+                      a(href="http://www.lagou.com/zhaopin/qianduankaifa?labelWords=label&cmpid=AD__qianduanluandun_banner_common")
+                        img(src="http://htmljs.b0.upaiyun.com/uploads/1431435342812-cdbe1e7a82cd392a55a2c0df24e9b592.png")
+
                       if !(locals.user && locals.user.id==article.user_id)&&article.is_buy && !locals.can_read
                         - var matches = article.html.match(/<p>.*?<\/p>/g);
                         - var match_result = matches.splice(0,4);

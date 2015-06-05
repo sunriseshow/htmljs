@@ -41,9 +41,6 @@ html
                   .hd
                     a(href="/article") 最新的专栏文章（#{locals.all_count?all_count.article:0}）
                   .bd(role="list")
-                    .item(class="new",role="listitem")
-                      a.title(href="http://community.apicloud.com/bbs/forum.php?mod=viewthread&tid=4864&page=1&extra=",style="color:#ff6700;") HTML5来了：推荐5个好用的混合式App开发工具
-                        a.u(href="http://apicloud.com") vivian
                     each article,i in articles
                       .item(class="#{article.visit_count<60?'new':''} #{Math.floor(i%2)==1?'yooo':''}",role="listitem")
                         a.title(href="/article/#{article.pinyin?article.pinyin:article.id}") #{article.title}

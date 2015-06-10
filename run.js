@@ -25,4 +25,4 @@ setInterval(function(){
     }else{
         console.log("memery use:"+use)
     }
-},1000)
+},10000)

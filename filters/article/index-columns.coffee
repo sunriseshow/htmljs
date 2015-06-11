@@ -9,8 +9,10 @@ module.exports = (req,res,next)->
       res.locals.page = (req.query.page||1)
 
       
-    func_column.getAll res.locals.page,30,null,"last_article_time desc,article_count desc",(error,columns)->
+    func_column.getAll res.locals.page,30,null,"article_count desc",(error,columns)->
       if error then next error
       else
-        res.locals.columns = columns
+        columns.sort (r1,r2)->
+          return if Math.random()>0.5 then 1 else -1
+        res.locals.columns = columns.splice(0,13)
         next()

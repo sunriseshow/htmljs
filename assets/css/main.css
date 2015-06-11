@@ -26,11 +26,11 @@ body{font-family:'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Lantinghei SC'
 .user{position:relative;}.user .sex{position:absolute;bottom:0;right:0;width:30%;height:30%;display:block;overflow:hidden;line-height:0;font-size:0px;}
 .user .sex.nan{background:rgba(255, 255, 255, 0.9) url(../images/nan.png) no-repeat center center;background-size:80% 80%;}
 .user .sex.nv{background:rgba(255, 255, 255, 0.9) url(../images/nv.png) no-repeat center center;background-size:80% 80%;}
-.mod-white{background:#fff;border-radius:3px;box-shadow:0px 1px 2px rgba(0, 0, 0, 0.1);overflow:hidden;}
 .module{background:#fff;padding:15px 20px;margin-bottom:10px;overflow:hidden;-webkit-border-radius:3px;border-radius:3px;-webkit-box-sizing:border-box;box-sizing:border-box;background-color:#fff;border:1px solid #d8d8d8;vertical-align:top;}.module .hd .right_more{font-size:12px;float:right;padding-right:10px;}
 .module .hd{line-height:16px;margin:10px 0;font-size:16px;height:16px;font-weight:100;color:#666;border-left:3px solid #88d1b4;padding-left:8px;}
 .module .bd{font-size:12px;padding:0px;color:#666;margin-top:10px;}
 body{background:url(../images/bg-repeat.png);background:#efefef;}
+.mod-white{background:#fff;border-radius:3px;border:none;box-shadow:0px 1px 2px rgba(0, 0, 0, 0.1);overflow:hidden;}
 #content{width:940px;margin:20px auto;}#content table{width:100%;overflow:auto;display:block;}
 #content table th{font-weight:bold;}
 #content table th,#content table td{border:1px solid #ddd;padding:6px 13px;}
@@ -382,7 +382,7 @@ body{background:url(../images/bg-repeat.png);background:#efefef;}
 #tag .tag-edit{padding-left:10px;}
 #tag .tag-keywords{color:#999;line-height:20px;}
 #tag .tag-desc{color:#666;font-size:12px;margin-top:5px;}
-#tag .qa-list{border:1px solid #f3f3f3;border-radius:5px;overflow:hidden;}
+#tag .qa-list{border-radius:5px;overflow:hidden;}
 #tag .qa-item.yooo{background:#F7F7F7;}
 #tag .qa-item.unanswered{background:#f1fff1;border-top:1px solid #deeadd;margin-top:-1px;border-bottom:1px solid #deeadd;}
 #tag .qa-item{background:#fff;padding:10px;position:relative;}#tag .qa-item .tip{position:absolute;right:0;top:0;width:40px;height:16px;font-size:12px;line-height:16px;text-align:center;background:#68a4d1;color:#fff;z-index:10;}

@@ -10,20 +10,13 @@ html
     include ./../header
     #content.clearfix
       .content
-        .module
+        .module.mod-white
           h1.tag-name(href="") #{tag.name}
             a.tag-edit(href="/tag/#{tag.id}/edit") <i class="icon-edit icon-gray" style="background:none;font-size:13px;"></i>
           .tag-keywords 别名：#{tag.keywords}
           .tag-desc !{tag.desc}
           .tag-action
-        .module
-          .hd
-            .nav.nav-pills
-              li
-                a.active() 相关文章
-              li
-                a() 相关问答
-          .bd
+        .mod-white
             if locals.articles
 
               .qa-list
@@ -49,7 +42,8 @@ html
                         div.user
                           a(data-original-title="#{article.article.user_nick}")
                             img(src="#{article.article.user_headpic}")
-        .module.comment
+                include ../page
+        .module.mod-white.comment
           .hd 讨论
           .bd
             .publish

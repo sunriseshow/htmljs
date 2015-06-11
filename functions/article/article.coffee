@@ -73,7 +73,7 @@ func_article =
       offset: (page - 1) * count
       limit: count
       order: order
-      attributes:['id','publish_time','createdAt','zan_count','comment_count','visit_count','main_pic','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin']
+      attributes:['id','publish_time','createdAt','zan_count','comment_count','visit_count','main_pic','title','user_id','user_nick','user_headpic','is_jian','is_top','type','column_id','uuid','pinyin','tags']
       include:[User,Column]
       raw:false
     if condition then query.where = condition

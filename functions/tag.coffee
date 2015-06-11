@@ -17,6 +17,14 @@ ArticleTag.sync()
 Tag.sync()
 Question.sync()
 func_tag = 
+  countArticles:(id,callback)->
+    ArticleTag.count
+      where:
+        tagid:id
+    .success (c)->
+      callback null,c
+    .error (e)->
+      callback e
   getByName:(name,callback)->
     Tag.find
       where:
@@ -40,6 +48,8 @@ func_tag =
     ArticleTag.findAll
       where:
         tagid:id
+      offset: (page - 1) * count
+      limit: count
       include:[Article]
     .success (as)->
       callback null,as

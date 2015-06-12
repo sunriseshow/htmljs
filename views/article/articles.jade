@@ -165,7 +165,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
                   div.user
                     a(data-original-title="#{column.user.nick}",href="/user/#{column.user.id}")
                       img(src="#{column.user.head_pic}")
-                  span #{column.name}  专栏 
+                  a(href="/article/column/#{column.id}",style="color:#444;") #{column.name}  专栏 
                 
                 .others
                   span 文章数：#{column.article_count}

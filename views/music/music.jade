@@ -8,7 +8,7 @@ html
     link(href="#{assets_head}/css/music.css?1221",rel="stylesheet",type="image/x-icon")
     title 二十一点·睡前故事 第#{music.index}期《#{music.title}》
     |<meta name="Description" content="二十一点·睡前故事 第#{music.index}期《#{music.title}》" />
-    |<meta name="apple-itunes-app" content="app-id=998079819" />
+    //- |<meta name="apple-itunes-app" content="app-id=998079819" />
     style.
       #app-header{height:80px;background:#eee;display:block;color:#333;}
       .app-icon{margin:10px;margin-left:20px;width:60px;float:left;}
@@ -23,6 +23,10 @@ html
         font-size:12px;
         border-radius:5px;
       }
+      .hidden{display:none !important;}
+      .app-open{position:fixed;width:100%;top:0;left:0;}
+      .cccc{background:#fff;opacity:0.7;position:fixed;width:100%;top:0;left:0;}
+      .app-open img{background:#fff;opacity:0.8;position:fixed;width:100%;top:0;left:0;}
     |<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   body#music-new
 
@@ -34,6 +38,9 @@ html
         .app-title 二十一点睡前故事
         .app-use 卓老师&芋头
       .app-download 下载APP
+    .app-open.hidden
+      .cccc
+      img(src="http://htmljs.b0.upaiyun.com/uploads/1434429969730-78bb034a62978df4b828249055816c02.png")
     #header
       .left
         a.home(href="/music/") 首页
@@ -62,6 +69,18 @@ html
         .other 二十一点 微信公众号，是由卓老师维护的一个面向各位小朋友和大朋友的深夜故事公众号。<br/><br/>卓老师每天晚上都会讲一个非常可爱的故事，然后录音发布在公众号上。<br/><br/>记住哦~每天晚上九点发布<br/>赶紧关注卓老师的公众号：二十一点<br/><br/>或者扫描二维码：<br/><img src="http://ww3.sinaimg.cn/bmiddle/6663ae3cgw1enwoooq45fj2076076dga.jpg"/><br/>如果您觉得卓老师讲的不错，欢迎多多分享给自己的朋友哦。谢谢啦~\(≧▽≦)/~
     script(src='#{assets_head}/js/jquery.js')
     script.
+      var isWeixin = (/MicroMessenger/i).test(window.navigator.userAgent);
+      $("#app-header").on("click",function(e){
+        e.preventDefault();
+        if(isWeixin){
+          $(".app-open").removeClass("hidden")
+        }else{
+          window.location.href=$(this).attr("href");
+        }
+        })
+      $(".app-open").on("click",function(){
+        $(".app-open").addClass("hidden")
+        })
       var audio = document.getElementById("audio");
       var url = "#{music.audio}";
       audio.src = url;

@@ -10,10 +10,30 @@ html
     |<meta name="Description" content="二十一点·睡前故事 第#{music.index}期《#{music.title}》" />
     |<meta name="apple-itunes-app" content="app-id=998079819" />
     style.
+      #app-header{height:80px;background:#eee;display:block;color:#333;}
+      .app-icon{margin:10px;margin-left:20px;width:60px;float:left;}
+      .app-desc{margin-top:15px;float:left;font-size:16px;}
+      .app-use{font-size:12px;margin-top:8px;}
+      .app-download{position:absolute;right:10px;top:30px;height:25px;line-height:25px;
+        background: #0088CC;
+        background-image: -webkit-linear-gradient(top, #00a3f5 0%, #0088CC 100%);
+        background-image: linear-gradient(to bottom, #00a3f5 0%, #0088CC 100%);
+        color:#fff;
+        padding:0 10px;
+        font-size:12px;
+        border-radius:5px;
+      }
     |<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   body#music-new
+
     img.backblur(src="#{music.cover}")
     .backcover
+    a#app-header(href="https://itunes.apple.com/cn/app/er-shi-yi-dian-shui-qian-gu-shi/id998079819")
+      img.app-icon(src="http://htmljs.b0.upaiyun.com/uploads/1434428806313-55ee7a857a03008353b246e1a70e991c.png")
+      .app-desc
+        .app-title 二十一点睡前故事
+        .app-use 卓老师&芋头
+      .app-download 下载APP
     #header
       .left
         a.home(href="/music/") 首页

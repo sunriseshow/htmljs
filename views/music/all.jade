@@ -24,8 +24,34 @@ html(xmlns:wb='http://open.weibo.com/wb')
       #musics article{
         margin:10px 0px;
       }
+      #app-header{height:80px;background:#eee;display:block;color:#333;}
+      .app-icon{margin:10px;margin-left:20px;width:60px;float:left;}
+      .app-desc{margin-top:15px;float:left;font-size:16px;}
+      .app-use{font-size:12px;margin-top:8px;}
+      .app-download{position:absolute;right:10px;top:30px;height:25px;line-height:25px;
+        background: #0088CC;
+        background-image: -webkit-linear-gradient(top, #00a3f5 0%, #0088CC 100%);
+        background-image: linear-gradient(to bottom, #00a3f5 0%, #0088CC 100%);
+        color:#fff;
+        padding:0 10px;
+        font-size:12px;
+        border-radius:5px;
+      }
+      .hidden{display:none !important;}
+      .app-open{position:fixed;width:100%;top:0;left:0;}
+      .cccc{background:#fff;opacity:0.7;position:fixed;width:100%;top:0;left:0;height:10000px;}
+      .app-open img{position:fixed;width:100%;top:0;left:0;}
       article img{width:100%;}
   body#musics
+    a#app-header(href="https://itunes.apple.com/cn/app/er-shi-yi-dian-shui-qian-gu-shi/id998079819")
+      img.app-icon(src="http://htmljs.b0.upaiyun.com/uploads/1434428806313-55ee7a857a03008353b246e1a70e991c.png")
+      .app-desc
+        .app-title 二十一点睡前故事
+        .app-use 卓老师&芋头
+      .app-download 下载APP
+    .app-open.hidden
+      .cccc
+      img(src="http://htmljs.b0.upaiyun.com/uploads/1434429969730-78bb034a62978df4b828249055816c02.png")
     a#header(href="/music") 二十一点 · 睡前故事
     #content.clearfix
       .content
@@ -47,3 +73,16 @@ html(xmlns:wb='http://open.weibo.com/wb')
           else
             .articles 暂无
           include ../page
+    script.
+      var isWeixin = (/MicroMessenger/i).test(window.navigator.userAgent);
+      $("#app-header").on("click",function(e){
+        e.preventDefault();
+        if(isWeixin){
+          $(".app-open").removeClass("hidden")
+        }else{
+          window.location.href=$(this).attr("href");
+        }
+        })
+      $(".app-open").on("click",function(){
+        $(".app-open").addClass("hidden")
+        })

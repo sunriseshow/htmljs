@@ -143,9 +143,7 @@ html(xmlns:wb='http://open.weibo.com/wb')
         .app-title 二十一点睡前故事
         .app-use 卓老师&芋头
       .app-download 下载APP
-    .app-open.hidden
-      .cccc
-      img(src="http://htmljs.b0.upaiyun.com/uploads/1434429969730-78bb034a62978df4b828249055816c02.png")
+    
     a#header(href="/music") 二十一点 · 睡前故事
     #content.clearfix
       .content
@@ -168,6 +166,9 @@ html(xmlns:wb='http://open.weibo.com/wb')
             .articles 暂无
           include ../page
     .ap-frame
+      img(src="http://htmljs.b0.upaiyun.com/uploads/1434642744793-b6141b315f447b48cd388e991153673e.png",style="display:none;")
+      img(src="http://htmljs.b0.upaiyun.com/uploads/1434642764680-c162b5ddf5a88070de8b5d3f4e988296.png",style="display:none;")
+      img(src="http://htmljs.b0.upaiyun.com/uploads/1434642780223-c69d19a94c175943a73f4920d18316c6.png",style="display:none;")
       .ap-container
         a.ap-icon
           img(src="#{assets_head}/images/app-icon.png")
@@ -177,10 +178,13 @@ html(xmlns:wb='http://open.weibo.com/wb')
           img(src="#{assets_head}/images/app-download.png")
         a.ap-see(href="#") 查看所有故事
         .ap-share
-          a.as-weibo(target="_blank",href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fwww.html-js.com%music&title=二十一点睡前故事，是卓老师个人维护的微信公众号，几个月来每天坚持更新一个儿童故事，现在我们有自己的App啦，背景播放自动连播，更有内置绘本预览功能，边看边听两不误，准爸妈的育儿小帮手，赶紧来下载一个吧！&pic=http://htmljs.b0.upaiyun.com/uploads/1434640353522-b6141b315f447b48cd388e991153673e.png&appkey=791755736") 
+          a.as-weibo(target="_blank",href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fwww.html-js.com%music&title=二十一点睡前故事，是卓老师个人维护的微信公众号，几个月来每天坚持更新一个儿童故事，现在我们有自己的App啦，背景播放自动连播，更有内置绘本预览功能，边看边听两不误，准爸妈的育儿小帮手，赶紧来下载一个吧！&appkey=791755736") 
           a.as-weixin
         .weixin-layer
         img.weixin-pop(src="http://htmljs.b0.upaiyun.com/uploads/1434640950178-9855e6c7b4c7e29bec027223a63b4df2.png")
+    .app-open.hidden
+      .cccc
+      img(src="http://htmljs.b0.upaiyun.com/uploads/1434429969730-78bb034a62978df4b828249055816c02.png")
     script(src='#{assets_head}/js/jquery.js')
     script.
       $('.app-frame').css({

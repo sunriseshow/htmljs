@@ -48,7 +48,6 @@ html(xmlns:wb='http://open.weibo.com/wb')
       left:0;
       width:100%;
       height:100%;
-      z-index:10;
       background:url(#{assets_head}/images/app-bg.jpg) #fff;
       background-size:100% 100%;
       }
@@ -136,32 +135,15 @@ html(xmlns:wb='http://open.weibo.com/wb')
       border:10px solid #fff;
       box-shadow:3px 0px 0px #444;
       display:none;
-      
       }
   body#musics
+    img(src="http://htmljs.b0.upaiyun.com/uploads/1434642744793-b6141b315f447b48cd388e991153673e.png",style="display:none;")
     a#app-header(href="https://itunes.apple.com/cn/app/er-shi-yi-dian-shui-qian-gu-shi/id998079819")
       img.app-icon(src="http://htmljs.b0.upaiyun.com/uploads/1434428806313-55ee7a857a03008353b246e1a70e991c.png")
       .app-desc
         .app-title 二十一点睡前故事
         .app-use 卓老师&芋头
       .app-download 下载APP
-    .ap-frame
-      img(src="http://htmljs.b0.upaiyun.com/uploads/1434642744793-b6141b315f447b48cd388e991153673e.png",style="visiblity:hidden;")
-      img(src="http://htmljs.b0.upaiyun.com/uploads/1434642764680-c162b5ddf5a88070de8b5d3f4e988296.png",style="visiblity:hidden;")
-      img(src="http://htmljs.b0.upaiyun.com/uploads/1434642780223-c69d19a94c175943a73f4920d18316c6.png",style="visiblity:hidden;")
-      .ap-container
-        a.ap-icon
-          img(src="#{assets_head}/images/app-icon.png")
-        .ap-title 
-          img(src="#{assets_head}/images/app-title.png")
-        a.ap-download(href="https://itunes.apple.com/cn/app/er-shi-yi-dian-shui-qian-gu-shi/id998079819")
-          img(src="#{assets_head}/images/app-download.png")
-        a.ap-see(href="#") 查看所有故事
-        .ap-share
-          a.as-weibo(target="_blank",href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fwww.html-js.com%music&title=二十一点睡前故事，是卓老师个人维护的微信公众号，几个月来每天坚持更新一个儿童故事，现在我们有自己的App啦，背景播放自动连播，更有内置绘本预览功能，边看边听两不误，准爸妈的育儿小帮手，赶紧来下载一个吧！&appkey=791755736") 
-          a.as-weixin
-        .weixin-layer
-        img.weixin-pop(src="http://htmljs.b0.upaiyun.com/uploads/1434640950178-9855e6c7b4c7e29bec027223a63b4df2.png")
     
     a#header(href="/music") 二十一点 · 睡前故事
     #content.clearfix
@@ -184,6 +166,21 @@ html(xmlns:wb='http://open.weibo.com/wb')
           else
             .articles 暂无
           include ../page
+    .ap-frame
+      
+      .ap-container
+        a.ap-icon
+          img(src="#{assets_head}/images/app-icon.png")
+        .ap-title 
+          img(src="#{assets_head}/images/app-title.png")
+        a.ap-download(href="https://itunes.apple.com/cn/app/er-shi-yi-dian-shui-qian-gu-shi/id998079819")
+          img(src="#{assets_head}/images/app-download.png")
+        a.ap-see(href="#") 查看所有故事
+        .ap-share
+          a.as-weibo(target="_blank",href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fwww.html-js.com%music&title=二十一点睡前故事，是卓老师个人维护的微信公众号，几个月来每天坚持更新一个儿童故事，现在我们有自己的App啦，背景播放自动连播，更有内置绘本预览功能，边看边听两不误，准爸妈的育儿小帮手，赶紧来下载一个吧！&pic=http://htmljs.b0.upaiyun.com/uploads/1434642744793-b6141b315f447b48cd388e991153673e.png&appkey=791755736") 
+          a.as-weixin
+        .weixin-layer
+        img.weixin-pop(src="http://htmljs.b0.upaiyun.com/uploads/1434640950178-9855e6c7b4c7e29bec027223a63b4df2.png")
     .app-open.hidden
       .cccc
       img(src="http://htmljs.b0.upaiyun.com/uploads/1434429969730-78bb034a62978df4b828249055816c02.png")

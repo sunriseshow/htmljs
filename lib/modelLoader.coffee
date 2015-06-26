@@ -15,6 +15,7 @@ global.sequelize = sequelize = new Sequelize(config.mysql_table, config.mysql_us
     charset: 'utf8'
     collate: 'utf8_general_ci'
   host:config.mysql_host
+  port:config.mysql_port
   maxConcurrentQueries:120
   logging:true
 )

@@ -12,6 +12,6 @@ module.exports.controllers =
           res.redirect 'back'
 module.exports.filters = 
   "/":
-    get:['checkLogin','checkAdmin','book/all-books.coffee']
+    get:['checkLogin','checkAdmin','book/all-books']
   "/:id/del":
     get:['checkLogin','checkAdmin']

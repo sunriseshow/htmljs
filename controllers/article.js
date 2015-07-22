@@ -115,7 +115,6 @@
                 result.success = 1;
                 articles.forEach(function(article) {
                   article.publish_time = moment(article.publish_time*1000).fromNow();
-                  return article.html = article.html.replace(/<[^>]*?>/g, '').replace(/\s/g, '').substr(0, 100);
                   if(article.tags){
                     var arr = [];
                     article.tags.split(",").forEach(function(tag_id){
@@ -126,6 +125,8 @@
                     })
                     article.tags = arr.join(",")
                   }
+                  return article.html = article.html.replace(/<[^>]*?>/g, '').replace(/\s/g, '').substr(0, 100);
+
                 });
                 result.data.articles = articles;
               }

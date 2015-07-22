@@ -114,7 +114,7 @@
               } else {
                 result.success = 1;
                 articles.forEach(function(article) {
-                  article.publish_time = moment(article.publish_time).fromNow();
+                  article.publish_time = moment(article.publish_time*1000).fromNow();
                   return article.html = article.html.replace(/<[^>]*?>/g, '').replace(/\s/g, '').substr(0, 100);
                 });
                 result.data.articles = articles;

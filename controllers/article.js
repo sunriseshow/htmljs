@@ -116,6 +116,16 @@
                 articles.forEach(function(article) {
                   article.publish_time = moment(article.publish_time*1000).fromNow();
                   return article.html = article.html.replace(/<[^>]*?>/g, '').replace(/\s/g, '').substr(0, 100);
+                  if(article.tags){
+                    var arr = [];
+                    article.tags.split(",").forEach(function(tag_id){
+                        var tag = res.locals.ts[tag_id]
+                        if(tag){
+                          arr.push(tag.name)
+                        }
+                    })
+                    article.tags = arr.join(",")
+                  }
                 });
                 result.data.articles = articles;
               }
@@ -887,6 +897,9 @@
     },
     "/:id/pay": {
       get: ['checkLogin']
+    },
+    ".json": {
+      get: [ 'tag/tags-obj']
     },
     "/": {
       get: ['freshLogin', 'get_infos', 'article/my-columns', 'article/public-columns', 'article/all-publish-articles', 'article/all-notpublish', 'article/index-columns', 'tag/tags-obj']

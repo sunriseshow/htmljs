@@ -101,14 +101,15 @@
           success: 0,
           data: {}
         };
+        var size = req.query.size||20;
         return func_article.count(condition, function(error, count) {
           if (error) {
             return result.info = error.message;
           } else {
             result.data.total = count;
-            result.data.totalPage = Math.ceil(count / 10);
+            result.data.totalPage = Math.ceil(count / size);
             result.data.page = req.query.page || 1;
-            return func_article.getAllWithContent(result.data.page, 10, condition, function(error, articles) {
+            return func_article.getAllWithContent(result.data.page, size, condition, function(error, articles) {
               if (error) {
                 result.info = error.message;
               } else {

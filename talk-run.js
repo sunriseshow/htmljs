@@ -13,7 +13,7 @@ var pagedown = require("pagedown")
 var safeConverter = new pagedown.Converter()
 var moment = require ("moment")
 moment.lang('zh-cn');
-
+global.xss = require('xss');
 server = require('http').createServer(app)
 io = require('socket.io').listen(server);
 app.use("/assets", express.static(__dirname+"/assets"))

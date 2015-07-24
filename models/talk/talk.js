@@ -11,7 +11,12 @@
     user_nick: "varchar(100)",
     user_headpic: "varchar(100)",
     md: "text",
-    html: "text",
+    html: {
+      type:"text",
+      set: function(v) {
+        return this.setDataValue('html', xss(v));
+      }
+    },
     time: "bigint"
   };
 

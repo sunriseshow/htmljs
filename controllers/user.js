@@ -91,7 +91,7 @@
     },
     "/check.json":{
       get:function(req,res){
-        var email = req.body.email;
+        var email = req.query.email;
         func_user.getByEmail(email,function(err,user){
           if(user){
             res.send({

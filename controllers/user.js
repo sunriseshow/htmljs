@@ -89,6 +89,22 @@
         })
       }
     },
+    "/check.json":{
+      get:function(req,res){
+        var email = req.body.email;
+        func_user.getByEmail(email,function(err,user){
+          if(user){
+            res.send({
+                  success:1,
+                })
+          }else{
+            res.send({
+                  success:0,
+                })
+          }
+        }
+      }
+    },
     "/sina_cb": {
       get: function(req, res, next) {
         var _sina, code, link;

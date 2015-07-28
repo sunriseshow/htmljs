@@ -37,6 +37,32 @@
         result.isnotlogin = 1;
         return res.send(result);
       }
+    }else if (req.body.token) {
+      p = req.body.token.split(':');
+      if (p.length === 2) {
+        uid = p[0];
+        token = p[1];
+        return func_user.getById(uid, function(error, user) {
+          if (user) {
+            if (md5(user.password) === token) {
+              res.locals.user = user;
+              return next();
+            } else {
+              result.success = 0;
+              result.isnotlogin = 1;
+              return res.send(result);
+            }
+          } else {
+            result.success = 0;
+            result.isnotlogin = 1;
+            return res.send(result);
+          }
+        });
+      } else {
+        result.success = 0;
+        result.isnotlogin = 1;
+        return res.send(result);
+      }
     } else {
       result.success = 0;
       result.isnotlogin = 1;

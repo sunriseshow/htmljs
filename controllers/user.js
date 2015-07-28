@@ -43,6 +43,7 @@
         }
       }
     },
+
     "/logout": {
       get: function(req, res, next) {
         res.cookie('_p', "", {
@@ -52,6 +53,40 @@
         });
         req.session = null;
         return res.redirect(req.query.redirect || '/user');
+      }
+    },
+    "/login.json":{
+      post:function(req,res){
+        var email = req.body.email;
+        var password = req.body.password;
+        var nick = req.body.user_nick;
+        func_user.getByEmail(email,function(err,user){
+            if(user){
+              if(user.password == password){
+                res.send({
+                  success:1,
+                  token:user.id + ":" + md5(user.password)
+                })
+              }else{
+                res.send({
+                  success:0,
+                  info:"密码错误"
+                })
+              }
+            }else{
+              //注册用户
+              func_user.add({
+                email:email,
+                password:password,
+                user_nick:user_nick
+              },function(error,user){
+                res.send({
+                  success:1,
+                  token:user.id + ":" + md5(user.password)
+                })
+              })
+            }
+        })
       }
     },
     "/sina_cb": {

@@ -45,6 +45,9 @@
       type: "varchar(100)",
       "private": true
     },
+    password: {
+      type:"varchar(100)"
+    },
     is_block: {
       "private": true,
       type: "tinyint",

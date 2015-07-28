@@ -80,6 +80,21 @@
         return callback(error);
       });
     },
+    getByEmail: function(email, callback) {
+      return User.find({
+        where: {
+          email: email
+        }
+      }).success(function(user) {
+        if (!user) {
+          return callback(new Error('不存在的邮箱'));
+        } else {
+          return callback(null, user);
+        }
+      }).error(function(error) {
+        return callback(error);
+      });
+    },
     getByNick: function(nick, callback) {
       return User.find({
         where: {

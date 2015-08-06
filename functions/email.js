@@ -3,7 +3,7 @@
   var mail, mustache;
 
   mail = require('./../lib/mail.js');
-
+  var tplmail = require("./../lib/tpl_mail.js")
   mustache = require('mu2');
 
   module.exports = {
@@ -50,6 +50,7 @@
         return mail({
           subject: source_user.nick + " 在 前端乱炖 评论了你的原创文章",
           to: article_user.email,
+          template_invoke_name:"article_comment",
           html: buffer
         });
       });
@@ -63,9 +64,10 @@
       return mustache.compileAndRender('./views/mail/common.html', data).on('data', function(c) {
         return buffer += c.toString();
       }).on('end', function() {
-        return mail({
+        return tplmail({
           subject: data.title,
           to: email,
+          template_invoke_name:"notify",
           html: buffer
         });
       });
@@ -98,9 +100,10 @@
       }).on('data', function(c) {
         return buffer += c.toString();
       }).on('end', function() {
-        return mail({
+        return tplmail({
           subject: "前端乱炖专栏新文章：" + article.title,
           bcc: emails,
+          template_invoke_name:"new_article",
           to: "xinyu198736@gmail.com",
           html: buffer
         });

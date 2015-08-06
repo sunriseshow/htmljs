@@ -5,7 +5,7 @@
   mail = require('./../lib/mail.js');
   var tplmail = require("./../lib/tpl_mail.js")
   mustache = require('mu2');
-
+  var async = require("async")
   module.exports = {
     sendQAInvite: function(qa, emails) {
       var buffer;
@@ -38,39 +38,39 @@
       });
     },
     sendArticleComment: function(source_user, article_user, article) {
-      var buffer;
-      if (!article_user.email) {
-        return;
-      }
-      buffer = "";
-      article.source_user = source_user;
-      return mustache.compileAndRender('./views/mail/article-comment.html', article).on('data', function(c) {
-        return buffer += c.toString();
-      }).on('end', function() {
-        return mail({
-          subject: source_user.nick + " 在 前端乱炖 评论了你的原创文章",
-          to: article_user.email,
+      
+
+       tplmail({
+          subject:source_user.nick + " 在 前端乱炖 评论了你的原创文章",
+          substitution_vars:JSON.stringify({
+            to:[article_user.email],
+            sub:{
+              "%source_user_nick%":[source_user.nick],
+              "%title%":[article.title],
+              "%id%":[article.id]
+            }
+          }),
           template_invoke_name:"article_comment",
-          html: buffer
+        },function(){
+          cb();
         });
-      });
     },
     sendMessage: function(email, data) {
-      var buffer;
-      if (!email) {
-        return;
-      }
-      buffer = "";
-      return mustache.compileAndRender('./views/mail/common.html', data).on('data', function(c) {
-        return buffer += c.toString();
-      }).on('end', function() {
-        return tplmail({
-          subject: data.title,
-          to: email,
-          template_invoke_name:"notify",
-          html: buffer
+      
+      tplmail({
+          subject:data.title,
+          substitution_vars:JSON.stringify({
+            to:[email],
+            sub:{
+              "%content%":[data.content],
+              "%url%":[data.url],
+              "%title%":[data.title]
+            }
+          }),
+          template_invoke_name:"common",
+        },function(){
+          cb();
         });
-      });
     },
     sendAnswer: function(answer, question, card) {
       var buffer;
@@ -93,21 +93,29 @@
       var buffer;
       buffer = "";
       console.log(emails);
-      return mustache.compileAndRender('./views/mail/article-rss.html', {
-        id: article.id,
-        title: article.title,
-        html: article.html.substr(0, 500) + "......"
-      }).on('data', function(c) {
-        return buffer += c.toString();
-      }).on('end', function() {
-        return tplmail({
+      var emails = emails.split(";");
+      if(emails.indexOf("xinyu198736@gmail.com")==-1){
+        emails.push('xinyu198736@gmail.com')
+      }
+      async.eachLimit(emails,2,function(email,cb){
+        tplmail({
           subject: "前端乱炖专栏新文章：" + article.title,
-          bcc: emails,
+          substitution_vars:JSON.stringify({
+            to:[email],
+            sub:{
+              "%user_nick%":[article.user_nick],
+              "%id%":[article.id],
+              "%title%":[article.title],
+              "%html%":[article.html.substr(0,1000)]
+            }
+          }),
           template_invoke_name:"new_article",
-          to: "xinyu198736@gmail.com",
-          html: buffer
+        },function(){
+          cb();
         });
-      });
+        
+      })
+      
     },
     sendColumnNotify: function(column, card, rsses) {
       var buffer;

@@ -52,7 +52,6 @@
           }),
           template_invoke_name:"article_comment",
         },function(){
-          cb();
         });
     },
     sendMessage: function(email, data) {
@@ -68,26 +67,27 @@
             }
           }),
           template_invoke_name:"common",
-        },function(){
-          cb();
         });
     },
     sendAnswer: function(answer, question, card) {
-      var buffer;
-      if (!card.email) {
-        return;
-      }
-      buffer = "";
       answer.title = question.title;
-      return mustache.compileAndRender('./views/mail/qa-answer.html', answer).on('data', function(c) {
-        return buffer += c.toString();
-      }).on('end', function() {
-        return mail({
-          subject: answer.user_nick + " 在 前端乱炖 回答了你的提问",
-          to: card.email,
-          html: buffer
+      
+
+      tplmail({
+          subject:answer.user_nick + " 在 前端乱炖 回答了你的提问",
+          substitution_vars:JSON.stringify({
+            to:[card.email],
+            sub:{
+              "%content%":['<p style="font-size:14px;">你好，'+answer.user_nick+' 回答了您的问题 《<a href="http://www.html-js.com/qa/'+answer.question_id+'">'+answer.title+'</a>》</p><div style="padding:10px 20px;">
+      <p style="font-size:13px;">'+answer.html+'</p>
+      </div>'],
+              "%url%":[data.url],
+              "%title%":[answer.user_nick+'回答了你的提问']
+            }
+          }),
+          template_invoke_name:"common",
+        },function(){
         });
-      });
     },
     sendArticleRss: function(article, emails) {
       var buffer;
@@ -118,17 +118,23 @@
       
     },
     sendColumnNotify: function(column, card, rsses) {
-      var buffer;
-      buffer = "";
-      return mustache.compileAndRender('./views/mail/column-notify.html', column).on('data', function(c) {
-        return buffer += c.toString();
-      }).on('end', function() {
-        return mail({
-          subject: "您的专栏被订阅了，赶紧来更新文章吧！",
-          to: card.email,
-          html: buffer
+      
+      tplmail({
+          subject:"您在前端乱炖的专栏被订阅了，赶紧来更新文章吧！",
+          substitution_vars:JSON.stringify({
+            to:[card.email],
+            sub:{
+              "%content%":['<div style="padding:10px 20px;">
+<p style="font-size:16px;">至今为止，已经有'+column.rss_count+'人订阅了您的专栏<a href="http://www.html-js.com/article/column/'+column.id+'">「'+column.name+'」 </a></p>
+<p style="font-size:16px;">大家非常期待专栏文章的更新</p>
+</div>'],
+              "%url%":[data.url],
+              "%title%":['您在前端乱炖的专栏被订阅了，赶紧来更新文章吧！']
+            }
+          }),
+          template_invoke_name:"common",
+        },function(){
         });
-      });
     }
   };
 

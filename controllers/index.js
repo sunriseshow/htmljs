@@ -580,7 +580,7 @@
       get: ['checkLogin', "checkCard"]
     },
     "/": {
-      get: ['freshLogin', "index/actives", "index/recent_articles", "index/recent_questions", "index/recent_topics", 'index/recent_columns', 'index/all_tags', 'index/all_topic_tags', 'index/recent_users', 'all_count', 'index/article_top_users', 'index/answer_top_users', 'index/topic_top_users']
+      get: ['freshLogin', "index/actives", "index/recent_articles","tag/all-tags-index", "index/recent_questions", "index/recent_topics", 'index/recent_columns', 'index/all_tags', 'index/all_topic_tags', 'index/recent_users', 'all_count', 'index/article_top_users', 'index/answer_top_users', 'index/topic_top_users']
     },
     "/card/:id/zan": {
       post: ['checkLoginJson']

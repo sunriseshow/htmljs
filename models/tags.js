@@ -19,6 +19,10 @@
     comment_count: {
       type: "int",
       defaultValue: 0
+    },
+    sort:{
+      type:"int",
+      defaultValue:10
     }
   };
 

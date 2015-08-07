@@ -2,7 +2,7 @@
 (function() {
   module.exports = function(req, res, next) {
     return (__F('tag')).getAll(1, 200, null, "sort desc,id desc", function(error, tags) {
-      res.locals.tags = tags;
+      res.locals.index_tags = tags;
       return next();
     });
   };

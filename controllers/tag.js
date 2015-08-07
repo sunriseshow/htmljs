@@ -14,6 +14,11 @@
         return res.render('tag/index.jade');
       }
     },
+    '.json': {
+      get: function(req, res, next) {
+        return res.send(res.locals.tags)
+      }
+    },
     "/add": {
       get: function(req, res, next) {
         return res.render('tag/add.jade');
@@ -119,6 +124,9 @@
   module.exports.filters = {
     "/": {
       get: ['freshLogin', 'tag/all-tags']
+    },
+    ".json": {
+      get: [ 'tag/all-tags']
     },
     "/:id": {
       get: ['freshLogin']

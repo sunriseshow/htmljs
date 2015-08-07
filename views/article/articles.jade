@@ -150,7 +150,8 @@ html(xmlns:wb='http://open.weibo.com/wb')
                               a.value(href="/article/#{article.id}/update?is_jian=1") 荐
                         if article.tags
                           each tag in article.tags.split(",")
-                            a.views.item.tag(href="/tag/#{tag}/articles") #{ts[tag].name}
+                            if ts[tag]
+                              a.views.item.tag(href="/tag/#{tag}/articles") #{ts[tag].name}
                           //- span.views.item
                           //-   span.index
                           //-     i.icon-signal

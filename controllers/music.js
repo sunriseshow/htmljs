@@ -10,7 +10,7 @@
     "/show_url": {
       get: function(req, res, next) {
         res.send({
-          show: 1,
+          show: 0,
           url: "http://www.html-js.com/music"
         });
       }

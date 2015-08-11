@@ -78,7 +78,7 @@
               func_user.add({
                 email:email,
                 password:password,
-                user_nick:user_nick
+                user_nick:nick
               },function(error,user){
                 res.send({
                   success:1,

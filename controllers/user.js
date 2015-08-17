@@ -59,7 +59,8 @@
       post:function(req,res){
         var email = req.body.email;
         var password = req.body.password;
-        var nick = req.body.user_nick;
+        var nick = req.body.nick;
+        var head_pic = req.body.head_pic;
         func_user.getByEmail(email,function(err,user){
             if(user){
               if(user.password == password){
@@ -78,7 +79,8 @@
               func_user.add({
                 email:email,
                 password:password,
-                user_nick:nick
+                nick:nick,
+                head_pic:head_pic
               },function(error,user){
                 res.send({
                   success:1,

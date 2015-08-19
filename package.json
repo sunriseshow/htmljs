@@ -23,6 +23,7 @@
   "dependencies": {
     "MD5": "^1.2.1",
     "alipay": "0.0.4",
+    "async": "^1.4.0",
     "base32": "0.0.6",
     "coffee-script": "^1.7.1",
     "consolidate": "^0.10.0",

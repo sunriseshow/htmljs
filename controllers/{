@@ -1,0 +1,10 @@
+{
+  "server": "100.98.115.26:8080",
+  "appid": "4",
+  "secret": "2719c96ff1dc9e0a15ef2ebbf6bbf5b04833a26a",
+  "cmddir": "/root/code/commands/",
+  "logdir": "/tmp/",
+  "reconnectDelay": 10,
+  "heartbeatInterval": 60,
+  "reportInterval": 60
+}

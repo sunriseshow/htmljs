@@ -41,6 +41,12 @@
         return res.render('topic/index.jade');
       }
     },
+    ".json": {
+      get: function(req, res, next) {
+        res.locals.now_page = req.query.page;
+        res.send(res.locals);
+      }
+    },
     "/add": {
       get: function(req, res, next) {
         res.locals.tag_id = req.query.tag_id;
@@ -312,6 +318,9 @@
   module.exports.filters = {
     "/": {
       get: ['freshLogin', 'topic/all-tags-ifonlyone', 'topic/all-topics', 'topic/recent-replys']
+    },
+    ".json": {
+      get: ['topic/all-topics']
     },
     "/add": {
       get: ['checkLogin', 'topic/all-tags'],

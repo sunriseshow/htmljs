@@ -9,7 +9,7 @@ html
       .ad-blank{opacity:0.6;}
     script(src='#{assets_head}/js/bootstrap/bootstrap-tooltip.js')
     script(src='#{assets_head}/js/bootstrap/bootstrap-scrollspy.js')
-    script(src='#{assets_head}/js/tips.js?dddddd')
+    script(src='#{assets_head}/js/tips.js?dddddddd')
     link(rel="stylesheet",href="#{assets_head}/css/tips.css?2dd2dddddddd",type="text/css")
   body#article
     - locals.pageId=1;
@@ -59,11 +59,11 @@ html
           .content
             .left
                 .alert(style="margin-top:20px;") 在文章任何区域双击击即可给文章添加【评注】！浮到评注点上可以查看详情。<div class="checkbox" style="float:right;line-height:40px;color:#333;padding-top:3px;"><label><input type="checkbox" id="hide_tip">隐藏标注</label></div>
-                article.post(id="post-#{article.id}",style="overflow:hidden")
+                article.post(id="post-#{article.id}",style="overflow:hidden;")
 
                   .wrapper
                     include ../recommend_books
-                    .entry-content
+                    .entry-content(style="margin-top:0;")
 
                       
                       //

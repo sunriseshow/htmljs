@@ -79,7 +79,7 @@
             to:[card.email],
             sub:{
               "%content%":['<p style="font-size:14px;">你好，'+answer.user_nick+' 回答了您的问题 《<a href="http://www.html-js.com/qa/'+answer.question_id+'">'+answer.title+'</a>》</p><div style="padding:10px 20px;"><p style="font-size:13px;">'+answer.html+'</p></div>'],
-              "%url%":[data.url],
+              "%url%":['http://www.html-js.com/qa/'+answer.question_id],
               "%title%":[answer.user_nick+'回答了你的提问']
             }
           }),

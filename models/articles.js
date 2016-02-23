@@ -72,6 +72,11 @@
       type: "double",
       "private": true
     },
+    static_score:{
+      defaultValue: 0,
+      type: "double",
+      "private": true
+    },
     pinyin: "varchar(1000)",
     is_buy: {
       defaultValue: 0,

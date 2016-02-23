@@ -110,8 +110,11 @@
         var score;
         if (article && article.publish_time && article.publish_time > 1000000) {
           score = (article.comment_count / 5 + article.visit_count / 500) / Math.pow((new Date().getTime() / 1000 - article.createdAt.getTime() / 1000) / 60 / 60 + 2, 1.8);
+
+          static_score = ( article.comment_count + article.zan_count ) * 100 + article.visit_count / 500 / Math.pow((new Date().getTime() / 1000 - article.createdAt.getTime() / 1000) )
           return article.updateAttributes({
-            score: score
+            score: score,
+            static_score:static_score
           }, ['score']).success(function() {});
         }
       }).error(function(error) {

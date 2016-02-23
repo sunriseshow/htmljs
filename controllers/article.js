@@ -52,7 +52,6 @@
   setInterval(function() {
     return func_article.run_sort();
   }, 1000 * 60 * 10);
-func_article.run_sort();
   module.exports.controllers = {
     "/": {
       "get": function(req, res, next) {
@@ -61,9 +60,15 @@ func_article.run_sort();
     },
     "/email":{
       get:function(req,res){
-        func_article.getAll(1,100,['createdAt > ?',(moment(new Date().getTime() - 1000*60*60*24*7).format("YYYY-MM-DD"))],"static_score desc",function(err,weekly_articles){
-          res.locals.weekly_articles = weekly_articles;
-            res.render('email_tpl.jade');
+        func_article.getAll(1,20,['articles.createdAt > ?',(moment(new Date().getTime() - 1000*60*60*24*7).format("YYYY-MM-DD"))],"static_score desc",function(err,weekly_articles){
+            res.locals.weekly_articles = weekly_articles;
+            func_article.getAll(1,20,['articles.createdAt > ?',(moment(new Date().getTime() - 1000*60*60*24*30).format("YYYY-MM-DD"))],"static_score desc",function(err,month_articles){
+                res.locals.month_articles = month_articles;
+                func_article.getAll(1,20,['articles.createdAt > ?',(moment(new Date().getTime() - 1000*60*60*24*30*12).format("YYYY-MM-DD"))],"static_score desc",function(err,year_articles){
+                    res.locals.year_articles = year_articles;
+                    res.render('email_tpl.jade');
+                })
+            })
         })
         
       }

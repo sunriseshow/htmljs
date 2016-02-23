@@ -67,7 +67,7 @@ func_article.run_sort();
         })
         
       }
-    }
+    },
     "/rss|/rss.xml": {
       "get": function(req, res, next) {
         var feed;

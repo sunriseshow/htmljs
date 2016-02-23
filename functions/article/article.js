@@ -115,7 +115,7 @@
           return article.updateAttributes({
             score: score,
             static_score:static_score
-          }, ['score']).success(function() {});
+          }, ['score','static_score']).success(function() {});
         }
       }).error(function(error) {
         return callback(error);

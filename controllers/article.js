@@ -52,7 +52,7 @@
   setInterval(function() {
     return func_article.run_sort();
   }, 1000 * 60 * 10);
-
+func_article.run_sort();
   module.exports.controllers = {
     "/": {
       "get": function(req, res, next) {

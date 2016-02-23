@@ -59,6 +59,15 @@ func_article.run_sort();
         return res.render('article/articles.jade');
       }
     },
+    "/email":{
+      get:function(req,res){
+        func_article.getAll(1,100,['createdAt > ?',(moment(new Date().getTime() - 1000*60*60*24*7).format("YYYY-MM-DD"))],"static_score desc",function(err,weekly_articles){
+          res.locals.weekly_articles = weekly_articles;
+            res.render('email_tpl.jade');
+        })
+        
+      }
+    }
     "/rss|/rss.xml": {
       "get": function(req, res, next) {
         var feed;

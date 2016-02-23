@@ -1,0 +1,11 @@
+div(style="margin-bottom:24px;border:1px solid #ccc;font-size:14px;")
+  p(style="padding:0 16px") 北京
+  
+
+  each article in locals.weekly_articles
+    div(style="border-top:1px dotted #ccc;padding:0 16px")
+      p #{article&&article.title} - #{article.column?article.column.name:''}
+      p #{article.user_nick}
+        | #{moment(article.createdAt).format("YYYY-MM-DD")}  
+        | 访问量：#{article.visit_count}
+        | 点赞数：#{article.zan_count}

@@ -31,7 +31,7 @@ html
                   |「#{channel.name}」
                 |#{question.title}
             .qa-content
-              .desc !{question.html.replace(/<code>/g,"<code class='language-javascript'>")}
+              .desc !{question.html.replace(/<code>/g,"<code class='language-javascript'>").replace(/(htmljs\.b0\.upaiyun\.com.*?(\.jpg|\.png))/g,"$1!bac")}
             .qa-user.clearfix
               
               .user
@@ -119,7 +119,7 @@ html
                             a(href="/user/#{ans.user_id}") #{ans.user_nick}
                             if ans.user
                               span(style="color:#333;")  #{ans.user.desc?("，"+ans.user.desc.substr(0,30)):""}
-                          .con-bd !{ans.html.replace(/<code>/g,"<code class='language-javascript'>")}
+                          .con-bd !{ans.html.replace(/<code>/g,"<code class='language-javascript'>").replace(/(htmljs\.b0\.upaiyun\.com.*?(\.jpg|\.png))/g,"$1!bac")}
                           .con-action
                             |<span style="color:#999;margin-right:10px;">#{moment(ans.createdAt).fromNow()}</span>
                             if locals.user && (locals.user.id == ans.user_id||locals.user.is_admin)

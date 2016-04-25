@@ -91,7 +91,7 @@ html
                             else
                               span 暂无付费用户
                       else
-                        | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>")}
+                        | !{article.html.replace(/([^>])\r\n\r\n([^<])/g,"$1<br/>$2").replace(/<code>/g,"<code class='language-javascript'>").replace(/(htmljs\.b0\.upaiyun\.com.*?(\.jpg|\.png))/g,"$1!bac")}
                       | <script src="#{assets_head}/js/tuiku.js"></script>
 
                     

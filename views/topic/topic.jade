@@ -48,7 +48,7 @@ html
             include ../320ad
             .topic-content
 
-              .desc !{topic.html.replace(/<code>/g,"<code class='language-javascript'>")}
+              .desc !{topic.html.replace(/<code>/g,"<code class='language-javascript'>").replace(/(htmljs\.b0\.upaiyun\.com.*?(\.jpg|\.png))/g,"$1!bac")}
             .topic-user.clearfix
               .zans.clearfix
                 a.zan.action(href="javascript:void(0);") 
@@ -104,7 +104,7 @@ html
                           .con-hd 
                             a(href="/user/#{ans.user_id}") #{ans.user_nick}
                             .hd-time #{moment(ans.createdAt).fromNow()}
-                          .con-bd !{ans.html.replace(/<code>/g,"<code class='language-javascript'>")}
+                          .con-bd !{ans.html.replace(/<code>/g,"<code class='language-javascript'>").replace(/(htmljs\.b0\.upaiyun\.com.*?(\.jpg|\.png))/g,"$1!bac")}
                           .con-action
                             //
                               if locals.user && (locals.user.id == ans.user_id||locals.user.is_admin)

@@ -5,7 +5,7 @@ htmljs
 
 本站代码仅供参考，缺少配置文件在本地不能运行，基于express，rainbow，sequelize，jade，coffeescript，less，moment等技术和框架。
 
-update:本站代码比较老，建议参考RabbitJS的实现思路，更清晰，原理与此相同：https://github.com/xinyu198736/Rabbit.js
+update:本站代码比较老，比较初级，不建议参考，请不要再 star 这个项目了，哈哈。
 
 约定模式：
 ==

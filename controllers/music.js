@@ -136,13 +136,24 @@
         var favs = req.body.favs.split(',')
 
         async.eachLimit(favs,1,function(music_id,callback){
-          func_fav.add({
+          func_fav.get({
             user_id: user_id,
-            push_id: push_id,
             music_id: music_id
-          },function(){
-            callback();
+          },function(err,fav){
+            if(!fav){
+              func_fav.add({
+                user_id: user_id,
+                push_id: push_id,
+                music_id: music_id
+              },function(){
+                callback();
+              })
+            }else{
+              callback();
+            }
+            
           })
+          
         },function(){
           res.send('ok')
         });

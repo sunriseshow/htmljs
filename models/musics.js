@@ -16,6 +16,14 @@
       type: "int",
       defaultValue: 1
     },
+    fav_count: {
+      type: "int",
+      defaultValue: 1
+    },
+    play_count: {
+      type: "int",
+      defaultValue: 1
+    },
     zip: "varchar(500)"
   };
 

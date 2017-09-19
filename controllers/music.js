@@ -3,7 +3,9 @@
   var func_music, musics;
 
   func_music = __F('music');
-
+  func_fav = __F('music_fav');
+  func_play = __F('music_play');
+  var async = require('async');
   musics = {};
 
   module.exports.controllers = {
@@ -125,6 +127,60 @@
             });
           }
         });
+      }
+    },
+    "/add_favs":{
+      post:function(req,res,next){
+        var user_id = req.body.user_id;
+        var push_id = req.body.push_id;
+        var favs = req.body.favs.split(',')
+
+        async.eachLimit(favs,1,function(music_id,callback){
+          func_fav.add({
+            user_id: user_id,
+            push_id: push_id,
+            music_id: music_id
+          },function(){
+            callback();
+          })
+        },function(){
+          res.send('ok')
+        });
+
+      }
+    },
+    "/add_fav":{
+      post:function(req,res,next){
+        var user_id = req.body.user_id;
+        var push_id = req.body.push_id;
+        var music_id = req.body.music_id
+
+        func_fav.add({
+          user_id: user_id,
+          push_id: push_id,
+          music_id: music_id
+        },function(){
+          res.send('ok')
+        })
+
+        func_music.addCount(req.params.music_id, 'fav_count', (function() {}), 1);
+      }
+    },
+    "/add_play":{
+      post:function(req,res,next){
+        var user_id = req.body.user_id;
+        var push_id = req.body.push_id;
+        var music_id = req.body.music_id
+
+        func_play.add({
+          user_id: user_id,
+          push_id: push_id,
+          music_id: music_id
+        },function(){
+          res.send('ok')
+        })
+
+        func_music.addCount(req.params.music_id, 'play_count', (function() {}), 1);
       }
     }
   };

@@ -185,7 +185,7 @@
           })
         
 
-        func_music.addCount(req.params.music_id, 'fav_count', (function() {}), 1);
+        func_music.addCount(req.body.music_id, 'fav_count', (function() {}), 1);
       }
     },
     "/add_play":{
@@ -212,7 +212,7 @@
           })
         
 
-        func_music.addCount(req.params.music_id, 'play_count', (function() {}), 1);
+        func_music.addCount(req.body.music_id, 'play_count', (function() {}), 1);
       }
     }
   };

@@ -8,7 +8,7 @@
 
   func = new __BaseFunction(Music);
   func.get = function(query, callback){
-  	Music.find(query).success(function(m) {
+  	Music.find().where(query).success(function(m) {
       return callback(null, m);
     }).error(function(e) {
       return callback(e);

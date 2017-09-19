@@ -148,6 +148,7 @@
               },function(){
                 callback();
               })
+              func_music.addCount(music_id, 'fav_count', (function() {}), 1);
             }else{
               callback();
             }
@@ -192,14 +193,24 @@
         var user_id = req.body.user_id;
         var push_id = req.body.push_id;
         var music_id = req.body.music_id
-
-        func_play.add({
-          user_id: user_id,
-          push_id: push_id,
-          music_id: music_id
-        },function(){
-          res.send('ok')
-        })
+        func_play.get({
+            user_id: user_id,
+            music_id: music_id
+          },function(err,fav){
+            if(!fav){
+              func_play.add({
+                user_id: user_id,
+                push_id: push_id,
+                music_id: music_id
+              },function(){
+                res.send('ok')
+              })
+            }else{
+              res.send('ok')
+            }
+            
+          })
+        
 
         func_music.addCount(req.params.music_id, 'play_count', (function() {}), 1);
       }

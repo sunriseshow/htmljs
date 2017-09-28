@@ -15,7 +15,7 @@
 
         #app-header{height:80px;background:#eee;display:block;color:#333;}
         .app-icon{margin:10px;margin-left:15px;width:60px;height:60px;float:left;border-radius: 10px;}
-        .app-desc{margin-top:15px;float:left;font-size:16px;}
+        .app-desc{margin-top:15px;float:left;font-size:16px;overflow:hidden;}
         .app-use{font-size:12px;margin-top:8px;color:#999;}
         .app-download{position:absolute;right:10px;top:30px;height:25px;line-height:25px;
             background: #0088CC;
@@ -80,6 +80,7 @@
     $(".dr-name").html('设计师：'+urlParam.name)
     $(".dr-user-pic").attr('src',urlParam.user_pic)
     $(".dr-pic").attr('src',urlParam.pic)
+    $(".app-desc").css("width",window.screen.width * 90%);
 </script>
 </body>
 </html>

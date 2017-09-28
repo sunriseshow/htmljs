@@ -76,8 +76,8 @@
         }
     }
     var urlParam = parseUrlParam();
-    $(".dr-title").html(urlParam.title)
-    $(".dr-name").html('设计师：'+urlParam.name)
+    $(".dr-title").html(decodeURI(urlParam.title))
+    $(".dr-name").html('设计师：'+decodeURI(urlParam.name))
     $(".dr-user-pic").attr('src',urlParam.user_pic)
     $(".dr-pic").attr('src',urlParam.pic)
     $(".app-desc").css("width",window.screen.width - 100);

@@ -47,9 +47,9 @@
     </div>
     <div class="mod-3 mod" style="background:#fff;">
         <div class="wrapper">
-            <div class="partner-hd" style="font-size:13px;">本图片由『设计搞 app』分享</div>
+            <div class="partner-hd" style="font-size:13px;">更多精品设计稿请下载『设计搞 app』</div>
             <div class="partner-bd">
-                <a href="https://itunes.apple.com/us/app/%E8%AE%BE%E8%AE%A1%E6%90%9E/id1282966969?l=zh&ls=1&mt=8"><img src="http://img.souche.com/test/ce9e047237b2b7fb4b2823894396513c.png"/>设计搞 - 一个国内 cdn 加速的 dribbble 客户端</a>
+                <a href="https://itunes.apple.com/us/app/%E8%AE%BE%E8%AE%A1%E6%90%9E/id1282966969?l=zh&ls=1&mt=8"><img src="http://img.souche.com/test/ce9e047237b2b7fb4b2823894396513c.png"/>设计搞 - 一个国内 cdn 图片加速的 dribbble 客户端</a>
             </div>
         </div>
     </div>
@@ -81,6 +81,30 @@
     $(".dr-user-pic").attr('src',urlParam.user_pic)
     $(".dr-pic").attr('src',urlParam.pic)
     $(".app-desc").css("width",window.screen.width - 100);
+    try{
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.on('menu:share:timeline', function(argv){
+                WeixinJSBridge.invoke('shareTimeline',{
+                    "img_url":urlParam.pic,
+                    "img_width":"120",
+                    "img_height":"120",
+                    "link":window.location.href,
+                    "desc": "设计师："+urlParam.name,
+                    "title":"发现一只上好的设计稿《"+urlParam.title+"》from 设计搞App"
+                }, function(res){});
+            });
+            WeixinJSBridge.on('menu:share:appmessage', function(argv){
+                WeixinJSBridge.invoke('sendAppMessage',{
+                    "img_url":urlParam.pic,
+                    "img_width":"120",
+                    "img_height":"120",
+                    "link":window.location.href,
+                    "desc": "设计师："+urlParam.name,
+                    "title":"发现一只上好的设计稿《"+urlParam.title+"》from 设计搞App"
+                }, function(res){});
+            });
+        });
+    }catch(e){}
 </script>
 </body>
 </html>

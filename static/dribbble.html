@@ -33,8 +33,32 @@
         .mod-3 .partner-bd a{line-height:35px;width:100%;}
 
     </style>
+    <script>
+        function parseUrlParam(){
+            // 取querystring
+            var search = window.location.search;
+            var queryString = search.slice(1);
+            if(queryString){
+                // 以&分割
+                var kvPairs = queryString.split('&');
+                var param = {};
+                kvPairs.forEach(function(kv){
+                    // 以=分割
+                    var arr = kv.split('=');
+                    // key = value
+                    param[arr[0]] = arr[1];
+                });
+                return param;
+            }
+            else{
+                return {};
+            }
+        }
+        var urlParam = parseUrlParam();
+    </script>
 </head>
 <body >
+<script>document.write("<img src='"+urlParam.pic+"' style='position:absolute;width:400px;height:400px;left:-500px;top:-500px;'/>")</script>
 <a id="app-header" href="https://itunes.apple.com/us/app/%E8%AE%BE%E8%AE%A1%E6%90%9E/id1282966969?l=zh&ls=1&mt=8">
     <img src="http://yutou.oss-cn-hangzhou.aliyuncs.com/users/43762/screenshots/3831183/dribbble_export_1.gif" class="app-icon dr-user-pic" >
     <div class="app-desc">
@@ -55,27 +79,7 @@
     </div>
 </div>
 <script>
-    function parseUrlParam(){
-        // 取querystring
-        var search = window.location.search;
-        var queryString = search.slice(1);
-        if(queryString){
-            // 以&分割
-            var kvPairs = queryString.split('&');
-            var param = {};
-            kvPairs.forEach(function(kv){
-                // 以=分割
-                var arr = kv.split('=');
-                // key = value
-                param[arr[0]] = arr[1];
-            });
-            return param;
-        }
-        else{
-            return {};
-        }
-    }
-    var urlParam = parseUrlParam();
+
     $(".dr-title").html(decodeURI(urlParam.title))
     $(".dr-name").html('设计师：'+decodeURI(urlParam.name))
     $(".dr-user-pic").attr('src',urlParam.user_pic)

@@ -19,7 +19,19 @@
     fs = require('fs');
 
     var min = require('min');
-
+    function localStore() {}
+    var store = {};
+localStore.prototype.get = function(key) {
+  return store[key];
+};
+localStore.prototype.set = function(key, value) {
+  return store[key] = value;
+};
+localStore.prototype.remove = function(key) {
+  delete store[key];
+  return true;
+};
+min.store = new localStore()
     var request = require('request');
 
     var checkCache = require("./lib/checkCache.js");
@@ -68,6 +80,24 @@
         app.use(log4js.connectLogger(logger, {
             level: log4js.levels.INFO
         }));
+        app.get("/dribbble/*", function(req, res, next) {
+            var url = req.originalUrl.replace(/^\/dribbble/,'');
+            var rUrl = 'https://api.dribbble.com'+url;
+            min.get('dribbble_api_'+url,function(err, v){
+                if(v) {
+                    res.send(v);
+                } else {
+                    console.log('proxy to :'+rUrl)
+                    request.get(rUrl,function(e,r,b){
+                        console.log(e,r,b)
+                        if (!e && r.statusCode == 200 && b) {
+                            min.setex('dribbble_api_'+url,60*30, b)
+                        } 
+
+                    }).pipe(res);
+                }
+            })
+        });
         app.use(function(req, res, next) {
             var agent, i, _i, _ref;
             res.locals.url = req.url;
@@ -113,11 +143,12 @@
             return next();
         });
         app.use(app.router);
-        rainbow.route(app, {
-            controllers: '/controllers/',
-            filters: '/filters/',
-            template: '/views/'
-        });
+        // rainbow.route(app, {
+        //     controllers: '/controllers/',
+        //     filters: '/filters/',
+        //     template: '/views/'
+        // });
+
         static_jades = {};
         app.get("/:p", function(req, res, next) {
             var p;
@@ -134,6 +165,7 @@
             }
             return next();
         });
+
         app.all("*", function(req, res, next) {
             return res.render('404.jade', {
                 status: 404
@@ -142,22 +174,7 @@
             });
         });
 
-        app.get("/dribbble/*", function(req, res, next) {
-            var url = req.originalUrl.replace(/^\/dribbble/,'');
-            var rUrl = 'https://api.dribbble.com/'+url;
-            min.get('dribbble_api_'+url,function(err, v){
-                if(v) {
-                    res.send(v);
-                } else {
-                    request.get(rUrl,function(e,r,b){
-                        if (!e && r.statusCode == 200 && b) {
-                            min.setex('dribbble_api_'+url,60*30, b)
-                        } 
-
-                    }).pipe(res);
-                }
-            })
-        });
+        
 
         app.use(function(err, req, res, next) {
             console.trace(err);

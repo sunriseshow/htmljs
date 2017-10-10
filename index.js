@@ -17,6 +17,11 @@
     less = require('less');
 
     fs = require('fs');
+
+    var min = require('min');
+
+    var request = require('request');
+
     var checkCache = require("./lib/checkCache.js");
     global.xss = require('xss');
 
@@ -136,6 +141,24 @@
                 return res.send(page, 404);
             });
         });
+
+        app.get("/dribbble/*", function(req, res, next) {
+            var url = req.originalUrl.replace(/^\/dribbble/,'');
+            var rUrl = 'https://api.dribbble.com/'+url;
+            min.get('dribbble_api_'+url,function(err, v){
+                if(v) {
+                    res.send(v);
+                } else {
+                    request.get(rUrl,function(e,r,b){
+                        if (!e && r.statusCode == 200 && b) {
+                            min.setex('dribbble_api_'+url,60*30, b)
+                        } 
+
+                    }).pipe(res);
+                }
+            })
+        });
+
         app.use(function(err, req, res, next) {
             console.trace(err);
             return res.render('error.jade', {

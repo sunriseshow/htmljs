@@ -92,9 +92,12 @@ min.store = new localStore()
                         console.log(e,r,b)
                         if (!e && r.statusCode == 200 && b) {
                             min.setex('dribbble_api_'+url,60*30, b)
-                        } 
+                            res.send(b);
+                        } else {
+                            res.send(r.statueCode,b);
+                        }
 
-                    }).pipe(res);
+                    });
                 }
             })
         });

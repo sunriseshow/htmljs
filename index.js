@@ -143,11 +143,11 @@ min.store = new localStore()
             return next();
         });
         app.use(app.router);
-        // rainbow.route(app, {
-        //     controllers: '/controllers/',
-        //     filters: '/filters/',
-        //     template: '/views/'
-        // });
+        rainbow.route(app, {
+            controllers: '/controllers/',
+            filters: '/filters/',
+            template: '/views/'
+        });
 
         static_jades = {};
         app.get("/:p", function(req, res, next) {
